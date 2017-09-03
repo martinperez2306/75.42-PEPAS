@@ -3,7 +3,7 @@
 
 //SERVIDOR BUILDER
 
-//BASE DE DATOS Y SERVIDOR SON PEDIDOS EN MEMORIA ACA. DEBEN SER LIBERADAS EN EL MAIN (EL SERVIDOR) Y LA BASE DE DATOS (POR EL SERVIDOR)
+//BASE DE DATOS Y SERVIDOR SON PEDIDOS EN MEMORIA ACA. DEBEN SER LIBERADAS EN EL CONTROLLER (EL SERVIDOR) Y LA BASE DE DATOS (POR EL SERVIDOR)
 ServidorBuilder::ServidorBuilder(){
 
 	this->puerto = 0;
@@ -42,10 +42,9 @@ void ServidorBuilder::setPuerto(int puerto){
 
 Servidor* ServidorBuilder::build(){
 
-	cout<<this->getCantidadDeConexiones()<<endl;
-	cout<<this->getPuerto()<<endl;
 	this->servidor->setCantidadDeConexiones(this->getCantidadDeConexiones());
 	this->servidor->setPuerto(this->getPuerto());
+	this->servidor->setBaseDeDatos(this->baseDeDatos);
 
 	return this->getServidor();
 }

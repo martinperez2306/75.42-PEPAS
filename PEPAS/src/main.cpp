@@ -1,19 +1,20 @@
 #include <iostream>
 #include "servidorBuilder.h"
+#include "consola.h"
 using namespace std;
 
 int main() {
 
-	ServidorBuilder* builder = new ServidorBuilder() ;
-	Servidor* servidor;
+	Consola* consola = new Consola();
 
-	builder->parsearXML();
-	servidor = builder->build();
-	cout<<"Se ha creado el servidor, la cantidad maxima de conexiones es: "<<servidor->getCantidadDeConexiones()<<endl;
-	cout<<"Se ha creado el servidor y el puerto es:"<<servidor->getPuerto();
-	cout<<"Usuario Disponible ="<<servidor->getBaseDeDatos()->getUsuario()->getUsuario()<<" "<<"Contraseña = "<<servidor->getBaseDeDatos()->getUsuario()->getContrasenia()<<endl;
-	delete servidor;
-	delete builder;
+	consola->cargarPaginaCrearServidor();
+	while(!consola->getTerminado()){
+
+		consola->cargarPagina(0);
+	}
+
+	delete consola;
+
 	return 0;
 }
 
