@@ -1,11 +1,8 @@
-#include <fstream>
-#include <string> 
-#include <iostream> 
-#include <ctime>
+
 #include "../../headers/Model/logger.h"
 using namespace std; 
 
-void loggear(string mensaje, int nivel, int prioridad){
+void loggear(std::string mensaje, int nivel, int prioridad){
 
 	if(nivel < prioridad)
 		return;
