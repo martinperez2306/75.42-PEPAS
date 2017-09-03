@@ -1,4 +1,4 @@
-#include "../../headers/Model/consola.h"
+#include "../../headers/Vista/consola.h"
 #include "../../headers/Model/usuario.h"
 #include <string>
 

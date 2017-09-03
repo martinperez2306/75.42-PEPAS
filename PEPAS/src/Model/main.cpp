@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../../headers/Model/servidorBuilder.h"
-#include "../../headers/Model/consola.h"
+#include "../../headers/Vista/consola.h"
 using namespace std;
 
 int main() {
