@@ -1,5 +1,5 @@
-#include "servidor.h"
-#include "baseDeDatos.h"
+#include "../../headers/Model/servidor.h"
+#include "../../headers/Model/baseDeDatos.h"
 
 Servidor::Servidor(){
 

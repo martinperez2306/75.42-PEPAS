@@ -1,4 +1,4 @@
-#include "usuario.h"
+#include "../../headers/Model/usuario.h"
 
 Usuario::Usuario(){
 	 this->contrasenia = "";

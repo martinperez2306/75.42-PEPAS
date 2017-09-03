@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "servidorController.h"
+#include "../Controller/servidorController.h"
 #include <stdlib.h>
 
 using namespace std;

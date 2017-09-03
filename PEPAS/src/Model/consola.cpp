@@ -1,5 +1,6 @@
-#include "consola.h"
-#include "usuario.h"
+#include "../../headers/Model/consola.h"
+#include "../../headers/Model/usuario.h"
+#include <string>
 
 Consola::Consola(){
 
@@ -20,7 +21,7 @@ bool Consola::getTerminado(){
 }
 
 void Consola::cargarPagina(int numeroPagina){
-	system("cls");
+	system("clear");
 	switch(numeroPagina){
 	case 1:
 		this->cargarPaginaCaracteristicasDelServidor();
@@ -44,23 +45,25 @@ void Consola::cargarPaginaPrincipal(){
 
 void Consola::cargarPaginaCaracteristicasDelServidor(){
 
+    char buffer;
 	Usuario* usuario = this->servidorController->getUsuario();
 
 	cout<<"La cantidad maxima de conexiones es: "<<this->servidorController->getMaximoClientesServidor()<<endl;
 	cout<<"El puerto es: "<<servidorController->getPuertoServidor()<<endl;
-	cout<<"Usuario Disponible = "<<usuario->getUsuario()<<" "<<"Contraseña = "<<usuario->getContrasenia()<<endl;
-	system("pause");
+	cout<<"Usuario Disponible = "<<usuario->getUsuario()<<" "<<"Contraseï¿½a = "<<usuario->getContrasenia()<<endl;
+    buffer = getchar();
 }
 
 void Consola::cargarPaginaCrearServidor(){
 
+    char buffer;
 	cout<<"CREANDO SERVIDOR..............."<<endl;
 	this->servidorController->crearServidor();
 	for(int i = 0;i<10;i++){
 		cout<<"."<<endl;
 	}
 	cout<<"SERVIDOR CREADO CORRECTAMENTE"<<endl;
-	system("pause");
+    buffer = getchar();
 }
 
 

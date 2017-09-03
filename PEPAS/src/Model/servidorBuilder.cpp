@@ -1,4 +1,4 @@
-#include "servidorBuilder.h"
+#include "../../headers/Model/servidorBuilder.h"
 
 
 //SERVIDOR BUILDER
@@ -52,7 +52,7 @@ Servidor* ServidorBuilder::build(){
 void ServidorBuilder::parsearXML(){
 
 	pugi::xml_document documento;
-	pugi::xml_parse_result result = documento.load_file("C:/Users/martin/workspaceCpp/Hello World/src/server.xml");
+	pugi::xml_parse_result result = documento.load_file("/home/payas17/CLionProjects/75.42-PEPAS/PEPAS/src/server.xml");
 	cout << "Load Result: " << result.description() <<endl;
 	/*pugi::xml_node panels = documento.child("servidor");
 

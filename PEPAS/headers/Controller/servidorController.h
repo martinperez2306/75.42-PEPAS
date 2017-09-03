@@ -1,8 +1,8 @@
 #ifndef SERVIDORCONTROLLER_H_
 #define SERVIDORCONTROLLER_H_
 
-#include"servidor.h"
-#include"servidorBuilder.h"
+#include"../Model/servidor.h"
+#include"../Model/servidorBuilder.h"
 
 
 class ServidorController{
