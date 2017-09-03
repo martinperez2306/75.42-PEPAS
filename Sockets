@@ -1,0 +1,100 @@
+The client program initiates communication, while the server program waits passively for and then responds to clients that contact it. Together, the client and server compose the application.The terms "client" and "server" are descriptive of the typical situation in which the server makes a particular capability--for example, a database service--available to any client that is able to communicate with it using the TCP/IP protocols. The client-server distinction is important because the client needs to know the server's address and port initially, but not vice versa.
+
+A socket is an abstraction through which an application may send and receive data, in m u c h the same way as an open file allows an application to read and write data to stable storage. A socket allows an application to "plug in" to the network and communicate with other
+applications that are also plugged in to the same network. Information written to the socket by an application on one machine can be read by an application on a different machine, and
+vice versa.
+
+
+
+Sock = socket (AF_INET, SOCK_STREAM, 0);
+
+The first parameter The IPv4 ( AF_INET ) domain allows communication between applications run-
+ning on hosts connected via an Internet Protocol version 4 (IPv4) network.
+
+
+The second parameter specifies the type of the socket. The type determines the semantics of data transmission with the socket.Stream sockets ( SOCK_STREAM ) provide a reliable, bidirectional, byte-stream communi-
+cation channel,stream sockets (usually) employ the Transmission Control Protocol (TCP).
+
+
+The third parameter specifies the particular end-to-end protocol to be used.Supplying the constant 0 as the third parameter requests the default end-to-end protocol for the specified protocol. The return value of socket () is actually an integer: a nonnegative value for success and
+- 1 for failure.
+
+The socket() system call creates a new socket.
+The bind() system call binds a socket to an address. Usually, a server employs
+this call to bind its socket to a well-known address so that clients can locate
+the socket.
+The listen() system call allows a stream socket to accept incoming connections
+from other sockets.
+The accept() system call accepts a connection from a peer application on a listen-
+ing stream socket, and optionally returns the address of the peer socket.
+The connect() system call establishes a connection with another socket.
+When an application is finished with a socket, it calls close(), giving the descriptor for the socket that is no longer needed.
+
+Un file descriptor es un numerito provisto por el kernel, usualmente no muy alto, que representa algo a lo que se puede mandar bytes, o desde donde se puede leerlos. En UNIX, muchas cosas pueden verse como file descriptors: 
+read(fd, buffer, tam)
+    Lee bytes de fd y los pone en un buffer de tamaño tam. 
+write(fd, buffer, tam)
+    Toma los primeros tam bytes de buffer y los envía al file descriptor fd. 
+
+
+1. El server llama a bind() para linkear una direccion conocida al socket.
+2. Abre la escucha con listen()
+3.EL cliente crea el socket () y usa connect() especificando la direccion a la cual conectarse.
+4. El servidor invoca accept() para aceptar la conexion, si el servidor acepta antes de que el cliente haga el connect() entonces se bloquea la comunicacion.
+5. Una vez hecha la conexion, la informacion se transmite en ambos sentidos entra las aplicaciones, hasta que finalmente uno invoca close()
+
+NO SE PUEDE APLICAR LISTEN() a un socket que ya esta conectado.
+
+int listen(int sockfd , int backlog );
+To understand the purpose of the backlog argument, we first observe that the client may call connect() before the server calls accept(). This could happen, for example, because the server is busy handling some other client(s). This results in a pending connection ( aca hay que usar threads? )
+The backlog argument allows us to limit the number of such pending connections. LEER 61.6.4.
+Further connection requests block until a pending connection
+is accepted (via accept()), and thus removed from the queue of pending connections.
+
+int accept(int sockfd , struct sockaddr * addr , socklen_t * addrlen );
+Si no hay conexiones pendientes cuando se invoca accept(), la llamada se bloquea hasta que haya una llamada a connect(). 
+El puntero addr a struct sockaddr es usado para devolver la direccion del socket.
+Addrlen es un value-result argument, socklen_t es un integer, debe ser inicializado con el tamaño del buffer apuntado por addr.
+If we are not interested in the address of the peer socket, then addr and addrlen
+should be specified as NULL and 0, respectively. (If desired, we can retrieve the peer’s
+address later using the getpeername() system call, as described in Section 61.5.)
+
+int connect(int sockfd , const struct sockaddr * addr , socklen_t addrlen );[0 success, -1 error]
+Si connect falla y queremos reahacer la conexion, se debe cerrar la conexion con close () y crear un nuevo socket() y reintentar nuevamente con este nuevo socket.
+
+
+Para enviar o recibir mensajes se puede usar read () y write () o send() y recv() 
+
+close () si multiples fd referencian a un mismo socket, entonces la conexion se cierra cuando TODOS los fd son cerrados. 
+Suponer que despues de cerrar una conexion, la aplicacion cerrada crashea o falla para leer o procesar informacion  correctamente que fue enviada previamente a esta, es decir antes de cerrar la conexion, en este caso no tenemos forma de saber que ocurrio un error. Ver syscall shutdown ()
+
+ssize_t recvfrom(int sockfd , void * buffer , size_t length , int flags ,
+struct sockaddr * src_addr , socklen_t * addrlen );
+Returns number of bytes received, 0 on EOF, or –1 on error
+
+
+Los primeros 3 argumentos son iguales al read(),
+flags en un bit de mascara que controla la I/O, se puede setear a 0 si no se lo usa.
+src_addr y addlen, son argumentos para obtener o especificar la direccion del peer socket con el que se esta comunicando, en este caso retorna la direccion del socket remoto al que se le envio la informacion.
+Si las direcciones de la cual provino el mensaje no son de interes se pueden setear los argumentos a NULL.
+Si el mensaje excede la cantidad de bytes posibles en el length, el mensaje es truncado.
+
+
+
+
+ssize_t sendto(int sockfd , const void * buffer , size_t length , int flags ,
+const struct sockaddr * dest_addr , socklen_t addrlen );
+Returns number of bytes sent, or –1 on error
+
+int getaddrinfo(const char * host , const char * service ,
+const struct addrinfo * hints , struct addrinfo ** result ); Returns 0 on success, or nonzero on error
+host contiene el hostname o el address expresado en dotted decimal.
+service contiene el nombre del servicio o el puerto
+hints, apunta a un addrinfo que especifica el criterio de seleccion de la direccion del socket,la funcion getaddrinfo() aloja una lista enlazada de structuras addrinfo y setea con el argumento result el puntero al principio de esta lista.
+
+gai_strerror() funcion que devuelve el string con el error.
+
+getnameinfo() es el opuesto a getaddrinfo(),
+
+
+
