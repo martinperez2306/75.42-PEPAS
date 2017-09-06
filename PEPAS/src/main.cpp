@@ -1,14 +1,14 @@
 #include <iostream>
-#include "../headers/Auto.h"
+#include "../headers/com.pepas.parser/ClienteParser.h"
 using namespace std;
 
 
-int main() {
+int main(int argc, char *argv[]) {
 
-	Auto automovil;
-
-	automovil.acelerar();
-	return 0;
+	ClienteParser *clienteParser = new ClienteParser();
+	//char* xmlPath = argv[0];
+	char* xmlPath = "/home/bigfatpancha/Documentos/tpTaller/primeraParte/75.42-PEPAS/PEPAS/src/cliente.xml";
+	clienteParser->parsearXML(xmlPath);
 }
 
 
