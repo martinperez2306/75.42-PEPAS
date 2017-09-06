@@ -1,10 +1,30 @@
 
 #include "../../headers/Model/logger.h"
-using namespace std; 
 
-void loggear(std::string mensaje, int nivel, int prioridad){
+using namespace std;
+int LOG_LEVEL; 
 
-	if(nivel < prioridad)
+void crear_logger() {
+   LOG_LEVEL = 1;
+
+   ofstream logger("log.txt",ios::app);
+
+   std::time_t timeT = std::time(nullptr);
+   std::string timeString = std::asctime(std::localtime(&timeT));
+
+   logger << "**********************************************************************************************************************************" << endl;
+   logger << " " << endl;
+   logger << "Inicio del logueo:" << endl;
+   logger << "Hora: ";
+   logger << timeString << endl;
+   logger << " " << endl;
+   logger << "**********************************************************************************************************************************" << endl;
+   logger.close();
+}
+void loggear(std::string mensaje, int prioridad){
+
+
+	if(LOG_LEVEL < prioridad)
 		return;
 
 	ofstream logger("log.txt",ios::app);
@@ -13,23 +33,22 @@ void loggear(std::string mensaje, int nivel, int prioridad){
 	logger.close();
 }
 
-void iniciar_logger(){
+void setNivelLogger(int nivel){
 
-	ofstream logger("log.txt",ios::app);
-	time_t current_time;
+   LOG_LEVEL = nivel;
+}
 
-   struct tm * time_info;
 
-   char timeString[9];
-   //string horario =  "Hora:" + timeString;
+void cerrar_logger(){
 
-   time(&current_time);
-   time_info = localtime(&current_time);
-   strftime(timeString, sizeof(timeString), "%H:%M:%S", time_info);
+   ofstream logger("log.txt",ios::app);
+
+   std::time_t timeT = std::time(nullptr);
+   std::string timeString = std::asctime(std::localtime(&timeT));
 
    logger << "**********************************************************************************************************************************" << endl;
    logger << " " << endl;
-   logger << "Inicio del logueo" << endl;
+   logger << "Fin del logueo:" << endl;
    logger << "Hora: ";
    logger << timeString << endl;
    logger << " " << endl;
@@ -37,5 +56,3 @@ void iniciar_logger(){
    logger.close();
 
 }
-
-

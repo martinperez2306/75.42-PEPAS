@@ -14,6 +14,7 @@ private:
 	bool terminado;
 	//int numeroPagina;
 	ServidorController* servidorController;
+	bool esint(std::string entrada);
 public:
 
 	Consola();
@@ -27,6 +28,7 @@ public:
 	void cargarIngresarUsuario();
 	void cargarPaginaCaracteristicasDelServidor();
 	void cargarPaginaCrearServidor();
+	void cargarCambioLoggeo();
 
 	~Consola();
 };

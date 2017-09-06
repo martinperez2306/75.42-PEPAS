@@ -26,5 +26,8 @@
 	rm -r ./obj
 	rm main
 
+ cleanlog:
+	rm log.txt
+
 .PHONY: all clean main
 

@@ -2,5 +2,9 @@
 #include <string> 
 #include <iostream> 
 #include <ctime>
-void loggear(std::string mensaje, int nivel, int prioridad);
-void iniciar_logger();
+
+	void crear_logger();
+	void cerrar_logger();
+	void loggear(std::string mensaje, int prioridad);
+	void setNivelLogger(int nivel);
+
