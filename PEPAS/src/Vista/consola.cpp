@@ -6,7 +6,6 @@
 Consola::Consola(){
 
 	this->terminado = false;
-	//this->numeroPagina = 0;
 	this->servidorController = new ServidorController();
 }
 
@@ -33,6 +32,7 @@ void Consola::cargarPagina(int numeroPagina){
       		loggear("No existe el comando ingresado por consola",2);
 			this->cargarPaginaPrincipal();
 		}
+
 	}
 }
 
@@ -84,6 +84,11 @@ void Consola::cargarPaginaPrincipal(){
       	loggear("Opcion invalida ingresada, no se ingreso un numero",2);
 		this->cargarPaginaPrincipal();
 	}
+
+	cout<<"Seleccione 2 para salir"<<endl;
+    cout<<"3. close-server"<<endl;
+    cout<<"4. change-log-level"<<endl;
+    cout<<"4. show-connected-users"<<endl;
 }
 
 void Consola::cargarPaginaCaracteristicasDelServidor(){
@@ -93,7 +98,7 @@ void Consola::cargarPaginaCaracteristicasDelServidor(){
 
 	cout<<"La cantidad maxima de conexiones es: "<<this->servidorController->getMaximoClientesServidor()<<endl;
 	cout<<"El puerto es: "<<servidorController->getPuertoServidor()<<endl;
-	cout<<"Usuario Disponible = "<<usuario->getUsuario()<<" "<<"Contrase�a = "<<usuario->getContrasenia()<<endl;
+	cout<<"Usuario Disponible = "<<usuario->getUsuario()<<" "<<"Contraseña = "<<usuario->getContrasenia()<<endl;
 }
 
 void Consola::cargarPaginaCrearServidor(){

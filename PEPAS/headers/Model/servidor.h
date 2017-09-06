@@ -2,12 +2,17 @@
 #define SERVIDOR_H_
 
 #include "baseDeDatos.h"
+#include "socket.h"
+
+
+
 class Servidor{
 
 private:
 	int puerto;
 	int cantidadDeConexiones;
 	BaseDeDatos* baseDeDatos;
+
 
 public:
 	Servidor();
@@ -22,6 +27,7 @@ public:
 	BaseDeDatos* getBaseDeDatos();
 
 	~Servidor();
+
 
 };
 

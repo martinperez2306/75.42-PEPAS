@@ -1,0 +1,3 @@
+/home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/cmake-build-debug/CMakeFiles/75_42_PEPAS.dir

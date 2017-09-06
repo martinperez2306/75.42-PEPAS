@@ -1,12 +1,17 @@
 #include "../../headers/Model/servidor.h"
 #include "../../headers/Model/baseDeDatos.h"
+#include "../../headers/Model/socket.h"
+
+
 
 Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
-}
+
+
+};
 
 int Servidor::getCantidadDeConexiones(){
 
@@ -35,6 +40,7 @@ void Servidor::setBaseDeDatos(BaseDeDatos* baseDeDatos){
 BaseDeDatos* Servidor::getBaseDeDatos(){
 	return this->baseDeDatos;
 }
+
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
