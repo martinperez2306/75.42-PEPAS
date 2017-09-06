@@ -10,12 +10,6 @@ Consola::Consola(){
 	this->servidorController = new ServidorController();
 }
 
-void Consola::setTerminado(bool terminado){
-
-	this->terminado = terminado;
-}
-
-
 bool Consola::getTerminado(){
 
 	return this->terminado;
@@ -23,16 +17,22 @@ bool Consola::getTerminado(){
 
 void Consola::cargarPagina(int numeroPagina){
 	switch(numeroPagina){
-	case 1:
-		this->cargarPaginaCaracteristicasDelServidor();
-		break;
-	case 2:
-		this->terminado = true;
-		break;
-	case 3:
-		this->cargarCambioLoggeo();
-	default:
-		this->cargarPaginaPrincipal();
+		case 1:
+			this->cargarPaginaCaracteristicasDelServidor();
+			break;
+		case 3:
+		{
+			this->terminarConsola();
+			break;
+		}
+		case 2:
+			this->cargarCambioLoggeo();
+		default:
+		{
+			cout << "No existe esa opcion" << endl;
+      		loggear("No existe el comando ingresado por consola",2);
+			this->cargarPaginaPrincipal();
+		}
 	}
 }
 
@@ -69,8 +69,9 @@ void Consola::cargarPaginaPrincipal(){
 
 	cout<<"Ingrese una opcion segun corresponda"<<endl;
 	cout<<"Seleccione 1 para ir a las caracteristicas del servidor"<<endl;
-	cout<<"Seleccione 2 para salir"<<endl;
-	cout<<"Seleccione 3 para cambiar el nivel del logger"<<endl;
+	cout<<"Seleccione 2 para cambiar el nivel del logger"<<endl;
+	cout<<"Seleccione 3 para salir"<<endl;
+	
 	cin>> entrada;
 
 	if(esint(entrada)){
@@ -122,3 +123,6 @@ bool Consola::esint(std::string entrada){
 	return false;
 }
 
+void Consola::terminarConsola(){
+	this->terminado = true;
+}

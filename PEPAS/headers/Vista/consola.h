@@ -19,9 +19,8 @@ public:
 
 	Consola();
 
-	void setTerminado(bool terminado);
 	bool getTerminado();
-
+	void terminarConsola();
 	/////////////////Cargar Paginas/////////////////
 	void cargarPagina(int numeroPagina);
 	void cargarPaginaPrincipal();
