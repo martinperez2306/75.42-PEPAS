@@ -2,7 +2,7 @@
 // Created by florencia on 03/09/17.
 //
 
-#include "consola.h"
+#include "../../headers/com.pepas.view/consola.h"
 
 Consola::Consola(){
 

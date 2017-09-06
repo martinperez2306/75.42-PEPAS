@@ -5,7 +5,7 @@
 #ifndef INC_75_42_PEPAS_CLIENTE_CLIENTECONTROLLER_H
 #define INC_75_42_PEPAS_CLIENTE_CLIENTECONTROLLER_H
 
-#include"cliente.h"
+#include "../com.pepas.model/cliente.h"
 //#include"servidorBuilder.h
 
 

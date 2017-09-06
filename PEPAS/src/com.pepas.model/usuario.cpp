@@ -2,7 +2,7 @@
 // Created by florencia on 06/09/17.
 //
 
-#include "usuario.h"
+#include "../../headers/com.pepas.model/usuario.h"
 
 Usuario::Usuario(){
     this->nombre = "";

@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <string>
-#include "clienteController.h"
+#include "../com.pepas.controllers/clienteController.h"
 #include <stdlib.h>
 
 
