@@ -14,6 +14,7 @@
 //
 
 #include "../com.pepas.model/cliente.h"
+#include "../com.pepas.parser/ClienteParser.h"
 
 
 class ClienteController{
@@ -21,10 +22,12 @@ class ClienteController{
 
 private:
     Cliente* cliente;
-   // ServidorBuilder* servidorBuilder;
+    ClienteParser* clienteParser;
 
 public:
     ClienteController();
+
+    ClienteController(ClienteParser *ClienteParser);
 
     void crearCliente();
 

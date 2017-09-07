@@ -5,8 +5,10 @@
 #include "../../headers/com.pepas.controllers/clienteController.h"
 
 
-ClienteController::ClienteController(){
+ClienteController::ClienteController(){}
 
+ClienteController::ClienteController(ClienteParser *clientePaser) {
+	this->clienteParser = clientePaser;
 }
 
 
@@ -14,17 +16,14 @@ ClienteController::ClienteController(){
 
 void ClienteController::crearCliente(){
 
-    //this->servidorBuilder = new ServidorBuilder();
-    //this->servidorBuilder->parsearXML();
-    // En que parte hacemos el parseo del cliente?
     this->cliente= new Cliente();
-    //delete servidorBuilder;
 }
 
 void ClienteController::asignarServidor() {}
 
 
 void ClienteController::conectarConElServidor(){
+	//crear socket
 
 }
 
