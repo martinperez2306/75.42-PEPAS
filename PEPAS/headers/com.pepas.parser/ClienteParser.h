@@ -29,7 +29,7 @@ public:
 
 	void parsearXML(char* xmlPath);
 
-	//no libera la memoria del servidor. Recordar Eliminarla en el programa principal.
+		//no libera la memoria del servidor. Recordar Eliminarla en el programa principal.
 	~ClienteParser();
 };
 

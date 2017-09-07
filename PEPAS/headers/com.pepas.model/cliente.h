@@ -10,11 +10,27 @@
 
 
 #include <string>
+#include "../../headers/com.pepas.model/usuario.h"
 using namespace std;
 
 class Cliente{
 
+private:
+    Usuario* usuario = new Usuario();
+    int socketCliente;
 
+public:
+    Cliente();
+
+    void logIn();
+
+    //metodo para loquearse?
+    void conectarseAlServidor(string ip, int puerto);
+
+    void enviarMensajePrueba();
+
+    void desconectarseDelServidor();
+    ~Cliente();
 
 };
 

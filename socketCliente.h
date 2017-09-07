@@ -21,7 +21,7 @@ public:
 
     SocketCliente();
 
-    int Crear();
+    int crear();
 
     void Enlazar(int socket, int puerto, string serverIP);
 

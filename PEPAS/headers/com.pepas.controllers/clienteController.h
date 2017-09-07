@@ -35,6 +35,8 @@ public:
 
     void desconectarseDelServidor();
 
+    void mensajeDePrueba();
+
     void logIn();
 
     void stressTest();

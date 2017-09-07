@@ -12,7 +12,7 @@ SocketCliente::SocketCliente(){
 
 }
 
-int SocketCliente::Crear(){
+int SocketCliente::crear(){
     int socket;
     socket = socket(AF_INET, SOCK_STREAM, 0);
     if (socket     < 0) {
