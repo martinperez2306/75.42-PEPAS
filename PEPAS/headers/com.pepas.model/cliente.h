@@ -1,9 +1,13 @@
-//
-// Created by florencia on 03/09/17.
-//
+/*
+ * cliente.h
+ *
+ *  Created on: 6 sep. 2017
+ *      Author: bigfatpancha
+ */
 
-#ifndef INC_75_42_PEPAS_CLIENTE_CLIENTE_H
-#define INC_75_42_PEPAS_CLIENTE_CLIENTE_H
+#ifndef COM_PEPAS_MODEL_CLIENTE_H_
+#define COM_PEPAS_MODEL_CLIENTE_H_
+
 
 #include <string>
 using namespace std;
@@ -14,4 +18,6 @@ class Cliente{
 
 };
 
-#endif //INC_75_42_PEPAS_CLIENTE_CLIENTE_H
+
+
+#endif /* COM_PEPAS_MODEL_CLIENTE_H_ */

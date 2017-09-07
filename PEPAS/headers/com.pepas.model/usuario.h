@@ -2,8 +2,8 @@
 // Created by florencia on 06/09/17.
 //
 
-#ifndef INC_75_42_PEPAS_USUARIO_H
-#define INC_75_42_PEPAS_USUARIO_H
+#ifndef COM_PEPAS_MODEL_USUARIO_H
+#define COM_PEPAS_MODEL_USUARIO_H
 
 #include <string>
 #include <iostream>
@@ -28,8 +28,8 @@ public:
 
     string getContrasenia();
 
-    ~Cliente();
+    ~Usuario();
 
 };
 
-#endif //INC_75_42_PEPAS_USUARIO_H
+#endif //COM_PEPAS_MODEL_USUARIO_H

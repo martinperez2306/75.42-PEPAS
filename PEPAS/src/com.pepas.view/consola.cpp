@@ -7,7 +7,6 @@
 Consola::Consola(){
 
     this->terminado = false;
-    //this->numeroPagina = 0;
     this->clienteController = new ClienteController();
 }
 

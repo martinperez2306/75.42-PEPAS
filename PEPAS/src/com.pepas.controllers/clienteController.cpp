@@ -2,15 +2,12 @@
 // Created by florencia on 03/09/17.
 //
 
-#include "../../headers/com.pepas.controller/clienteController.h"
+#include "../../headers/com.pepas.controllers/clienteController.h"
 
 
-//ClienteController::ClienteController(//&parser){
+ClienteController::ClienteController(){
 
-  //  this->cliente = NULL;
-   // this-> servidor = NULL;
-    //this->servidorBuilder = NULL;
-//}
+}
 
 
 //RESERVA Y LIBERA MEMORIA DEL SERVIDOR BUILDER. QUEDA USANDOSE LA MEMORIA PEDIDA PARA SERVIDOR (QUE PIDIO SERVIDOR BUILDER)
@@ -24,18 +21,8 @@ void ClienteController::crearCliente(){
     //delete servidorBuilder;
 }
 
-void ClienteController::asignarServidor()
+void ClienteController::asignarServidor() {}
 
-
-/*int ServidorController::getPuertoServidor(){
-
-    return this->servidor->getPuerto();
-}
-
-Usuario* ServidorController::getUsuario(){
-
-    return this->servidor->getBaseDeDatos()->getUsuario();
-}*/
 
 void ClienteController::conectarConElServidor(){
 

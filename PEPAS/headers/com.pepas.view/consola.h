@@ -2,8 +2,8 @@
 // Created by florencia on 03/09/17.
 //
 
-#ifndef INC_75_42_PEPAS_CLIENTE_CONSOLA_H
-#define INC_75_42_PEPAS_CLIENTE_CONSOLA_H
+#ifndef COM_PEPAS_CONSOLA_CONSOLA_H
+#define COM_PEPAS_CONSOLA_CONSOLA_H
 
 #include <iostream>
 #include <string>
@@ -36,4 +36,4 @@ public:
     ~Consola();
 };
 
-#endif //INC_75_42_PEPAS_CLIENTE_CONSOLA_H
+#endif //COM_PEPAS_CONSOLA_CONSOLA_H

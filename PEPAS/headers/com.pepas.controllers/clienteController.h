@@ -1,12 +1,19 @@
+/*
+ * clienteController2.h
+ *
+ *  Created on: 6 sep. 2017
+ *      Author: bigfatpancha
+ */
+
+#ifndef COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_
+#define COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_
+
+
 //
 // Created by florencia on 03/09/17.
 //
 
-#ifndef INC_75_42_PEPAS_CLIENTE_CLIENTECONTROLLER_H
-#define INC_75_42_PEPAS_CLIENTE_CLIENTECONTROLLER_H
-
 #include "../com.pepas.model/cliente.h"
-//#include"servidorBuilder.h
 
 
 class ClienteController{
@@ -21,12 +28,6 @@ public:
 
     void crearCliente();
 
-    //int getPuertoServidor();
-
-    //int getMaximoClientesServidor();
-
-    //Usuario* getUsuario();
-
     void conectarConElServidor();
 
     void desconectarseDelServidor();
@@ -37,12 +38,12 @@ public:
 
     void enviarMensajeChat();
 
-    void enviarMensajePrivado(){
+    void enviarMensajePrivado();
 
-    }
+    void asignarServidor();
 
     ~ClienteController();
 
 };
 
-#endif //INC_75_42_PEPAS_CLIENTE_CLIENTECONTROLLER_H
+#endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

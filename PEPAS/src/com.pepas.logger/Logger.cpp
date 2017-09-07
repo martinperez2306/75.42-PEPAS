@@ -1,5 +1,7 @@
 
 #include "../../headers/com.pepas.logger/Logger.h"
+#include <iostream>
+#include <cstddef>
 
 using namespace std;
 int LOG_LEVEL;
