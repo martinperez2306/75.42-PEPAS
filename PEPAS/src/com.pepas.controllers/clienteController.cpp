@@ -19,7 +19,7 @@ void ClienteController::crearCliente(){
 
     this->cliente= new Cliente();
     //a penas crea el cliente se empieza a parsear el achivo xml
-    this->clienteParser->parsearXML((char*)"/home/florencia/Escritorio/75.42-PEPAS-cliente/PEPAS/src/com.pepas.parser/cliente.xml");
+    this->clienteParser->parsearXML((char*)"cliente.xml");
 }
 
 void ClienteController::asignarServidor(){
@@ -45,12 +45,14 @@ void ClienteController::desconectarseDelServidor(){
 }
 
 
-void ClienteController::logIn(){
+void ClienteController::logIn(char* nomrbe, char* contrasenia){
 
 }
 
+void ClienteController::logOut() {
 
-void
+}
+
 
 void ClienteController::stressTest(){
 }
@@ -61,6 +63,11 @@ void ClienteController::enviarMensajeChat(){
 
 void ClienteController::enviarMensajePrivado(){
 
+}
+
+void ClienteController::salirDelPrograma() {
+	//chequear que este desconectado, sino, desconectar
+	cout<<"SALISTE DEL CHAT"<<endl;
 }
 
 ClienteController::~ClienteController(){

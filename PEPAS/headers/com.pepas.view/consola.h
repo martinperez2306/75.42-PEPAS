@@ -27,11 +27,13 @@ public:
     bool getTerminado();
 
     /////////////////Cargar Paginas/////////////////
-    void cargarPagina(int numeroPagina);
+    void cargarPagina();
     void cargarPaginaPrincipal();
     void cargarIngresarUsuario();
     void cargarPaginaCaracteristicasDelCliente();
     void cargarPaginaCrearCliente();
+    void cargarLogIn();
+    void cargarMenuPrincipal();
 
     ~Consola();
 };

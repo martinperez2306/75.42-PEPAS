@@ -37,7 +37,9 @@ public:
 
     void mensajeDePrueba();
 
-    void logIn();
+    void logIn(char* nombre, char* contrasenia);
+
+    void logOut();
 
     void stressTest();
 
@@ -46,6 +48,8 @@ public:
     void enviarMensajePrivado();
 
     void asignarServidor();
+
+    void salirDelPrograma();
 
     ~ClienteController();
 

@@ -9,7 +9,9 @@
 //SERVIDOR BUILDER
 
 //BASE DE DATOS Y SERVIDOR SON PEDIDOS EN MEMORIA ACA. DEBEN SER LIBERADAS EN EL CONTROLLER (EL SERVIDOR) Y LA BASE DE DATOS (POR EL SERVIDOR)
-ClienteParser::ClienteParser(){}
+ClienteParser::ClienteParser(){
+	this->ip = (char *) malloc(15);
+}
 
 void ClienteParser::parsearXML(char* xmlPath) {
 	struct sockaddr_in sa;
@@ -29,24 +31,21 @@ void ClienteParser::parsearXML(char* xmlPath) {
 	int puerto = nodePuerto.text().as_int();
 
 	//TODO levantar archivo de test
-
-	//BUILDING SERVICE
-
 	inet_ntop(AF_INET, &(sa.sin_addr), str, 15);
 
 	cout << "IP: " << str << endl;
 	cout << "Puerto: " << puerto << endl;
-	this->ip = str;
-	this->puerto = puerto;
+//	strcpy(this->ip, str);
+//	this->puerto = puerto;
 
-	}
+}
 
 const char* ClienteParser::getIp(){
-	return this->ip;
+	return "192.168.0.1"; // this->ip;
 }
 
 int ClienteParser::getPuerto() {
-	return this->puerto;
+	return 55671; // this->puerto;
 }
 
 ClienteParser::~ClienteParser() {

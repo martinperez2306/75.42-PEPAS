@@ -8,7 +8,7 @@ using namespace std;
 int main(int argc, char *argv[]) {
 
 	Consola* consola = new Consola();
-	consola->cargarPaginaPrincipal();
+	consola->cargarPagina();
 
 
 
