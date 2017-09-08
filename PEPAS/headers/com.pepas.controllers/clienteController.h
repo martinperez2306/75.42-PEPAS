@@ -23,6 +23,7 @@ class ClienteController{
 private:
     Cliente* cliente;
     ClienteParser* clienteParser;
+    ClienteParser::SocketData socketData;
 
 public:
     ClienteController();
@@ -37,7 +38,7 @@ public:
 
     void mensajeDePrueba();
 
-    void logIn(char* nombre, char* contrasenia);
+    void logIn(string nombre, string contrasenia);
 
     void logOut();
 

@@ -10,44 +10,43 @@
 
 //BASE DE DATOS Y SERVIDOR SON PEDIDOS EN MEMORIA ACA. DEBEN SER LIBERADAS EN EL CONTROLLER (EL SERVIDOR) Y LA BASE DE DATOS (POR EL SERVIDOR)
 ClienteParser::ClienteParser(){
-	this->ip = (char *) malloc(15);
 }
 
-void ClienteParser::parsearXML(char* xmlPath) {
+ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
 	struct sockaddr_in sa;
+	ClienteParser::SocketData sd;
 	char str[15];
 	pugi::xml_document documento;
 	pugi::xml_parse_result result = documento.load_file(xmlPath);
-	cout << "Load Result: " << result.description() << endl;
+	cout << "Load Result: " << result.status << endl;
+	if(result.status == 0) {
+		//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
+		pugi::xml_node nodeIp = documento.child("cliente").child("conexion").child("IP");
+		const char *ip = nodeIp.text().as_string();
+		if (inet_pton(AF_INET, ip, &(sa.sin_addr)) == -1) {
+			return ClienteParser::parsearXML("clienteDefault.xml");
+		}
+		pugi::xml_node nodePuerto = documento.child("cliente").child("conexion").child("puerto");
+		int puerto = nodePuerto.text().as_int();
+		if(!puertoValido(puerto)) {
+			return ClienteParser::parsearXML("clienteDefault.xml");
+		}
+		pugi::xml_node nodeTestfile = documento.child("cliente").child("testfile");
+		const char* testFile = nodeTestfile.text().as_string();
+		if(!pathValido(testFile)) {
+			return ClienteParser::parsearXML("clienteDefault.xml");
+		}
 
-	//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
-	pugi::xml_node nodeIp = documento.child("cliente").child("conexion").child("IP");
-	const char *ip = nodeIp.text().as_string();
-	if (inet_pton(AF_INET, ip, &(sa.sin_addr)) == -1) {
-		// TODO logear error
-		// TODO levantar archivo default
+		inet_ntop(AF_INET, &(sa.sin_addr), sd.ip, 15);
+		sd.puerto = puerto;
+		return sd;
+	} else {
+		return ClienteParser::parsearXML("clienteDefault.xml");
 	}
-	pugi::xml_node nodePuerto = documento.child("cliente").child("conexion").child("puerto");
-	int puerto = nodePuerto.text().as_int();
+}
 
-	//TODO levantar archivo de test
-	inet_ntop(AF_INET, &(sa.sin_addr), str, 15);
-
-	cout << "IP: " << str << endl;
-	cout << "Puerto: " << puerto << endl;
-//	strcpy(this->ip, str);
-//	this->puerto = puerto;
+bool ClienteParser::puertoValido(int puerto) {
 
 }
 
-const char* ClienteParser::getIp(){
-	return "192.168.0.1"; // this->ip;
-}
-
-int ClienteParser::getPuerto() {
-	return 55671; // this->puerto;
-}
-
-ClienteParser::~ClienteParser() {
-
-}
+bool ClienteParser::pathValido(const char* path) {}

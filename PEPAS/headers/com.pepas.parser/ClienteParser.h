@@ -9,6 +9,7 @@
 #define COM_PEPAS_PARSER_CLIENTEPARSER_H_
 
 #include "../pugi/pugixml.hpp"
+#include "../../headers/com.pepas.logger/Logger.h"
 #include <arpa/inet.h>
 #include <iostream>
 #include <stdio.h>
@@ -19,17 +20,18 @@ using namespace std;
 
 class ClienteParser{
 
-private:
-	char *ip;
-	int puerto;
-
 public:
+
+	struct SocketData {
+		char *ip;
+		int puerto;
+		char *rutaFile;
+	};
 	ClienteParser();
 
-	const char* getIp();
-	int getPuerto();
-
-	void parsearXML(char* xmlPath);
+	ClienteParser::SocketData parsearXML(char* xmlPath);
+	bool puertoValido(int puerto);
+	bool pathValido(const char* path);
 
 		//no libera la memoria del servidor. Recordar Eliminarla en el programa principal.
 	~ClienteParser();

@@ -7,6 +7,7 @@
 Consola::Consola(){
 
     this->terminado = false;
+    this->salirMenu = false;
     this->clienteController = new ClienteController();
 }
 
@@ -23,8 +24,8 @@ bool Consola::getTerminado(){
 
 void Consola::cargarPagina() {
     system("cls");
+	int numeroPagina;
     while(!this->terminado) {
-    	int numeroPagina;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
 		cout<<"Seleccione 1 conectarse al servidor"<<endl;
 		cout<<"Seleccione 2 para salir"<<endl;
@@ -55,18 +56,18 @@ void Consola::cargarPagina() {
 
 void Consola::cargarLogIn() {
 	int numeroPag;
-	char* nombre;
-	char* contrasenia;
+	string nombre;
+	string contrasenia;
 	cout<<"Ingresa tus datos o cualquier tecla para salir"<<endl;
 	cout<<"Usuario: "<<endl;
-	//cin<<nombre;
+	cin >> nombre;
 	cout<<"Contraseña: "<<endl;
-	//cin<<contrasenia;
+	cin >> contrasenia;
 	this->clienteController->logIn(nombre, contrasenia);
 }
 
 void Consola::cargarMenuPrincipal() {
-	while(!this->terminado) {
+	while(!this->salirMenu) {
 		int numeroPag;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
 		cout<<"Seleccione 1 para el Stress Test"<<endl;
@@ -74,7 +75,7 @@ void Consola::cargarMenuPrincipal() {
 		cout<<"Seleccione 3 para el enviar un mensaje privado"<<endl;
 		cout<<"Seleccione 4 para el enviar un mensaje de prueba"<<endl;
 		cout<<"Seleccione 5 para el deslogearse"<<endl;
-		cout<<"Cualquier tecla para vovler al menu anterior"<<endl;
+		cout<<"Cualquier tecla para salir"<<endl;
 		cin>> numeroPag;
 		switch(numeroPag) {
 			case 1:
@@ -93,10 +94,13 @@ void Consola::cargarMenuPrincipal() {
 				this->clienteController->logOut();
 				break;
 			default:
-				this->clienteController->salirDelPrograma();
-				this->terminado = true;
+				this->salirMenu = true;
 		}
 	}
+	cout<<"Se va a cerrar la conexion con el servidor..."<<endl;
+	this->clienteController->desconectarseDelServidor();
+	cout<<"Terminando la ejecucion del programa"<<endl;
+	this->terminado = true;
 
 }
 

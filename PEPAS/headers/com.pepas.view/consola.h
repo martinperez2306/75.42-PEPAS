@@ -17,6 +17,7 @@ class Consola{
 
 private:
     bool terminado;
+    bool salirMenu;
     //int numeroPagina;
     ClienteController* clienteController;
 public:

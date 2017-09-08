@@ -19,7 +19,8 @@ void ClienteController::crearCliente(){
 
     this->cliente= new Cliente();
     //a penas crea el cliente se empieza a parsear el achivo xml
-    this->clienteParser->parsearXML((char*)"cliente.xml");
+    ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"cliente.xml");
+    this->socketData = sd;
 }
 
 void ClienteController::asignarServidor(){
@@ -29,9 +30,7 @@ void ClienteController::asignarServidor(){
 
 
 void ClienteController::conectarConElServidor(){
-    const char* ip = this->clienteParser->getIp();
-    int puerto = this->clienteParser->getPuerto();
-    this->cliente->conectarseAlServidor((string) ip, puerto);
+    this->cliente->conectarseAlServidor((string) socketData.ip, socketData.puerto);
 
 
 }
@@ -45,7 +44,7 @@ void ClienteController::desconectarseDelServidor(){
 }
 
 
-void ClienteController::logIn(char* nomrbe, char* contrasenia){
+void ClienteController::logIn(string nomrbe, string contrasenia){
 
 }
 
