@@ -13,7 +13,7 @@ private:
 	int cantidadDeConexiones;
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
-	Socket serverSocket;
+	Socket* serverSocket;
 	string ip;
 
 
@@ -32,15 +32,21 @@ public:
 	void mostrarUsuariosDisponibles();
 
 	string getIP();
-	int getSocketEscucha();
+	int obtenerSocketFD();
 
 	void iniciarServidor();
+	void aceptarConexiones();
+	void finalizarConexiones();
+	void cerrarSockets();
 
-	Socket getSocket();
+	Socket* obtenerSocket();
+
+
 
 	~Servidor();
 
 
+	void asignarSocketFd(int crear);
 };
 
 

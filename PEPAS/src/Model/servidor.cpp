@@ -10,6 +10,8 @@ Servidor::Servidor(){
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
 	this->ip = "127.0.0.1";
+	this->serverSocket= new Socket();
+	this->socketEscucha=0;
 
 };
 
@@ -47,11 +49,11 @@ void Servidor::mostrarUsuariosDisponibles(){
 }
 
 
-Socket Servidor::getSocket() {
+Socket* Servidor::obtenerSocket(){
     return this->serverSocket;
 }
 
-int Servidor::getSocketEscucha() {
+int Servidor::obtenerSocketFD() {
     return this->socketEscucha;
 }
 
@@ -59,25 +61,40 @@ string Servidor::getIP() {
     return this->ip;
 }
 
+void Servidor::asignarSocketFd(int socket) {
+	this->socketEscucha=socket;
+}
 
 
 void Servidor::iniciarServidor() {
-    int listenSock = this->getSocketEscucha();
-    Socket svSocket = this->getSocket();
-    int maxConexiones = getCantidadDeConexiones();
-    int svPuerto = this->getPuerto();
-    string svIP = this->getIP();
 
-    listenSock = svSocket.Crear(); //devuelve el file descriptor
-    svSocket.Enlazar(listenSock, svPuerto,svIP);
-    svSocket.Escuchar(listenSock, maxConexiones);
+    asignarSocketFd(obtenerSocket()->Crear()); //devuelve el file descriptor
+    obtenerSocket()->Enlazar(this->obtenerSocketFD(),this->getPuerto(),this->getIP());
+   	obtenerSocket()->Escuchar(this->obtenerSocketFD(),this->getCantidadDeConexiones());
+	cout << "Servidor creado correctamente, escuchando conexiones ..." << endl;
 }
+
+
+
+void Servidor::aceptarConexiones() {
+	obtenerSocket()->AceptarConexion(this->obtenerSocketFD());
+	cout << "Conexion aceptada" << endl;
+}
+
+
+void Servidor::finalizarConexiones() {
+	obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
+	cout << "Cerrando conexiones" << endl;
+}
+
+
+
+
+
+
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
 
 	delete this->baseDeDatos;
 }
-
-
-
