@@ -22,24 +22,20 @@ public:
 	void setPuerto(int puerto);
 
 	int getPuerto();
+	int getSocketEscucha();
+	int getCantidadDeConexiones();
+	string getIP();
 
 	void setCantidadDeConexiones(int cantidadDeConexiones);
-
-	int getCantidadDeConexiones();
-
 	void setBaseDeDatos(BaseDeDatos* baseDeDatos);
-
-	Socket getSocket();
-
-	int getSocketEscucha();
-
 	void iniciarServidor();
 
+	Socket getSocket();
 	BaseDeDatos* getBaseDeDatos();
 
 	~Servidor();
 
-	string getIP();
+
 };
 
 

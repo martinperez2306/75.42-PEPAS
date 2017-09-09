@@ -121,3 +121,5 @@ void Socket::CerrarConexion(int socket) {
 }
 
 
+Socket::~Socket(){
+}

@@ -9,7 +9,7 @@ Servidor::Servidor(){
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
-    this->ip = '127.0.0.1';
+    this->ip = "127.0.0.1";
 
 
 };
