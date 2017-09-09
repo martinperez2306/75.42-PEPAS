@@ -36,6 +36,7 @@ CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/pugixml.cpp.o: ../PEPAS/src/Model/pug
 
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o: ../PEPAS/headers/Model/baseDeDatos.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o: ../PEPAS/headers/Model/servidor.h
+CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o: ../PEPAS/headers/Model/socket.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o: ../PEPAS/headers/Model/usuario.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o: ../PEPAS/src/Model/servidor.cpp
 
@@ -47,11 +48,15 @@ CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidorBuilder.cpp.o: ../PEPAS/heade
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidorBuilder.cpp.o: ../PEPAS/headers/Model/usuario.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidorBuilder.cpp.o: ../PEPAS/src/Model/servidorBuilder.cpp
 
+CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/socket.cpp.o: ../PEPAS/headers/Model/socket.h
+CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/socket.cpp.o: ../PEPAS/src/Model/socket.cpp
+
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/usuario.cpp.o: ../PEPAS/headers/Model/usuario.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/usuario.cpp.o: ../PEPAS/src/Model/usuario.cpp
 
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Controller/servidorController.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Model/baseDeDatos.h
+CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Model/logger.h
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Model/pugiconfig.hpp
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Model/pugixml.hpp
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o: ../PEPAS/headers/Model/servidor.h

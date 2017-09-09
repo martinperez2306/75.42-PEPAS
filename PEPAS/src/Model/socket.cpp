@@ -43,11 +43,11 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
     }
 }
 
-void Socket::Conectar(int socket, int puerto, string IP) {
+void Socket::Conectar(int socket, int puerto, string IPremota) {
     int connectSocket = socket;
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = inet_addr(IP.data());
+    serverAddress.sin_addr.s_addr = inet_addr(IPremota.data());
     serverAddress.sin_port = htons(puerto);
     socklen_t serverSize = sizeof(serverAddress);
 

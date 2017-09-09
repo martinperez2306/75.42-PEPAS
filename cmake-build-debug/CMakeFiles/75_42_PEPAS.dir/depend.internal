@@ -37,6 +37,7 @@ CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/pugixml.cpp.o
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidor.cpp.o
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/baseDeDatos.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/servidor.h
+ /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/socket.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/usuario.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/src/Model/servidor.cpp
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidorBuilder.cpp.o
@@ -47,12 +48,16 @@ CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/servidorBuilder.cpp.o
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/servidorBuilder.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/usuario.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/src/Model/servidorBuilder.cpp
+CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/socket.cpp.o
+ /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/socket.h
+ /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/src/Model/socket.cpp
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Model/usuario.cpp.o
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/usuario.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/src/Model/usuario.cpp
 CMakeFiles/75_42_PEPAS.dir/PEPAS/src/Vista/consola.cpp.o
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Controller/servidorController.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/baseDeDatos.h
+ /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/logger.h
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/pugiconfig.hpp
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/pugixml.hpp
  /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/PEPAS/headers/Model/servidor.h

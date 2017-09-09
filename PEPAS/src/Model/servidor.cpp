@@ -9,6 +9,7 @@ Servidor::Servidor(){
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
+    this->ip = '127.0.0.1';
 
 
 };
@@ -49,4 +50,29 @@ Servidor::~Servidor(){
 }
 
 
+Socket Servidor::getSocket() {
+    return this->serverSocket;
+}
+
+int Servidor::getSocketEscucha() {
+    return this->socketEscucha;
+}
+
+string Servidor::getIP() {
+    return this->ip;
+}
+
+
+
+void Servidor::iniciarServidor() {
+    int listenSock = this->getSocketEscucha();
+    Socket svSocket = this->getSocket();
+    int maxConexiones = getCantidadDeConexiones();
+    int svPuerto = this->getPuerto();
+    string svIP = this->getIP();
+
+    listenSock = svSocket.Crear(); //devuelve el file descriptor
+    svSocket.Enlazar(listenSock, svPuerto,svIP);
+    svSocket.Escuchar(listenSock, maxConexiones);
+}
 
