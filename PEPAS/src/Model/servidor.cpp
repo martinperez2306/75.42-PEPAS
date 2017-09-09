@@ -10,7 +10,7 @@ Servidor::Servidor(){
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
 	this->ip = "127.0.0.1";
-
+	this->socketEscucha = 0;
 };
 
 int Servidor::getCantidadDeConexiones(){

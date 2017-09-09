@@ -1,18 +1,10 @@
-//
-// Created by arturi on 04/09/17.
-//
-
-
-
 #include "../../headers/Model/socket.h"
 
 
 using namespace std;
 Socket::Socket(){
 
-    int puerto = 0;
-
-
+    puerto = 0;
 }
 
 int Socket::Crear(){
