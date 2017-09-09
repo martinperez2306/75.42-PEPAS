@@ -34,8 +34,6 @@ public:
 	string getIP();
 	int getSocketEscucha();
 
-	void setCantidadDeConexiones(int cantidadDeConexiones);
-	void setBaseDeDatos(BaseDeDatos* baseDeDatos);
 	void iniciarServidor();
 
 	Socket getSocket();

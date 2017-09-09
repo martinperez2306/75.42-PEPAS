@@ -4,9 +4,9 @@
 
 	<cantidadMaximaClientes>4</cantidadMaximaClientes>
 	<puerto>27015</puerto>
-
+	
 	<usuarios>
-
+		
 		<usuario>
 			<username>Martin</username>
 			<password>tincho</password>
