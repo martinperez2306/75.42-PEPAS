@@ -1,8 +1,8 @@
 #include "../../headers/Model/usuario.h"
 
 Usuario::Usuario(){
-	 this->contrasenia = "";
-	 this->usuario = "";
+	 this->contrasenia = "contraseña vacia";
+	 this->usuario = "usuario vacio";
 }
 
 Usuario::Usuario(string usuario,string contrasenia){

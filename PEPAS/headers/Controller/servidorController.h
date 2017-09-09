@@ -17,11 +17,13 @@ public:
 
 	void crearServidor();
 
+	void mostrarUsuariosDisponibles();
+
 	int getPuertoServidor();
 
 	int getMaximoClientesServidor();
 
-	Usuario* getUsuario();
+	Usuario* getUsuario(string username);
 
 	~ServidorController();
 

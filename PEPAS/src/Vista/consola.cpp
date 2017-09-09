@@ -26,10 +26,9 @@ void Consola::cargarPagina(int numeroPagina){
 		}
 		case 2:
 			this->cargarCambioLoggeo();
+			break;
 		default:
 		{
-			cout << "No existe esa opcion" << endl;
-      		loggear("No existe el comando ingresado por consola",2);
 			this->cargarPaginaPrincipal();
 		}
 
@@ -74,31 +73,28 @@ void Consola::cargarPaginaPrincipal(){
 	
 	cin>> entrada;
 
-	if(esint(entrada)){
+	if(esint(entrada) && std::stoi(entrada,nullptr,10)>0 && std::stoi(entrada,nullptr,10) < 4
+			){
 		int ent = std::stoi(entrada,nullptr,10);
 		this->cargarPagina(ent);
 	}
 	else{
 
-		cout << "Entrada invalida, debe ser un numero"<<endl;
-      	loggear("Opcion invalida ingresada, no se ingreso un numero",2);
+		cout << "Entrada invalida"<<endl;
+      	loggear("Opcion invalida ingresada",2);
 		this->cargarPaginaPrincipal();
 	}
-
-	cout<<"Seleccione 2 para salir"<<endl;
-    cout<<"3. close-server"<<endl;
-    cout<<"4. change-log-level"<<endl;
-    cout<<"4. show-connected-users"<<endl;
 }
 
 void Consola::cargarPaginaCaracteristicasDelServidor(){
 
 	loggear("Cargado pagina con caracteristicas del servidor",3);
-	Usuario* usuario = this->servidorController->getUsuario();
+	Usuario* usuario = this->servidorController->getUsuario("Martin");
 
 	cout<<"La cantidad maxima de conexiones es: "<<this->servidorController->getMaximoClientesServidor()<<endl;
 	cout<<"El puerto es: "<<servidorController->getPuertoServidor()<<endl;
-	cout<<"Usuario Disponible = "<<usuario->getUsuario()<<" "<<"Contraseña = "<<usuario->getContrasenia()<<endl;
+	cout<<"Usuarios Disponibles "<<endl;
+	this->servidorController->mostrarUsuariosDisponibles();
 }
 
 void Consola::cargarPaginaCrearServidor(){
@@ -114,13 +110,6 @@ void Consola::cargarPaginaCrearServidor(){
 }
 
 
-
-Consola::~Consola(){
-
-	delete this->servidorController;
-}
-
-
 bool Consola::esint(std::string entrada){
 
 	if (entrada.length() == 1 && isdigit(entrada[0]))
@@ -130,4 +119,9 @@ bool Consola::esint(std::string entrada){
 
 void Consola::terminarConsola(){
 	this->terminado = true;
+}
+
+Consola::~Consola(){
+
+	delete this->servidorController;
 }

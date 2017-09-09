@@ -52,23 +52,8 @@ Servidor* ServidorBuilder::build(){
 void ServidorBuilder::parsearXML(){
 
 	pugi::xml_document documento;
-	pugi::xml_parse_result result = documento.load_file("../75.42-PEPAS/PEPAS/src/server.xml");
+	pugi::xml_parse_result result = documento.load_file("PEPAS/src/server.xml");
 	cout << "Load Result: " << result.description() <<endl;
-	/*pugi::xml_node panels = documento.child("servidor");
-
-	    std::cout << panels.name() << std::endl;
-
-	    for (pugi::xml_node panel = panels.first_child(); panel; panel = panel.next_sibling())
-	    {
-	        std::cout << panel.name() << std::endl;
-
-	        for (pugi::xml_attribute attr = panel.first_attribute(); attr; attr = attr.next_attribute())
-	        {
-	            std::cout << " " << attr.name() << "=" << attr.value() << std::endl;
-	        }
-	        std::cout << std::endl;
-	    }
-	    std::cout << std::endl;*/
 
 	//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
 	pugi::xml_node nodePuerto = documento.child("servidor").child("puerto");
@@ -78,17 +63,29 @@ void ServidorBuilder::parsearXML(){
 	cout<< puerto << endl;
 	cout<< maximoClientes << endl;
 
-	pugi::xml_node nodeUser = documento.child("servidor").child("usuarios");
-	string usuario = nodeUser.child("user").text().as_string();
-	string contrasenia = nodeUser.child("password").text().as_string();
+	//SET USERS TO DATA BASE
+	pugi::xml_node nodeUsers = documento.child("servidor").child("usuarios");
 
-	//BUILDING SERVICE
+		for (pugi::xml_node nodeUser = nodeUsers.first_child(); nodeUser; nodeUser = nodeUser.next_sibling())  {
+
+			// SE CREA UN USUARIO. BORRARLO CUANDO MATAMOS LA BASE DE DATOS.
+			Usuario* usuario = new Usuario();
+			for(pugi::xml_node userFeature = nodeUser.first_child();userFeature;userFeature = userFeature.next_sibling()){
+
+				if((strcmp(userFeature.name(),"username")) == 0){
+					usuario->setUsuario(userFeature.text().as_string());
+				}
+				if((strcmp(userFeature.name(),"password"))== 0){
+					usuario->setContrasenia(userFeature.text().as_string());
+				}
+
+				this->baseDeDatos->agregarUsuarioABaseDeDatos(usuario);
+		     }
+			this->baseDeDatos->agregarUsuarioABaseDeDatos(usuario);
+		}
+	//BUILDING SERVICE FEATURES
 	this->cantidadDeConexiones = maximoClientes;
 	this->puerto = puerto;
-	Usuario* user = new Usuario();
-	user->setUsuario(usuario);
-	user->setContrasenia(contrasenia);
-	this->baseDeDatos->setUsuario(user);
 }
 
 ServidorBuilder::~ServidorBuilder(){

@@ -4,22 +4,30 @@
 
 #include <list>
 #include "usuario.h"
+#include <map>
+#include <iomanip>
+#include <string>
+#include <utility>
+#include <iostream>
 
 using namespace std;
 
 class BaseDeDatos{
 
 private:
-	Usuario* usuario;
+	map<string,Usuario*>* usuarios;
+	map<string,Usuario*>::iterator iterador;
 
 public:
 	BaseDeDatos();
 
-	void setUsuario(Usuario* usuario);
+	Usuario* getUsuario(string username);
 
-	Usuario* getUsuario();
+	void agregarUsuarioABaseDeDatos(Usuario* usuario);
 
-	//void agregarUsuarioABaseDeDatos(Usuario* usuario);
+	//bool validarDatosDeUsuario(string username);
+
+	void mostrarTodosLosUsuarios();
 
 	//DEBE ELIMINAR LA MEMORIA PEDIDA PARA CADA USUARIO EN LA BASE DE DATOS (CREADA POR EL BUILDER).
 	~BaseDeDatos();

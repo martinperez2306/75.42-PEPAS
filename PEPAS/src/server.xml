@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<servidor>
+
+	<cantidadMaximaClientes>4</cantidadMaximaClientes>
+	<puerto>27015</puerto>
+
+	<usuarios>
+
+		<usuario>
+			<username>Martin</username>
+			<password>tincho</password>
+		</usuario>
+		<usuario>
+			<username>Augusto</username>
+			<password>Turi</password>
+		</usuario>
+	</usuarios>
+
+</servidor>

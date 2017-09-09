@@ -9,8 +9,7 @@ Servidor::Servidor(){
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
-    this->ip = "127.0.0.1";
-
+	this->ip = "127.0.0.1";
 
 };
 
@@ -42,11 +41,9 @@ BaseDeDatos* Servidor::getBaseDeDatos(){
 	return this->baseDeDatos;
 }
 
+void Servidor::mostrarUsuariosDisponibles(){
 
-//DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
-Servidor::~Servidor(){
-
-	delete this->baseDeDatos;
+	this->baseDeDatos->mostrarTodosLosUsuarios();
 }
 
 
@@ -75,4 +72,12 @@ void Servidor::iniciarServidor() {
     svSocket.Enlazar(listenSock, svPuerto,svIP);
     svSocket.Escuchar(listenSock, maxConexiones);
 }
+
+//DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
+Servidor::~Servidor(){
+
+	delete this->baseDeDatos;
+}
+
+
 

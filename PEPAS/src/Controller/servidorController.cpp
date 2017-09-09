@@ -17,7 +17,10 @@ void ServidorController::crearServidor(){
 	delete servidorBuilder;
 }
 
+void ServidorController::mostrarUsuariosDisponibles(){
 
+	this->servidor->mostrarUsuariosDisponibles();
+}
 int ServidorController::getMaximoClientesServidor(){
 
 	return this->servidor->getCantidadDeConexiones();
@@ -28,9 +31,9 @@ int ServidorController::getPuertoServidor(){
 	return this->servidor->getPuerto();
 }
 
-Usuario* ServidorController::getUsuario(){
+Usuario* ServidorController::getUsuario(string username){
 
-	return this->servidor->getBaseDeDatos()->getUsuario();
+	return this->servidor->getBaseDeDatos()->getUsuario(username);
 }
 
 ServidorController::~ServidorController(){

@@ -11,27 +11,34 @@ class Servidor{
 private:
 	int puerto;
 	int cantidadDeConexiones;
-	int socketEscucha;
 	BaseDeDatos* baseDeDatos;
+	int socketEscucha;
 	Socket serverSocket;
 	string ip;
+
 
 public:
 	Servidor();
 
 	void setPuerto(int puerto);
-
 	int getPuerto();
-	int getSocketEscucha();
+
+	void setCantidadDeConexiones(int cantidadDeConexiones);
 	int getCantidadDeConexiones();
+
+	void setBaseDeDatos(BaseDeDatos* baseDeDatos);
+	BaseDeDatos* getBaseDeDatos();
+
+	void mostrarUsuariosDisponibles();
+
 	string getIP();
+	int getSocketEscucha();
 
 	void setCantidadDeConexiones(int cantidadDeConexiones);
 	void setBaseDeDatos(BaseDeDatos* baseDeDatos);
 	void iniciarServidor();
 
 	Socket getSocket();
-	BaseDeDatos* getBaseDeDatos();
 
 	~Servidor();
 

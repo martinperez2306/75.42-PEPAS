@@ -1,30 +1,44 @@
 #include "../../headers/Model/baseDeDatos.h"
 
+
+typedef pair<string, Usuario*> user;
+
 BaseDeDatos::BaseDeDatos(){
 
-	this->usuario = NULL;
+	this->usuarios = new map<string,Usuario*>;
 }
 
-/*list<Usuario*>* BaseDeDatos::getUsuarios(){
 
-	return this->usuarios;
-}*/
-
-void BaseDeDatos::setUsuario(Usuario* usuario){
-	this->usuario = usuario;
+Usuario* BaseDeDatos::getUsuario(string username){
+	return this->usuarios->find(username)->second;
 }
 
-Usuario* BaseDeDatos::getUsuario(){
-	return this->usuario;
+void BaseDeDatos::agregarUsuarioABaseDeDatos(Usuario* usuario){
+
+	this->usuarios->insert(user(usuario->getUsuario(),usuario));
 }
 
-/*void BaseDeDatos::agregarUsuarioABaseDeDatos(Usuario* usuario){
-	this->usuarios->push_back(usuario);
+void BaseDeDatos::mostrarTodosLosUsuarios(){
+
+	for (iterador = usuarios->begin(); iterador != usuarios->end(); ++iterador){
+	    cout<< iterador->first << " => " <<"username "<< (iterador->second)->getUsuario() << endl;
+		cout<< iterador->first << " => " <<"password "<< (iterador->second)->getContrasenia() << endl;
+	}
+}
+
+/*bool BaseDeDatos::validarDatosDeUsuario(string username){
+
+	this->iterador= this->usuarios->find(username);
+	return (this->iterador != this->usuarios->end());
 }*/
 
 BaseDeDatos::~BaseDeDatos(){
 
-	delete this->usuario;
+	//Borrar cada usuario Creado por el srvBuilder
+	for (iterador =usuarios->begin(); iterador != usuarios->end(); ++iterador){
+	    delete iterador->second;
+	}
+	delete this->usuarios;
 }
 
 
