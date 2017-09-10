@@ -14,6 +14,7 @@
 //
 
 #include "../com.pepas.model/cliente.h"
+#include "../com.pepas.model/Mensaje.h"
 #include "../com.pepas.parser/ClienteParser.h"
 
 
@@ -21,11 +22,12 @@ class ClienteController{
 
 
 private:
-    Cliente* cliente;
+
     ClienteParser* clienteParser;
     ClienteParser::SocketData socketData;
 
 public:
+    Cliente* cliente;
     ClienteController();
 
     ClienteController(ClienteParser *ClienteParser);
@@ -37,8 +39,6 @@ public:
     void desconectarseDelServidor();
 
     void mensajeDePrueba();
-
-    void logIn(string nombre, string contrasenia);
 
     void logOut();
 

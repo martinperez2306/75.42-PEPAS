@@ -10,17 +10,6 @@ int main(int argc, char *argv[]) {
 	Consola* consola = new Consola();
 	consola->cargarPagina();
 
-
-
-	/*ClienteParser *clienteParser = new ClienteParser();
-	//char* xmlPath = argv[0];
-	char* xmlPath = "cliente.xml";
-	clienteParser->parsearXML(xmlPath);
-
-	ClienteController* clienteController = new ClienteController(clienteParser);
-	clienteController->conectarConElServidor();
-	*/
-
 }
 
 

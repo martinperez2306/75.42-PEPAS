@@ -27,7 +27,7 @@ public:
     //metodo para loquearse?
     void conectarseAlServidor(string ip, int puerto);
 
-    void enviarMensajePrueba();
+    void enviarMensaje(string mensaje);
 
     void desconectarseDelServidor();
     ~Cliente();

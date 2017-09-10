@@ -50,8 +50,7 @@ void Cliente::conectarseAlServidor(string ip, int puerto) {
 }
 
 
-void Cliente::enviarMensajePrueba(){
-    string mensaje = "hola";
+void Cliente::enviarMensaje(string mensaje){
     send (socketCliente, (char *)&mensaje, sizeof (mensaje), 0);
     unsigned Rta;
     recv (socketCliente, (char *)&Rta, sizeof (Rta), 0);

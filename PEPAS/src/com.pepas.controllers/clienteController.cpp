@@ -36,17 +36,12 @@ void ClienteController::conectarConElServidor(){
 }
 
 void ClienteController::mensajeDePrueba(){
-    this->cliente->enviarMensajePrueba();
 }
 
 void ClienteController::desconectarseDelServidor(){
 
 }
 
-
-void ClienteController::logIn(string nomrbe, string contrasenia){
-
-}
 
 void ClienteController::logOut() {
 
@@ -57,11 +52,22 @@ void ClienteController::stressTest(){
 }
 
 void ClienteController::enviarMensajeChat(){
-
+	string texto;
+	cout<<"Ingresa el mensaje: "<<endl;
+	cin >> texto;
+	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, texto, Mensaje::BROADCAST);
+	this->cliente->enviarMensaje(mensaje->toSrvText());
 }
 
 void ClienteController::enviarMensajePrivado(){
-
+	string texto;
+	int user;
+	cout<<"Ingresa el mensaje: "<<endl;
+	cin >> texto;
+	cout<<"Ingresa el ususario destino: "<<endl;
+	cin >> user;
+	Mensaje *mensaje = new Mensaje(Mensaje::PRIVATE_MSG, texto, user);
+	this->cliente->enviarMensaje(mensaje->toSrvText());
 }
 
 void ClienteController::salirDelPrograma() {

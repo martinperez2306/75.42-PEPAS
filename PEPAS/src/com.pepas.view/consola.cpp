@@ -34,7 +34,7 @@ void Consola::cargarPagina() {
 			case 1:
 				this->clienteController->crearCliente();
 				this->clienteController->conectarConElServidor();
-				this->cargarLogIn();
+				this->clienteController->cliente->logIn();
 				this->cargarMenuPrincipal();
 				break;
 			default:
@@ -44,27 +44,6 @@ void Consola::cargarPagina() {
     }
 }
 
-//void Consola::cargarPaginaPrincipal(){
-//
-//    int numeroPagina;
-//    cout<<"Ingrese una opcion segun corresponda"<<endl;
-//    cout<<"Seleccione 1 conectarse al servidor"<<endl;
-//    cout<<"Seleccione 2 para salir"<<endl;
-//    cin>> numeroPagina;
-//    this->cargarPagina(numeroPagina);
-//}
-
-void Consola::cargarLogIn() {
-	int numeroPag;
-	string nombre;
-	string contrasenia;
-	cout<<"Ingresa tus datos o cualquier tecla para salir"<<endl;
-	cout<<"Usuario: "<<endl;
-	cin >> nombre;
-	cout<<"Contraseña: "<<endl;
-	cin >> contrasenia;
-	this->clienteController->logIn(nombre, contrasenia);
-}
 
 void Consola::cargarMenuPrincipal() {
 	while(!this->salirMenu) {
