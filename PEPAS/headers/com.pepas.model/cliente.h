@@ -11,13 +11,15 @@
 
 #include <string>
 #include "../../headers/com.pepas.model/usuario.h"
+#include "../../headers/com.pepas.model/socket.h"
 using namespace std;
 
 class Cliente{
 
 private:
     Usuario* usuario = new Usuario();
-    int socketCliente;
+    Socket* socketCliente;
+    int socketFD;
 
 public:
     Cliente();
@@ -32,6 +34,11 @@ public:
     void desconectarseDelServidor();
     ~Cliente();
 
+    Socket* obtenerSocket();
+
+    void asignarSocketFd(int crear);
+
+    int obtenerSocketFD();
 };
 
 

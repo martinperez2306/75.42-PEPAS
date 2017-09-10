@@ -19,7 +19,7 @@ void ClienteController::crearCliente(){
 
     this->cliente= new Cliente();
     //a penas crea el cliente se empieza a parsear el achivo xml
-    ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"cliente.xml");
+    ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"../75.42-PEPAS/PEPAS/src/com.pepas.parser/cliente.xml");
     this->socketData = sd;
 }
 

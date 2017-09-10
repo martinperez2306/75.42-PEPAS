@@ -23,12 +23,15 @@ bool Consola::getTerminado(){
 }
 
 void Consola::cargarPagina() {
-    system("cls");
+    system("clear");
 	int numeroPagina;
     while(!this->terminado) {
+		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
 		cout<<"Seleccione 1 conectarse al servidor"<<endl;
 		cout<<"Seleccione 2 para salir"<<endl;
+		cout<<"*********************************************"<<endl;
+		cout<<"-->";
 		cin>> numeroPagina;
     	switch(numeroPagina) {
 			case 1:

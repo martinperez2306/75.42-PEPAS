@@ -36,6 +36,8 @@ public:
 
     void conectarConElServidor();
 
+    void asignarServidor();
+
     void desconectarseDelServidor();
 
     void mensajeDePrueba();
@@ -48,7 +50,6 @@ public:
 
     void enviarMensajePrivado();
 
-    void asignarServidor();
 
     void salirDelPrograma();
 
