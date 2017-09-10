@@ -27,6 +27,7 @@ public:
 
 	~ServidorController();
 
+    void iniciarEscuchasDeConexiones();
 };
 
 

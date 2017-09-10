@@ -40,3 +40,9 @@ ServidorController::~ServidorController(){
 	delete this->servidor;
 }
 
+void ServidorController::iniciarEscuchasDeConexiones() {
+
+	servidor->iniciarServidor();
+	servidor->aceptarConexiones();
+}
+

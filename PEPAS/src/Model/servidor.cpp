@@ -67,7 +67,7 @@ void Servidor::asignarSocketFd(int socket) {
 
 
 void Servidor::iniciarServidor() {
-
+    cout<<"El puerto del servidor es: "<<this->getPuerto()<<endl;
     asignarSocketFd(obtenerSocket()->Crear()); //devuelve el file descriptor
     obtenerSocket()->Enlazar(this->obtenerSocketFD(),this->getPuerto(),this->getIP());
    	obtenerSocket()->Escuchar(this->obtenerSocketFD(),this->getCantidadDeConexiones());

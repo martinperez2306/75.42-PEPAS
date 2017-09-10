@@ -65,13 +65,14 @@ void Consola::cargarCambioLoggeo(){
 void Consola::cargarPaginaPrincipal(){
 
 	std::string entrada;
-
+	cout<<"****************************************************************"<<endl;
 	cout<<"Ingrese una opcion segun corresponda"<<endl;
 	cout<<"Seleccione 1 para ir a las caracteristicas del servidor"<<endl;
 	cout<<"Seleccione 2 para cambiar el nivel del logger"<<endl;
 	cout<<"Seleccione 3 para salir"<<endl;
-	
-	cin>> entrada;
+	cout<<"****************************************************************"<<endl;
+	cout<<"--->";
+	cin>>entrada;
 
 	if(esint(entrada) && std::stoi(entrada,nullptr,10)>0 && std::stoi(entrada,nullptr,10) < 4
 			){
@@ -102,6 +103,7 @@ void Consola::cargarPaginaCrearServidor(){
 	cout<<"CREANDO SERVIDOR..............."<<endl;
 	loggear("Servidor Creado",3);
 	this->servidorController->crearServidor();
+	this->servidorController->iniciarEscuchasDeConexiones();
 	for(int i = 0;i<10;i++){
 		cout<<"."<<endl;
 	}
