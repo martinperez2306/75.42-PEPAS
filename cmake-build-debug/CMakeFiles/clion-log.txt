@@ -1,4 +1,0 @@
-/home/arturi/Documentos/Programacion/Clion/clion-2017.2.1/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS
--- Configuring done
--- Generating done
--- Build files have been written to: /home/arturi/Escritorio/Taller/TP/TP1/75.42-PEPAS/cmake-build-debug
