@@ -12,6 +12,7 @@
 #include <string>
 #include "../../headers/com.pepas.model/usuario.h"
 #include "../../headers/com.pepas.model/socket.h"
+#include "../../headers/com.pepas.model/Mensaje.h"
 #include <iostream>
 #include <cstring>
 
@@ -20,7 +21,7 @@ using namespace std;
 class Cliente{
 
 private:
-    Usuario* usuario = new Usuario();
+    Usuario* usuario;
     Socket* socketCliente;
     int socketFD;
 
@@ -35,13 +36,24 @@ public:
     void enviarMensaje(string mensaje);
 
     void desconectarseDelServidor();
-    ~Cliente();
-
-    Socket* obtenerSocket();
 
     void asignarSocketFd(int crear);
 
     int obtenerSocketFD();
+
+    Socket* obtenerSocket();
+
+    Usuario *obtenerUsuario();
+
+    ~Cliente();
+
+    void validarUsuario(Usuario* usuario);
+
+    string procesarMensaje(string usuario, string contrasenia);
+
+    string procesarMensaje(Mensaje* mensaje);
+
+    string obtenerCodigo();
 };
 
 

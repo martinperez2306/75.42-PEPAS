@@ -21,6 +21,7 @@
 class ClienteController{
 
 
+
 private:
 
     ClienteParser* clienteParser;
@@ -55,6 +56,7 @@ public:
 
     ~ClienteController();
 
+    Cliente *obtenerCliente();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

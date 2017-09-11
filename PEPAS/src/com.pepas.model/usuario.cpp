@@ -7,6 +7,7 @@
 Usuario::Usuario(){
     this->nombre = "";
     this->contrasenia = "";
+    //Lista de mensajes;
 }
 
 void Usuario::setearNombre(string nombre) {
@@ -24,3 +25,9 @@ string Usuario::getNombre(){
 string Usuario::getContrasenia(){
     return this->contrasenia;
 }
+
+void Usuario::enviarMensajeAlServidor() {
+
+}
+
+

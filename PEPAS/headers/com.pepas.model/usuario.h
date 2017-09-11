@@ -30,6 +30,7 @@ public:
 
     ~Usuario();
 
+    void enviarMensajeAlServidor();
 };
 
 #endif //COM_PEPAS_MODEL_USUARIO_H

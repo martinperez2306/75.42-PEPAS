@@ -9,33 +9,35 @@
 
 namespace std {
 
-Mensaje::Mensaje() {
-	// TODO Auto-generated constructor stub
 
-}
 
-Mensaje::Mensaje(int codigo, string texto, int destinatario) {
+Mensaje::Mensaje(int codigo, string texto, string emisor, string receptor) {
 	this->codigo = codigo;
 	this->texto = texto;
-	this->destinatario = destinatario;
+	this->emisor = emisor;
+	this->destinatario = receptor;
 
 }
 
-string Mensaje::toSrvText() {
-	string mensaje = "";
-	mensaje += this->codigo; // TODO definir los codigos para cada mensaje
-	mensaje += this->destinatario; // TODO definir un largo para mandar el numero
-	mensaje += this->texto.length(); // TODO definir un largo para mandar el numero
-	mensaje += this->texto;
-
+string Mensaje::obtenerEmisor() {
+	return this->emisor;
 }
 
-bool Mensaje::isBroadcast() {
-	return this->destinatario == 0;
+string Mensaje::obtenerDestinatario() {
+	return this->destinatario;
+}
+
+string Mensaje::obtenerTexto() {
+	return this->texto;
 }
 
 Mensaje::~Mensaje() {
 	// TODO Auto-generated destructor stub
 }
+
+int Mensaje::obtenerCodigo() {
+	return this->codigo;
+}
+
 
 } /* namespace std */

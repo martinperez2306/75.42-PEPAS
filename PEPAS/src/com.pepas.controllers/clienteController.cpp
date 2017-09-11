@@ -7,9 +7,8 @@
 
 
 ClienteController::ClienteController(){
-	this->socketData.ip = "127.0.0.1"; //TODO HARDCODEEEEEEE
+	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
 	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
-
 }
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
@@ -56,22 +55,29 @@ void ClienteController::stressTest(){
 }
 
 void ClienteController::enviarMensajeChat(){
-	string texto;
-	cout<<"Ingresa el mensaje: "<<endl;
-	cin >> texto;
-	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, texto, Mensaje::BROADCAST);
-	//this->cliente->enviarMensaje(mensaje->toSrvText()); //TODO EEEEEEEEEEEEEEee
+    string mensajeProcesado, bug, texto;
+	string destinatario = "";
+	cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
+	//TODO aca hay un bug que no lo entiendo, si no pongo las variables de esta forma anda mal.
+	getline(cin, bug);
+	getline(cin, texto);
+	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, texto, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
+    mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje);
+	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
 }
 
 void ClienteController::enviarMensajePrivado(){
-	string texto;
-	int user;
-	cout<<"Ingresa el mensaje: "<<endl;
-	cin >> texto;
-	cout<<"Ingresa el ususario destino: "<<endl;
-	cin >> user;
-	Mensaje *mensaje = new Mensaje(Mensaje::PRIVATE_MSG, texto, user);
-	this->cliente->enviarMensaje(mensaje->toSrvText());
+	string texto, mensajeProcesado, destinatario, bug;
+    cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
+	//TODO aca hay un bug que no lo entiendo, si no pongo las variables de esta forma anda mal.
+	getline (cin,bug);
+	getline(cin, texto);
+	cout<<"Ingresa el ususario destino: ";
+	cin >> destinatario;
+	Mensaje *mensaje = new Mensaje(Mensaje::PRIVATE_MSG, texto, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
+	mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje); //mensaje->toSrvText()
+    this->obtenerCliente()->enviarMensaje(mensajeProcesado);
+
 }
 
 void ClienteController::salirDelPrograma() {
@@ -81,4 +87,8 @@ void ClienteController::salirDelPrograma() {
 
 ClienteController::~ClienteController(){
     delete this->cliente;
+}
+
+Cliente *ClienteController::obtenerCliente() {
+    return this->cliente;
 }

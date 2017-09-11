@@ -4,6 +4,7 @@
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
+    this->usuario = new Usuario();
     this->socketFD=0;
 
 
@@ -17,8 +18,9 @@ void Cliente::logIn(){
     cin>> usuario;
     cout<<"Ingrese su clave"<<endl;
     cin>> clave;
-    this->usuario->setearNombre(usuario);
-    this->usuario->setearContrasenia(clave);
+    this->obtenerUsuario()->setearNombre(usuario);
+    this->obtenerUsuario()->setearContrasenia(clave);
+    this->validarUsuario(obtenerUsuario());
 }
 
 void Cliente::conectarseAlServidor(string ip, int puerto) {
@@ -29,14 +31,6 @@ void Cliente::conectarseAlServidor(string ip, int puerto) {
 
 }
 
-
-void Cliente::enviarMensaje(string  mensaje){
-    //this->obtenerSocket()->Enviar(this->obtenerSocketFD(),&mensaje, strlen(mensaje));
-/*    send (socketCliente, (char *)&mensaje, sizeof (mensaje), 0);
-    unsigned Rta;
-    recv (socketCliente, (char *)&Rta, sizeof (Rta), 0);
-    printf ("Dato enviado: %u, Respuesta recibida: %u\n", mensaje, Rta);*/
-}
 
 void Cliente::desconectarseDelServidor() {
     //neesito ver lo del servidor?
@@ -60,3 +54,52 @@ Socket* Cliente::obtenerSocket() {
         return this->socketCliente;
 
 }
+
+Usuario *Cliente::obtenerUsuario() {
+    return this->usuario;
+}
+
+void Cliente::validarUsuario(Usuario* usuario) {
+
+    //Codigo de mensaje 01
+    string mensaje = this->procesarMensaje(usuario->getNombre(), usuario->getContrasenia());
+    this->enviarMensaje(mensaje);
+    cout<<"Mensaje enviado con exito"<<endl;
+
+}
+void Cliente::enviarMensaje(string  mensa){
+    const void *mensaje = mensa.c_str();
+    this->obtenerSocket()->Enviar(obtenerSocketFD(), &mensaje, mensa.length());
+}
+/*Este procesador, codifica el mensaje con el codigo 1.
+<código_mensaje>/<usuario>/<password>*/
+
+string Cliente::procesarMensaje(string usuario, string contrasenia) {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    stringACrear = separador + "1" + separador + usuario + separador + contrasenia;
+    stringProcesado =  to_string(stringACrear.length()) +  stringACrear;
+    cout<<stringProcesado<<endl;
+    return stringProcesado;
+}
+
+
+/*Este procesador, codifica el mensaje con el codigo 2.
+<código_mensaje>/<usuario>/<mensaje>
+
+Este procesador, codifica el mensaje con el codigo 3
+ <código_mensaje>/<usuario>/<destinatario>/<mensaje>*/
+string Cliente::procesarMensaje(Mensaje *mensaje) {
+    string stringACrear,stringProcesado;
+    string separador = "/";
+    if (mensaje->obtenerDestinatario()==""){
+        stringACrear = to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->obtenerTexto();
+    } else {
+        stringACrear = separador + to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->obtenerDestinatario() + separador + mensaje->obtenerTexto();
+    }
+    stringProcesado = to_string(stringACrear.length()) +   stringACrear;
+    cout<<stringProcesado<<endl;
+    return stringProcesado;
+}
+
+

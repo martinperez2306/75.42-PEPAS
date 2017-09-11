@@ -63,8 +63,7 @@ class Socket {
         void CerrarSocket(int socket);
 
         ~Socket();
-
-    };
+};
 
 
 #endif //INC_75_42_PEPAS_SOCKET_H

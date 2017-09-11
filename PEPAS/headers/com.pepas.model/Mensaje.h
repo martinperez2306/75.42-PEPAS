@@ -16,22 +16,22 @@ namespace std {
 class Mensaje {
 private:
 	string texto;
-	int destinatario;
+	string destinatario;
+	string emisor;
 	int codigo;
 
-	bool isBroadcast();
 
 public:
 	// TODO definir los codigos para cada tipo de mensaje
-	static const int BROADCAST_MSG = 0;
-	static const int PRIVATE_MSG = 0;
+	static const int BROADCAST_MSG = 2;
+	static const int PRIVATE_MSG = 3;
 
-	static const int BROADCAST = 0;
-	Mensaje();
-	Mensaje(int codigo, string texto, int destinatario);
-	string getTexto();
-	int getDestinatario();
-	string toSrvText();
+
+	Mensaje(int codigo, string texto, string emisor, string receptor);
+	string obtenerTexto();
+	string obtenerDestinatario();
+	string obtenerEmisor();;
+	int obtenerCodigo();
 	virtual ~Mensaje();
 };
 
