@@ -12,6 +12,9 @@
 #include <string>
 #include "../../headers/com.pepas.model/usuario.h"
 #include "../../headers/com.pepas.model/socket.h"
+#include <iostream>
+#include <cstring>
+
 using namespace std;
 
 class Cliente{

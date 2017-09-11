@@ -23,7 +23,7 @@ class ClienteParser{
 public:
 
 	struct SocketData {
-		char *ip;
+		char* ip;
 		int puerto;
 		char *rutaFile;
 	};

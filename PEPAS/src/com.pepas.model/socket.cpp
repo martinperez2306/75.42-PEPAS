@@ -44,20 +44,20 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
 }
 
 void Socket::Conectar(int socket, int puerto, string IPremota) {
-    int connectSocket = socket;
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = inet_addr(IPremota.data());
     serverAddress.sin_port = htons(puerto);
     socklen_t serverSize = sizeof(serverAddress);
-
     /*VERIFICACION DE ERRORES*/
-    if (connect(connectSocket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
+    if (connect(socket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         // logger info
         cout << "Error al conectar con el servidor " << strerror(errno) << endl;
     }
 
 }
+
+
 
 void Socket::Escuchar(int socket, int maximasConexiones) {
     int ret = listen(socket, maximasConexiones);

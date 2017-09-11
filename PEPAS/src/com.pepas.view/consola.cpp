@@ -37,7 +37,7 @@ void Consola::cargarPagina() {
 			case 1:
 				this->clienteController->crearCliente();
 				this->clienteController->conectarConElServidor();
-				this->clienteController->cliente->logIn();
+				//this->clienteController->cliente->logIn();
 				this->cargarMenuPrincipal();
 				break;
 			default:

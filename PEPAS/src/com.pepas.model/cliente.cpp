@@ -1,9 +1,12 @@
 #include "../../headers/com.pepas.model/cliente.h"
 
 
+
 Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->socketFD=0;
+
+
 
 }
 
@@ -20,14 +23,15 @@ void Cliente::logIn(){
 
 void Cliente::conectarseAlServidor(string ip, int puerto) {
     asignarSocketFd(obtenerSocket()->Crear());
-    this->obtenerSocket()->Conectar(obtenerSocketFD(), puerto, ip);
+    cout<<"Socket creado... Conectando..."<<endl;
+    this->obtenerSocket()->Conectar(obtenerSocketFD(),puerto, ip); //TODO HARDCODEADO
     cout <<"Conectado satisfactorio"<< endl;
 
 }
 
 
-void Cliente::enviarMensaje(string mensaje){
-
+void Cliente::enviarMensaje(string  mensaje){
+    //this->obtenerSocket()->Enviar(this->obtenerSocketFD(),&mensaje, strlen(mensaje));
 /*    send (socketCliente, (char *)&mensaje, sizeof (mensaje), 0);
     unsigned Rta;
     recv (socketCliente, (char *)&Rta, sizeof (Rta), 0);
