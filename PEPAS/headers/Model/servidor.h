@@ -3,6 +3,7 @@
 
 #include "baseDeDatos.h"
 #include "socket.h"
+#include <string>
 
 
 
@@ -14,6 +15,7 @@ private:
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
 	Socket* serverSocket;
+	
 
 
 public:
@@ -37,6 +39,7 @@ public:
 	void aceptarConexiones();
 	void finalizarConexiones();
 	void cerrarSockets();
+	void parsearMensaje(std::string mensaje);
 
 	Socket* obtenerSocket();
 

@@ -1,6 +1,8 @@
 #include "../../headers/Model/servidor.h"
 
-
+#define LOGIN 1
+#define BROADCAST 2
+#define BUZON 3
 
 
 
@@ -83,6 +85,47 @@ void Servidor::finalizarConexiones() {
 	cout << "Cerrando conexiones" << endl;
 }
 
+std::string obtenerParametros(std::string mensaje, int* i){
+	std::string aux = "";
+
+	while(mensaje[*i] != '/' || mensaje[*i] != '\0'){
+		aux = aux + mensaje[*i];
+		i++;
+	}
+	i++;
+	return aux;
+
+}
+
+
+void Servidor::parsearMensaje(std::string datos){
+
+	int i = 0;
+	unsigned long tam;
+	unsigned int codigo;
+	
+	tam = std::stoi(obtenerParametros(datos,&i),nullptr,10);
+	codigo = std::stoi(obtenerParametros(datos,&i),nullptr,10);
+	std::string usuario = obtenerParametros(datos,&i);
+	std::string segundobloque = obtenerParametros(datos,&i);
+
+	switch(codigo){
+		case LOGIN:
+			
+		break;
+		case BROADCAST:
+			
+		break;
+		case BUZON:{
+			std::string tercerbloque = obtenerParametros(datos,&i);
+		}
+		break;
+		default:
+		break;
+	}
+
+
+}
 
 
 
