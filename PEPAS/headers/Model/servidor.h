@@ -14,7 +14,6 @@ private:
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
 	Socket* serverSocket;
-	string ip;
 
 
 public:

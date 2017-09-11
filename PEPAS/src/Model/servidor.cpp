@@ -1,6 +1,6 @@
 #include "../../headers/Model/servidor.h"
-#include "../../headers/Model/baseDeDatos.h"
-#include "../../headers/Model/socket.h"
+
+
 
 
 
@@ -9,7 +9,6 @@ Servidor::Servidor(){
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
-	this->ip = "127.0.0.1";
 	this->serverSocket= new Socket();
 	this->socketEscucha=0;
 
@@ -57,9 +56,6 @@ int Servidor::obtenerSocketFD() {
     return this->socketEscucha;
 }
 
-string Servidor::getIP() {
-    return this->ip;
-}
 
 void Servidor::asignarSocketFd(int socket) {
 	this->socketEscucha=socket;
@@ -69,7 +65,7 @@ void Servidor::asignarSocketFd(int socket) {
 void Servidor::iniciarServidor() {
     cout<<"El puerto del servidor es: "<<this->getPuerto()<<endl;
     asignarSocketFd(obtenerSocket()->Crear()); //devuelve el file descriptor
-    obtenerSocket()->Enlazar(this->obtenerSocketFD(),this->getPuerto(),this->getIP());
+    obtenerSocket()->Enlazar(this->obtenerSocketFD(),this->getPuerto());
    	obtenerSocket()->Escuchar(this->obtenerSocketFD(),this->getCantidadDeConexiones());
 	cout << "Servidor creado correctamente, escuchando conexiones ..." << endl;
 }

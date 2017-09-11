@@ -4,7 +4,7 @@
 using namespace std;
 Socket::Socket(){
 
-    puerto = 0;
+   int puerto = 0;
 }
 
 int Socket::Crear(){
@@ -18,16 +18,16 @@ int sockett;
     return sockett;
 }
 
-void Socket::Enlazar(int socket, int puerto, string serverIP) {
-    int bindsocket = socket;
+void Socket::Enlazar(int socket, int puerto) {
     struct sockaddr_in serverAddress;
+    memset((char *)&serverAddress,0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = inet_addr(serverIP.data());
+    serverAddress.sin_addr.s_addr = INADDR_ANY;
     serverAddress.sin_port = htons(puerto);
     socklen_t serverSize = sizeof(serverAddress);
 
     /*VERIFICACION DE ERRORES*/
-    if (bind(bindsocket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
+    if (bind(socket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
         //AGREGAR ERROR AL LOGGER
         cout << "Error al hacer el enlazado " << error << endl;
@@ -35,6 +35,8 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
     }
 }
 
+
+//Esta funcion no se usa en el servidor
 void Socket::Conectar(int socket, int puerto, string IPremota) {
     int connectSocket = socket;
     struct sockaddr_in serverAddress;

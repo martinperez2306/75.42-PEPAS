@@ -35,7 +35,7 @@ class Socket {
         int Crear();
 
         /* Enlaza el socket identificado por el filedescriptor con una dirección y puerto locales.*/
-        void Enlazar (int socket, int puerto, string serverIP);
+        void Enlazar (int socket, int puerto);
 
       /*  Conecta el socket a la dirección y puerto destino.
         Determina dirección y puertos locales si no se utilizó bind() previamente.*/
