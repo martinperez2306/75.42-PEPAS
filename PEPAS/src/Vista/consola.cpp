@@ -103,7 +103,7 @@ void Consola::cargarPaginaCrearServidor(){
 	cout<<"CREANDO SERVIDOR..............."<<endl;
 	loggear("Servidor Creado",3);
 	this->servidorController->crearServidor();
-	//this->servidorController->iniciarEscuchasDeConexiones();
+	this->servidorController->iniciarEscuchasDeConexiones();
 	for(int i = 0;i<10;i++){
 		cout<<"."<<endl;
 	}
