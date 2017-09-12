@@ -13,8 +13,9 @@ Servidor::Servidor(){
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
 	this->socketEscucha=0;
+	parsearMensaje("0020/2/usuario/11111");
 
-};
+}
 
 int Servidor::getCantidadDeConexiones(){
 
@@ -70,6 +71,7 @@ void Servidor::iniciarServidor() {
     obtenerSocket()->Enlazar(this->obtenerSocketFD(),this->getPuerto());
    	obtenerSocket()->Escuchar(this->obtenerSocketFD(),this->getCantidadDeConexiones());
 	cout << "Servidor creado correctamente, escuchando conexiones ..." << endl;
+	
 }
 
 
@@ -85,14 +87,17 @@ void Servidor::finalizarConexiones() {
 	cout << "Cerrando conexiones" << endl;
 }
 
-std::string obtenerParametros(std::string mensaje, int* i){
+std::string obtenerParametros(std::string mensaje, int tamanio, int* i){
 	std::string aux = "";
+		while(*i != tamanio){
+			aux = aux + mensaje[*i];
+			*i = *i + 1;
+			if (mensaje[*i] == '/'){
+				*i = *i + 1;
+				break;
+			}
 
-	while(mensaje[*i] != '/' || mensaje[*i] != '\0'){
-		aux = aux + mensaje[*i];
-		i++;
-	}
-	i++;
+		}
 	return aux;
 
 }
@@ -101,29 +106,32 @@ std::string obtenerParametros(std::string mensaje, int* i){
 void Servidor::parsearMensaje(std::string datos){
 
 	int i = 0;
-	unsigned long tam;
-	unsigned int codigo;
-	
-	tam = std::stoi(obtenerParametros(datos,&i),nullptr,10);
-	codigo = std::stoi(obtenerParametros(datos,&i),nullptr,10);
-	std::string usuario = obtenerParametros(datos,&i);
-	std::string segundobloque = obtenerParametros(datos,&i);
+	int tam = stoi(obtenerParametros(datos,4,&i),nullptr,10);
+	int codigo = stoi(obtenerParametros(datos,tam,&i),nullptr,10);
 
 	switch(codigo){
-		case LOGIN:
+		case LOGIN:{
+			std::string usuario = obtenerParametros(datos,tam,&i);
+			std::string password = obtenerParametros(datos,tam,&i);
+		}
 			
 		break;
-		case BROADCAST:
-			
+		case BROADCAST:{
+			std::string usuario = obtenerParametros(datos,tam,&i);
+			std::string mensaje = obtenerParametros(datos,tam,&i);
+			cout << usuario << endl;
+			cout << mensaje << endl;
+		}
 		break;
 		case BUZON:{
-			std::string tercerbloque = obtenerParametros(datos,&i);
+			std::string usuario = obtenerParametros(datos,tam,&i);
+			std::string destinatario = obtenerParametros(datos,tam,&i);
+			std::string mensaje = obtenerParametros(datos,tam,&i);
 		}
 		break;
 		default:
 		break;
 	}
-
 
 }
 

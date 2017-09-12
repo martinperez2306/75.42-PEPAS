@@ -38,7 +38,7 @@ int main() {
 
 	crear_logger();
 	Consola* consola = new Consola();
-
+	
 	consola->cargarPaginaCrearServidor();
 	while(!consola->getTerminado()){
 
