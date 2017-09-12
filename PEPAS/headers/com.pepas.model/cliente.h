@@ -54,6 +54,8 @@ public:
     string procesarMensaje(Mensaje* mensaje);
 
     string obtenerCodigo();
+
+    string agregarPadding(int i);
 };
 
 

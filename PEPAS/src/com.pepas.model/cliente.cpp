@@ -78,7 +78,8 @@ string Cliente::procesarMensaje(string usuario, string contrasenia) {
     string stringACrear, stringProcesado;
     string separador = "/";
     stringACrear = separador + "1" + separador + usuario + separador + contrasenia;
-    stringProcesado =  to_string(stringACrear.length()) +  stringACrear;
+    int largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     cout<<stringProcesado<<endl;
     return stringProcesado;
 }
@@ -97,9 +98,23 @@ string Cliente::procesarMensaje(Mensaje *mensaje) {
     } else {
         stringACrear = separador + to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->obtenerDestinatario() + separador + mensaje->obtenerTexto();
     }
-    stringProcesado = to_string(stringACrear.length()) +   stringACrear;
+    int largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     cout<<stringProcesado<<endl;
     return stringProcesado;
+}
+
+string Cliente::agregarPadding(int lenght) {
+    string mensajeProcesado;
+    string largo = to_string(lenght);
+        if (lenght < 10)
+            mensajeProcesado = "000" + largo;
+        else if (lenght < 100)
+            mensajeProcesado = "00" + largo;
+        else if (lenght < 1000)
+            mensajeProcesado = "0" + largo;
+        else mensajeProcesado = largo;
+    return mensajeProcesado;
 }
 
 
