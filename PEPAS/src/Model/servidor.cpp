@@ -13,7 +13,6 @@ Servidor::Servidor(){
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
 	this->socketEscucha=0;
-	parsearMensaje("0020/2/usuario/11111");
 
 }
 
@@ -87,46 +86,44 @@ void Servidor::finalizarConexiones() {
 	cout << "Cerrando conexiones" << endl;
 }
 
-std::string obtenerParametros(std::string mensaje, int tamanio, int* i){
+std::string obtenerParametros(std::string mensaje, int* i){
 	std::string aux = "";
-		while(*i != tamanio){
-			aux = aux + mensaje[*i];
-			*i = *i + 1;
-			if (mensaje[*i] == '/'){
-				*i = *i + 1;
-				break;
-			}
+	while(mensaje[*i] == '/' && mensaje[*i] == '\0'){
+		aux = aux + mensaje[*i];
+		*i = *i + 1;
+	}
+	*i = *i + 1;
 
-		}
 	return aux;
 
+}
+
+std::string Servidor::recibirMensaje(){
+	int largo = stoi(this->serverSocket->Recibir(this->socketEscucha, 4),nullptr,10);
+	return this->serverSocket->Recibir(this->socketEscucha, largo - 4);
 }
 
 
 void Servidor::parsearMensaje(std::string datos){
 
 	int i = 0;
-	int tam = stoi(obtenerParametros(datos,4,&i),nullptr,10);
-	int codigo = stoi(obtenerParametros(datos,tam,&i),nullptr,10);
+	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
+	std::string usuario = obtenerParametros(datos,&i);
 
 	switch(codigo){
 		case LOGIN:{
-			std::string usuario = obtenerParametros(datos,tam,&i);
-			std::string password = obtenerParametros(datos,tam,&i);
+			
+			std::string password = obtenerParametros(datos,&i);
 		}
 			
 		break;
 		case BROADCAST:{
-			std::string usuario = obtenerParametros(datos,tam,&i);
-			std::string mensaje = obtenerParametros(datos,tam,&i);
-			cout << usuario << endl;
-			cout << mensaje << endl;
+			std::string mensaje = obtenerParametros(datos,&i);
 		}
 		break;
 		case BUZON:{
-			std::string usuario = obtenerParametros(datos,tam,&i);
-			std::string destinatario = obtenerParametros(datos,tam,&i);
-			std::string mensaje = obtenerParametros(datos,tam,&i);
+			std::string destinatario = obtenerParametros(datos,&i);
+			std::string mensaje = obtenerParametros(datos,&i);
 		}
 		break;
 		default:

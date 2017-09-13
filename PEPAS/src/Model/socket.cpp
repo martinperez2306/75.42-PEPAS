@@ -99,7 +99,8 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 
 
 
-void Socket::Recibir(int socket, char *mensajeArecibir, size_t mensajeAleerLength) {
+std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
+    std::string mensajeArecibir;
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
     ssize_t ultimaCantidadRecibida = 0;
@@ -118,6 +119,8 @@ void Socket::Recibir(int socket, char *mensajeArecibir, size_t mensajeAleerLengt
             totalRecibido += ultimaCantidadRecibida;
         }
     }
+
+    return mensajeArecibir;
 
 }
 

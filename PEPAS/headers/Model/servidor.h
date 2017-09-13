@@ -15,7 +15,7 @@ private:
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
 	Socket* serverSocket;
-	
+
 
 
 public:
@@ -40,6 +40,7 @@ public:
 	void finalizarConexiones();
 	void cerrarSockets();
 	void parsearMensaje(std::string mensaje);
+	std::string recibirMensaje();
 
 	Socket* obtenerSocket();
 
