@@ -46,7 +46,9 @@ ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
 }
 
 bool ClienteParser::puertoValido(int puerto) {
-
+	return true;
 }
 
-bool ClienteParser::pathValido(const char* path) {}
+bool ClienteParser::pathValido(const char* path) {
+	return true; 
+}
