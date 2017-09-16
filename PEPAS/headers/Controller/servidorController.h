@@ -4,7 +4,8 @@
 #include"../Model/servidor.h"
 #include"../Model/servidorBuilder.h"
 
-
+#include <iostream>;
+using namespace std;
 class ServidorController{
 
 
@@ -28,6 +29,9 @@ public:
 	~ServidorController();
 
     void iniciarEscuchasDeConexiones();
+
+    void mostrarUsuariosConectados();
+
 };
 
 

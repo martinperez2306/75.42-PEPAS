@@ -15,8 +15,8 @@ private:
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
 	Socket* serverSocket;
-
-
+	int conexiones;
+	int socketFD2;
 
 public:
 	Servidor();
@@ -35,6 +35,9 @@ public:
 	string getIP();
 	int obtenerSocketFD();
 
+	int getSocketFD2();
+	void setSocketFD2(int fd2);
+
 	void iniciarServidor();
 	void aceptarConexiones();
 	void finalizarConexiones();
@@ -44,7 +47,7 @@ public:
 
 	Socket* obtenerSocket();
 
-
+	void mostrarUsuariosConectados();
 
 	~Servidor();
 

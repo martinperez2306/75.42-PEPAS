@@ -4,8 +4,6 @@
 #define BROADCAST 2
 #define BUZON 3
 
-
-
 Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
@@ -13,7 +11,16 @@ Servidor::Servidor(){
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
 	this->socketEscucha=0;
+	this->conexiones = 0;
+	this->socketFD2 = 0;
+}
 
+int Servidor::getSocketFD2(){
+	return this->socketFD2;
+}
+
+void Servidor::setSocketFD2(int fd2){
+	this->socketFD2 = fd2;
 }
 
 int Servidor::getCantidadDeConexiones(){
@@ -76,7 +83,7 @@ void Servidor::iniciarServidor() {
 
 
 void Servidor::aceptarConexiones() {
-	obtenerSocket()->AceptarConexion(this->obtenerSocketFD());
+	this->setSocketFD2(obtenerSocket()->AceptarConexion(this->obtenerSocketFD()));
 	cout << "Conexion aceptada" << endl;
 }
 
@@ -99,8 +106,8 @@ std::string obtenerParametros(std::string mensaje, int* i){
 }
 
 std::string Servidor::recibirMensaje(){
-	int largo = stoi(this->serverSocket->Recibir(this->socketEscucha, 4),nullptr,10);
-	return this->serverSocket->Recibir(this->socketEscucha, largo - 4);
+	//int largo = stoi(this->serverSocket->Recibir(this->socketFD2, 4),nullptr,10);
+	return this->serverSocket->Recibir(this->socketFD2, 10);
 }
 
 
@@ -114,6 +121,7 @@ void Servidor::parsearMensaje(std::string datos){
 		case LOGIN:{
 			
 			std::string password = obtenerParametros(datos,&i);
+			this->conexiones += 1;
 		}
 			
 		break;
@@ -132,13 +140,16 @@ void Servidor::parsearMensaje(std::string datos){
 
 }
 
+void Servidor::mostrarUsuariosConectados(){
 
+	cout<< this->conexiones << endl;
+}
 
 
 
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
-
+	//this->finalizarConexiones();
 	delete this->baseDeDatos;
 }

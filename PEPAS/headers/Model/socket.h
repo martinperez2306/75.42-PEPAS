@@ -46,7 +46,7 @@ class Socket {
         puerto previamente determinada mediante bind().*/
         void Escuchar(int socket, int maximasConexiones);
 
-        void AceptarConexion(int socket);
+        int AceptarConexion(int socket);
 
        /* Envía datos a través del socket*/
         void Enviar(int socket, const void *mensaje, size_t mensajeLength);

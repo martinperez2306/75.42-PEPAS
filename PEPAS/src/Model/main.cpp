@@ -6,7 +6,7 @@
 #include "../../tests/baseDeDatosTest.cpp"
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
 
 	////////////////////////////////////////TESTS/////////////////////////////////////////
 
@@ -19,16 +19,6 @@ int main() {
 //	BaseDeDatosTest* bdt = new BaseDeDatosTest();
 //	bdt->obtenerUnUsuario("martin");
 //	delete bdt;
-
-
-
-
-
-
-
-
-
-
 
 
 
