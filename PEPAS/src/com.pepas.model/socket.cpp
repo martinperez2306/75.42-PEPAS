@@ -1,16 +1,11 @@
-//
-// Created by arturi on 04/09/17.
-//
-
-
-
 #include "../../headers/com.pepas.model/socket.h"
 
+#define MAX_DATA_SIZE 128
 
 using namespace std;
 Socket::Socket(){
 
-    int puerto = 0;
+    puerto = 0;
 
 
 }
@@ -88,29 +83,35 @@ void Socket::AceptarConexion(int listenSocket) {
 
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
-        ssize_t ultimaCantidadEnviada = send(socket, &mensaje, mensajeLength, MSG_NOSIGNAL);
-        while (totalEnviado < mensajeLength){
-            if (ultimaCantidadEnviada < 0) {
-                    string error = strerror(errno);
-                    //LOGGER INFo
-                    cout << "Error al enviar mensaje " << error << endl;
+        ssize_t ultimaCantidadEnviada = send(socket, mensaje, mensajeLength, MSG_NOSIGNAL);
+//        while (totalEnviado < mensajeLength){
+//            if (ultimaCantidadEnviada < 0) {
+//                    string error = strerror(errno);
+//                    //LOGGER INFo
+//                    cout << "Error al enviar mensaje " << error << endl;
+//
+//            } else {
+//                totalEnviado += ultimaCantidadEnviada;
+//                ultimaCantidadEnviada = send(socket, &mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
+//            }}
+        if(ultimaCantidadEnviada < 0){
+        	string error = strerror(errno);
+        	//LOGGER INFo
+        	cout << "Error al enviar mensaje " << error << endl;
 
-            } else {
-                totalEnviado += ultimaCantidadEnviada;
-                ultimaCantidadEnviada = send(socket, &mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
-            }}
-
-
+        }
+        cout<<ultimaCantidadEnviada<<endl;
 }
 
 
 
-void Socket::Recibir(int socket, char *mensajeArecibir, size_t mensajeAleerLength) {
+string Socket::Recibir(int socket, size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
-    ssize_t ultimaCantidadRecibida = 0;
+    char buffer[MAX_DATA_SIZE];
+    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,MSG_NOSIGNAL);
     while (totalRecibido < mensajeAleerLength && !socketShutDown){
-        ultimaCantidadRecibida = recv(socket, &mensajeArecibir[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
+        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
             string error = strerror(errno);
             //LOGGEER INFO
             cout << "Error al recibir el mensaje " << error << endl;
@@ -124,7 +125,8 @@ void Socket::Recibir(int socket, char *mensajeArecibir, size_t mensajeAleerLengt
             totalRecibido += ultimaCantidadRecibida;
         }
     }
-
+    cout<<"paso por recibir msj"<<buffer<<endl;
+    return buffer;
 }
 
 

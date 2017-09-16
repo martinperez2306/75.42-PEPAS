@@ -6,9 +6,6 @@ Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->usuario = new Usuario();
     this->socketFD=0;
-
-
-
 }
 
 void Cliente::logIn(){
