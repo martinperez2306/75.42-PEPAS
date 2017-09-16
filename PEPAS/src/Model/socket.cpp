@@ -105,18 +105,18 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
 	    ssize_t totalRecibido = 0;
 	    char buffer[MAX_DATA_SIZE];
 	    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,MSG_NOSIGNAL);
-//	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
-//	        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
-//	        if (ultimaCantidadRecibida < 0) {
-//	            string error = strerror(errno);
-//	            //LOGGER INFo
-//	            cout << "Error al recibir mensaje " << error << endl;
-//	        } else if (ultimaCantidadRecibida == 0) {
-//	            socketShutDown = true;
-//	        } else {
-//	            totalRecibido += ultimaCantidadRecibida;
-//	        }
-//	    }
+	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
+	        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
+	        if (ultimaCantidadRecibida < 0) {
+	            string error = strerror(errno);
+	            //LOGGER INFo
+	            cout << "Error al recibir mensaje " << error << endl;
+	        } else if (ultimaCantidadRecibida == 0) {
+	            socketShutDown = true;
+	        } else {
+	            totalRecibido += ultimaCantidadRecibida;
+	        }
+	    }
 	    if(ultimaCantidadRecibida < 0){
 	    	string error = strerror(errno);
 	    	//LOGGEER INFO

@@ -106,8 +106,8 @@ std::string obtenerParametros(std::string mensaje, int* i){
 }
 
 std::string Servidor::recibirMensaje(){
-	//int largo = stoi(this->serverSocket->Recibir(this->socketFD2, 4),nullptr,10);
-	return this->serverSocket->Recibir(this->socketFD2, 10);
+	int largo = stoi(this->serverSocket->Recibir(this->socketFD2, 4),nullptr,10);
+	return this->serverSocket->Recibir(this->socketFD2, largo);
 }
 
 
