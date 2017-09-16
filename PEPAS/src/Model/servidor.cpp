@@ -101,8 +101,6 @@ std::string obtenerParametros(std::string mensaje, int* i){
 }
 
 std::string Servidor::recibirMensaje(){
-	//string cuatro = this->serverSocket->Recibir(this->socketFD2, 11);
-	//cout<<"El mensaje a parsear es: "<<cuatro<<endl;
 	int largo = stoi(this->serverSocket->Recibir(this->socketFD2, 4),nullptr,10);
 	cout<<"paso el stoi"<<endl;
 	return this->serverSocket->Recibir(this->socketFD2, largo);

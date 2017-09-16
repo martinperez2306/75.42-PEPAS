@@ -113,24 +113,33 @@ std::string chartoString (char* buffer){
 }
 
 std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
-    bool socketShutDown = false;
-    ssize_t totalRecibido = 0;
-    char buffer[9999];
-    ssize_t ultimaCantidadRecibida = 0;
-    while (totalRecibido < mensajeAleerLength && !socketShutDown) {
-        ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
-        loggear(buffer, 1);
-        loggear(to_string(ultimaCantidadRecibida), 1);
-        if (ultimaCantidadRecibida < 0) {
-            string error = strerror(errno);
-            cout << "Error al recibir mensaje " << error << endl;
-        } else if (ultimaCantidadRecibida == 0) {
-            socketShutDown = true;
-        } else {
-            totalRecibido += ultimaCantidadRecibida;
+		bool socketShutDown = false;
+	    ssize_t totalRecibido = 0;
+	    char buffer[MAX_DATA_SIZE];
+	    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,MSG_NOSIGNAL);
+	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
+	        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
+	        if (ultimaCantidadRecibida < 0) {
+	            string error = strerror(errno);
+	            //LOGGER INFo
+	            cout << "Error al recibir mensaje " << error << endl;
+	        } else if (ultimaCantidadRecibida == 0) {
+	            socketShutDown = true;
+	        } else {
+	            totalRecibido += ultimaCantidadRecibida;
+	        }
+	    }
+	    if(ultimaCantidadRecibida < 0){
+	    	string error = strerror(errno);
+	    	//LOGGEER INFO
+	    	cout << "Error al recibir el mensaje " << error << endl;
+	    }
+	    cout<<ultimaCantidadRecibida<<endl;
+	    cout<<"paso por recibir msj"<<endl;
+	    cout<<buffer<<endl;
 
-        }
-    }
+
+
     if (ultimaCantidadRecibida < 0) {
         string error = strerror(errno);
         loggear(error,1);
