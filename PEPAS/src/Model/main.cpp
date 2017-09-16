@@ -3,8 +3,19 @@
 #include "../../headers/Vista/consola.h"
 #include "../../headers/Model/logger.h"
 
-#include "../../tests/baseDeDatosTest.cpp"
+
+//#include "../../tests/baseDeDatosTest.cpp"
+#include "../../tests/threadsTests.cpp";
+#include <cstdlib>
+#include <pthread.h>
 using namespace std;
+
+void *PrintHello(void *threadid) {
+				   long tid;
+				   tid = (long)threadid;
+				   cout << "Hello World! Thread ID, " << tid << endl;
+				   pthread_exit(NULL);
+				}
 
 int main(int argc, char *argv[]) {
 
@@ -21,22 +32,32 @@ int main(int argc, char *argv[]) {
 //	delete bdt;
 
 
+	//THREADS TESTS
+//	pthread_t thread;
+//	pthread_t thread2;
+//	cout<<"creando thread 1"<<endl;
+//	pthread_create(&thread,NULL,PrintHello,NULL);
+//	cout<<"creadno thread 2"<<endl;
+//	pthread_create(&thread2,NULL,PrintHello,NULL);
+//	ThreadsTests test;
+//	test.crearUnNuevoThreadYCerrarloLuegoDeMain();
+//	Thread::terminar();
 
 	//////////////////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////////////MAIN EXECUTE///////////////////////////////////////
 
-	crear_logger();
-	Consola* consola = new Consola();
-	
-	consola->cargarPaginaCrearServidor();
-	while(!consola->getTerminado()){
-
-		consola->cargarPagina(0);
-	}
-
-	delete consola;
-	cerrar_logger();
+//	crear_logger();
+//	Consola* consola = new Consola();
+//
+//	consola->cargarPaginaCrearServidor();
+//	while(!consola->getTerminado()){
+//
+//		consola->cargarPagina(0);
+//	}
+//
+//	delete consola;
+//	cerrar_logger();
 
 	/////////////////////////////////////////////////////////////////////////////////////
 

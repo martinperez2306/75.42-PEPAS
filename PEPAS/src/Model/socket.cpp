@@ -104,7 +104,7 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
 		bool socketShutDown = false;
 	    ssize_t totalRecibido = 0;
 	    char buffer[MAX_DATA_SIZE];
-	    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,MSG_NOSIGNAL);
+	    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,0);
 //	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
 //	        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
 //	        if (ultimaCantidadRecibida < 0) {
