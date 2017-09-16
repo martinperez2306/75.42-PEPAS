@@ -13,7 +13,7 @@ private:
 	int puerto;
 	int cantidadDeConexiones;
 	BaseDeDatos* baseDeDatos;
-	int socketEscucha;
+	//int socketEscucha;
 	Socket* serverSocket;
 	int conexiones;
 	int socketFD2;
@@ -33,7 +33,6 @@ public:
 	void mostrarUsuariosDisponibles();
 
 	string getIP();
-	int obtenerSocketFD();
 
 	int getSocketFD2();
 	void setSocketFD2(int fd2);
@@ -48,11 +47,12 @@ public:
 	Socket* obtenerSocket();
 
 	void mostrarUsuariosConectados();
+	BaseDeDatos* obtenerBaseDeDatos();
 
 	~Servidor();
 
 
-	void asignarSocketFd(int crear);
+    void validarCliente(string basic_string, string basicString);
 };
 
 

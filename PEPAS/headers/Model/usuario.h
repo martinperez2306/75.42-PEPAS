@@ -17,6 +17,8 @@ class Usuario{
 private:
 	string usuario;
 	string contrasenia;
+	int socketFD;
+	bool conectado;
 
 public:
 
@@ -31,6 +33,10 @@ public:
 	string getUsuario();
 
 	string getContrasenia();
+
+	int obtenerSocket();
+
+	bool estaConectado();
 };
 
 

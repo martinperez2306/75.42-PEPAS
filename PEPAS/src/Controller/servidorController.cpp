@@ -32,12 +32,10 @@ int ServidorController::getPuertoServidor(){
 }
 
 Usuario* ServidorController::getUsuario(string username){
-
 	return this->servidor->getBaseDeDatos()->getUsuario(username);
 }
 
 void ServidorController::mostrarUsuariosConectados(){
-
 	this->servidor->mostrarUsuariosConectados();
 }
 
@@ -48,7 +46,7 @@ ServidorController::~ServidorController(){
 void ServidorController::iniciarEscuchasDeConexiones() {
 	servidor->iniciarServidor();
 	servidor->aceptarConexiones();
-//	servidor->parsearMensaje(servidor->recibirMensaje());
+	servidor->parsearMensaje(servidor->recibirMensaje());
 	servidor->recibirMensaje();
 }
 

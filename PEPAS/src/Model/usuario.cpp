@@ -1,8 +1,10 @@
 #include "../../headers/Model/usuario.h"
 
 Usuario::Usuario(){
-	 this->contrasenia = "contraseña vacia";
-	 this->usuario = "usuario vacio";
+	this->contrasenia = "contraseña vacia";
+	this->usuario = "usuario vacio";
+	this->socketFD = NULL;
+	this->conectado = true;
 }
 
 Usuario::Usuario(string usuario,string contrasenia){
@@ -28,6 +30,14 @@ string Usuario::getContrasenia(){
 
 string Usuario::getUsuario(){
 	return this->usuario;
+}
+
+int Usuario::obtenerSocket() {
+	return this->socketFD;
+}
+
+bool Usuario::estaConectado() {
+	return this->conectado;
 }
 
 
