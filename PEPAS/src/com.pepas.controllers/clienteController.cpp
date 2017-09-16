@@ -7,8 +7,8 @@
 
 
 ClienteController::ClienteController(){
-	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
-	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
+	this->socketData.ip = "192.168.0.9"; //TODO HARDCODEEEEEEE
+	this->socketData.puerto = 8000;  //TODO HARDCODEEEEEEE
 }
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
@@ -23,6 +23,7 @@ void ClienteController::crearCliente(){
     this->cliente= new Cliente();
     //a penas crea el cliente se empieza a parsear el achivo xml
     //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"../75.42-PEPAS/PEPAS/src/com.pepas.parser/cliente.xml");
+    //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"src/com.pepas.parser/cliente.xml");
     //this->socketData = sd;
 }
 

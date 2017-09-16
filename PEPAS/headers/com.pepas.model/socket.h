@@ -53,7 +53,7 @@ class Socket {
 
 
         /*Recibe datos a través del socket*/
-        void Recibir(int socket, char mensajeArecibir[], size_t mensajeAleerLength);
+        string Recibir(int socket, size_t mensajeAleerLength);
 
         /*Se utiliza para cerrar el envío y la recepción de datos en
         forma ordenada*/
