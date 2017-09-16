@@ -29,6 +29,8 @@ public:
 
 	void mostrarTodosLosUsuarios();
 
+	int obtenerSocketUsuario (string usuario);
+
 	//DEBE ELIMINAR LA MEMORIA PEDIDA PARA CADA USUARIO EN LA BASE DE DATOS (CREADA POR EL BUILDER).
 	~BaseDeDatos();
 

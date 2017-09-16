@@ -41,4 +41,8 @@ BaseDeDatos::~BaseDeDatos(){
 	delete this->usuarios;
 }
 
+int BaseDeDatos::obtenerSocketUsuario(string usuario) {
+	return getUsuario(usuario)->obtenerSocket();
+}
+
 

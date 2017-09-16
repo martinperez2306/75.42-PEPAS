@@ -10,7 +10,6 @@ Consola::Consola(){
 }
 
 bool Consola::getTerminado(){
-
 	return this->terminado;
 }
 
