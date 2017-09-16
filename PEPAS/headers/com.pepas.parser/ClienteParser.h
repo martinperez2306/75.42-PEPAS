@@ -31,7 +31,8 @@ public:
 	ClienteParser();
 
 	ClienteParser::SocketData parsearXML(char* xmlPath);
-	bool puertoValido(int puerto);
+	bool puertoValido(const char* puerto);
+	bool sonDigitos(const char* puerto);
 	bool pathValido(const char* path);
 
 		//no libera la memoria del servidor. Recordar Eliminarla en el programa principal.
