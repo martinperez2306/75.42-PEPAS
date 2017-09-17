@@ -1,6 +1,9 @@
 #include "../../headers/com.pepas.model/cliente.h"
+#include "../../headers/com.pepas.logger/Logger.h"
 
-
+#define LOGIN 1
+#define BROADCAST 2
+#define BUZON 3
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -68,6 +71,12 @@ void Cliente::enviarMensaje(string  mensa){
     const void *mensaje = mensa.c_str();
     this->obtenerSocket()->Enviar(obtenerSocketFD(), mensaje, mensa.length());
 }
+
+std::string Cliente::recibirMensaje(){
+	int largo = stoi(this->socketCliente->Recibir(this->socketFD, 4),nullptr,10);
+	cout<<"paso el stoi"<<endl;
+	return this->socketCliente->Recibir(this->socketFD, largo);
+}
 /*Este procesador, codifica el mensaje con el codigo 1.
 <código_mensaje>/<usuario>/<password>*/
 
@@ -115,3 +124,48 @@ string Cliente::agregarPadding(int lenght) {
 }
 
 
+std::string obtenerParametros(std::string mensaje, int* i){
+	std::string aux = "";
+	*i = *i + 1;
+	while(mensaje[*i] != '/' && mensaje[*i] != '\0'){
+		aux = aux + mensaje[*i];
+		*i = *i + 1;
+	}
+
+
+	return aux;
+
+}
+
+void Cliente::parsearMensaje(std::string datos){
+
+	int i = 0;
+	loggear("entro al parsear mensaje",1);
+	loggear (datos,1);
+	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
+	loggear("paso el stoi tragico",1 );
+	std::string usuario = obtenerParametros(datos,&i);
+
+	switch(codigo){
+		case LOGIN:{
+
+			std::string password = obtenerParametros(datos,&i);
+			cout << "Conectado correctamente con usuario ";
+			cout << usuario + " " + password << endl;
+		}
+
+			break;
+		case BROADCAST:{
+			std::string mensaje = obtenerParametros(datos,&i);
+		}
+			break;
+		case BUZON:{
+			std::string destinatario = obtenerParametros(datos,&i);
+			std::string mensaje = obtenerParametros(datos,&i);
+		}
+			break;
+		default:
+			break;
+	}
+
+}

@@ -4,6 +4,6 @@
 		<puerto>65532</puerto>
 	</conexion>
 	<testfile>
-		<path>/tmp/filetest_01</path>
+		<path>cliente_test_file</path>
 	</testfile>
 </cliente>
