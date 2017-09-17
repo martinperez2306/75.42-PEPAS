@@ -10,6 +10,7 @@
 
 #include "../pugi/pugixml.hpp"
 #include "../../headers/com.pepas.logger/Logger.h"
+#include <fstream>
 #include <arpa/inet.h>
 #include <iostream>
 #include <stdio.h>
@@ -25,6 +26,8 @@ public:
 	struct SocketData {
 		char* ip;
 		int puerto;
+		//HDC
+		int puerto2;
 		char *rutaFile;
 	};
 	ClienteParser();

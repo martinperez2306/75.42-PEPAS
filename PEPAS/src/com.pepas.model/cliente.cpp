@@ -66,7 +66,7 @@ void Cliente::validarUsuario(Usuario* usuario) {
 }
 void Cliente::enviarMensaje(string  mensa){
     const void *mensaje = mensa.c_str();
-    this->obtenerSocket()->Enviar(obtenerSocketFD(), &mensaje, mensa.length());
+    this->obtenerSocket()->Enviar(obtenerSocketFD(), mensaje, mensa.length());
 }
 /*Este procesador, codifica el mensaje con el codigo 1.
 <código_mensaje>/<usuario>/<password>*/

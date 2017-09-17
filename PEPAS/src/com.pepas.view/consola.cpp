@@ -28,8 +28,9 @@ void Consola::cargarPagina() {
     while(!this->terminado) {
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
-		cout<<"Seleccione 1 conectarse al servidor"<<endl;
-		cout<<"Seleccione 2 para salir"<<endl;
+		cout<<"Seleccione 1 conectarse al servidor (8000)"<<endl;
+		cout<<"Seleccione 2 conectarse al servidor (8010)"<<endl;
+		cout<<"Seleccione 3 para salir"<<endl;
 		cout<<"*********************************************"<<endl;
 		cout<<"-->";
 		cin>> numeroPagina;
@@ -37,6 +38,13 @@ void Consola::cargarPagina() {
 			case 1:
 				this->clienteController->crearCliente();
 				this->clienteController->conectarConElServidor();
+				this->clienteController->obtenerCliente()->logIn();
+				this->cargarMenuPrincipal();
+				break;
+
+			case 2:
+				this->clienteController->crearCliente();
+				this->clienteController->conectarConElServidor2();
 				this->clienteController->obtenerCliente()->logIn();
 				this->cargarMenuPrincipal();
 				break;

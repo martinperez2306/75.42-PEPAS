@@ -35,6 +35,8 @@ public:
 
     void crearCliente();
 
+    void conectarConElServidor2();
+
     void conectarConElServidor();
 
     void asignarServidor();
