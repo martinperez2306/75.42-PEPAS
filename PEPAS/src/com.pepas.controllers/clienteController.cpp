@@ -94,3 +94,4 @@ ClienteController::~ClienteController(){
 Cliente *ClienteController::obtenerCliente() {
     return this->cliente;
 }
+

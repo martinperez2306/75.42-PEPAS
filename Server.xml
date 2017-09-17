@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<servidor>
+	<CantidadMaximaClientes>5</CantidadMaximaClientes>
+	<puerto>27015</puerto>
+	<usuarios>
+		<usuario>
+			<nombre>Augusto</nombre>
+ 			<password>Turi</password>
+		</usuario>
+		<usuario>
+			<nombre>Florencia</nombre>
+			<password>Flor</password>
+		</usuario>
+		<usuario>
+			<nombre>Barbara</nombre>
+			<password>Barbi</password>
+		</usuario>
+		<usuario>
+			<nombre>Agustin</nombre>
+			<password>Payas</password>
+		</usuario>
+		<usuario>
+			<nombre>Martin</nombre>
+			<password>Tincho</password>
+		</usuario>
+	</usuarios>
+</servidor>
+
