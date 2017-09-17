@@ -102,14 +102,21 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
             ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
             if (ultimaCantidadEnviada < 0) {
                     string error = strerror(errno);
-                    loggear(error,1);
+                    //LOGGER INFo
                     cout << "Error al enviar mensaje " << error << endl;
 
             } else {
                 totalEnviado += ultimaCantidadEnviada;
-
+                
             }
+	}
+        if(ultimaCantidadEnviada < 0){
+        	string error = strerror(errno);
+        	//LOGGER INFo
+        	cout << "Error al enviar mensaje " << error << endl;
+
         }
+        cout<<ultimaCantidadEnviada<<endl;
 }
 
 

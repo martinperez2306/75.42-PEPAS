@@ -132,6 +132,11 @@ std::string Servidor::recibirMensaje(){
 	return this->serverSocket->Recibir(this->socketFD2, largo);
 }
 
+void Servidor::enviarMensaje(string  mensa){
+    const void *mensaje = mensa.c_str();
+    this->obtenerSocket()->Enviar(getSocketFD2(), mensaje, mensa.length());
+}
+
 
 void Servidor::parsearMensaje(std::string datos){
 
