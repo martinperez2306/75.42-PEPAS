@@ -34,7 +34,6 @@ public:
     void conectarseAlServidor(string ip, int puerto);
 
     void enviarMensaje(string mensaje);
-std::string recibirMensaje();
 
     void desconectarseDelServidor();
 
@@ -55,9 +54,12 @@ std::string recibirMensaje();
     string procesarMensaje(Mensaje* mensaje);
 
     string obtenerCodigo();
- void parsearMensaje(std::string datos);
 
     string agregarPadding(int i);
+
+    void parsearMensaje(std::string datos);
+
+    std::string recibirMensaje();
 };
 
 

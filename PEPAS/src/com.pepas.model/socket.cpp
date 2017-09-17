@@ -1,13 +1,12 @@
 #include "../../headers/com.pepas.model/socket.h"
 #include "../../headers/com.pepas.logger/Logger.h"
+
 #define MAX_DATA_SIZE 128
 
 using namespace std;
 Socket::Socket(){
 
     puerto = 0;
-
-
 }
 
 int Socket::Crear(){
@@ -52,8 +51,6 @@ void Socket::Conectar(int socket, int puerto, string IPremota) {
 
 }
 
-
-
 void Socket::Escuchar(int socket, int maximasConexiones) {
     int ret = listen(socket, maximasConexiones);
 
@@ -81,6 +78,15 @@ void Socket::AceptarConexion(int listenSocket) {
     }
 }
 
+std::string chartoString (char* buffer){
+    string string = "";
+    for (int i = 0; i< strlen(buffer);i++){
+        string = string + buffer[i];
+    }
+    string = string + "\0";
+    return string;
+}
+
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
         ssize_t ultimaCantidadEnviada = 0;
@@ -94,7 +100,7 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 
             } else {
                 totalEnviado += ultimaCantidadEnviada;
-                
+
             }
 	}
         if(ultimaCantidadEnviada < 0){
@@ -106,14 +112,6 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         cout<<ultimaCantidadEnviada<<endl;
 }
 
-
-std::string chartoString (char* buffer){
-    string string = "";
-    for (int i = 0; i< strlen(buffer);i++){
-        string = string + buffer[i];
-    }
-    return string;
-}
 
 std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
 		bool socketShutDown = false;
@@ -172,7 +170,6 @@ void Socket::CerrarConexion(int socket) {
 void Socket::CerrarSocket(int socket) {
     //close(socket);
 }
-
 
 Socket::~Socket(){
 }
