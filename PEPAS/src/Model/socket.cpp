@@ -88,20 +88,28 @@ int Socket::AceptarConexion(int listenSocket) {
 
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
-        ssize_t ultimaCantidadEnviada = send(socket, &mensaje, mensajeLength, MSG_NOSIGNAL);
+        ssize_t ultimaCantidadEnviada = 0;
         while (totalEnviado < mensajeLength){
+            ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
             if (ultimaCantidadEnviada < 0) {
                     string error = strerror(errno);
-                    loggear(error,1);
+                    //LOGGER INFo
                     cout << "Error al enviar mensaje " << error << endl;
 
             } else {
                 totalEnviado += ultimaCantidadEnviada;
-                ultimaCantidadEnviada = send(socket, &mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
-            }}
+                
+            }
+	}
+        if(ultimaCantidadEnviada < 0){
+        	string error = strerror(errno);
+        	//LOGGER INFo
+        	cout << "Error al enviar mensaje " << error << endl;
 
-
+        }
+        cout<<ultimaCantidadEnviada<<endl;
 }
+
 
 
 std::string chartoString (char* buffer){
@@ -116,9 +124,9 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
 		bool socketShutDown = false;
 	    ssize_t totalRecibido = 0;
 	    char buffer[MAX_DATA_SIZE];
-	    ssize_t ultimaCantidadRecibida = recv(socket,&buffer,MAX_DATA_SIZE,MSG_NOSIGNAL);
+	    ssize_t ultimaCantidadRecibida = 0;
 	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
-	        ultimaCantidadRecibida = recv(socket, &buffer[totalRecibido], mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
+	        ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
 	        if (ultimaCantidadRecibida < 0) {
 	            string error = strerror(errno);
 	            //LOGGER INFo

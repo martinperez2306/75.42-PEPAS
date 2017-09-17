@@ -43,11 +43,13 @@ public:
 	void cerrarSockets();
 	void parsearMensaje(std::string mensaje);
 	std::string recibirMensaje();
+	void enviarMensaje(string  mensa);
 
 	Socket* obtenerSocket();
 
 	void mostrarUsuariosConectados();
 	BaseDeDatos* obtenerBaseDeDatos();
+
 
 	~Servidor();
 
