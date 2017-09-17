@@ -209,6 +209,7 @@ void *Servidor::IniciarConexiones(void* servidor){
 	Servidor* srv = (Servidor*) servidor;
 	srv->iniciarServidor();
 	srv->aceptarConexiones();
+	srv->parsearMensaje(srv->recibirMensaje());
 	pthread_exit(NULL);
 }
 
