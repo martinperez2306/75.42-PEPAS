@@ -1,10 +1,10 @@
-#include "../../headers/Model/Thread.h"
+#include "../../headers/Model/thread.h"
 
 Thread::Thread() {
 
 }
 
-void Thread::crear(void *funcion(void *threadid), void *args){
+void Thread::crear(void *funcion(void *tharg), void *args){
 
 	int rc = pthread_create(&thread,NULL,funcion,args);
 }

@@ -17,7 +17,7 @@ public:
 	//Recibe por parametro un puntero Void que representa una funcion y un puntero Void que son los argumentos de esa funcion
 	//No se que es threadid (supongo que un id que maneja pthreads)
 	//La funcion debe ser proporcionada por quien maneja los threads.
-	void crear(void* funcion(void* threadid),void *args);
+	void crear(void* funcion(void* tharg),void *args);
 
 	//METODO ESTATICO (PUEDE SER LLAMADO DE CUALQUIER LUGAR EN CUALQUIER MOMENTO SIN INSTANCIAR LA CLASE THREAD
 	//Se debe usar al final de cada proceso donde esta vivo quien maneja los threads

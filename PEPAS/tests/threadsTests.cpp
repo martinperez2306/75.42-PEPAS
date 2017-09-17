@@ -1,5 +1,6 @@
-#include "../headers/Model/Thread.h"
 #include <iostream>
+
+#include "../headers/Model/thread.h"
 using namespace std;
 
 class ThreadsTests{

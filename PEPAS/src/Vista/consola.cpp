@@ -98,7 +98,6 @@ void Consola::cargarPaginaPrincipal(){
 void Consola::cargarPaginaCaracteristicasDelServidor(){
 
 	loggear("Cargado pagina con caracteristicas del servidor",3);
-
 	cout<<"La cantidad maxima de conexiones es: "<<this->servidorController->getMaximoClientesServidor()<<endl;
 	cout<<"El puerto es: "<<servidorController->getPuertoServidor()<<endl;
 	cout<<"Usuarios Disponibles "<<endl;

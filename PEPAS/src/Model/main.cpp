@@ -10,13 +10,6 @@
 #include <pthread.h>
 using namespace std;
 
-void *PrintHello(void *threadid) {
-				   long tid;
-				   tid = (long)threadid;
-				   cout << "Hello World! Thread ID, " << tid << endl;
-				   pthread_exit(NULL);
-				}
-
 int main(int argc, char *argv[]) {
 
 	////////////////////////////////////////TESTS/////////////////////////////////////////
@@ -47,17 +40,17 @@ int main(int argc, char *argv[]) {
 
 	//////////////////////////////////MAIN EXECUTE///////////////////////////////////////
 
-//	crear_logger();
-//	Consola* consola = new Consola();
-//
-//	consola->cargarPaginaCrearServidor();
-//	while(!consola->getTerminado()){
-//
-//		consola->cargarPagina(0);
-//	}
-//
-//	delete consola;
-//	cerrar_logger();
+	crear_logger();
+	Consola* consola = new Consola();
+
+	consola->cargarPaginaCrearServidor();
+	while(!consola->getTerminado()){
+
+		consola->cargarPagina(0);
+	}
+
+	delete consola;
+	cerrar_logger();
 
 	/////////////////////////////////////////////////////////////////////////////////////
 

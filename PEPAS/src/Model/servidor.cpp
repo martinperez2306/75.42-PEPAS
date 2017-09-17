@@ -9,12 +9,33 @@ Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
+	this->puerto2 = 8010; //HARDCODE PARA SEGUNDO CLIENTE
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
+	this->serverSocket2 = new Socket();
 	//this->socketEscucha=0;
 	this->conexiones = 0;
+	this->socketFD = 0;
 	this->socketFD2 = 0;
 }
+
+//HCD
+Socket* Servidor::obtenerSocket2(){
+	return this->serverSocket2;
+}
+int Servidor::getSocketFD(){
+	return this->socketFD;
+}
+
+void Servidor::setSocketFD(int fd){
+	this->socketFD = fd;
+}
+
+int Servidor::getPuerto2(){
+	return this->puerto2;
+}
+
+//
 
 int Servidor::getSocketFD2(){
 	return this->socketFD2;
@@ -62,7 +83,13 @@ Socket* Servidor::obtenerSocket(){
     return this->serverSocket;
 }
 
+void Servidor::abrirConexiones(){
 
+	Thread conexion1;
+	conexion1.crear(IniciarConexiones,this);
+	Thread conexion2;
+	conexion2.crear(IniciarConexiones2,this);
+}
 
 
 void Servidor::iniciarServidor() {
@@ -70,15 +97,15 @@ void Servidor::iniciarServidor() {
     setSocketFD2(obtenerSocket()->Crear()); //devuelve el file descriptor
     obtenerSocket()->Enlazar(this->getSocketFD2(),this->getPuerto());
    	obtenerSocket()->Escuchar(this->getSocketFD2(),this->getCantidadDeConexiones());
-	cout << "Servidor creado correctamente, escuchando conexiones ..." << endl;
+	cout << "Escuchando conexiones ..." << endl;
 	
 }
-
 
 
 void Servidor::aceptarConexiones() {
 	this->setSocketFD2(obtenerSocket()->AceptarConexion(this->getSocketFD2()));
 	cout << "Conexion aceptada" << endl;
+	this->conexiones += 1;
 }
 
 
@@ -93,8 +120,7 @@ std::string obtenerParametros(std::string mensaje, int* i){
 	while(mensaje[*i] != '/' && mensaje[*i] != '\0'){
 		aux = aux + mensaje[*i];
 		*i = *i + 1;
-	}
-
+}
 
 	return aux;
 
@@ -139,8 +165,6 @@ void Servidor::parsearMensaje(std::string datos){
 
 }
 
-
-
 void Servidor::validarCliente(string usuario, string contrasenia) {
 	Usuario* usuarioAValidar = this->obtenerBaseDeDatos()->getUsuario(usuario);
 	if (usuarioAValidar==NULL){
@@ -162,15 +186,44 @@ void Servidor::mostrarUsuariosConectados(){
     cout<< this->conexiones << endl;
 }
 
-
 BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 	return this->baseDeDatos;
 }
+
+
+void *Servidor::IniciarConexiones2(void* servidor){
+
+	Servidor* srv = (Servidor*) servidor;
+	srv->iniciarServidor2();
+	srv->aceptarConexiones2();
+	pthread_exit(NULL);
+}
+
+void *Servidor::IniciarConexiones(void* servidor){
+
+	Servidor* srv = (Servidor*) servidor;
+	srv->iniciarServidor();
+	srv->aceptarConexiones();
+	pthread_exit(NULL);
+}
+
+void Servidor::iniciarServidor2(){
+	cout<<"El puerto del servidor es: "<<this->getPuerto2()<<endl;
+	setSocketFD(obtenerSocket2()->Crear()); //devuelve el file descriptor
+	obtenerSocket2()->Enlazar(this->getSocketFD(),this->getPuerto2());
+	obtenerSocket2()->Escuchar(this->getSocketFD(),this->getCantidadDeConexiones());
+	cout << "Escuchando conexiones ..." << endl;
+}
+
+void Servidor::aceptarConexiones2(){
+
+	this->setSocketFD(obtenerSocket2()->AceptarConexion(this->getSocketFD()));
+	cout << "Conexion aceptada" << endl;
+	this->conexiones += 1;
+}
+
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->baseDeDatos;
 }
-
-
-

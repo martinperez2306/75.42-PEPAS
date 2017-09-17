@@ -52,8 +52,8 @@ Servidor* ServidorBuilder::build(){
 void ServidorBuilder::parsearXML(){
 
 	pugi::xml_document documento;
-	//pugi::xml_parse_result result = documento.load_file("src/server.xml");
-	pugi::xml_parse_result result = documento.load_file("../75.42-PEPAS/PEPAS/src/server.xml");
+	pugi::xml_parse_result result = documento.load_file("src/server.xml");
+	//pugi::xml_parse_result result = documento.load_file("../75.42-PEPAS/PEPAS/src/server.xml");
 	cout << "Load Result: " << result.description() <<endl;
 
 	//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
