@@ -6,26 +6,23 @@
 #define COM_PEPAS_CONSOLA_CONSOLA_H
 
 #include <iostream>
+#include <thread>
+#include <unistd.h>
 #include <string>
 #include "../com.pepas.controllers/clienteController.h"
 #include <stdlib.h>
-
+#define BUFLEN 1000
 
 using namespace std;
 
 class Consola{
 
 private:
-    bool terminado;
-    bool salirMenu;
     //int numeroPagina;
     ClienteController* clienteController;
 public:
 
     Consola();
-
-    void setTerminado(bool terminado);
-    bool getTerminado();
 
     /////////////////Cargar Paginas/////////////////
     void *cargarPagina();

@@ -1,7 +1,7 @@
 <cliente>
 	<conexion>
-		<IP>192.168.0.9</IP>
-		<puerto>8a000</puerto>
+		<IP>127.0.0.1</IP>
+		<puerto>27015</puerto>
 	</conexion>
 	<testfile>
 		<path>cliente_test_file</path>

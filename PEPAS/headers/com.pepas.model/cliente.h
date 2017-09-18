@@ -31,7 +31,7 @@ public:
     void logIn();
 
     //metodo para loquearse?
-    void conectarseAlServidor(string ip, int puerto);
+    int conectarseAlServidor(const char *ip, int puerto);
 
     void enviarMensaje(string mensaje);
 

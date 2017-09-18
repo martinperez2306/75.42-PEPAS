@@ -1,7 +1,7 @@
 #include "../../headers/com.pepas.model/socket.h"
 #include "../../headers/com.pepas.logger/Logger.h"
 
-#define MAX_DATA_SIZE 128
+#define MAX_DATA_SIZE 1000
 
 using namespace std;
 Socket::Socket(){
@@ -37,17 +37,19 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
     }
 }
 
-void Socket::Conectar(int socket, int puerto, string IPremota) {
+int Socket::Conectar(int socket, int puerto, const char *IPremota) {
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = inet_addr(IPremota.data());
+    serverAddress.sin_addr.s_addr = inet_addr(IPremota);
     serverAddress.sin_port = htons(puerto);
     socklen_t serverSize = sizeof(serverAddress);
     /*VERIFICACION DE ERRORES*/
     if (connect(socket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         // logger info
         cout << "Error al conectar con el servidor " << strerror(errno) << endl;
+        return -1;
     }
+    return 0;
 
 }
 
@@ -114,38 +116,26 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 
 
 std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
-		bool socketShutDown = false;
-	    ssize_t totalRecibido = 0;
-	    char buffer[MAX_DATA_SIZE];
-	    ssize_t ultimaCantidadRecibida = 0;
-	    while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
-	        ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
-	        if (ultimaCantidadRecibida < 0) {
-	            string error = strerror(errno);
-	            //LOGGER INFo
-	            cout << "Error al recibir mensaje " << error << endl;
-	        } else if (ultimaCantidadRecibida == 0) {
-	            socketShutDown = true;
-	        } else {
-	            totalRecibido += ultimaCantidadRecibida;
-	        }
-	    }
-	    if(ultimaCantidadRecibida < 0){
-	    	string error = strerror(errno);
-	    	//LOGGEER INFO
-	    	cout << "Error al recibir el mensaje " << error << endl;
-	    }
-	    cout<<ultimaCantidadRecibida<<endl;
-	    cout<<"paso por recibir msj"<<endl;
-	    cout<<buffer<<endl;
-
-
-
-    if (ultimaCantidadRecibida < 0) {
-        string error = strerror(errno);
-        loggear(error,1);
-        cout << "Error al recibir el mensaje " << error << endl;
-    }
+	bool socketShutDown = false;
+	ssize_t totalRecibido = 0;
+	char buffer[MAX_DATA_SIZE];
+	ssize_t ultimaCantidadRecibida = 0;
+	while (totalRecibido < MAX_DATA_SIZE && !socketShutDown){
+		ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength-totalRecibido, MSG_NOSIGNAL);
+		if (ultimaCantidadRecibida < 0) {
+			string error = strerror(errno);
+			//LOGGER INFo
+			cout << "Error al recibir mensaje " << error << endl;
+			return "";
+		} else if (ultimaCantidadRecibida == 0) {
+			socketShutDown = true;
+		} else {
+			totalRecibido += ultimaCantidadRecibida;
+		}
+	}
+	cout<<ultimaCantidadRecibida<<endl;
+	cout<<"paso por recibir msj"<<endl;
+	cout<<buffer<<endl;
 
     cout << "Antes de convertir a string: "<<buffer << endl;
     string  cadenaAdevolver = chartoString (buffer);

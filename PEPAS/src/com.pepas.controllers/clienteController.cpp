@@ -7,10 +7,10 @@
 
 
 ClienteController::ClienteController(){
-	this->socketData.ip = "192.168.0.9"; //TODO HARDCODEEEEEEE
-	this->socketData.puerto = 8000;  //TODO HARDCODEEEEEEE
-	this->socketData.puerto2 = 8010; //TODO HARDCODEEEEEEE
-	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
+//	this->socketData.ip = "192.168.0.9"; //TODO HARDCODEEEEEEE
+//	this->socketData.puerto = 8000;  //TODO HARDCODEEEEEEE
+//	this->socketData.puerto2 = 8010; //TODO HARDCODEEEEEEE
+	this->socketData = this->clienteParser->parsearXML("cliente.xml");
 }
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
@@ -35,14 +35,8 @@ void ClienteController::asignarServidor(){
 }
 
 
-void ClienteController::conectarConElServidor(){
-    this->cliente->conectarseAlServidor(socketData.ip, socketData.puerto);
-
-
-}
-
-void ClienteController::conectarConElServidor2(){
-	this->cliente->conectarseAlServidor(socketData.ip,socketData.puerto2);
+int ClienteController::conectarConElServidor(){
+    return this->cliente->conectarseAlServidor(socketData.ip, socketData.puerto);
 }
 
 void ClienteController::mensajeDePrueba(){

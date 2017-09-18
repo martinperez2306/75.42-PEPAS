@@ -41,7 +41,7 @@ class Socket {
       /*  Conecta el socket a la dirección y puerto destino.
         Determina dirección y puertos locales si no se utilizó bind() previamente.*/
 
-        void Conectar(int socket, int puerto, string IP);
+        int Conectar(int socket, int puerto, const char* IP);
 
         /*Configura el socket para recibir conexiones en la dirección y
         puerto previamente determinada mediante bind().*/

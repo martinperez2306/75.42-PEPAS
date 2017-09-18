@@ -24,7 +24,7 @@ class ClienteParser{
 public:
 
 	struct SocketData {
-		char* ip;
+		const char* ip;
 		int puerto;
 		//HDC
 		int puerto2;
@@ -33,6 +33,7 @@ public:
 	ClienteParser();
 
 	ClienteParser::SocketData parsearXML(char* xmlPath);
+	bool validarIp(const char *ip);
 	bool puertoValido(const char* puerto);
 	bool sonDigitos(const char* puerto);
 	bool pathValido(const char* path);

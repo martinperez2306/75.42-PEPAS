@@ -23,11 +23,10 @@ void Cliente::logIn(){
     this->validarUsuario(obtenerUsuario());
 }
 
-void Cliente::conectarseAlServidor(string ip, int puerto) {
-    asignarSocketFd(obtenerSocket()->Crear());
+int Cliente::conectarseAlServidor(const char *ip, int puerto) {
+    this->socketFD = this->socketCliente->Crear();
     cout<<"Socket creado... Conectando..."<<endl;
-    this->obtenerSocket()->Conectar(obtenerSocketFD(),puerto, ip); //TODO HARDCODEADO
-    cout <<"Conectado satisfactorio"<< endl;
+    return this->obtenerSocket()->Conectar(this->socketFD,puerto, ip);
 
 }
 
