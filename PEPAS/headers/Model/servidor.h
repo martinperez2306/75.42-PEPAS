@@ -5,6 +5,7 @@
 #include "socket.h"
 #include <list>
 #include <string>
+#include <unordered_map>
 
 
 
@@ -18,6 +19,9 @@ private:
 	Socket* serverSocket;
 	int conexiones;
 	int socketFD;
+	std::list<int> puertos;
+ 	std::unordered_map<int,int> mapFD;
+	void iniciarConexion(int puerto);
 
 
 

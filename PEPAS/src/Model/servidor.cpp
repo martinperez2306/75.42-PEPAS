@@ -87,15 +87,35 @@ void Servidor::iniciarServidor() {
     cout<<"El puerto del servidor es: "<<this->getPuerto()<<endl;
     asignarSocketEscucha(obtenerSocket()->Crear()); //devuelve el file descriptor
     obtenerSocket()->Enlazar(this->obtenerSocketEscucha(),this->getPuerto());
-   	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
+   	
+}
+
+void Servidor::iniciarConexion(int puerto) {
+	Socket* newSocket= new Socket();
+    cout<<"El puerto del cliente es: "<<puerto<<endl;
+    int fd = newSocket->Crear(); 
+    newSocket->Enlazar(fd,puerto);
+    newSocket->Escuchar(fd,this->getCantidadDeConexiones());
 	cout << "Escuchando conexiones ..." << endl;
+    fd = newSocket->AceptarConexion(fd);
+    mapFD.insert({puerto,fd});
+    this->conexiones += 1;
+    cout << "Conexion aceptada" << endl;  	
 }
 
 
 int  Servidor::aceptarConexiones() {
+	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
+	cout << "Escuchando conexiones ..." << endl;
     int fd = obtenerSocket()->AceptarConexion(this->obtenerSocketEscucha());
     cout << "Conexion aceptada" << endl;
-    this->conexiones += 1;
+    
+    int puerto = this->puertos.front();
+    this->puertos.pop_front();
+    this->iniciarConexion(puerto);
+    this->enviarMensaje(to_string(puerto));
+    obtenerSocket()->CerrarConexion(fd);
+
     return fd;
 }
 
