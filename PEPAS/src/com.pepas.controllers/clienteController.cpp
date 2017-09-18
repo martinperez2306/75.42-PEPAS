@@ -94,3 +94,9 @@ Cliente *ClienteController::obtenerCliente() {
     return this->cliente;
 }
 
+void ClienteController::asignarPuertoParaNuevaConexion() {
+    string msg  = this->obtenerCliente()->recibirMensaje();
+    cout<<msg<<endl;
+
+}
+

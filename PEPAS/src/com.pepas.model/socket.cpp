@@ -80,14 +80,15 @@ void Socket::AceptarConexion(int listenSocket) {
     }
 }
 
+
 std::string chartoString (char* buffer){
     string string = "";
     for (int i = 0; i< strlen(buffer);i++){
         string = string + buffer[i];
     }
-    string = string + "\0";
     return string;
 }
+
 
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
@@ -144,7 +145,6 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
     return cadenaAdevolver;
 
 }
-
 
 void Socket::CerrarConexion(int socket) {
     int ret = shutdown(socket, SHUT_WR);

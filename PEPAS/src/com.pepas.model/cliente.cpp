@@ -64,7 +64,6 @@ void Cliente::validarUsuario(Usuario* usuario) {
     string mensaje = this->procesarMensaje(usuario->getNombre(), usuario->getContrasenia());
     this->enviarMensaje(mensaje);
     cout<<"Mensaje enviado con exito"<<endl;
-
 }
 void Cliente::enviarMensaje(string  mensa){
     const void *mensaje = mensa.c_str();
