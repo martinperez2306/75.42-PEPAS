@@ -39,6 +39,7 @@ void Consola::cargarPagina() {
 				this->clienteController->crearCliente();
 				this->clienteController->conectarConElServidor();
 				this->clienteController->obtenerCliente()->logIn();
+                this->clienteController->asignarPuertoParaNuevaConexion();
 				this->cargarMenuPrincipal();
 				break;
 
@@ -46,7 +47,7 @@ void Consola::cargarPagina() {
 				this->clienteController->crearCliente();
 				this->clienteController->conectarConElServidor2();
 				this->clienteController->obtenerCliente()->logIn();
-				this->cargarMenuPrincipal();
+
 				break;
 			default:
 				this->clienteController->salirDelPrograma();

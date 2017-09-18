@@ -7,8 +7,8 @@
 
 
 ClienteController::ClienteController(){
-	this->socketData.ip = "192.168.0.9"; //TODO HARDCODEEEEEEE
-	this->socketData.puerto = 8000;  //TODO HARDCODEEEEEEE
+	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
+	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
 	this->socketData.puerto2 = 8010; //TODO HARDCODEEEEEEE
 	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
 }
@@ -98,5 +98,11 @@ ClienteController::~ClienteController(){
 
 Cliente *ClienteController::obtenerCliente() {
     return this->cliente;
+}
+
+void ClienteController::asignarPuertoParaNuevaConexion() {
+    string msg  = this->obtenerCliente()->recibirMensaje();
+    cout<<msg<<endl;
+
 }
 
