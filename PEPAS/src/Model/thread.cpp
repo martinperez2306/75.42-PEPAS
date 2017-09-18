@@ -1,20 +1,9 @@
 #include "../../headers/Model/thread.h"
 
-Thread::Thread() {
-
+void Thread::start() {
+	thread = std::thread(&Thread::run, this);
 }
 
-void Thread::crear(void *funcion(void *tharg), void *args){
-
-	int rc = pthread_create(&thread,NULL,funcion,args);
+void Thread::join() {
+	this->thread.join();
 }
-
-void Thread::terminar(){
-
-	pthread_exit(NULL);
-}
-
-Thread::~Thread() {
-
-}
-

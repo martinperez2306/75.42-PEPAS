@@ -2,6 +2,7 @@
 
 #include "../headers/Model/thread.h"
 using namespace std;
+/*
 
 class ThreadsTests{
 
@@ -32,5 +33,6 @@ public:
 	}
 };
 
+*/
 
 

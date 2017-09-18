@@ -3,7 +3,7 @@
 
 #include"../Model/servidor.h"
 #include"../Model/servidorBuilder.h"
-#include"../Model/thread.h"
+
 
 #include <iostream>
 using namespace std;

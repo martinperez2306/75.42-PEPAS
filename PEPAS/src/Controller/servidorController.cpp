@@ -44,6 +44,7 @@ ServidorController::~ServidorController(){
 }
 
 void ServidorController::iniciarEscuchasDeConexiones() {
+
 	this->servidor->abrirConexiones();
 	//Si se sale de un hilo aca (creo que es el del main) entonces el programa termina al aceptar conexiones
 	//Thread::terminar();

@@ -5,7 +5,7 @@
 
 
 //#include "../../tests/baseDeDatosTest.cpp"
-#include "../../tests/threadsTests.cpp";
+#include "../../tests/threadsTests.cpp"
 #include <cstdlib>
 #include <pthread.h>
 using namespace std;

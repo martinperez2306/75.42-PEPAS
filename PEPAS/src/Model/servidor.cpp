@@ -9,40 +9,33 @@ Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
-	this->puerto2 = 8010; //HARDCODE PARA SEGUNDO CLIENTE
+    //HARDCODE PARA SEGUNDO CLIENTE
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
 	this->serverSocket2 = new Socket();
-	//this->socketEscucha=0;
 	this->conexiones = 0;
+	this->socketEscucha = 0;
 	this->socketFD = 0;
-	this->socketFD2 = 0;
 }
 
 //HCD
-Socket* Servidor::obtenerSocket2(){
-	return this->serverSocket2;
+
+int Servidor::obtenerSocketEscucha(){
+	return this->socketEscucha;
 }
-int Servidor::getSocketFD(){
+
+void Servidor::asignarSocketEscucha(int fd){
+	this->socketEscucha = fd;
+}
+
+
+
+int Servidor::obtenerSocketFD(){
 	return this->socketFD;
 }
 
-void Servidor::setSocketFD(int fd){
-	this->socketFD = fd;
-}
-
-int Servidor::getPuerto2(){
-	return this->puerto2;
-}
-
-//
-
-int Servidor::getSocketFD2(){
-	return this->socketFD2;
-}
-
-void Servidor::setSocketFD2(int fd2){
-	this->socketFD2 = fd2;
+void Servidor::asignarSocketFD(int fd2){
+	this->socketFD = fd2;
 }
 
 int Servidor::getCantidadDeConexiones(){
@@ -85,32 +78,32 @@ Socket* Servidor::obtenerSocket(){
 
 void Servidor::abrirConexiones(){
 
-	Thread conexion1;
-	conexion1.crear(IniciarConexiones,this);
-	Thread conexion2;
-	conexion2.crear(IniciarConexiones2,this);
+	//Thread conexion1;
+	//conexion1.crear(IniciarConexiones,this);
+/*	Thread conexion2;
+	conexion2.crear(IniciarConexiones2,this);*/
 }
 
 
 void Servidor::iniciarServidor() {
     cout<<"El puerto del servidor es: "<<this->getPuerto()<<endl;
-    setSocketFD2(obtenerSocket()->Crear()); //devuelve el file descriptor
-    obtenerSocket()->Enlazar(this->getSocketFD2(),this->getPuerto());
-   	obtenerSocket()->Escuchar(this->getSocketFD2(),this->getCantidadDeConexiones());
+    asignarSocketEscucha(obtenerSocket()->Crear()); //devuelve el file descriptor
+    obtenerSocket()->Enlazar(this->obtenerSocketEscucha(),this->getPuerto());
+   	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
 	cout << "Escuchando conexiones ..." << endl;
-	
 }
 
 
 void Servidor::aceptarConexiones() {
-	this->setSocketFD2(obtenerSocket()->AceptarConexion(this->getSocketFD2()));
-	cout << "Conexion aceptada" << endl;
-	this->conexiones += 1;
+    int fd = obtenerSocket()->AceptarConexion(this->obtenerSocketEscucha());
+    this->agregarAlistaDeConexiones(fd);
+    cout << "Conexion aceptada" << endl;
+    this->conexiones += 1;
 }
 
 
 void Servidor::finalizarConexiones() {
-	obtenerSocket()->CerrarConexion(this->getSocketFD2());
+	obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
 	cout << "Cerrando conexiones" << endl;
 }
 
@@ -127,14 +120,14 @@ std::string obtenerParametros(std::string mensaje, int* i){
 }
 
 std::string Servidor::recibirMensaje(){
-	int largo = stoi(this->serverSocket->Recibir(this->socketFD2, 4),nullptr,10);
+	int largo = stoi(this->serverSocket->Recibir(this->obtenerSocketFD(), 4),nullptr,10);
 	cout<<"paso el stoi"<<endl;
-	return this->serverSocket->Recibir(this->socketFD2, largo);
+	return this->serverSocket->Recibir(this->obtenerSocketFD(), largo);
 }
 
 void Servidor::enviarMensaje(string  mensa){
     const void *mensaje = mensa.c_str();
-    this->obtenerSocket()->Enviar(getSocketFD2(), mensaje, mensa.length());
+    this->obtenerSocket()->Enviar(obtenerSocketFD(), mensaje, mensa.length());
 }
 
 
@@ -196,40 +189,33 @@ BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 }
 
 
-void *Servidor::IniciarConexiones2(void* servidor){
-
-	Servidor* srv = (Servidor*) servidor;
-	srv->iniciarServidor2();
-	srv->aceptarConexiones2();
-	pthread_exit(NULL);
-}
-
 void *Servidor::IniciarConexiones(void* servidor){
 
 	Servidor* srv = (Servidor*) servidor;
 	srv->iniciarServidor();
 	srv->aceptarConexiones();
 	srv->parsearMensaje(srv->recibirMensaje());
+    cout<<"Termino parseo"<<endl;
+    string msg = "0009/1/dale/e";
+    srv->enviarMensaje(msg);
+    srv->aceptarConexiones();
+    srv->parsearMensaje(srv->recibirMensaje());
 	pthread_exit(NULL);
 }
 
-void Servidor::iniciarServidor2(){
-	cout<<"El puerto del servidor es: "<<this->getPuerto2()<<endl;
-	setSocketFD(obtenerSocket2()->Crear()); //devuelve el file descriptor
-	obtenerSocket2()->Enlazar(this->getSocketFD(),this->getPuerto2());
-	obtenerSocket2()->Escuchar(this->getSocketFD(),this->getCantidadDeConexiones());
-	cout << "Escuchando conexiones ..." << endl;
-}
 
-void Servidor::aceptarConexiones2(){
 
-	this->setSocketFD(obtenerSocket2()->AceptarConexion(this->getSocketFD()));
-	cout << "Conexion aceptada" << endl;
-	this->conexiones += 1;
-}
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->baseDeDatos;
+}
+
+void Servidor::agregarAlistaDeConexiones(int nuevaConexion) {
+    if (socketFD == 0) {
+        this->asignarSocketFD(nuevaConexion);
+    }else{
+        int socketTest =  nuevaConexion;
+    }
 }
