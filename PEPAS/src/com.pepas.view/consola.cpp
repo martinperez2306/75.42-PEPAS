@@ -86,7 +86,8 @@ void *Consola::cargarPagina() {
 				if (this->clienteController->conectarConElServidor() == -1) {
 					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 				} else {
-					this->clienteController->obtenerCliente()->logIn();
+					this->clienteController->obtengoPuertoNuevoYHagoConectar();
+					/*//this->clienteController->obtenerCliente()->logIn();
 					socketFD = this->clienteController->cliente->obtenerSocketFD();
 					controller = this->clienteController;
 					socketCliente = this->clienteController->cliente->obtenerSocket();
@@ -94,7 +95,7 @@ void *Consola::cargarPagina() {
 					pthread_create(&_recv, NULL, mostrarMensajes, NULL);
 
 					pthread_join(_send, NULL);
-					pthread_join(_recv,NULL);
+					pthread_join(_recv,NULL);*/
 				}
 				break;
 			default:
@@ -103,6 +104,8 @@ void *Consola::cargarPagina() {
     	}
     }
 }
+
+
 
 
 

@@ -58,7 +58,7 @@ public:
 
     Cliente *obtenerCliente();
 
-    void asignarPuertoParaNuevaConexion();
+    void obtengoPuertoNuevoYHagoConectar();;
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

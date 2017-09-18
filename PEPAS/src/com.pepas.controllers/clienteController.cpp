@@ -94,9 +94,16 @@ Cliente *ClienteController::obtenerCliente() {
     return this->cliente;
 }
 
-void ClienteController::asignarPuertoParaNuevaConexion() {
-    string msg  = this->obtenerCliente()->recibirMensaje();
-    cout<<msg<<endl;
+
+void ClienteController::obtengoPuertoNuevoYHagoConectar() {
+	/*Recibo 4 bytes en donde ya se que voy a recibir 4 bytes con el puerto nuevo*/
+	string puerto = this->obtenerCliente()->obtenerSocket()->Recibir(this->obtenerCliente()->obtenerSocketFD(), 4);
+	/*Cierro la conexion con el puerto del xml*/
+	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
+	/*Seteo mi nuevo puerto*/
+	this->socketData.puerto= stoi(puerto,nullptr,10);
+	/*Me conecto al nuevo servidor*/
+	this->obtenerCliente()->conectarseAlServidor(socketData.ip, socketData.puerto);
+	cout<<"Conectado satisfactorio con puerto: "<<socketData.puerto<<endl;
 
 }
-
