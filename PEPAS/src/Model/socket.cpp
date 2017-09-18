@@ -5,7 +5,6 @@
 
 using namespace std;
 Socket::Socket(){
-
     this->puerto = 0;
 }
 

@@ -1,7 +1,7 @@
 #include "../../headers/Controller/servidorController.h"
 
 
-ServidorController::ServidorController(){
+ServidorController::ServidorController() {
 
 	this->servidor = NULL;
 	this->servidorBuilder = NULL;
@@ -45,7 +45,10 @@ ServidorController::~ServidorController(){
 
 void ServidorController::iniciarEscuchasDeConexiones() {
 
-	this->servidor->abrirConexiones();
+	this->servidor->iniciarServidor();
+    clientThreads.emplace_back(this->servidor->aceptarConexiones(),this->servidor);
+	clientThreads.back().start();
+
 	//Si se sale de un hilo aca (creo que es el del main) entonces el programa termina al aceptar conexiones
 	//Thread::terminar();
 }

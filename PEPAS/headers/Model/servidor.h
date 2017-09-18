@@ -3,6 +3,7 @@
 
 #include "baseDeDatos.h"
 #include "socket.h"
+#include <list>
 #include <string>
 
 
@@ -15,10 +16,9 @@ private:
 	BaseDeDatos* baseDeDatos;
 	int socketEscucha;
 	Socket* serverSocket;
-	Socket* serverSocket2;
 	int conexiones;
 	int socketFD;
-	int puerto2;
+
 
 
 
@@ -50,7 +50,7 @@ public:
 	void asignarSocketFD(int fd2);
 
 	void iniciarServidor();
-	void aceptarConexiones();
+	int aceptarConexiones();
 
 
 

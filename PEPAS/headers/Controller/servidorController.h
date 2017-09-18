@@ -3,6 +3,7 @@
 
 #include"../Model/servidor.h"
 #include"../Model/servidorBuilder.h"
+#include "../Model/ClientesThread.h"
 
 
 #include <iostream>
@@ -14,7 +15,11 @@ private:
 	Servidor* servidor;
 	ServidorBuilder* servidorBuilder;
 
+
 public:
+
+	list<ClientesThread> clientThreads;
+
 	ServidorController();
 
 	void crearServidor();

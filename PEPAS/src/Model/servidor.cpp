@@ -9,16 +9,14 @@ Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
 	this->puerto = 0;
-    //HARDCODE PARA SEGUNDO CLIENTE
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
-	this->serverSocket2 = new Socket();
 	this->conexiones = 0;
 	this->socketEscucha = 0;
 	this->socketFD = 0;
 }
 
-//HCD
+
 
 int Servidor::obtenerSocketEscucha(){
 	return this->socketEscucha;
@@ -94,11 +92,11 @@ void Servidor::iniciarServidor() {
 }
 
 
-void Servidor::aceptarConexiones() {
+int  Servidor::aceptarConexiones() {
     int fd = obtenerSocket()->AceptarConexion(this->obtenerSocketEscucha());
-    this->agregarAlistaDeConexiones(fd);
     cout << "Conexion aceptada" << endl;
     this->conexiones += 1;
+    return fd;
 }
 
 
@@ -212,10 +210,19 @@ Servidor::~Servidor(){
 	delete this->baseDeDatos;
 }
 
-void Servidor::agregarAlistaDeConexiones(int nuevaConexion) {
-    if (socketFD == 0) {
-        this->asignarSocketFD(nuevaConexion);
-    }else{
-        int socketTest =  nuevaConexion;
-    }
-}
+
+
+/*
+void *Servidor::IniciarConexiones(void* servidor){
+
+    Servidor* srv = (Servidor*) servidor;
+    srv->iniciarServidor();
+    srv->aceptarConexiones();
+    srv->parsearMensaje(srv->recibirMensaje());
+    cout<<"Termino parseo"<<endl;
+    string msg = "0009/1/dale/e";
+    srv->enviarMensaje(msg);
+    srv->aceptarConexiones();
+    srv->parsearMensaje(srv->recibirMensaje());
+    pthread_exit(NULL);
+}*/
