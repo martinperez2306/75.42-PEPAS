@@ -28,7 +28,7 @@ public:
     bool getTerminado();
 
     /////////////////Cargar Paginas/////////////////
-    void cargarPagina();
+    void *cargarPagina();
     void cargarPaginaPrincipal();
     void cargarIngresarUsuario();
     void cargarPaginaCaracteristicasDelCliente();

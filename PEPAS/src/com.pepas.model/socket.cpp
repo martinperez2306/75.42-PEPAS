@@ -30,7 +30,7 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
 
     /*VERIFICACION DE ERRORES*/
     if (bind(bindsocket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
-        string error = strerror(errno);
+        char* error = strerror(errno);
         //AGREGAR ERROR AL LOGGER
         cout << "Error al hacer el enlazado " << error << endl;
         //exit(1);

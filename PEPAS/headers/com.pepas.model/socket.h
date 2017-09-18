@@ -10,7 +10,7 @@
 #include <sys/socket.h>
 #include <iostream>
 #include <arpa/inet.h>
-
+#include <errno.h>
 using namespace std;
 class Socket {
 

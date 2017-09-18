@@ -22,7 +22,7 @@ bool Consola::getTerminado(){
     return this->terminado;
 }
 
-void Consola::cargarPagina() {
+void *Consola::cargarPagina() {
     system("clear");
 	int numeroPagina;
     while(!this->terminado) {

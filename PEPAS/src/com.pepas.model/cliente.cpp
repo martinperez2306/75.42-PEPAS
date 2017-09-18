@@ -100,7 +100,8 @@ string Cliente::procesarMensaje(Mensaje *mensaje) {
     string stringACrear,stringProcesado;
     string separador = "/";
     if (mensaje->obtenerDestinatario()==""){
-        stringACrear = to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->obtenerTexto();
+        stringACrear = to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->
+        		obtenerTexto();
     } else {
         stringACrear = separador + to_string(mensaje->obtenerCodigo()) + separador + mensaje->obtenerEmisor() + separador + mensaje->obtenerDestinatario() + separador + mensaje->obtenerTexto();
     }
