@@ -1,4 +1,5 @@
 #include "../../headers/Controller/servidorController.h"
+#include "../../headers/Model/ShutdownThread.h"
 
 
 ServidorController::ServidorController() {
@@ -43,13 +44,29 @@ ServidorController::~ServidorController(){
 	delete this->servidor;
 }
 
-void ServidorController::iniciarEscuchasDeConexiones() {
 
-	this->servidor->iniciarServidor();
-    clientThreads.emplace_back(this->servidor->aceptarConexiones(),this->servidor);
-	clientThreads.back().start();
+void ServidorController::abrirServidorAClientes() {
+    bool cerrarServidor = false;
 
-	//Si se sale de un hilo aca (creo que es el del main) entonces el programa termina al aceptar conexiones
-	//Thread::terminar();
+    this->servidor->iniciarServidor();
+
+    ShutdownThread shutdownThread(cerrarServidor, this->servidor);
+    shutdownThread.start();
+
+    while (!cerrarServidor) {
+         //saco los threads que ya no se usan
+        for (auto it = clientThreads.begin(); it != clientThreads.end();
+             ++it){
+            if (it->esBorrable()){
+                it->join();
+                it = clientThreads.erase(it);
+            }
+        }
+
+        clientThreads.emplace_back(this->servidor->aceptarConexiones(), this->servidor, cerrarServidor);
+        clientThreads.back().start();
+
+
+    }
 }
 

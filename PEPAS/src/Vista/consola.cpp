@@ -20,7 +20,7 @@ void Consola::cargarPagina(int numeroPagina){
 			this->cargarPaginaCaracteristicasDelServidor();
 			break;
 		case 2:
-			this->servidorController->iniciarEscuchasDeConexiones();
+			this->servidorController->abrirServidorAClientes();
 			break;
 		case 5:
 		{

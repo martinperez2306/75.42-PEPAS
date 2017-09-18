@@ -34,10 +34,10 @@ public:
 
 	~ServidorController();
 
-    void iniciarEscuchasDeConexiones();
 
     void mostrarUsuariosConectados();
 
+	void abrirServidorAClientes();
 };
 
 

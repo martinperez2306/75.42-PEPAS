@@ -4,15 +4,24 @@
 
 #include "../../headers/Model/ClientesThread.h"
 
-ClientesThread::ClientesThread( int socket, Servidor* server) : socketFD(socket), srv(server) {
+ClientesThread::ClientesThread( int socket, Servidor* server, bool &CerrarServidor) : socketFD(socket), srv(server), estaCerrado(CerrarServidor) {
     borrable = false;
 }
 
 
 void ClientesThread::run() {
-    cout<<"laconcha detumadre"<<endl;
+    //bool socketEstaCerrado = false;
     srv->asignarSocketFD(socketFD);
-    srv->parsearMensaje(srv->recibirMensaje());
-
+    while (!borrable) {
+        srv->parsearMensaje(srv->recibirMensaje());
+        string msg = "0009/1/dale/e";
+        srv->enviarMensaje(msg);
+    }
 }
+
+bool ClientesThread::esBorrable() {
+    return this->borrable;
+}
+
+
 

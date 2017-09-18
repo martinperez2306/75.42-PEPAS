@@ -13,12 +13,15 @@ class ClientesThread : public Thread {
 private:
     int socketFD;
     Servidor* srv;
+    bool &estaCerrado;
     bool borrable; // para saber si se puede borrar el thread.
 public:
 
-    ClientesThread(int socket, Servidor* sv);
+    ClientesThread(int socket, Servidor* sv, bool &CerrarServidor);
 
     virtual void run();
+
+    bool esBorrable();
 
 };
 
