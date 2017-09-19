@@ -127,8 +127,9 @@ int  Servidor::aceptarConexiones() {
     int puerto = this->puertos.front();
     cout << puerto << endl;
     this->puertos.pop_front();
-    this->iniciarConexion(puerto);
+    this->asignarSocketFD(fd);
     this->enviarMensaje(to_string(puerto));
+    this->iniciarConexion(puerto);
     obtenerSocket()->CerrarConexion(fd);
 
     return fd;
