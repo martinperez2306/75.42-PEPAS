@@ -5,6 +5,18 @@
 #define BROADCAST 2
 #define BUZON 3
 
+
+
+std::list<int> crearPuertos(){
+	
+	std::list<int> puertos;
+	for(int i = 8000; i <= 8007; i++)
+		puertos.push_back(i);
+
+	return puertos;
+	
+}
+
 Servidor::Servidor(){
 
 	this->cantidadDeConexiones = 0;
@@ -14,6 +26,8 @@ Servidor::Servidor(){
 	this->conexiones = 0;
 	this->socketEscucha = 0;
 	this->socketFD = 0;
+	this->puertos = crearPuertos();
+
 }
 
 
@@ -111,6 +125,7 @@ int  Servidor::aceptarConexiones() {
     cout << "Conexion aceptada" << endl;
     
     int puerto = this->puertos.front();
+    cout << puerto << endl;
     this->puertos.pop_front();
     this->iniciarConexion(puerto);
     this->enviarMensaje(to_string(puerto));

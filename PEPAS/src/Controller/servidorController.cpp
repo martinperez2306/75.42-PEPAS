@@ -49,8 +49,9 @@ void ServidorController::abrirServidorAClientes() {
     bool cerrarServidor = false;
 
     this->servidor->iniciarServidor();
+    this->servidor->aceptarConexiones();
 
-    ShutdownThread shutdownThread(cerrarServidor, this->servidor);
+   /* ShutdownThread shutdownThread(cerrarServidor, this->servidor);
     shutdownThread.start();
 
     while (!cerrarServidor) {
@@ -65,8 +66,6 @@ void ServidorController::abrirServidorAClientes() {
 
         clientThreads.emplace_back(this->servidor->aceptarConexiones(), this->servidor, cerrarServidor);
         clientThreads.back().start();
-
-
-    }
+*/
 }
 
