@@ -18,7 +18,7 @@ private:
 
 public:
 
-	list<ClientesThread> clientThreads;
+
 
 	ServidorController();
 
@@ -37,7 +37,8 @@ public:
 
     void mostrarUsuariosConectados();
 
-	void abrirServidorAClientes();
+
+	Servidor* obtenerServidor();
 };
 
 

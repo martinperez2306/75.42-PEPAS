@@ -11,17 +11,19 @@ ClientesThread::ClientesThread( int socket, Servidor* server, bool &CerrarServid
 
 void ClientesThread::run() {
     //bool socketEstaCerrado = false;
-    srv->asignarSocketFD(socketFD);
+    cout<<"Thread listo para correr cliente ... "<<endl;
+   /* srv->asignarSocketFD(socketFD);
     while (!borrable) {
         srv->parsearMensaje(srv->recibirMensaje());
         string msg = "0009/1/dale/e";
         srv->enviarMensaje(msg);
-    }
+    }*/
 }
 
 bool ClientesThread::esBorrable() {
     return this->borrable;
 }
+
 
 
 

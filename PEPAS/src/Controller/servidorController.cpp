@@ -45,27 +45,7 @@ ServidorController::~ServidorController(){
 }
 
 
-void ServidorController::abrirServidorAClientes() {
-    bool cerrarServidor = false;
-
-    this->servidor->iniciarServidor();
-    this->servidor->aceptarConexiones();
-
-   /* ShutdownThread shutdownThread(cerrarServidor, this->servidor);
-    shutdownThread.start();
-
-    while (!cerrarServidor) {
-         //saco los threads que ya no se usan
-        for (auto it = clientThreads.begin(); it != clientThreads.end();
-             ++it){
-            if (it->esBorrable()){
-                it->join();
-                it = clientThreads.erase(it);
-            }
-        }
-
-        clientThreads.emplace_back(this->servidor->aceptarConexiones(), this->servidor, cerrarServidor);
-        clientThreads.back().start();
-*/
+Servidor* ServidorController::obtenerServidor(){
+    return this->servidor;
 }
 

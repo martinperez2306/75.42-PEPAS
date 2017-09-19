@@ -1,6 +1,7 @@
 #include "../../headers/Vista/consola.h"
 #include "../../headers/Model/usuario.h"
 #include "../../headers/Model/logger.h"
+#include "../../headers/Model/ShutdownThread.h"
 #include <string>
 
 Consola::Consola(){
@@ -20,7 +21,7 @@ void Consola::cargarPagina(int numeroPagina){
 			this->cargarPaginaCaracteristicasDelServidor();
 			break;
 		case 2:
-			this->servidorController->abrirServidorAClientes();
+			this->abrirServidorAClientes();
 			break;
 		case 5:
 		{
@@ -131,4 +132,31 @@ void Consola::terminarConsola(){
 Consola::~Consola(){
 
 	delete this->servidorController;
+}
+void Consola::abrirServidorAClientes() {
+	bool cerrarServidor = false;
+
+	this->servidorController->obtenerServidor()->iniciarServidor();
+	//this->servidor->aceptarConexiones();
+
+	ShutdownThread shutdownThread(cerrarServidor, this->servidorController->obtenerServidor());
+	shutdownThread.start();
+
+	while (!cerrarServidor) {
+		//saco los threads que ya no se usan
+		for (auto it = clientThreads.begin(); it != clientThreads.end();
+			 ++it) {
+			if (it->esBorrable()) {
+				it->join();
+				it = clientThreads.erase(it);
+			}
+		}
+
+		clientThreads.emplace_back(this->servidorController->obtenerServidor()->aceptarConexiones(),
+								   this->servidorController->obtenerServidor(), cerrarServidor);
+		clientThreads.back().start();
+		cout<<"-------------Nuevo cliente conectado-------------"<<endl;
+
+
+	}
 }

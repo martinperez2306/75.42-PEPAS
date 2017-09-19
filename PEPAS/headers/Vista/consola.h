@@ -16,7 +16,7 @@ private:
 	ServidorController* servidorController;
 	bool esint(std::string entrada);
 public:
-
+	list<ClientesThread> clientThreads;
 	Consola();
 
 	bool getTerminado();
@@ -28,6 +28,7 @@ public:
 	void cargarPaginaCaracteristicasDelServidor();
 	void cargarPaginaCrearServidor();
 	void cargarCambioLoggeo();
+	void abrirServidorAClientes();
 
 	~Consola();
 };

@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
 	consola->cargarPaginaCrearServidor();
 	while(!consola->getTerminado()){
-
+		//consola->abrirServidorAClientes();
 		consola->cargarPagina(0);
 	}
 
