@@ -86,6 +86,7 @@ void *Consola::cargarPagina() {
 				if (this->clienteController->conectarConElServidor() == -1) {
 					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 				} else {
+                    cout<<"Haciendo cambio de puerto"<<endl;
 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
 					/*//this->clienteController->obtenerCliente()->logIn();
 					socketFD = this->clienteController->cliente->obtenerSocketFD();

@@ -7,10 +7,10 @@
 
 
 ClienteController::ClienteController(){
-//	this->socketData.ip = "192.168.0.9"; //TODO HARDCODEEEEEEE
-//	this->socketData.puerto = 8000;  //TODO HARDCODEEEEEEE
+	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
+	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
 //	this->socketData.puerto2 = 8010; //TODO HARDCODEEEEEEE
-	this->socketData = this->clienteParser->parsearXML("cliente.xml");
+	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
 }
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
@@ -99,7 +99,9 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	/*Recibo 4 bytes en donde ya se que voy a recibir 4 bytes con el puerto nuevo*/
 	string puerto = this->obtenerCliente()->obtenerSocket()->Recibir(this->obtenerCliente()->obtenerSocketFD(), 4);
 	/*Cierro la conexion con el puerto del xml*/
+    cout<<"El puerto recibido es: "<<puerto<<endl;
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
+
 	/*Seteo mi nuevo puerto*/
 	this->socketData.puerto= stoi(puerto,nullptr,10);
 	/*Me conecto al nuevo servidor*/
