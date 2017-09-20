@@ -6,6 +6,7 @@
 
 //#include "../../tests/baseDeDatosTest.cpp"
 #include "../../tests/threadsTests.cpp"
+#include "../Vista/ConsolaThread.h"
 #include <cstdlib>
 #include <pthread.h>
 using namespace std;
@@ -42,14 +43,13 @@ int main(int argc, char *argv[]) {
 
 	crear_logger();
 	Consola* consola = new Consola();
+    ConsolaThread intefazMenu(consola);
 
-	consola->cargarPaginaCrearServidor();
-	while(!consola->getTerminado()){
-		//consola->abrirServidorAClientes();
-		consola->cargarPagina(0);
-	}
 
-	delete consola;
+    consola->cargarPaginaCrearServidor();
+    intefazMenu.start();
+    consola->abrirServidorAClientes();
+
 	cerrar_logger();
 
 	/////////////////////////////////////////////////////////////////////////////////////

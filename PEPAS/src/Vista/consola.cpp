@@ -23,17 +23,15 @@ void Consola::cargarPagina(int numeroPagina){
 		case 2:
 			this->abrirServidorAClientes();
 			break;
-		case 5:
-		{
-			this->terminarConsola();
-			break;
-		}
 		case 3:
 			this->cargarCambioLoggeo();
 			break;
 		case 4:
 			this->servidorController->mostrarUsuariosConectados();
 			break;
+        case 5:
+            this->terminarConsola();
+            break;
 		default:
 		{
 			this->cargarPaginaPrincipal();
@@ -139,8 +137,8 @@ void Consola::abrirServidorAClientes() {
 	this->servidorController->obtenerServidor()->iniciarServidor();
 	//this->servidor->aceptarConexiones();
 
-	ShutdownThread shutdownThread(cerrarServidor, this->servidorController->obtenerServidor());
-	shutdownThread.start();
+	//ShutdownThread shutdownThread(cerrarServidor, this->servidorController->obtenerServidor());
+	//shutdownThread.start();
 
 	while (!cerrarServidor) {
 		//saco los threads que ya no se usan
@@ -155,8 +153,7 @@ void Consola::abrirServidorAClientes() {
 		clientThreads.emplace_back(this->servidorController->obtenerServidor()->aceptarConexiones(),
 								   this->servidorController->obtenerServidor(), cerrarServidor);
 		clientThreads.back().start();
-		cout<<"-------------Nuevo cliente conectado-------------"<<endl;
-
+        loggear("-------------Nuevo cliente conectado-------------",1);
 
 	}
 }

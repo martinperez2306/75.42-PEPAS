@@ -10,7 +10,7 @@ ShutdownThread::ShutdownThread(bool &quit, Servidor *servidor) : quit(quit), srv
 
 void ShutdownThread::run() {
     char c;
-    std:cout<<"Presiona # para cerrar la conexion: "<<endl;
+    std::cout<<"Presiona # para cerrar la conexion: "<<endl;
     std::cin >> c;
     while (c != '#'){
         std::cin >> c;
