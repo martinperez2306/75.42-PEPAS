@@ -149,9 +149,11 @@ void Consola::abrirServidorAClientes() {
 				it = clientThreads.erase(it);
 			}
 		}
-
+        /*Cuando se acepta la conexion se crea un nuevo SocketFD que es el que se
+         * utiliza para la comunicacion*/
 		clientThreads.emplace_back(this->servidorController->obtenerServidor()->aceptarConexiones(),
 								   this->servidorController->obtenerServidor(), cerrarServidor);
+        /*Se obtiene el ultimo de la pila y se lo ejecuta con start()*/
 		clientThreads.back().start();
         loggear("-------------Nuevo cliente conectado-------------",1);
 

@@ -104,17 +104,26 @@ void Servidor::iniciarServidor() {
    	
 }
 
-void Servidor::iniciarConexion(int puerto) {
+int Servidor::iniciarConexion(int puerto) {
 	Socket* newSocket= new Socket();
     cout<<"El puerto del cliente es: "<<puerto<<endl;
-    int fd = newSocket->Crear(); 
+    int fd = newSocket->Crear();
     newSocket->Enlazar(fd,puerto);
     newSocket->Escuchar(fd,this->getCantidadDeConexiones());
-	cout << "Escuchando conexiones ..." << endl;
+	//cout << "Escuchando conexiones ..." << endl;
     fd = newSocket->AceptarConexion(fd);
     mapFD.insert({puerto,fd});
     this->conexiones += 1;
-    cout << "Conexion aceptada" << endl;  	
+    cout << "Conexion aceptada" << endl;
+/*    int fd = this->obtenerSocket()->Crear();
+    this->obtenerSocket()->Enlazar(fd,puerto);
+    this->obtenerSocket()->Escuchar(fd,this->getCantidadDeConexiones());
+    cout << "Escuchando conexiones ..." << endl;
+    fd = this->obtenerSocket()->AceptarConexion(fd);
+    mapFD.insert({puerto,fd});
+    this->conexiones +=1;
+    cout << "Conexion aceptada" << endl;*/
+    return fd;
 }
 
 
@@ -129,10 +138,11 @@ int  Servidor::aceptarConexiones() {
     this->puertos.pop_front();
     this->asignarSocketFD(fd);
     this->enviarMensaje(to_string(puerto));
-    this->iniciarConexion(puerto);
+    int socketNuevo = this->iniciarConexion(puerto);
     obtenerSocket()->CerrarConexion(fd);
 
-    return fd;
+    /*fd ya esta muerto por CerrarConexion(fd)*/
+    return socketNuevo;
 }
 
 
@@ -247,18 +257,3 @@ Servidor::~Servidor(){
 }
 
 
-
-/*
-void *Servidor::IniciarConexiones(void* servidor){
-
-    Servidor* srv = (Servidor*) servidor;
-    srv->iniciarServidor();
-    srv->aceptarConexiones();
-    srv->parsearMensaje(srv->recibirMensaje());
-    cout<<"Termino parseo"<<endl;
-    string msg = "0009/1/dale/e";
-    srv->enviarMensaje(msg);
-    srv->aceptarConexiones();
-    srv->parsearMensaje(srv->recibirMensaje());
-    pthread_exit(NULL);
-}*/

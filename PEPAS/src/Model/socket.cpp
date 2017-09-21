@@ -124,7 +124,7 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
     ssize_t totalRecibido = 0;
     char buffer[MAX_DATA_SIZE];
     ssize_t ultimaCantidadRecibida = 0;
-    while (totalRecibido < mensajeAleerLength && !socketShutDown) {
+    while (totalRecibido < mensajeAleerLength) { // && !socketShutDown
         ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
         if (ultimaCantidadRecibida < 0) {
             string error = strerror(errno);
