@@ -88,7 +88,7 @@ void *Consola::cargarPagina() {
 				} else {
                     cout<<"Haciendo cambio de puerto"<<endl;
 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					/*//this->clienteController->obtenerCliente()->logIn();
+					this->clienteController->obtenerCliente()->logIn();
 					socketFD = this->clienteController->cliente->obtenerSocketFD();
 					controller = this->clienteController;
 					socketCliente = this->clienteController->cliente->obtenerSocket();
@@ -96,7 +96,7 @@ void *Consola::cargarPagina() {
 					pthread_create(&_recv, NULL, mostrarMensajes, NULL);
 
 					pthread_join(_send, NULL);
-					pthread_join(_recv,NULL);*/
+					pthread_join(_recv,NULL);
 				}
 				break;
 			default:
