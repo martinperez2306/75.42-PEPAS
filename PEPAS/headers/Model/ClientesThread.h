@@ -11,13 +11,13 @@
 
 class ClientesThread : public Thread {
 private:
-    int socketFD;
+    Socket* socket;
     Servidor* srv;
-    bool &estaCerrado;
+    bool estaCerrado;
     bool borrable; // para saber si se puede borrar el thread.
 public:
 
-    ClientesThread(int socket, Servidor* sv, bool &CerrarServidor);
+    ClientesThread(Socket* socket, Servidor* sv, bool CerrarServidor);
 
     virtual void run();
 

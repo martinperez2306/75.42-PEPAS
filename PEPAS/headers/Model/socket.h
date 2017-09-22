@@ -14,7 +14,7 @@ using namespace std;
 class Socket {
 
     private:
-        int puerto;
+        int fd;
 
     public:
 
@@ -35,36 +35,41 @@ class Socket {
         int Crear();
 
         /* Enlaza el socket identificado por el filedescriptor con una dirección y puerto locales.*/
-        void Enlazar (int socket, int puerto);
+        void Enlazar (int puerto);
 
       /*  Conecta el socket a la dirección y puerto destino.
         Determina dirección y puertos locales si no se utilizó bind() previamente.*/
 
-        void Conectar(int socket, int puerto, string IP);
+        void Conectar(int puerto, string IP);
 
         /*Configura el socket para recibir conexiones en la dirección y
         puerto previamente determinada mediante bind().*/
         void Escuchar(int socket, int maximasConexiones);
+        void Escuchar(int maximasConexiones);
 
-        int AceptarConexion(int socket);
+        int AceptarConexion();
 
        /* Envía datos a través del socket*/
-        void Enviar(int socket, const void *mensaje, size_t mensajeLength);
+        void Enviar(const void *mensaje, size_t mensajeLength);
 
 
         /*Recibe datos a través del socket*/
-        std::string Recibir(int socket, size_t mensajeAleerLength);
+        std::string Recibir(size_t mensajeAleerLength);
 
         /*Se utiliza para cerrar el envío y la recepción de datos en
         forma ordenada*/
+        void CerrarConexion();
         void CerrarConexion(int socket);
 
         /*Se utiliza para cerrar el socket y liberar los recursos.*/
-        void CerrarSocket(int socket);
+        void CerrarSocket();
+
+        int obtenerFD();
 
         ~Socket();
 
-    };
+    void asignarFD(int i);
+};
 
 
 #endif //INC_75_42_PEPAS_SOCKET_H

@@ -6,7 +6,8 @@
 
 //#include "../../tests/baseDeDatosTest.cpp"
 #include "../../tests/threadsTests.cpp"
-#include "../Vista/ConsolaThread.h"
+#include "../../headers/Vista/ConsolaThread.h"
+#include "../../headers/Model/EscuchaThread.h"
 #include <cstdlib>
 #include <pthread.h>
 using namespace std;
@@ -43,13 +44,18 @@ int main(int argc, char *argv[]) {
 
 	crear_logger();
 	Consola* consola = new Consola();
-    ConsolaThread intefazMenu(consola);
-
-
     consola->cargarPaginaCrearServidor();
+
+    ConsolaThread intefazMenu(consola);
+    Servidor* servidor = consola->obtenerServidorController()->obtenerServidor();
+
+
+    EscuchaThread escuchaThread(servidor);
     intefazMenu.start();
-    consola->abrirServidorAClientes();
+    //consola->abrirServidorAClientes();
+    escuchaThread.start();
     intefazMenu.join();
+    escuchaThread.join();
 	cerrar_logger();
 
 	/////////////////////////////////////////////////////////////////////////////////////

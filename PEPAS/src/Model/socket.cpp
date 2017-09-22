@@ -5,22 +5,22 @@
 
 using namespace std;
 Socket::Socket(){
-    this->puerto = 0;
+    this->fd=0;
 }
 
 int Socket::Crear(){
 int sockett;
-    sockett = socket(AF_INET, SOCK_STREAM, 0);
+    fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockett < 0) {
         cout << "\nError en la creacion del socket" << endl;
         string error = strerror(errno);
         loggear(error,1);
         exit(1);
     }
-    return sockett;
+    return fd;
 }
 
-void Socket::Enlazar(int socket, int puerto) {
+void Socket::Enlazar(int puerto) {
     struct sockaddr_in serverAddress;
     memset((char *)&serverAddress,0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
@@ -29,7 +29,7 @@ void Socket::Enlazar(int socket, int puerto) {
     socklen_t serverSize = sizeof(serverAddress);
 
     /*VERIFICACION DE ERRORES*/
-    if (bind(socket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
+    if (bind(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
         loggear(error,1);
         cout << "Error al hacer el enlazado " << error << endl;
@@ -39,8 +39,7 @@ void Socket::Enlazar(int socket, int puerto) {
 
 
 //Esta funcion no se usa en el servidor
-void Socket::Conectar(int socket, int puerto, string IPremota) {
-    int connectSocket = socket;
+void Socket::Conectar( int puerto, string IPremota) {
     struct sockaddr_in serverAddress;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = inet_addr(IPremota.data());
@@ -48,7 +47,7 @@ void Socket::Conectar(int socket, int puerto, string IPremota) {
     socklen_t serverSize = sizeof(serverAddress);
 
     /*VERIFICACION DE ERRORES*/
-    if (connect(connectSocket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
+    if (connect(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
         loggear(error,1);
         cout << "Error al conectar con el servidor " << strerror(errno) << endl;
@@ -68,13 +67,25 @@ void Socket::Escuchar(int socket, int maximasConexionesAlaVez) {
 
 }
 
-int Socket::AceptarConexion(int listenSocket) {
-    int clientID;
+void Socket::Escuchar(int maximasConexionesAlaVez) {
+    int ret = listen(fd, maximasConexionesAlaVez);
+
+    /*VERIFICACION DE ERRORES*/
+    if (ret  < 0){
+        string error = strerror(errno);
+        cout << "Error al escuchar conexiones " << error << endl;
+        loggear(error,1);
+    }
+
+}
+
+int Socket::AceptarConexion() {
+    int socketFD;
     struct sockaddr_in clientAddress;
     socklen_t clientSize =sizeof(clientAddress);
-    clientID = accept(listenSocket, (struct sockaddr *) &clientAddress, &clientSize);
+    socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
 
-    if (clientID < 0) {
+    if (socketFD < 0) {
         string error = strerror(errno);
         loggear(error,1);
 
@@ -82,7 +93,7 @@ int Socket::AceptarConexion(int listenSocket) {
 
         exit(1);
     }
-    return clientID;
+    return socketFD;
 }
 
 std::string chartoString (char* buffer){
@@ -93,11 +104,11 @@ std::string chartoString (char* buffer){
     return string;
 }
 
-void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
+void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
     ssize_t totalEnviado= 0;
     ssize_t ultimaCantidadEnviada = 0;
     while (totalEnviado < mensajeLength){
-        ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
+        ultimaCantidadEnviada = send(fd, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
         if (ultimaCantidadEnviada < 0) {
             string error = strerror(errno);
             //LOGGER INFo
@@ -119,13 +130,13 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 }
 
 
-std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
+std::string Socket::Recibir( size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
     char buffer[MAX_DATA_SIZE];
     ssize_t ultimaCantidadRecibida = 0;
     while (totalRecibido < mensajeAleerLength) { // && !socketShutDown
-        ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
+        ultimaCantidadRecibida = recv(fd, buffer, mensajeAleerLength - totalRecibido, 0);
         if (ultimaCantidadRecibida < 0) {
             string error = strerror(errno);
             cout << "Error al recibir mensaje " << error << endl;
@@ -151,6 +162,16 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
 }
 
 
+void Socket::CerrarConexion() {
+    int ret = shutdown(fd, SHUT_WR);
+
+    /*VERIFICACION DE ERRORES*/
+    if (ret < 0){
+        string error = strerror(errno);
+        //LOGGEER INFO
+        cout << "Error al cerrar conexion " << error << endl;
+    }
+}
 void Socket::CerrarConexion(int socket) {
     int ret = shutdown(socket, SHUT_WR);
 
@@ -162,11 +183,20 @@ void Socket::CerrarConexion(int socket) {
     }
 }
 
-void Socket::CerrarSocket(int socket) {
-    //close(socket);
+void Socket::CerrarSocket() {
+    //close(fd);
 }
 
 
 Socket::~Socket(){
+}
+
+int Socket::obtenerFD() {
+    return this->fd;
+}
+
+void Socket::asignarFD(int newFD) {
+    this->fd = newFD;
+
 }
 

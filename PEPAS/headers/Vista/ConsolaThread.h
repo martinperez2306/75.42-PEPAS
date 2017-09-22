@@ -6,8 +6,8 @@
 #define SERVIDOR_CONSOLATHREAD_H
 
 
-#include "../../headers/Model/thread.h"
-#include "../../headers/Vista/consola.h"
+#include "../Model/thread.h"
+#include "consola.h"
 
 class ConsolaThread : public Thread {
 private:

@@ -22,8 +22,8 @@ private:
 	std::list<int> puertosDisponibles;
 	std::list<int> puertosEnUso;
 	std::unordered_map<int,int> mapFD; // <puerto, socketFD>
-
-	int iniciarConexion(int puerto);
+	bool terminado;
+	Socket* iniciarConexion(int puerto);
 
 
 
@@ -55,15 +55,15 @@ public:
 	void asignarSocketFD(int fd2);
 
 	void iniciarServidor();
-	int aceptarConexiones();
+	Socket* aceptarConexiones();
 
 
 
 	void finalizarConexiones();
 	void cerrarSockets();
 	void parsearMensaje(std::string mensaje);
-	std::string recibirMensaje();
-	void enviarMensaje(string  mensa);
+	std::string recibirMensaje(Socket* socket);
+	void enviarMensaje(string  mensa, Socket* socket);
 
 	Socket* obtenerSocket();
 
@@ -79,6 +79,7 @@ public:
     void validarCliente(string basic_string, string basicString);
 
 
+    bool getTerminado();
 };
 
 

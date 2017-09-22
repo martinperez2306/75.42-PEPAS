@@ -2,7 +2,7 @@
 // Created by arturi on 20/09/17.
 //
 
-#include "ConsolaThread.h"
+#include "../../headers/Vista/ConsolaThread.h"
 
 ConsolaThread::ConsolaThread(Consola *consol) : consola(consol){
 

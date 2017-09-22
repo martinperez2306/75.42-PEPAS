@@ -4,7 +4,7 @@
 
 #include "../../headers/Model/ClientesThread.h"
 
-ClientesThread::ClientesThread( int socket, Servidor* server, bool &CerrarServidor) : socketFD(socket), srv(server), estaCerrado(CerrarServidor) {
+ClientesThread::ClientesThread( Socket* socket, Servidor* server, bool CerrarServidor) : socket(socket), srv(server), estaCerrado(CerrarServidor) {
     borrable = false;
 }
 
@@ -12,13 +12,11 @@ ClientesThread::ClientesThread( int socket, Servidor* server, bool &CerrarServid
 void ClientesThread::run() {
     //bool socketEstaCerrado = false;
     cout<<"Thread listo para correr cliente ... "<<endl;
-
-    while (!borrable) {
-        srv->asignarSocketFD(socketFD);
-        srv->parsearMensaje(srv->recibirMensaje());
+    //while (!estaCerrado) {
+        srv->parsearMensaje(srv->recibirMensaje(this->socket));
         string msg = "0010/1/FIUBA/e";
-        srv->enviarMensaje(msg);
-    }
+        srv->enviarMensaje(msg, this->socket);
+    //}
 }
 
 bool ClientesThread::esBorrable() {

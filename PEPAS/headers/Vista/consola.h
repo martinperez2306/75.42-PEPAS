@@ -16,7 +16,7 @@ private:
 	ServidorController* servidorController;
 	bool esint(std::string entrada);
 public:
-	list<ClientesThread> clientThreads;
+
 	Consola();
 
 	bool getTerminado();
