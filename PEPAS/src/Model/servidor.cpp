@@ -26,7 +26,7 @@ Servidor::Servidor(){
 	this->conexiones = 0;
 	this->socketEscucha = 0;
 	this->socketFD = 0;
-	this->puertos = crearPuertos();
+	this->puertosDisponibles = crearPuertos();
 
 }
 
@@ -113,6 +113,8 @@ int Servidor::iniciarConexion(int puerto) {
 	//cout << "Escuchando conexiones ..." << endl;
     fd = newSocket->AceptarConexion(fd);
     mapFD.insert({puerto,fd});
+    /*Agrego a la lista el puerto que estoy usando*/
+    puertosEnUso.push_back(puerto);
     this->conexiones += 1;
     cout << "Conexion aceptada" << endl;
 /*    int fd = this->obtenerSocket()->Crear();
@@ -133,15 +135,16 @@ int  Servidor::aceptarConexiones() {
     int fd = obtenerSocket()->AceptarConexion(this->obtenerSocketEscucha());
     cout << "Conexion aceptada" << endl;
     
-    int puerto = this->puertos.front();
+    int puerto = this->puertosDisponibles.front();
     cout << puerto << endl;
-    this->puertos.pop_front();
+    this->puertosDisponibles.pop_front();
     this->asignarSocketFD(fd);
     this->enviarMensaje(to_string(puerto));
     int socketNuevo = this->iniciarConexion(puerto);
+    /*Cierro la conexion con el socket escucha*/
     obtenerSocket()->CerrarConexion(fd);
 
-    /*fd ya esta muerto por CerrarConexion(fd)*/
+
     return socketNuevo;
 }
 
@@ -255,5 +258,18 @@ Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->baseDeDatos;
 }
+
+void Servidor::cerrarSockets() {
+    /*Recorro lista de puertos y hasheo el puerto con el socket*/
+    while (!puertosEnUso.empty()){
+        int puertoActual = puertosEnUso.front();
+        puertosEnUso.pop_front();
+        unordered_map<int,int>::const_iterator got = mapFD.find(puertoActual);
+        this->obtenerSocket()->CerrarSocket(got->second);
+    }
+
+
+}
+
 
 

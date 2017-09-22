@@ -19,8 +19,9 @@ private:
 	Socket* serverSocket;
 	int conexiones;
 	int socketFD;
-	std::list<int> puertos;
- 	std::unordered_map<int,int> mapFD;
+	std::list<int> puertosDisponibles;
+	std::list<int> puertosEnUso;
+	std::unordered_map<int,int> mapFD; // <puerto, socketFD>
 
 	int iniciarConexion(int puerto);
 
@@ -76,7 +77,6 @@ public:
 
 
     void validarCliente(string basic_string, string basicString);
-
 
 
 };

@@ -14,24 +14,19 @@ bool Consola::getTerminado(){
 	return this->terminado;
 }
 
+
 void Consola::cargarPagina(int numeroPagina){
 	//system("clear");
 	switch(numeroPagina){
 		case 1:
-			this->cargarPaginaCaracteristicasDelServidor();
+			this->terminarConsola();
 			break;
 		case 2:
-			this->abrirServidorAClientes();
+            this->cargarCambioLoggeo();
 			break;
 		case 3:
-			this->cargarCambioLoggeo();
+            this->servidorController->mostrarUsuariosConectados();
 			break;
-		case 4:
-			this->servidorController->mostrarUsuariosConectados();
-			break;
-        case 5:
-            this->terminarConsola();
-            break;
 		default:
 		{
 			this->cargarPaginaPrincipal();
@@ -72,11 +67,9 @@ void Consola::cargarPaginaPrincipal(){
 	std::string entrada;
 	cout<<"****************************************************************"<<endl;
 	cout<<"Ingrese una opcion segun corresponda"<<endl;
-	cout<<"Seleccione 1 para ir a las caracteristicas del servidor"<<endl;
-	cout<<"Seleccione 2 para levantar conexiones de servidor"<<endl;
-	cout<<"Seleccione 3 para cambiar el nivel del logger"<<endl;
-	cout<<"Seleccione 4 para ver los usuarios conectados"<<endl;
-	cout<<"Seleccione 5 para salir"<<endl;
+	cout<<"Seleccione 1 para cerrar el servidor"<<endl;
+	cout<<"Seleccione 2 para cambiar el nivel del logger"<<endl;
+	cout<<"Seleccione 3 para mostrar los usuarios conectados"<<endl;
 	cout<<"****************************************************************"<<endl;
 	cout<<"--->";
 	cin>>entrada;
@@ -125,6 +118,8 @@ bool Consola::esint(std::string entrada){
 
 void Consola::terminarConsola(){
 	this->terminado = true;
+    this->obtenerServidorController()->obtenerServidor()->cerrarSockets();
+
 }
 
 Consola::~Consola(){
@@ -132,15 +127,13 @@ Consola::~Consola(){
 	delete this->servidorController;
 }
 void Consola::abrirServidorAClientes() {
-	bool cerrarServidor = false;
 
 	this->servidorController->obtenerServidor()->iniciarServidor();
-	//this->servidor->aceptarConexiones();
 
-	//ShutdownThread shutdownThread(cerrarServidor, this->servidorController->obtenerServidor());
-	//shutdownThread.start();
+	/*ShutdownThread shutdownThread(this->terminado, this->servidorController->obtenerServidor());
+	shutdownThread.start();*/
 
-	while (!cerrarServidor) {
+	while (!this->terminado) {
 		//saco los threads que ya no se usan
 		for (auto it = clientThreads.begin(); it != clientThreads.end();
 			 ++it) {
@@ -152,10 +145,16 @@ void Consola::abrirServidorAClientes() {
         /*Cuando se acepta la conexion se crea un nuevo SocketFD que es el que se
          * utiliza para la comunicacion*/
 		clientThreads.emplace_back(this->servidorController->obtenerServidor()->aceptarConexiones(),
-								   this->servidorController->obtenerServidor(), cerrarServidor);
+								   this->servidorController->obtenerServidor(), this->terminado);
         /*Se obtiene el ultimo de la pila y se lo ejecuta con start()*/
 		clientThreads.back().start();
         loggear("-------------Nuevo cliente conectado-------------",1);
-
 	}
+    for (auto it = clientThreads.begin(); it != clientThreads.end(); ++it){
+        (*it).join();
+    }
+}
+
+ServidorController *Consola::obtenerServidorController() {
+    return this->servidorController;
 }

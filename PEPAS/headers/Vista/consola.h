@@ -29,6 +29,7 @@ public:
 	void cargarPaginaCrearServidor();
 	void cargarCambioLoggeo();
 	void abrirServidorAClientes();
+	ServidorController* obtenerServidorController();
 
 	~Consola();
 };

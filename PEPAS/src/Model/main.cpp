@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
     consola->cargarPaginaCrearServidor();
     intefazMenu.start();
     consola->abrirServidorAClientes();
-
+    intefazMenu.join();
 	cerrar_logger();
 
 	/////////////////////////////////////////////////////////////////////////////////////
