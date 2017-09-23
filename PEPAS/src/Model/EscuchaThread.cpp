@@ -7,6 +7,7 @@
 void EscuchaThread::run() {
     servidor->iniciarServidor();
     while(!servidor->getTerminado()){
+        cout << "la wea" << endl;
         this->socket = servidor->aceptarConexiones();
         for (auto it = clientThreads.begin(); it != clientThreads.end();
              ++it) {

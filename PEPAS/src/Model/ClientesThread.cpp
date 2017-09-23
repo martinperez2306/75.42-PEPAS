@@ -13,8 +13,8 @@ void ClientesThread::run() {
     //bool socketEstaCerrado = false;
     cout<<"Thread listo para correr cliente ... "<<endl;
     //while (!estaCerrado) {
-        string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket));
-        cout<<msg<<endl;
+        srv->parsearMensaje(srv->recibirMensaje(this->socket));
+        string msg = "0010/1/FIUBA/e";
         srv->enviarMensaje(msg, this->socket);
     //}
 }
