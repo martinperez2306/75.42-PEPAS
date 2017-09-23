@@ -4,6 +4,7 @@
 #define LOGIN 1
 #define BROADCAST 2
 #define BUZON 3
+#define CONECTION_ERROR 4
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -11,7 +12,21 @@ Cliente::Cliente() {
     this->socketFD=0;
 }
 
-void Cliente::logIn(){
+
+std::string obtenerParametros(std::string mensaje, int* i){
+	std::string aux = "";
+	*i = *i + 1;
+	while(mensaje[*i] != '/' && mensaje[*i] != '\0'){
+		aux = aux + mensaje[*i];
+		*i = *i + 1;
+	}
+
+
+	return aux;
+
+}
+
+int Cliente::logIn(){
     string usuario;
     string clave;
     cout<<"Ingrese su nombre de usuario"<<endl;
@@ -21,6 +36,12 @@ void Cliente::logIn(){
     this->obtenerUsuario()->setearNombre(usuario);
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
+    string mensaje = this->recibirMensaje();
+    int i = 0;
+    int codigo = stoi(obtenerParametros(mensaje,&i),nullptr,10);
+    if(codigo == 4)
+    	loggear("Alguno de los datos ingresados no es correcto.", 1);
+    return codigo;
 }
 
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
@@ -123,19 +144,6 @@ string Cliente::agregarPadding(int lenght) {
 }
 
 
-std::string obtenerParametros(std::string mensaje, int* i){
-	std::string aux = "";
-	*i = *i + 1;
-	while(mensaje[*i] != '/' && mensaje[*i] != '\0'){
-		aux = aux + mensaje[*i];
-		*i = *i + 1;
-	}
-
-
-	return aux;
-
-}
-
 void Cliente::parsearMensaje(std::string datos){
 
 	int i = 0;
@@ -161,6 +169,11 @@ void Cliente::parsearMensaje(std::string datos){
 		case BUZON:{
 			std::string destinatario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
+		}
+			break;
+		case CONECTION_ERROR: {
+			std::string mensaje = "Alguno de los datos ingresados no es correcto.";
+			loggear("Alguno de los datos ingresados no es correcto.", 1);
 		}
 			break;
 		default:

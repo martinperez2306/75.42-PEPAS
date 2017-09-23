@@ -28,7 +28,7 @@ private:
 public:
     Cliente();
 
-    void logIn();
+    int logIn();
 
     //metodo para loquearse?
     int conectarseAlServidor(const char *ip, int puerto);
