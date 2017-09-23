@@ -4,7 +4,7 @@ Usuario::Usuario(){
 	this->contrasenia = "contraseña vacia";
 	this->usuario = "usuario vacio";
 	this->socketFD = NULL;
-	this->conectado = true;
+	this->conectado = false;
 }
 
 Usuario::Usuario(string usuario,string contrasenia){
@@ -36,7 +36,11 @@ int Usuario::obtenerSocket() {
 	return this->socketFD;
 }
 
-bool Usuario::estaConectado() {
+void Usuario::estaConectado() {
+	this->conectado=true;
+}
+
+bool Usuario::getConectado() {
 	return this->conectado;
 }
 
