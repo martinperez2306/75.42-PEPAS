@@ -169,7 +169,7 @@ void Socket::CerrarConexion() {
     }
 }
 void Socket::CerrarConexion(int socket) {
-    int ret = shutdown(socket, SHUT_WR);
+    int ret = shutdown(socket, SHUT_RDWR);
 
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
