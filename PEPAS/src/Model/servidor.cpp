@@ -222,6 +222,7 @@ std::string obtenerParametros(std::string mensaje, int* i){
 
 std::string Servidor::recibirMensaje(Socket* socket){
 	int largo = stoi(socket->Recibir(4),nullptr,10);
+	cout<<"paso el stoi"<<endl;
 	return socket->Recibir(largo);
 }
 
@@ -231,21 +232,22 @@ void Servidor::enviarMensaje(string  mensa, Socket* socket){
 }
 
 
-string Servidor::parsearMensaje(std::string datos){
+void Servidor::parsearMensaje(std::string datos){
 
 	int i = 0;
-	loggear("Entro al parsear mensaje",1);
+	loggear("entro al parsear mensaje",1);
 	loggear (datos,1);
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
-	loggear("Paso el stoi tragico",1 );
+	loggear("paso el stoi tragico",1 );
 	std::string usuario = obtenerParametros(datos,&i);
-    string mensajeAEnviar;
 
 	switch(codigo){
 		case LOGIN:{
+
 			std::string password = obtenerParametros(datos,&i);
-            mensajeAEnviar = validarCliente(usuario, password);
+			this->conexiones += 1;
 		}
+
 			break;
 		case BROADCAST:{
 			std::string mensaje = obtenerParametros(datos,&i);
@@ -259,43 +261,25 @@ string Servidor::parsearMensaje(std::string datos){
 		default:
 			break;
 	}
-return mensajeAEnviar;
+
 }
 
-string Servidor::validarCliente(string usuario, string contrasenia) {
-    Usuario *usuarioAValidar = this->obtenerBaseDeDatos()->getUsuario(usuario);
-    string msg, msgOK, msgAdevolver;
-    bool fallo = false;
-    if (usuarioAValidar == NULL) {
-        msg = "No existe el usuario ingresado";
-        loggear(msg, 3);
-        msg = procesarMensaje(msg);
-        fallo = true;
-    } else if(usuarioAValidar->getContrasenia() != contrasenia ||
-            usuarioAValidar->getUsuario() != usuario) {
-            msg = "Usuario o contraseña incorrectas";
-            loggear(msg, 3);
-            msg = procesarMensaje(msg);
-            fallo = true;
-        } else if (usuarioAValidar->getConectado()) {
-                msg = "El usuario ingresado ya se encuentra conectado";
-                loggear(msg, 3);
-                msg = procesarMensaje(msg);
-                fallo = true;
-            } else {
-                msgOK = "*************Bienvenido***************";
-                loggear(msgOK, 1);
-                procesarMensaje(msgOK);
-                usuarioAValidar->estaConectado();
-            }
+void Servidor::validarCliente(string usuario, string contrasenia) {
+	Usuario* usuarioAValidar = this->obtenerBaseDeDatos()->getUsuario(usuario);
+	if (usuarioAValidar==NULL){
+		//Enviar mensaje de error al cliente
+		//Actividad de loggeo incorrecto en logger
+	} else {
+			if (usuarioAValidar->estaConectado()== true) {
+				//Enviar mensaje de error al cliente
+				//Actividad de loggeo incorrecto en logger
+			}else{
+				//Enviar el mensaje al cliente para que pueda continuar con su actividad
+				//Actividad de loggeo correcto en logger.
+			}
+	}
 
-    msgAdevolver = msgOK;
-    if (fallo){
-        msgAdevolver = msg;
-    }
-return msgAdevolver;
 }
-
 
 void Servidor::mostrarUsuariosConectados(){
     cout<< this->conexiones << endl;
@@ -332,29 +316,5 @@ bool Servidor::getTerminado() {
 	return this->terminado;
 }
 
-string Servidor::agregarPadding(int lenght) {
-    string mensajeProcesado;
-    string largo = to_string(lenght);
-    if (lenght < 10)
-        mensajeProcesado = "000" + largo;
-    else if (lenght < 100)
-        mensajeProcesado = "00" + largo;
-    else if (lenght < 1000)
-        mensajeProcesado = "0" + largo;
-    else mensajeProcesado = largo;
-    return mensajeProcesado;
-}
 
-
-/*Este procesador, codifica el mensaje con el codigo 4.
-<código_mensaje>/<mensaje>*/
-string Servidor::procesarMensaje(string mensa) {
-    string stringACrear, stringProcesado;
-    string separador = "/";
-    stringACrear = separador + "4" + separador + mensa;
-    unsigned long largoDelMensaje = stringACrear.length();
-    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    loggear(stringProcesado,1);
-    return stringProcesado;
-}
 
