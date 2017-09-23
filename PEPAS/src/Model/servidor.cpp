@@ -168,8 +168,7 @@ Socket* Servidor::iniciarConexion(int puerto) {
     mapFD.insert({puerto,fd});
     /*Agrego a la lista el puerto que estoy usando*/
     puertosEnUso.push_back(puerto);
-    this->conexiones += 1;
-	/*Piso el valor del fd por el nuevo que contiene la conexion aceptada*/
+    /*Piso el valor del fd por el nuevo que contiene la conexion aceptada*/
 	newSocket->asignarFD(fd);
     cout << "Conexion aceptada" << endl;
     return newSocket;
