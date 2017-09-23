@@ -10,7 +10,12 @@ BaseDeDatos::BaseDeDatos(){
 
 
 Usuario* BaseDeDatos::getUsuario(string username){
-	return this->usuarios->find(username)->second;
+	Usuario* user ;
+	if (this->usuarios->find(username) == this->usuarios->end()){
+		user = NULL;
+	} else
+		user = this->usuarios->find(username)->second;
+	return user;
 }
 
 void BaseDeDatos::agregarUsuarioABaseDeDatos(Usuario* usuario){
@@ -44,5 +49,10 @@ BaseDeDatos::~BaseDeDatos(){
 int BaseDeDatos::obtenerSocketUsuario(string usuario) {
 	return getUsuario(usuario)->obtenerSocket();
 }
+
+map<string, Usuario *> * BaseDeDatos::obtenerMapUsuarios() {
+	return this->usuarios;
+}
+
 
 

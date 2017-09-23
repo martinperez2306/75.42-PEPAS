@@ -61,7 +61,7 @@ public:
 
 	void finalizarConexiones();
 	void cerrarSockets();
-	void parsearMensaje(std::string mensaje);
+	string parsearMensaje(std::string mensaje);
 	std::string recibirMensaje(Socket* socket);
 	void enviarMensaje(string  mensa, Socket* socket);
 
@@ -76,10 +76,13 @@ public:
 	~Servidor();
 
 
-    void validarCliente(string basic_string, string basicString);
+    string validarCliente(string basic_string, string basicString);
 
 
     bool getTerminado();
+
+	string procesarMensaje(string unMensaje);
+	string agregarPadding(int lenght);
 };
 
 
