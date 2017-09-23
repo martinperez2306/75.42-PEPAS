@@ -36,7 +36,9 @@ public:
 
 	int obtenerSocket();
 
-	bool estaConectado();
+	void estaConectado();
+
+	bool getConectado();
 };
 
 
