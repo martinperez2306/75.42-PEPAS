@@ -30,17 +30,18 @@ void cargarMenuPrincipal() {
 		int numeroPag;
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
-		cout<<"Seleccione 1 para el Stress Test"<<endl;
+		cout<<"Seleccione 1 para loguearse"<<endl;
 		cout<<"Seleccione 2 para el enviar un mensaje de Chat"<<endl;
 		cout<<"Seleccione 3 para el enviar un mensaje privado"<<endl;
 		cout<<"Seleccione 4 para el enviar un mensaje de prueba"<<endl;
-		cout<<"Seleccione 5 para el deslogearse"<<endl;
+		cout<<"Seleccione 5 para el Stress Test"<<endl;
+		cout<<"Seleccione 6 para el deslogearse"<<endl;
 		cout<<"Cualquier tecla para salir"<<endl;
 		cout<<"*********************************************"<<endl;
 		cin>> numeroPag;
 		switch(numeroPag) {
 			case 1:
-				controller->stressTest();
+				controller->obtenerCliente()->logIn();
 				break;
 			case 2:
 				controller->enviarMensajeChat();
@@ -52,6 +53,9 @@ void cargarMenuPrincipal() {
 				controller->mensajeDePrueba();
 				break;
 			case 5:
+				controller->stressTest();
+				break;
+			case 6:
 				controller->logOut();
 				break;
 			default:
@@ -88,7 +92,7 @@ void *Consola::cargarPagina() {
 				} else {
                     cout<<"Haciendo cambio de puerto"<<endl;
 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					this->clienteController->obtenerCliente()->logIn();
+					//this->clienteController->obtenerCliente()->logIn();
 					socketFD = this->clienteController->cliente->obtenerSocketFD();
 					controller = this->clienteController;
 					socketCliente = this->clienteController->cliente->obtenerSocket();

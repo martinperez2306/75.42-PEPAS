@@ -16,6 +16,7 @@ ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
 	ClienteParser::SocketData sd;
 	pugi::xml_document documento;
 	pugi::xml_parse_result result = documento.load_file(xmlPath, pugi::parse_default|pugi::parse_declaration);
+	cout << "Load Result: " << result.description() <<endl;
 	if(result.status == 0) {
 		//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
 		pugi::xml_node nodeIp = documento.child("cliente").child("conexion").child("IP");
