@@ -31,8 +31,11 @@ public:
 
 	int obtenerSocketUsuario (string usuario);
 
+	map<string, Usuario *> * obtenerMapUsuarios();
+
 	//DEBE ELIMINAR LA MEMORIA PEDIDA PARA CADA USUARIO EN LA BASE DE DATOS (CREADA POR EL BUILDER).
 	~BaseDeDatos();
+
 
 };
 
