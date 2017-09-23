@@ -9,9 +9,8 @@ Socket::Socket(){
 }
 
 int Socket::Crear(){
-int sockett;
     fd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockett < 0) {
+    if (fd < 0) {
         cout << "\nError en la creacion del socket" << endl;
         string error = strerror(errno);
         loggear(error,1);
@@ -57,7 +56,6 @@ void Socket::Conectar( int puerto, string IPremota) {
 
 void Socket::Escuchar(int socket, int maximasConexionesAlaVez) {
     int ret = listen(socket, maximasConexionesAlaVez);
-
     /*VERIFICACION DE ERRORES*/
     if (ret  < 0){
         string error = strerror(errno);
@@ -69,7 +67,6 @@ void Socket::Escuchar(int socket, int maximasConexionesAlaVez) {
 
 void Socket::Escuchar(int maximasConexionesAlaVez) {
     int ret = listen(fd, maximasConexionesAlaVez);
-
     /*VERIFICACION DE ERRORES*/
     if (ret  < 0){
         string error = strerror(errno);
@@ -84,7 +81,7 @@ int Socket::AceptarConexion() {
     struct sockaddr_in clientAddress;
     socklen_t clientSize =sizeof(clientAddress);
     socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
-
+    cout << "la xuxa" << endl;
     if (socketFD < 0) {
         string error = strerror(errno);
         loggear(error,1);
