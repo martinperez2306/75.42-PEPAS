@@ -88,15 +88,18 @@ void *Consola::cargarPagina() {
 				} else {
                     cout<<"Haciendo cambio de puerto"<<endl;
 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					this->clienteController->obtenerCliente()->logIn();
-					socketFD = this->clienteController->cliente->obtenerSocketFD();
-					controller = this->clienteController;
-					socketCliente = this->clienteController->cliente->obtenerSocket();
-					pthread_create(&_send, NULL, enviarMensajes, NULL);
-					pthread_create(&_recv, NULL, mostrarMensajes, NULL);
+					if(this->clienteController->obtenerCliente()->logIn() == 4 ){
+						cout<<"Alguno de los datos ingresados es incorrecto."<<endl;
+					} else {
+						socketFD = this->clienteController->cliente->obtenerSocketFD();
+						controller = this->clienteController;
+						socketCliente = this->clienteController->cliente->obtenerSocket();
+						pthread_create(&_send, NULL, enviarMensajes, NULL);
+						pthread_create(&_recv, NULL, mostrarMensajes, NULL);
 
-					pthread_join(_send, NULL);
-					pthread_join(_recv,NULL);
+						pthread_join(_send, NULL);
+						pthread_join(_recv,NULL);
+					}
 				}
 				break;
 			default:

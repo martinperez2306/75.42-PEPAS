@@ -7,10 +7,10 @@
 
 
 ClienteController::ClienteController(){
-	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
-	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
+//	this->socketData.ip = "127.0.0.2"; //TODO HARDCODEEEEEEE
+//	this->socketData.puerto = 27015;  //TODO HARDCODEEEEEEE
 //	this->socketData.puerto2 = 8010; //TODO HARDCODEEEEEEE
-	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
+	this->socketData = this->clienteParser->parsearXML("cliente.xml");
 }
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
