@@ -14,9 +14,10 @@ private:
 	Servidor* servidor;
 	int cantidadDeConexiones;
 	int puerto;
-	BaseDeDatos* baseDeDatos;
 
 public:
+
+	BaseDeDatos* baseDeDatos;
 	ServidorBuilder();
 
 	void setServidor(Servidor* servidor);

@@ -195,6 +195,11 @@ string Servidor::parsearMensaje(std::string datos){
 		case LOGIN:{
 			std::string password = obtenerParametros(datos,&i);
             mensajeAEnviar = validarCliente(usuario, password);
+            Usuario *user = this->obtenerBaseDeDatos()->getUsuario(usuario);
+            if (user != NULL){
+                this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
+            }
+
 		}
 			break;
 		case BROADCAST:{
