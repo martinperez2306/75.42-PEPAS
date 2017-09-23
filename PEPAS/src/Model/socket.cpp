@@ -81,7 +81,6 @@ int Socket::AceptarConexion() {
     struct sockaddr_in clientAddress;
     socklen_t clientSize =sizeof(clientAddress);
     socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
-    cout << "la xuxa" << endl;
     if (socketFD < 0) {
         string error = strerror(errno);
         loggear(error,1);
