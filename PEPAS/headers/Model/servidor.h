@@ -24,7 +24,7 @@ private:
 	std::unordered_map<int,int> mapFD; // <puerto, socketFD>
 	bool terminado;
 	Socket* iniciarConexion(int puerto);
-
+	map<int,Socket*>* mapaSocket;
 
 
 

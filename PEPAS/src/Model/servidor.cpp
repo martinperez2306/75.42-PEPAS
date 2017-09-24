@@ -5,7 +5,7 @@
 #define BROADCAST 2
 #define BUZON 3
 
-
+typedef pair<int, Socket*> socketConect;
 
 std::list<int> crearPuertos(){
 	
@@ -28,10 +28,9 @@ Servidor::Servidor(){
 	this->socketFD = 0;
 	this->puertosDisponibles = crearPuertos();
 	this->terminado = false;
-
+	this->mapaSocket = new map<int,Socket*>();
 
 }
-
 
 
 int Servidor::obtenerSocketEscucha(){
@@ -146,7 +145,8 @@ Socket*  Servidor::aceptarConexiones() {
     obtenerSocket()->CerrarConexion(fd);
     this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
 
-
+    /*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*/
+    this->mapaSocket->insert(socketConect(puerto,socketNuevo));
 
     return socketNuevo;
 }
@@ -203,6 +203,11 @@ string Servidor::parsearMensaje(std::string datos){
 			break;
 		case BROADCAST:{
 			std::string mensaje = obtenerParametros(datos,&i);
+			cout<<mensaje<<endl;
+			map<int,Socket*>::iterator iterador;
+			for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    this->enviarMensaje(mensaje,iterador->second);
+				}
 		}
 			break;
 		case BUZON:{
@@ -237,9 +242,9 @@ string Servidor::validarCliente(string usuario, string contrasenia) {
                 msg = procesarMensaje(msg);
                 fallo = true;
             } else {
-                msgOK = "*************Bienvenido***************";
+                msgOK = usuario + " se ha logueado";
                 loggear(msgOK, 1);
-                procesarMensaje(msgOK);
+                msgOK = procesarMensaje(msgOK);
                 usuarioAValidar->estaConectado();
             }
 
@@ -258,8 +263,6 @@ void Servidor::mostrarUsuariosConectados(){
 BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 	return this->baseDeDatos;
 }
-
-
 
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
