@@ -18,6 +18,10 @@ private:
 	map<string,Usuario*>* usuarios;
 	map<string,Usuario*>::iterator iterador;
 
+	map<string,Usuario*>* usuariosConectados;
+
+
+
 public:
 	BaseDeDatos();
 
@@ -35,6 +39,19 @@ public:
 
 	//DEBE ELIMINAR LA MEMORIA PEDIDA PARA CADA USUARIO EN LA BASE DE DATOS (CREADA POR EL BUILDER).
 	~BaseDeDatos();
+
+
+
+	Usuario* getUsuarioConectado(string username);
+
+	void agregarUsuarioConectadoABaseDeDatos(string nombre);
+
+	void mostrarTodosLosUsuariosConectados();
+
+
+	int obtenerSocketUsuarioConectado(string usuario);
+
+	map<string, Usuario *> * obtenerMapUsuariosConectados();
 
 
 };

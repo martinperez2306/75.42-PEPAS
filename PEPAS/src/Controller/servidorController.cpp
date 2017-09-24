@@ -38,6 +38,7 @@ Usuario* ServidorController::getUsuario(string username){
 
 void ServidorController::mostrarUsuariosConectados(){
 	this->servidor->mostrarUsuariosConectados();
+	this->servidorBuilder->baseDeDatos->mostrarTodosLosUsuariosConectados();
 }
 
 ServidorController::~ServidorController(){

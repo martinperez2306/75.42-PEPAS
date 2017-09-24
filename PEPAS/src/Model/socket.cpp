@@ -81,7 +81,6 @@ int Socket::AceptarConexion() {
     struct sockaddr_in clientAddress;
     socklen_t clientSize =sizeof(clientAddress);
     socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
-    cout << "la xuxa" << endl;
     if (socketFD < 0) {
         string error = strerror(errno);
         loggear(error,1);
@@ -170,7 +169,7 @@ void Socket::CerrarConexion() {
     }
 }
 void Socket::CerrarConexion(int socket) {
-    int ret = shutdown(socket, SHUT_WR);
+    int ret = shutdown(socket, SHUT_RDWR);
 
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
