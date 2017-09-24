@@ -63,6 +63,7 @@ void ClienteController::enviarMensajeChat(){
 	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, texto, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
     mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje);
 	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
+	this->obtenerCliente()->recibirMensaje();
 }
 
 void ClienteController::enviarMensajePrivado(){

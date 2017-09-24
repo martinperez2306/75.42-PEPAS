@@ -1,7 +1,3 @@
-//
-// Created by florencia on 03/09/17.
-//
-
 #include "../../headers/com.pepas.view/consola.h"
 
 enum { STATE_SEND, STATE_RECV } state = STATE_SEND;
@@ -25,7 +21,7 @@ void* mostrarMensajes(void* threadid) {
 	}
 }
 
-void cargarMenuPrincipal() {
+void Consola::cargarMenuPrincipal() {
 	while(!salirMenu) {
 		int numeroPag;
 		cout<<"*********************************************"<<endl;
@@ -71,7 +67,7 @@ void cargarMenuPrincipal() {
 
 void* enviarMensajes(void* threadid) {
 
-	cargarMenuPrincipal();
+	//cargarMenuPrincipal();
 }
 
 void *Consola::cargarPagina() {
@@ -92,18 +88,10 @@ void *Consola::cargarPagina() {
 				} else {
                     cout<<"Haciendo cambio de puerto"<<endl;
 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					if(this->clienteController->obtenerCliente()->logIn() == 4 ){
-						cout<<"Alguno de los datos ingresados es incorrecto."<<endl;
-					} else {
-						socketFD = this->clienteController->cliente->obtenerSocketFD();
-						controller = this->clienteController;
-						socketCliente = this->clienteController->cliente->obtenerSocket();
-						pthread_create(&_send, NULL, enviarMensajes, NULL);
-						pthread_create(&_recv, NULL, mostrarMensajes, NULL);
-
-						pthread_join(_send, NULL);
-						pthread_join(_recv,NULL);
-					}
+					socketFD = this->clienteController->cliente->obtenerSocketFD();
+					controller = this->clienteController;
+					socketCliente = this->clienteController->cliente->obtenerSocket();
+					this->cargarMenuPrincipal();
 				}
 				break;
 			default:
@@ -112,10 +100,6 @@ void *Consola::cargarPagina() {
     	}
     }
 }
-
-
-
-
 
 void Consola::cargarPaginaCrearCliente(){
 

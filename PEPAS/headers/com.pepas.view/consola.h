@@ -1,7 +1,3 @@
-//
-// Created by florencia on 03/09/17.
-//
-
 #ifndef COM_PEPAS_CONSOLA_CONSOLA_H
 #define COM_PEPAS_CONSOLA_CONSOLA_H
 

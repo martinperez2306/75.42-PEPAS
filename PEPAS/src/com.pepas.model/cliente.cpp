@@ -21,12 +21,12 @@ std::string obtenerParametros(std::string mensaje, int* i){
 		*i = *i + 1;
 	}
 
-
 	return aux;
 
 }
 
 int Cliente::logIn(){
+
     string usuario;
     string clave;
     cout<<"Ingrese su nombre de usuario"<<endl;
@@ -37,11 +37,12 @@ int Cliente::logIn(){
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
     string mensaje = this->recibirMensaje();
-    int i = 0;
-    int codigo = stoi(obtenerParametros(mensaje,&i),nullptr,10);
-    if(codigo == 4)
-    	loggear("Alguno de los datos ingresados no es correcto.", 1);
-    return codigo;
+//    int i = 0;
+//    int codigo = stoi(obtenerParametros(mensaje,&i),nullptr,10);
+//    if(codigo == 4)
+//    	loggear("Alguno de los datos ingresados no es correcto.", 1);
+//    return codigo;
+    return 0;
 }
 
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
@@ -142,7 +143,6 @@ string Cliente::agregarPadding(int lenght) {
         else mensajeProcesado = largo;
     return mensajeProcesado;
 }
-
 
 void Cliente::parsearMensaje(std::string datos){
 
