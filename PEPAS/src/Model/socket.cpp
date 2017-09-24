@@ -129,7 +129,7 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
 std::string Socket::Recibir( size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
-    char buffer[MAX_DATA_SIZE];
+    char buffer[MAX_DATA_SIZE] = {0};
     ssize_t ultimaCantidadRecibida = 0;
     while (totalRecibido < mensajeAleerLength) { // && !socketShutDown
         ultimaCantidadRecibida = recv(fd, buffer, mensajeAleerLength - totalRecibido, 0);
@@ -151,6 +151,7 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
 
     cout << "Antes de convertir a string: "<<buffer << endl;
     string  cadenaAdevolver = chartoString (buffer);
+
     cout<< "El mensaje recibido fue: "<<cadenaAdevolver<<endl;
     cout<< "El ultimo recv fue de "<<ultimaCantidadRecibida<< " bytes"<<endl;
     return cadenaAdevolver;
