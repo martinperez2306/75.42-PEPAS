@@ -15,7 +15,7 @@ void ClientesThread::run() {
     while (!estaCerrado) {
         string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
         //cout<<msg<<endl;
-        srv->enviarMensaje(msg, this->socket);
+        //srv->enviarMensaje(msg, this->socket);
     }
 }
 

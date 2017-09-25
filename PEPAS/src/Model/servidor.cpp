@@ -184,10 +184,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 		case LOGIN:{
 			std::string password = obtenerParametros(datos,&i);
             mensajeAEnviar = validarCliente(usuario, password, socketDelemisor);
-            Usuario *user = this->obtenerBaseDeDatos()->getUsuario(usuario);
-            if (user != NULL){
-                this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
-            }
+            enviarMensaje(mensajeAEnviar, socketDelemisor);
 		}
 			break;
 		case BROADCAST:{
@@ -246,6 +243,7 @@ string Servidor::validarCliente(string usuario, string contrasenia, Socket* sock
                 msgOK = procesarMensaje(msgOK);
                 usuarioAValidar->estaConectado();
                 usuarioAValidar->asignarSocket(socketDelEmisor);
+                this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
             }
 
     msgAdevolver = msgOK;
