@@ -10,6 +10,8 @@ Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->usuario = new Usuario();
     this->socketFD=0;
+    this->logueado = false;
+    
 }
 
 
@@ -25,7 +27,7 @@ std::string obtenerParametros(std::string mensaje, int* i){
 
 }
 
-int Cliente::logIn(){
+void Cliente::logIn(){
 
     string usuario;
     string clave;
@@ -37,12 +39,11 @@ int Cliente::logIn(){
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
     string mensaje = this->recibirMensaje();
-//    int i = 0;
-//    int codigo = stoi(obtenerParametros(mensaje,&i),nullptr,10);
-//    if(codigo == 4)
-//    	loggear("Alguno de los datos ingresados no es correcto.", 1);
-//    return codigo;
-    return 0;
+    if(mensaje.compare("Bienvenido\n") == 0){
+        this->logueado = true;
+
+    }
+
 }
 
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
@@ -149,6 +150,7 @@ void Cliente::parsearMensaje(std::string datos){
 	int i = 0;
 	loggear("entro al parsear mensaje",1);
 	loggear (datos,1);
+    cout<<"Jesus esta pasando por aqui"<<endl;
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
 	loggear("paso el stoi tragico",1 );
 	std::string usuario = obtenerParametros(datos,&i);
@@ -164,11 +166,16 @@ void Cliente::parsearMensaje(std::string datos){
 			break;
 		case BROADCAST:{
 			std::string mensaje = obtenerParametros(datos,&i);
+            string msg = armarMensaje(usuario,mensaje);
+            colaChat.push_back(msg);
 		}
 			break;
 		case BUZON:{
 			std::string destinatario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
+            string msg = armarMensaje(usuario, mensaje);
+            string buzon = "[BUZON]" + msg;
+            colaBuzon.push_back(buzon);
 		}
 			break;
 		case CONECTION_ERROR: {
@@ -180,4 +187,21 @@ void Cliente::parsearMensaje(std::string datos){
 			break;
 	}
 
+}
+
+bool Cliente::estalogueado(){
+    return this->logueado;
+}
+
+string Cliente::armarMensaje(string emisor, string mensaje) {
+    string msgADevolver = emisor + ": " + mensaje;
+    return msgADevolver;
+}
+
+list<string> Cliente::obtenerColaChat() {
+    return this->colaChat;
+}
+
+list<string> Cliente::obtenerColaBuzon() {
+    return this->colaBuzon;
 }

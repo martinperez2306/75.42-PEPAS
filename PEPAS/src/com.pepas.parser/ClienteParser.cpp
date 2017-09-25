@@ -22,23 +22,27 @@ ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
 		pugi::xml_node nodeIp = documento.child("cliente").child("conexion").child("IP");
 		const char *ip = nodeIp.text().as_string();
 		if(!validarIp(ip)) {
-			return ClienteParser::parsearXML("clienteDefault.xml");
+			//return ClienteParser::parsearXML("clienteDefault.xml");
+            return ClienteParser::parsearXML("../75.42-PEPAS/PEPAS/clienteDefault.xml");
 		}
 		pugi::xml_node nodePuerto = documento.child("cliente").child("conexion").child("puerto");
 		const char* puerto = nodePuerto.text().as_string();
 		if(!puertoValido(puerto)) {
-			return ClienteParser::parsearXML("clienteDefault.xml");
+			//return ClienteParser::parsearXML("clienteDefault.xml");
+            return ClienteParser::parsearXML("../75.42-PEPAS/PEPAS/clienteDefault.xml");
 		}
 		pugi::xml_node nodeTestfile = documento.child("cliente").child("testfile").child("path");
 		const char* testFile = nodeTestfile.text().as_string();
 		if(!pathValido(testFile)) {
-			return ClienteParser::parsearXML("clienteDefault.xml");
+			//return ClienteParser::parsearXML("clienteDefault.xml");
+            return ClienteParser::parsearXML("../75.42-PEPAS/PEPAS/clienteDefault.xml");
 		}
 		sd.ip = ip;
 		sd.puerto = atoi(puerto);
 		return sd;
 	} else {
-		return ClienteParser::parsearXML("clienteDefault.xml");
+		//return ClienteParser::parsearXML("clienteDefault.xml");
+        return ClienteParser::parsearXML("../75.42-PEPAS/PEPAS/clienteDefault.xml");
 	}
 }
 

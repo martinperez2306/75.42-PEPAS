@@ -5,12 +5,12 @@ enum { STATE_SEND, STATE_RECV } state = STATE_SEND;
 int socketFD;
 Socket *socketCliente;
 ClienteController *controller;
-bool salirMenu = false;
-bool terminado = false;
+
 pthread_t _send, _recv;
 
 Consola::Consola(){
-    this->clienteController = new ClienteController();
+   this->clienteController = new ClienteController();
+   terminado = false;
 }
 
 void* mostrarMensajes(void* threadid) {
@@ -22,7 +22,7 @@ void* mostrarMensajes(void* threadid) {
 }
 
 void Consola::cargarMenuPrincipal() {
-	while(!salirMenu) {
+	while(!terminado) {
 		int numeroPag;
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
@@ -37,10 +37,16 @@ void Consola::cargarMenuPrincipal() {
 		cin>> numeroPag;
 		switch(numeroPag) {
 			case 1:
+			{
 				controller->obtenerCliente()->logIn();
+				if (controller->obtenerCliente()->estalogueado()){
+					controller->empezarRecibir();
+				}
+			}
 				break;
 			case 2:
-				controller->enviarMensajeChat();
+				//controller->enviarMensajeChat();
+                controller->entrarAlChat();
 				break;
 			case 3:
 				controller->enviarMensajePrivado();
@@ -55,13 +61,12 @@ void Consola::cargarMenuPrincipal() {
 				controller->logOut();
 				break;
 			default:
-				salirMenu = true;
+				terminado = true;
 		};
 	}
 	cout<<"Se va a cerrar la conexion con el servidor..."<<endl;
 	controller->desconectarseDelServidor();
 	cout<<"Terminando la ejecucion del programa"<<endl;
-	terminado = true;
 
 }
 
@@ -71,34 +76,41 @@ void* enviarMensajes(void* threadid) {
 }
 
 void *Consola::cargarPagina() {
+	
 	int numeroPagina;
-    while(!terminado) {
-		cout<<"*********************************************"<<endl;
-		cout<<"Ingrese una opcion segun corresponda"<<endl;
-		cout<<"Seleccione 1 conectarse al servidor"<<endl;
-		cout<<"Seleccione 2 para salir"<<endl;
-		cout<<"*********************************************"<<endl;
-		cout<<"-->";
-		cin>> numeroPagina;
-    	switch(numeroPagina) {
-			case 1:
-				this->clienteController->crearCliente();
-				if (this->clienteController->conectarConElServidor() == -1) {
-					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
-				} else {
-                    cout<<"Haciendo cambio de puerto"<<endl;
-					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					socketFD = this->clienteController->cliente->obtenerSocketFD();
-					controller = this->clienteController;
-					socketCliente = this->clienteController->cliente->obtenerSocket();
-					this->cargarMenuPrincipal();
-				}
-				break;
-			default:
-				this->clienteController->salirDelPrograma();
-				terminado = true;
-    	}
-    }
+	cout<<"*********************************************"<<endl;
+	cout<<"Ingrese una opcion segun corresponda"<<endl;
+	cout<<"Seleccione 1 conectarse al servidor"<<endl;
+	cout<<"Seleccione 2 para salir"<<endl;
+	cout<<"*********************************************"<<endl;
+	cout<<"-->";
+	cin>> numeroPagina;
+	switch(numeroPagina) {
+		case 1:
+			this->clienteController->crearCliente();
+			if (this->clienteController->conectarConElServidor() == -1) {
+				cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
+			} else {
+                cout<<"Haciendo cambio de puerto"<<endl;
+				this->clienteController->obtengoPuertoNuevoYHagoConectar();
+				socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
+				controller = this->clienteController;
+				socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
+				this->cargarMenuPrincipal();
+				
+				
+			}
+			break;
+		case 2:
+		{
+			this->clienteController->salirDelPrograma();
+			terminado = true;				
+		}
+			break;
+		default:{
+			cout << "Opcion incorrecta" << endl;
+		}
+	}
 }
 
 void Consola::cargarPaginaCrearCliente(){
@@ -117,3 +129,10 @@ Consola::~Consola(){
     delete this->clienteController;
 }
 
+bool Consola::terminoConsola(){
+	return this->terminado;
+}
+
+ClienteController* Consola::getController(){
+	return this->clienteController;
+}

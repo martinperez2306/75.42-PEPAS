@@ -3,13 +3,17 @@
 //
 
 #include "../../headers/com.pepas.controllers/clienteController.h"
-#include "../../headers/com.pepas.parser/ClienteParser.h"
+#include <ncurses.h>
+
+
 
 
 ClienteController::ClienteController(){
-	this->socketData = this->clienteParser->parsearXML("cliente.xml");
+	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
+    this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
 
 }
+
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
 	this->clienteParser = clientePaser;
@@ -21,6 +25,7 @@ ClienteController::ClienteController(ClienteParser *clientePaser) {
 void ClienteController::crearCliente(){
 
     this->cliente= new Cliente();
+    recvThread threadRecibir(this->cliente);
     //a penas crea el cliente se empieza a parsear el achivo xml
     //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"../75.42-PEPAS/PEPAS/src/com.pepas.parser/cliente.xml");
     //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"src/com.pepas.parser/cliente.xml");
@@ -108,3 +113,43 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	cout<<"Conectado satisfactorio con puerto: "<<socketData.puerto<<endl;
 
 }
+
+void ClienteController::empezarRecibir(){
+	this->threadRecibir.start();
+}
+
+void ClienteController::dejarRecibir(){
+	this->threadRecibir.join();
+}
+
+
+int kbhit() {
+	struct timeval tv;
+	fd_set fds;
+	tv.tv_sec = 0;
+	tv.tv_usec = 0;
+	FD_ZERO(&fds);
+	FD_SET(0, &fds);
+	//STDIN_FILENO is 0
+	// select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
+	// return FD_ISSET(STDIN_FILENO, &fds); }
+}
+void ClienteController::entrarAlChat() {
+	system("clear");
+	cout<<"Presione & para salir del chat"<<endl;
+	string entrada= "";
+	list<string> mensajesALeer = this->obtenerCliente()->obtenerColaChat();
+	string msg = "0015/2/Augusto/turi";
+	this->obtenerCliente()->enviarMensaje(msg);
+	while (entrada.compare("&\0") != 0){
+		if (!mensajesALeer.empty()) {
+			cout<<mensajesALeer.front()<<endl;
+			mensajesALeer.pop_front();
+			if (kbhit()) {
+				char c = fgetc(stdin);
+				printf("Char: %c\n", c);
+			}
+		}
+	}
+}
+
