@@ -9,6 +9,8 @@
 #define USUARIO_H_
 
 #include <string>
+#include "socket.h"
+
 using namespace std;
 
 class Usuario{
@@ -19,6 +21,7 @@ private:
 	string contrasenia;
 	int socketFD;
 	bool conectado;
+	Socket* socket;
 
 public:
 
@@ -39,6 +42,10 @@ public:
 	void estaConectado();
 
 	bool getConectado();
+
+    void asignarSocket(Socket *Socket);
+
+	Socket* getSocket();
 };
 
 

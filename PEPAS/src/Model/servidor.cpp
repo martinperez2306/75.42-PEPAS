@@ -89,14 +89,6 @@ Socket* Servidor::obtenerSocket(){
     return this->serverSocket;
 }
 
-void Servidor::abrirConexiones(){
-
-	//Thread conexion1;
-	//conexion1.crear(IniciarConexiones,this);
-/*	Thread conexion2;
-	conexion2.crear(IniciarConexiones2,this);*/
-}
-
 
 void Servidor::iniciarServidor() {
 	/*Aqui se crea el socket escucha del servidor el cual es leido del XML*/
@@ -163,10 +155,8 @@ std::string obtenerParametros(std::string mensaje, int* i){
 	while(mensaje[*i] != '/' && mensaje[*i] != '\0'){
 		aux = aux + mensaje[*i];
 		*i = *i + 1;
-}
-
-	return aux;
-
+    }
+    return aux;
 }
 
 std::string Servidor::recibirMensaje(Socket* socket){
@@ -180,7 +170,7 @@ void Servidor::enviarMensaje(string  mensa, Socket* socket){
 }
 
 
-string Servidor::parsearMensaje(std::string datos){
+string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
 	int i = 0;
 	loggear("Entro al parsear mensaje",1);
@@ -193,12 +183,11 @@ string Servidor::parsearMensaje(std::string datos){
 	switch(codigo){
 		case LOGIN:{
 			std::string password = obtenerParametros(datos,&i);
-            mensajeAEnviar = validarCliente(usuario, password);
+            mensajeAEnviar = validarCliente(usuario, password, socketDelemisor);
             Usuario *user = this->obtenerBaseDeDatos()->getUsuario(usuario);
             if (user != NULL){
                 this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
             }
-
 		}
 			break;
 		case BROADCAST:{
@@ -206,14 +195,24 @@ string Servidor::parsearMensaje(std::string datos){
 			cout<<mensaje<<endl;
 			map<int,Socket*>::iterator iterador;
 			for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
-				    this->enviarMensaje(mensaje,iterador->second);
+				    this->enviarMensaje(datos,iterador->second);
 				}
 		}
 			break;
 		case BUZON:{
+            string msg;
 			std::string destinatario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
+            Usuario *usuarioDestinatario = this->obtenerBaseDeDatos()->getUsuario(destinatario);
+            if (usuarioDestinatario == NULL) {
+                msg = "El destinatario al que se le envio el mensaje no existe";
+                this->enviarMensaje(msg, this->obtenerBaseDeDatos()->getUsuario(usuario)->getSocket());
+            }else{
+                msg = datos;
+                this->enviarMensaje(datos,usuarioDestinatario->getSocket());
+            }
 		}
+
 			break;
 		default:
 			break;
@@ -221,7 +220,7 @@ string Servidor::parsearMensaje(std::string datos){
 return mensajeAEnviar;
 }
 
-string Servidor::validarCliente(string usuario, string contrasenia) {
+string Servidor::validarCliente(string usuario, string contrasenia, Socket* socketDelEmisor) {
     Usuario *usuarioAValidar = this->obtenerBaseDeDatos()->getUsuario(usuario);
     string msg, msgOK, msgAdevolver;
     bool fallo = false;
@@ -242,10 +241,11 @@ string Servidor::validarCliente(string usuario, string contrasenia) {
                 msg = procesarMensaje(msg);
                 fallo = true;
             } else {
-                msgOK = usuario + " se ha logueado";
+                msgOK = "Bienvenido\n";
                 loggear(msgOK, 1);
                 msgOK = procesarMensaje(msgOK);
                 usuarioAValidar->estaConectado();
+                usuarioAValidar->asignarSocket(socketDelEmisor);
             }
 
     msgAdevolver = msgOK;

@@ -44,5 +44,13 @@ bool Usuario::getConectado() {
 	return this->conectado;
 }
 
+void Usuario::asignarSocket(Socket* Socketusuario) {
+	this->socket = Socketusuario;
+}
+
+Socket *Usuario::getSocket() {
+	return this->socket;
+}
+
 
 

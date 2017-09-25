@@ -13,7 +13,7 @@ void ClientesThread::run() {
     //bool socketEstaCerrado = false;
     cout<<"Thread listo para correr cliente ... "<<endl;
     while (!estaCerrado) {
-        string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket));
+        string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
         //cout<<msg<<endl;
         srv->enviarMensaje(msg, this->socket);
     }

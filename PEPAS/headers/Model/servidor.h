@@ -14,22 +14,17 @@ class Servidor{
 private:
 	int puerto;
 	int cantidadDeConexiones;
-	BaseDeDatos* baseDeDatos;
-	int socketEscucha;
-	Socket* serverSocket;
 	int conexiones;
 	int socketFD;
+	int socketEscucha;
+	bool terminado;
+	BaseDeDatos* baseDeDatos;
+	Socket* iniciarConexion(int puerto);
+	Socket* serverSocket;
 	std::list<int> puertosDisponibles;
 	std::list<int> puertosEnUso;
 	std::unordered_map<int,int> mapFD; // <puerto, socketFD>
-	bool terminado;
-	Socket* iniciarConexion(int puerto);
 	map<int,Socket*>* mapaSocket;
-
-
-
-	//FUNCIONES ESTATICAS PARA LOS THREADS DEL SERVIDOR
-	static void *IniciarConexiones(void* servidor);
 
 
 public:
@@ -49,7 +44,6 @@ public:
 
 	void mostrarUsuariosDisponibles();
 
-	string getIP();
 
 	int obtenerSocketFD();
 	void asignarSocketFD(int fd2);
@@ -61,7 +55,7 @@ public:
 
 	void finalizarConexiones();
 	void cerrarSockets();
-	string parsearMensaje(std::string mensaje);
+	string parsearMensaje(std::string mensaje, Socket* socket);
 	std::string recibirMensaje(Socket* socket);
 	void enviarMensaje(string  mensa, Socket* socket);
 
@@ -70,13 +64,11 @@ public:
 	void mostrarUsuariosConectados();
 	BaseDeDatos* obtenerBaseDeDatos();
 
-	void abrirConexiones();
-
 
 	~Servidor();
 
 
-    string validarCliente(string basic_string, string basicString);
+    string validarCliente(string basic_string, string basicString, Socket* socket);
 
 
     bool getTerminado();
