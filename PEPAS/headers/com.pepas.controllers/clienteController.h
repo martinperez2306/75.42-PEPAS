@@ -41,17 +41,12 @@ public:
 
     int conectarConElServidor();
 
-    void asignarServidor();
-
     void desconectarseDelServidor();
-
-    void mensajeDePrueba();
 
     void logOut();
 
     void stressTest();
 
-    void enviarMensajeChat();
 
     void enviarMensajePrivado();
     void empezarRecibir();
@@ -67,6 +62,7 @@ public:
     void obtengoPuertoNuevoYHagoConectar();;
 
     void entrarAlChat();
+    void verBuzon();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

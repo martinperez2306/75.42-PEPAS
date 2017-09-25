@@ -57,6 +57,7 @@ public:
     string procesarMensaje(string usuario, string contrasenia);
 
     string procesarMensaje(Mensaje* mensaje);
+    string procesarMensaje(string usuario);
 
     string obtenerCodigo();
 
@@ -73,6 +74,7 @@ public:
     list<string> obtenerColaChat();
 
     list<string> obtenerColaBuzon();
+    void desloguearse();
 };
 
 

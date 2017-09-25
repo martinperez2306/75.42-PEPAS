@@ -25,15 +25,6 @@ void ClienteController::crearCliente(){
 
     this->cliente= new Cliente();
     recvThread threadRecibir(this->cliente);
-    //a penas crea el cliente se empieza a parsear el achivo xml
-    //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"../75.42-PEPAS/PEPAS/src/com.pepas.parser/cliente.xml");
-    //ClienteParser::SocketData sd = this->clienteParser->parsearXML((char*)"src/com.pepas.parser/cliente.xml");
-    //this->socketData = sd;
-}
-
-void ClienteController::asignarServidor(){
-    // que hace exactamente?
-
 }
 
 
@@ -41,15 +32,23 @@ int ClienteController::conectarConElServidor(){
     return this->cliente->conectarseAlServidor(socketData.ip, socketData.puerto);
 }
 
-void ClienteController::mensajeDePrueba(){
-}
-
 void ClienteController::desconectarseDelServidor(){
-
+	if (cliente->estalogueado()){
+		this->logOut();
+	}
+	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
 }
 
 
 void ClienteController::logOut() {
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para desloguearse"<< endl;
+		return;
+	}
+
+	this->obtenerCliente()->desloguearse();
+	string usuario = this->obtenerCliente()->obtenerUsuario()->getNombre();
+	this->obtenerCliente()->enviarMensaje(this->obtenerCliente()->procesarMensaje(usuario));
 
 }
 
@@ -57,20 +56,13 @@ void ClienteController::logOut() {
 void ClienteController::stressTest(){
 }
 
-void ClienteController::enviarMensajeChat(){
-    string mensajeProcesado, bug, texto;
-	string destinatario = "";
-	cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
-	//TODO aca hay un bug que no lo entiendo, si no pongo las variables de esta forma anda mal.
-	getline(cin, bug);
-	getline(cin, texto);
-	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, texto, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
-    mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje);
-	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
-	this->obtenerCliente()->recibirMensaje();
-}
+
 
 void ClienteController::enviarMensajePrivado(){
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para enviar un mensaje"<< endl;
+		return;
+	}
 	string texto, mensajeProcesado, destinatario, bug;
     cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
 	//TODO aca hay un bug que no lo entiendo, si no pongo las variables de esta forma anda mal.
@@ -85,8 +77,8 @@ void ClienteController::enviarMensajePrivado(){
 }
 
 void ClienteController::salirDelPrograma() {
-	//chequear que este desconectado, sino, desconectar
-	cout<<"SALISTE DEL CHAT"<<endl;
+	cout<<"SALISTE"<<endl;
+	
 }
 
 ClienteController::~ClienteController(){
@@ -133,7 +125,13 @@ int kbhit() {
 	// select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
 	// return FD_ISSET(STDIN_FILENO, &fds); }
 }
+
 void ClienteController::entrarAlChat() {
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para enviar un mensaje"<< endl;
+		return;
+	}
+
 	system("clear");
 	cout<<"Presione & para salir del chat"<<endl;
 	string entrada= "";
@@ -149,6 +147,24 @@ void ClienteController::entrarAlChat() {
 				printf("Char: %c\n", c);
 			}
 		}
+	}
+}
+
+
+void ClienteController::verBuzon() {
+	
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para ver su buzon"<< endl;
+		return;
+	}
+
+	list<string> mensajesALeer = this->obtenerCliente()->obtenerColaBuzon();
+
+	while (!mensajesALeer.empty()){
+		
+		cout<<mensajesALeer.front()<<endl;
+		mensajesALeer.pop_front();
+			
 	}
 }
 

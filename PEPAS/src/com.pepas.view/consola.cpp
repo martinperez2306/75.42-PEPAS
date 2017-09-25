@@ -27,12 +27,12 @@ void Consola::cargarMenuPrincipal() {
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
 		cout<<"Seleccione 1 para loguearse"<<endl;
-		cout<<"Seleccione 2 para el enviar un mensaje de Chat"<<endl;
+		cout<<"Seleccione 2 para entrar al Chat"<<endl;
 		cout<<"Seleccione 3 para el enviar un mensaje privado"<<endl;
-		cout<<"Seleccione 4 para el enviar un mensaje de prueba"<<endl;
-		cout<<"Seleccione 5 para el Stress Test"<<endl;
-		cout<<"Seleccione 6 para el deslogearse"<<endl;
-		cout<<"Cualquier tecla para salir"<<endl;
+		cout<<"Seleccione 4 para el Stress Test"<<endl;
+		cout<<"Seleccione 5 para el deslogearse"<<endl;
+		cout<<"Seleccione 6 para ver su buzon"<<endl;
+		cout<<"Cualquier tecla para desconectarse"<<endl;
 		cout<<"*********************************************"<<endl;
 		cin>> numeroPag;
 		switch(numeroPag) {
@@ -45,28 +45,27 @@ void Consola::cargarMenuPrincipal() {
 			}
 				break;
 			case 2:
-				//controller->enviarMensajeChat();
                 controller->entrarAlChat();
 				break;
 			case 3:
 				controller->enviarMensajePrivado();
 				break;
 			case 4:
-				controller->mensajeDePrueba();
-				break;
-			case 5:
 				controller->stressTest();
 				break;
-			case 6:
+			case 5:
 				controller->logOut();
 				break;
+			case 6:
+				controller->verBuzon();
+			break;
 			default:
 				terminado = true;
 		};
 	}
 	cout<<"Se va a cerrar la conexion con el servidor..."<<endl;
 	controller->desconectarseDelServidor();
-	cout<<"Terminando la ejecucion del programa"<<endl;
+	this->cargarPagina();
 
 }
 

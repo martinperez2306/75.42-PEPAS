@@ -132,6 +132,18 @@ string Cliente::procesarMensaje(Mensaje *mensaje) {
     return stringProcesado;
 }
 
+// Este procesador, codifica el mensaje con el codigo 5
+//  <código_mensaje>/<usuario>
+string Cliente::procesarMensaje(string usuario) {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    stringACrear = separador + "5" + separador + usuario;
+    int largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    cout<<stringProcesado<<endl;
+    return stringProcesado;
+}
+
 string Cliente::agregarPadding(int lenght) {
     string mensajeProcesado;
     string largo = to_string(lenght);
@@ -204,4 +216,9 @@ list<string> Cliente::obtenerColaChat() {
 
 list<string> Cliente::obtenerColaBuzon() {
     return this->colaBuzon;
+}
+
+
+void Cliente::desloguearse(){
+    this->logueado = false;
 }
