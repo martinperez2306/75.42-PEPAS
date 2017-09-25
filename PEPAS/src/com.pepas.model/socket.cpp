@@ -119,7 +119,7 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
-    char buffer[MAX_DATA_SIZE];
+    char buffer[MAX_DATA_SIZE] = {0};
     ssize_t ultimaCantidadRecibida = 0;
     while (totalRecibido < mensajeAleerLength && !socketShutDown) {
         ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
