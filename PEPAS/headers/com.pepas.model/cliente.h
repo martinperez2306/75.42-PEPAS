@@ -15,6 +15,7 @@
 #include "../../headers/com.pepas.model/Mensaje.h"
 #include <iostream>
 #include <cstring>
+#include <list>
 
 using namespace std;
 
@@ -24,11 +25,15 @@ private:
     Usuario* usuario;
     Socket* socketCliente;
     int socketFD;
+    bool logueado;
+    list<string> colaBuzon;
+    list<string> colaChat;
+
 
 public:
     Cliente();
 
-    int logIn();
+    void logIn();
 
     //metodo para loquearse?
     int conectarseAlServidor(const char *ip, int puerto);
@@ -60,6 +65,14 @@ public:
     void parsearMensaje(std::string datos);
 
     std::string recibirMensaje();
+
+    bool estalogueado();
+
+    string armarMensaje(string emisor, string mensa);
+
+    list<string> obtenerColaChat();
+
+    list<string> obtenerColaBuzon();
 };
 
 

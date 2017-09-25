@@ -12,7 +12,7 @@
 //
 // Created by florencia on 03/09/17.
 //
-
+#include "../com.pepas.model/recvThread.h"
 #include "../com.pepas.model/cliente.h"
 #include "../com.pepas.model/Mensaje.h"
 #include "../com.pepas.parser/ClienteParser.h"
@@ -26,9 +26,13 @@ private:
 
     ClienteParser* clienteParser;
     ClienteParser::SocketData socketData;
+    recvThread threadRecibir = recvThread(cliente);
+    Cliente* cliente;
+
+    
 
 public:
-    Cliente* cliente;
+    
     ClienteController();
 
     ClienteController(ClienteParser *ClienteParser);
@@ -50,6 +54,8 @@ public:
     void enviarMensajeChat();
 
     void enviarMensajePrivado();
+    void empezarRecibir();
+    void dejarRecibir();
 
 
     void salirDelPrograma();
@@ -59,6 +65,8 @@ public:
     Cliente *obtenerCliente();
 
     void obtengoPuertoNuevoYHagoConectar();;
+
+    void entrarAlChat();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

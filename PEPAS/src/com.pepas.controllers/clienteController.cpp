@@ -3,7 +3,6 @@
 //
 
 #include "../../headers/com.pepas.controllers/clienteController.h"
-#include <ncurses.h>
 
 
 

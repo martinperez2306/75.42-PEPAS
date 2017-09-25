@@ -16,6 +16,7 @@ class Consola{
 private:
     //int numeroPagina;
     ClienteController* clienteController;
+    bool terminado;
 public:
 
     Consola();
@@ -28,6 +29,8 @@ public:
     void cargarPaginaCrearCliente();
     void cargarLogIn();
     void cargarMenuPrincipal();
+    bool terminoConsola();
+    ClienteController* getController();
 
     ~Consola();
 };
