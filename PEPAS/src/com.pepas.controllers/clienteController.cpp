@@ -135,22 +135,18 @@ void ClienteController::entrarAlChat() {
 
 	//system("clear");
 	cout<<"Presione & para salir del chat"<<endl;
-	string msg = "0015/2/Augusto/turi";
-	string entrada= "";
-	this->obtenerCliente()->enviarMensaje(msg);
-	this->obtenerCliente()->enviarMensaje(msg);
-	this->obtenerCliente()->enviarMensaje(msg);
-	this->obtenerCliente()->enviarMensaje(msg);
+	string entrada;
 	
-	 while (entrada.compare("&\0") != 0){
+	 do{
 		while (!this->obtenerCliente()->obtenerColaChat().empty()){
 			cout<<this->obtenerCliente()->obtenerColaChat().front()<<endl;
-			this->obtenerCliente()->obtenerColaChat().pop_front();
+			this->obtenerCliente()->desencolarColaChat();
 		}
-	 	cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
+	 	cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje:";
 	 	getline(cin,entrada);
 	 	enviarBroadcast(entrada);
-	 }
+
+	 }while(entrada.compare("&\0") != 0);
 }
 
 

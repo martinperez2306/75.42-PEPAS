@@ -21,9 +21,18 @@ void* mostrarMensajes(void* threadid) {
 	}
 }
 
+bool esint(std::string entrada){
+
+	if (entrada.length() == 1 && isdigit(entrada[0]))
+		return true;
+	return false;
+}
+
 void Consola::cargarMenuPrincipal() {
+	string entrada;
+	int numeroPag;
 	while(!terminado) {
-		int numeroPag;
+		
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
 		cout<<"Seleccione 1 para loguearse"<<endl;
@@ -34,7 +43,13 @@ void Consola::cargarMenuPrincipal() {
 		cout<<"Seleccione 6 para ver su buzon"<<endl;
 		cout<<"Cualquier tecla para desconectarse"<<endl;
 		cout<<"*********************************************"<<endl;
-		cin>> numeroPag;
+		cin>> entrada;
+		if(!esint(entrada)){
+			cout<<"Entrada invalida"<<endl;
+			continue;
+		}
+		numeroPag = stoi(entrada,nullptr,10);
+
 		switch(numeroPag) {
 			case 1:
 			{
@@ -73,17 +88,24 @@ void* enviarMensajes(void* threadid) {
 }
 
 void *Consola::cargarPagina() {
-	
-	int numeroPagina;
-	cout<<"*********************************************"<<endl;
-	cout<<"Ingrese una opcion segun corresponda"<<endl;
-	cout<<"Seleccione 1 conectarse al servidor"<<endl;
-	cout<<"Seleccione 2 para salir"<<endl;
-	cout<<"*********************************************"<<endl;
-	cout<<"-->";
-	cin>> numeroPagina;
 	terminado = false;
+	int numeroPagina;
+	string entrada;
 	while(!terminado){
+		
+		cout<<"*********************************************"<<endl;
+		cout<<"Ingrese una opcion segun corresponda"<<endl;
+		cout<<"Seleccione 1 conectarse al servidor"<<endl;
+		cout<<"Seleccione 2 para salir"<<endl;
+		cout<<"*********************************************"<<endl;
+		cout<<"-->";
+		cin>> entrada;
+		
+		if(!esint(entrada)){
+			cout<<"Entrada invalida"<<endl;
+			continue;
+		}
+		numeroPagina = stoi(entrada,nullptr,10);
 		switch(numeroPagina) {
 			case 1:
 				if (this->clienteController->conectarConElServidor() == -1) {

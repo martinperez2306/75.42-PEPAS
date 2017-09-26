@@ -75,6 +75,7 @@ public:
 
     list<string> obtenerColaBuzon();
     void desloguearse();
+    void desencolarColaChat();
 };
 
 

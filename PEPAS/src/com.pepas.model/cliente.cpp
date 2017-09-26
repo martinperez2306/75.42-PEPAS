@@ -105,7 +105,6 @@ string Cliente::procesarMensaje(string usuario, string contrasenia) {
     stringACrear = separador + "1" + separador + usuario + separador + contrasenia;
     int largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    cout<<stringProcesado<<endl;
     return stringProcesado;
 }
 
@@ -126,7 +125,6 @@ string Cliente::procesarMensaje(Mensaje *mensaje) {
     }
     int largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    cout<<stringProcesado<<endl;
     return stringProcesado;
 }
 
@@ -138,7 +136,6 @@ string Cliente::procesarMensaje(string usuario) {
     stringACrear = separador + "5" + separador + usuario;
     int largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    cout<<stringProcesado<<endl;
     return stringProcesado;
 }
 
@@ -208,6 +205,10 @@ string Cliente::armarMensaje(string emisor, string mensaje) {
 
 list<string> Cliente::obtenerColaChat() {
     return this->colaChat;
+}
+
+void Cliente::desencolarColaChat() {
+    colaChat.pop_front();
 }
 
 list<string> Cliente::obtenerColaBuzon() {
