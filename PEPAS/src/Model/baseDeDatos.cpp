@@ -93,3 +93,7 @@ int BaseDeDatos::obtenerSocketUsuarioConectado(string usuario) {
 map<string, Usuario *> * BaseDeDatos::obtenerMapUsuariosConectados() {
 	return this->usuariosConectados;
 }
+
+void BaseDeDatos::sacarUsuarioConectadoABaseDeDatos(string nombre) {
+	this->usuariosConectados->erase(nombre);
+}

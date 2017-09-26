@@ -61,8 +61,6 @@ class Socket {
         void CerrarConexion();
         void CerrarConexion(int socket);
 
-        /*Se utiliza para cerrar el socket y liberar los recursos.*/
-        void CerrarSocket();
 
         int obtenerFD();
 

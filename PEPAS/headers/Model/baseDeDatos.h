@@ -17,7 +17,6 @@ class BaseDeDatos{
 private:
 	map<string,Usuario*>* usuarios;
 	map<string,Usuario*>::iterator iterador;
-
 	map<string,Usuario*>* usuariosConectados;
 
 
@@ -45,6 +44,8 @@ public:
 	Usuario* getUsuarioConectado(string username);
 
 	void agregarUsuarioConectadoABaseDeDatos(string nombre);
+
+	void sacarUsuarioConectadoABaseDeDatos(string nombre);
 
 	void mostrarTodosLosUsuariosConectados();
 

@@ -46,6 +46,8 @@ public:
     void asignarSocket(Socket *Socket);
 
 	Socket* getSocket();
+
+    void estaDesconectado();
 };
 
 

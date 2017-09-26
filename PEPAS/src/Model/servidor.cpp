@@ -4,6 +4,7 @@
 #define LOGIN 1
 #define BROADCAST 2
 #define BUZON 3
+#define LOGOUT 5
 
 typedef pair<int, Socket*> socketConect;
 
@@ -92,7 +93,8 @@ Socket* Servidor::obtenerSocket(){
 
 void Servidor::iniciarServidor() {
 	/*Aqui se crea el socket escucha del servidor el cual es leido del XML*/
-    cout<<"El puerto del servidor es: "<<this->getPuerto()<<endl;
+    string msg = "El puerto del servidor es: " + to_string(this->getPuerto());
+    loggear (msg,1);
     asignarSocketEscucha(obtenerSocket()->Crear()); //devuelve el file descriptor
     obtenerSocket()->Enlazar(this->getPuerto());
    	
@@ -100,38 +102,37 @@ void Servidor::iniciarServidor() {
 
 Socket* Servidor::iniciarConexion(int puerto) {
 	Socket* newSocket= new Socket();
-    cout<<"El puerto del cliente es: "<<puerto<<endl;
+    string msg = "El puerto del cliente es: " + to_string(puerto);
+    loggear (msg, 1);
     newSocket->Crear();
     newSocket->Enlazar(puerto);
     newSocket->Escuchar(this->getCantidadDeConexiones());
-	//cout << "Escuchando conexiones ..." << endl;
     int fd = newSocket->AceptarConexion();
     mapFD.insert({puerto,fd});
     /*Agrego a la lista el puerto que estoy usando*/
     puertosEnUso.push_back(puerto);
     /*Piso el valor del fd por el nuevo que contiene la conexion aceptada*/
 	newSocket->asignarFD(fd);
-    cout << "Conexion aceptada" << endl;
+    loggear ("Conexion aceptada", 1);
     return newSocket;
 }
 
 
 Socket*  Servidor::aceptarConexiones() {
-	//cout << this->socketEscucha << endl;
-	cout << "Escuchando conexiones ..." << endl;
+    loggear ("Escuchando conexiones",1);
 	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
     int fd = obtenerSocket()->AceptarConexion();
-    cout << "Conexion aceptada" << endl;
+    loggear ("Conexion aceptada" , 1);
 	/*Toma un puerto de los disponibles*/
     int puerto = this->puertosDisponibles.front();
-    cout << puerto << endl;
+    string msg = "Conexion nueva en puerto: " + to_string(puerto);
+    loggear(msg,1);
 	/*Lo quita de la pila*/ //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
 	this->puertosDisponibles.pop_front();
     this->asignarSocketFD(fd);
 	this->obtenerSocket()->asignarFD(fd);
 	/*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
     this->enviarMensaje(to_string(puerto), this->obtenerSocket());
-
     Socket* socketNuevo = this->iniciarConexion(puerto);
     /*Cierro la conexion con el socket escucha*/
     obtenerSocket()->CerrarConexion(fd);
@@ -146,7 +147,7 @@ Socket*  Servidor::aceptarConexiones() {
 
 void Servidor::finalizarConexiones() {
 	obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
-	cout << "Cerrando conexiones" << endl;
+    loggear ("Cerrando conexiones",1 );
 }
 
 std::string obtenerParametros(std::string mensaje, int* i){
@@ -166,6 +167,8 @@ std::string Servidor::recibirMensaje(Socket* socket){
 
 void Servidor::enviarMensaje(string  mensa, Socket* socket){
     const void *mensaje = mensa.c_str();
+    string msgLogger = "Mensaje enviado: " + mensa;
+    loggear (msgLogger,1);
     socket->Enviar(mensaje, mensa.length());
 }
 
@@ -189,10 +192,11 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 			break;
 		case BROADCAST:{
 			std::string mensaje = obtenerParametros(datos,&i);
-			cout<<mensaje<<endl;
 			map<int,Socket*>::iterator iterador;
 			for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
-				    this->enviarMensaje(datos,iterador->second);
+                    unsigned long largoDelMensaje = datos.length();
+                    string stringProcesado = this->agregarPadding(largoDelMensaje) + datos;
+				    this->enviarMensaje(stringProcesado,iterador->second);
 				}
 		}
 			break;
@@ -205,10 +209,21 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
                 msg = "El destinatario al que se le envio el mensaje no existe";
                 this->enviarMensaje(msg, this->obtenerBaseDeDatos()->getUsuario(usuario)->getSocket());
             }else{
-                msg = datos;
+                unsigned long largoDelMensaje = datos.length();
+                string stringProcesado = this->agregarPadding(largoDelMensaje) + datos;
                 this->enviarMensaje(datos,usuarioDestinatario->getSocket());
             }
 		}
+        case LOGOUT:{
+            string msg = "El usuario se ha deslogueado correctamente";
+            msg = procesarMensaje(msg);
+            this->enviarMensaje(msg,socketDelemisor);
+            Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
+            usuarioLogOut->estaDesconectado();
+            this->obtenerBaseDeDatos()->sacarUsuarioConectadoABaseDeDatos(usuario);
+            string msgLogger = "Usuario " + usuario + "desconectado";
+            loggear (msgLogger,1);
+        }
 
 			break;
 		default:
@@ -277,7 +292,6 @@ void Servidor::cerrarSockets() {
         unordered_map<int,int>::const_iterator got = mapFD.find(puertoActual);
         this->obtenerSocket()->CerrarConexion(got->second);
     }
-
 	this->obtenerSocket()->CerrarConexion(obtenerSocketEscucha());
 
 }
@@ -311,4 +325,5 @@ string Servidor::procesarMensaje(string mensa) {
     loggear(stringProcesado,1);
     return stringProcesado;
 }
+
 

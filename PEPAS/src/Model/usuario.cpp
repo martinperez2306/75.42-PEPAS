@@ -52,5 +52,9 @@ Socket *Usuario::getSocket() {
 	return this->socket;
 }
 
+void Usuario::estaDesconectado() {
+    this->conectado=false;
+}
+
 
 

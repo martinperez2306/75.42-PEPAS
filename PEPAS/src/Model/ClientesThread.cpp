@@ -3,6 +3,7 @@
 //
 
 #include "../../headers/Model/ClientesThread.h"
+#include "../../headers/Model/logger.h"
 
 ClientesThread::ClientesThread( Socket* socket, Servidor* server, bool CerrarServidor) : socket(socket), srv(server), estaCerrado(CerrarServidor) {
     borrable = false;
@@ -11,7 +12,8 @@ ClientesThread::ClientesThread( Socket* socket, Servidor* server, bool CerrarSer
 
 void ClientesThread::run() {
     //bool socketEstaCerrado = false;
-    cout<<"Thread listo para correr cliente ... "<<endl;
+    string msglogger = "Thread listo para correr cliente ... ";
+    loggear (msglogger,1);
     while (!estaCerrado) {
         string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
         //cout<<msg<<endl;

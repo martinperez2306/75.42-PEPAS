@@ -13,7 +13,7 @@ int Socket::Crear(){
     if (fd < 0) {
         cout << "\nError en la creacion del socket" << endl;
         string error = strerror(errno);
-        loggear(error,1);
+        loggear(error,3);
         exit(1);
     }
     return fd;
@@ -30,7 +30,7 @@ void Socket::Enlazar(int puerto) {
     /*VERIFICACION DE ERRORES*/
     if (bind(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
-        loggear(error,1);
+        loggear(error,3);
         cout << "Error al hacer el enlazado " << error << endl;
         exit(1);
     }
@@ -48,7 +48,7 @@ void Socket::Conectar( int puerto, string IPremota) {
     /*VERIFICACION DE ERRORES*/
     if (connect(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
-        loggear(error,1);
+        loggear(error,3);
         cout << "Error al conectar con el servidor " << strerror(errno) << endl;
     }
 
@@ -60,7 +60,7 @@ void Socket::Escuchar(int socket, int maximasConexionesAlaVez) {
     if (ret  < 0){
         string error = strerror(errno);
         cout << "Error al escuchar conexiones " << error << endl;
-        loggear(error,1);
+        loggear(error,3);
     }
 
 }
@@ -71,7 +71,7 @@ void Socket::Escuchar(int maximasConexionesAlaVez) {
     if (ret  < 0){
         string error = strerror(errno);
         cout << "Error al escuchar conexiones " << error << endl;
-        loggear(error,1);
+        loggear(error,3);
     }
 
 }
@@ -83,7 +83,7 @@ int Socket::AceptarConexion() {
     socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
     if (socketFD < 0) {
         string error = strerror(errno);
-        loggear(error,1);
+        loggear(error,3);
 
         cout << "Error al conectar con el cliente " << error << endl;
 
@@ -107,8 +107,7 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
         ultimaCantidadEnviada = send(fd, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
         if (ultimaCantidadEnviada < 0) {
             string error = strerror(errno);
-            //LOGGER INFo
-            loggear(error,1);
+            loggear(error,3);
             cout << "Error al enviar mensaje " << error << endl;
 
         } else {
@@ -118,11 +117,10 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
     }
     if(ultimaCantidadEnviada < 0){
         string error = strerror(errno);
-        //LOGGER INFo
         cout << "Error al enviar mensaje " << error << endl;
+        loggear(error,3);
 
     }
-    cout<<ultimaCantidadEnviada<<endl;
 }
 
 
@@ -145,15 +143,16 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
     }
     if (ultimaCantidadRecibida < 0) {
         string error = strerror(errno);
-        loggear(error,1);
+        loggear(error,3);
         cout << "Error al recibir el mensaje " << error << endl;
     }
 
-    cout << "Antes de convertir a string: "<<buffer << endl;
-    string  cadenaAdevolver = chartoString (buffer);
 
-    cout<< "El mensaje recibido fue: "<<cadenaAdevolver<<endl;
-    cout<< "El ultimo recv fue de "<<ultimaCantidadRecibida<< " bytes"<<endl;
+    string  cadenaAdevolver = chartoString (buffer);
+    string msgLogger =  "Antes de convertir a string: " + cadenaAdevolver;
+    loggear(msgLogger,1);
+    msgLogger = "El ultivo recv fue de " + to_string(ultimaCantidadRecibida) + "bytes";
+    loggear(msgLogger,1);
     return cadenaAdevolver;
 
 }
@@ -165,7 +164,7 @@ void Socket::CerrarConexion() {
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
         string error = strerror(errno);
-        //LOGGEER INFO
+        loggear(error,3);
         cout << "Error al cerrar conexion " << error << endl;
     }
 }
@@ -175,14 +174,11 @@ void Socket::CerrarConexion(int socket) {
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
         string error = strerror(errno);
-        //LOGGEER INFO
+        loggear(error,3);
         cout << "Error al cerrar conexion " << error << endl;
     }
 }
 
-void Socket::CerrarSocket() {
-    //close(fd);
-}
 
 
 Socket::~Socket(){
