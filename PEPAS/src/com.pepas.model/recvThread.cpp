@@ -22,6 +22,7 @@ recvThread::recvThread(Cliente* cliente) {
     this->cliente = cliente;
 }
 
+/*NO BORRAR*/
 recvThread::recvThread() {}
 
 

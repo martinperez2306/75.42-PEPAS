@@ -60,6 +60,8 @@ public:
 
     void entrarAlChat();
     void verBuzon();
+
+    void enviarBroadcast(string entradita);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

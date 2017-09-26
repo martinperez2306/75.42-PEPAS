@@ -112,7 +112,7 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         	cout << "Error al enviar mensaje " << error << endl;
 
         }
-        cout<<ultimaCantidadEnviada<<endl;
+
 }
 
 
@@ -141,10 +141,7 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
         cout << "Error al recibir el mensaje " << error << endl;
     }
 
-    cout << "Antes de convertir a string: "<<buffer << endl;
     string  cadenaAdevolver = chartoString (buffer);
-    cout<< "El mensaje recibido fue: "<<cadenaAdevolver<<endl;
-    cout<< "El ultimo recv fue de "<<ultimaCantidadRecibida<< " bytes"<<endl;
     return cadenaAdevolver;
 
 }

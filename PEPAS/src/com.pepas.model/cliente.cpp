@@ -28,7 +28,10 @@ std::string obtenerParametros(std::string mensaje, int* i){
 }
 
 void Cliente::logIn(){
-
+    if(this->logueado){
+        cout << "Usted ya esta logueado" << endl;
+        return;
+    }
     string usuario;
     string clave;
     cout<<"Ingrese su nombre de usuario"<<endl;
@@ -95,7 +98,6 @@ void Cliente::enviarMensaje(string  mensa){
 
 std::string Cliente::recibirMensaje(){
 	int largo = stoi(this->socketCliente->Recibir(this->socketFD, 4),nullptr,10);
-	cout<<"paso el stoi"<<endl;
 	return this->socketCliente->Recibir(this->socketFD, largo);
 }
 /*Este procesador, codifica el mensaje con el codigo 1.
@@ -162,14 +164,12 @@ void Cliente::parsearMensaje(std::string datos){
 	int i = 0;
 	loggear("entro al parsear mensaje",1);
 	loggear (datos,1);
-    cout<<"Jesus esta pasando por aqui"<<endl;
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
 	loggear("paso el stoi tragico",1 );
 	std::string usuario = obtenerParametros(datos,&i);
 
 	switch(codigo){
 		case LOGIN:{
-
 			std::string password = obtenerParametros(datos,&i);
 			cout << "Conectado correctamente con usuario ";
 			cout << usuario + " " + password << endl;

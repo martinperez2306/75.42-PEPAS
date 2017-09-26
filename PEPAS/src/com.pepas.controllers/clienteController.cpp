@@ -138,15 +138,21 @@ void ClienteController::entrarAlChat() {
 	list<string> mensajesALeer = this->obtenerCliente()->obtenerColaChat();
 	string msg = "0015/2/Augusto/turi";
 	this->obtenerCliente()->enviarMensaje(msg);
+	this->obtenerCliente()->enviarMensaje(msg);
+	this->obtenerCliente()->enviarMensaje(msg);
+	this->obtenerCliente()->enviarMensaje(msg);
 	while (entrada.compare("&\0") != 0){
-		if (!mensajesALeer.empty()) {
+		while (!mensajesALeer.empty()){
 			cout<<mensajesALeer.front()<<endl;
 			mensajesALeer.pop_front();
 			if (kbhit()) {
-				char c = fgetc(stdin);
-				printf("Char: %c\n", c);
+				break;
 			}
 		}
+		//cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
+		cin>>entrada;
+		getline(cin,entrada);
+		enviarBroadcast(entrada);
 	}
 }
 
@@ -166,5 +172,14 @@ void ClienteController::verBuzon() {
 		mensajesALeer.pop_front();
 			
 	}
+}
+
+void ClienteController::enviarBroadcast(string entrada) {
+	string mensajeProcesado;
+	string destinatario = "";
+	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, entrada, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
+	mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje);
+	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
+
 }
 
