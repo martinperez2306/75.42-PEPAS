@@ -38,10 +38,8 @@ void Consola::cargarMenuPrincipal() {
 		switch(numeroPag) {
 			case 1:
 			{
-				controller->obtenerCliente()->logIn();
-				if (controller->obtenerCliente()->estalogueado()){
-					controller->empezarRecibir();
-				}
+				controller->logIn();
+
 			}
 				break;
 			case 2:

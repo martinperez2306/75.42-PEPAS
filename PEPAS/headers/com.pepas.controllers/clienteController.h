@@ -57,7 +57,7 @@ public:
     Cliente *obtenerCliente();
 
     void obtengoPuertoNuevoYHagoConectar();;
-
+    void logIn();
     void entrarAlChat();
     void verBuzon();
 

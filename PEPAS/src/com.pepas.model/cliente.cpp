@@ -1,10 +1,10 @@
 #include "../../headers/com.pepas.model/cliente.h"
 #include "../../headers/com.pepas.logger/Logger.h"
 
-#define LOGIN 1
+#define LOGIN 4
 #define BROADCAST 2
 #define BUZON 3
-#define CONECTION_ERROR 4
+#define SERVIDOR 4
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -41,12 +41,8 @@ void Cliente::logIn(){
     this->obtenerUsuario()->setearNombre(usuario);
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
-    string mensaje = this->recibirMensaje();
-    if(mensaje.compare("/4/Bienvenido\n") == 0){
-        this->logueado = true;
-
-    }
-
+    this->parsearMensaje(this->recibirMensaje());
+ 
 }
 
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
@@ -166,33 +162,35 @@ void Cliente::parsearMensaje(std::string datos){
 	loggear (datos,1);
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
 	loggear("paso el stoi tragico",1 );
-	std::string usuario = obtenerParametros(datos,&i);
+	
 
 	switch(codigo){
 		case LOGIN:{
-			std::string password = obtenerParametros(datos,&i);
-			cout << "Conectado correctamente con usuario ";
-			cout << usuario + " " + password << endl;
+            string mensaje = obtenerParametros(datos,&i);
+			cout << mensaje << endl;
+               if(mensaje.compare("Bienvenido\n") == 0){
+
+                   this->logueado = true;
+
+               }
+
 		}
 
 			break;
 		case BROADCAST:{
+            std::string usuario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
             string msg = armarMensaje(usuario,mensaje);
             colaChat.push_back(msg);
 		}
 			break;
 		case BUZON:{
+            std::string usuario = obtenerParametros(datos,&i);
 			std::string destinatario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
             string msg = armarMensaje(usuario, mensaje);
             string buzon = "[BUZON]" + msg;
             colaBuzon.push_back(buzon);
-		}
-			break;
-		case CONECTION_ERROR: {
-			std::string mensaje = "Alguno de los datos ingresados no es correcto.";
-			loggear("Alguno de los datos ingresados no es correcto.", 1);
 		}
 			break;
 		default:

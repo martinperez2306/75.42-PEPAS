@@ -51,6 +51,19 @@ void ClienteController::logOut() {
 
 
 }
+void ClienteController::logIn() {
+	if(cliente->estalogueado()){
+        cout << "Usted ya esta logueado" << endl;
+        return;
+    }
+	
+	this->cliente->logIn();
+
+	if (this->cliente->estalogueado()){
+		this->empezarRecibir();
+	}
+
+}
 
 
 void ClienteController::stressTest(){
