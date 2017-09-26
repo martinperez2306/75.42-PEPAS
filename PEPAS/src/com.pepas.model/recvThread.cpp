@@ -4,9 +4,11 @@
 
 #include "../../headers/com.pepas.model/recvThread.h"
 
+/*
 recvThread::recvThread( Cliente* cliente) : cliente(cliente) {
     this->cliente = cliente;
 }
+*/
 
 
 void recvThread::run() {
@@ -15,6 +17,14 @@ void recvThread::run() {
         cliente->parsearMensaje(cliente->recibirMensaje());
     }
 }
+
+recvThread::recvThread(Cliente* cliente) {
+    this->cliente = cliente;
+}
+
+recvThread::recvThread() {}
+
+
 
 
 

@@ -55,6 +55,7 @@ void Consola::cargarMenuPrincipal() {
 				break;
 			case 5:
 				controller->logOut();
+				controller->dejarRecibir();
 				break;
 			case 6:
 				controller->verBuzon();
@@ -86,7 +87,6 @@ void *Consola::cargarPagina() {
 	cin>> numeroPagina;
 	switch(numeroPagina) {
 		case 1:
-			this->clienteController->crearCliente();
 			if (this->clienteController->conectarConElServidor() == -1) {
 				cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 			} else {

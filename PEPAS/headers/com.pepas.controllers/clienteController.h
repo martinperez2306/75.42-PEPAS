@@ -26,9 +26,8 @@ private:
 
     ClienteParser* clienteParser;
     ClienteParser::SocketData socketData;
-    recvThread threadRecibir = recvThread(cliente);
     Cliente* cliente;
-
+    recvThread threadRecibir;
     
 
 public:
@@ -36,8 +35,6 @@ public:
     ClienteController();
 
     ClienteController(ClienteParser *ClienteParser);
-
-    void crearCliente();
 
     int conectarConElServidor();
 

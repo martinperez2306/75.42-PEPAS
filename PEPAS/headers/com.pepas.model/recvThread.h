@@ -14,7 +14,12 @@ private:
 
 public:
 
+    //recvThread(Cliente* cliente);
+
     recvThread(Cliente* cliente);
+
+    recvThread();
+
 
     virtual void run();
 

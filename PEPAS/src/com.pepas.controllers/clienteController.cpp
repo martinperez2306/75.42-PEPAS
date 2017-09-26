@@ -10,22 +10,20 @@
 ClienteController::ClienteController(){
 	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
     this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
+	this->cliente= new Cliente();
+	this->threadRecibir = recvThread(cliente);
 
 }
 
 
 ClienteController::ClienteController(ClienteParser *clientePaser) {
 	this->clienteParser = clientePaser;
+
 }
 
 
 //RESERVA Y LIBERA MEMORIA DEL SERVIDOR BUILDER. QUEDA USANDOSE LA MEMORIA PEDIDA PARA SERVIDOR (QUE PIDIO SERVIDOR BUILDER)
 
-void ClienteController::crearCliente(){
-
-    this->cliente= new Cliente();
-    recvThread threadRecibir(this->cliente);
-}
 
 
 int ClienteController::conectarConElServidor(){
@@ -37,6 +35,7 @@ void ClienteController::desconectarseDelServidor(){
 		this->logOut();
 	}
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
+
 }
 
 
@@ -49,6 +48,7 @@ void ClienteController::logOut() {
 	this->obtenerCliente()->desloguearse();
 	string usuario = this->obtenerCliente()->obtenerUsuario()->getNombre();
 	this->obtenerCliente()->enviarMensaje(this->obtenerCliente()->procesarMensaje(usuario));
+
 
 }
 

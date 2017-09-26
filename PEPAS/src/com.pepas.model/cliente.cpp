@@ -39,7 +39,7 @@ void Cliente::logIn(){
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
     string mensaje = this->recibirMensaje();
-    if(mensaje.compare("Bienvenido\n") == 0){
+    if(mensaje.compare("/4/Bienvenido\n") == 0){
         this->logueado = true;
 
     }
