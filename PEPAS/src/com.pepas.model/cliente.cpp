@@ -169,9 +169,7 @@ void Cliente::parsearMensaje(std::string datos){
             string mensaje = obtenerParametros(datos,&i);
 			cout << mensaje << endl;
                if(mensaje.compare("Bienvenido\n") == 0){
-
                    this->logueado = true;
-
                }
 
 		}
@@ -181,7 +179,7 @@ void Cliente::parsearMensaje(std::string datos){
             std::string usuario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
             string msg = armarMensaje(usuario,mensaje);
-            colaChat.push_back(msg);
+            this->colaChat.push_back(msg);
 		}
 			break;
 		case BUZON:{

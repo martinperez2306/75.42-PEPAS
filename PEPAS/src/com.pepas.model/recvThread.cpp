@@ -15,6 +15,8 @@ void recvThread::run() {
 
     while (cliente->estalogueado()) {
         cliente->parsearMensaje(cliente->recibirMensaje());
+
+
     }
 }
 

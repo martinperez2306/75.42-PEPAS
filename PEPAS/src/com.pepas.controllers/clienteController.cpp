@@ -7,6 +7,7 @@
 
 
 
+
 ClienteController::ClienteController(){
 	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
     this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
@@ -49,8 +50,8 @@ void ClienteController::logOut() {
 	string usuario = this->obtenerCliente()->obtenerUsuario()->getNombre();
 	this->obtenerCliente()->enviarMensaje(this->obtenerCliente()->procesarMensaje(usuario));
 
-
 }
+
 void ClienteController::logIn() {
 	if(cliente->estalogueado()){
         cout << "Usted ya esta logueado" << endl;
@@ -126,47 +127,30 @@ void ClienteController::dejarRecibir(){
 	this->threadRecibir.join();
 }
 
-
-int kbhit() {
-	struct timeval tv;
-	fd_set fds;
-	tv.tv_sec = 0;
-	tv.tv_usec = 0;
-	FD_ZERO(&fds);
-	FD_SET(0, &fds);
-	//STDIN_FILENO is 0
-	// select(STDIN_FILENO+1, &fds, NULL, NULL, &tv);
-	// return FD_ISSET(STDIN_FILENO, &fds); }
-}
-
 void ClienteController::entrarAlChat() {
 	if (!cliente->estalogueado()){
 		cout<< "Debe loguearse para enviar un mensaje"<< endl;
 		return;
 	}
 
-	system("clear");
+	//system("clear");
 	cout<<"Presione & para salir del chat"<<endl;
-	string entrada= "";
-	list<string> mensajesALeer = this->obtenerCliente()->obtenerColaChat();
 	string msg = "0015/2/Augusto/turi";
+	string entrada= "";
 	this->obtenerCliente()->enviarMensaje(msg);
 	this->obtenerCliente()->enviarMensaje(msg);
 	this->obtenerCliente()->enviarMensaje(msg);
 	this->obtenerCliente()->enviarMensaje(msg);
-	while (entrada.compare("&\0") != 0){
-		while (!mensajesALeer.empty()){
-			cout<<mensajesALeer.front()<<endl;
-			mensajesALeer.pop_front();
-			if (kbhit()) {
-				break;
-			}
+	
+	 while (entrada.compare("&\0") != 0){
+		while (!this->obtenerCliente()->obtenerColaChat().empty()){
+			cout<<this->obtenerCliente()->obtenerColaChat().front()<<endl;
+			this->obtenerCliente()->obtenerColaChat().pop_front();
 		}
-		//cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
-		cin>>entrada;
-		getline(cin,entrada);
-		enviarBroadcast(entrada);
-	}
+	 	cout<<this->obtenerCliente()->obtenerUsuario()->getNombre()<<" ingresa el mensaje: ";
+	 	getline(cin,entrada);
+	 	enviarBroadcast(entrada);
+	 }
 }
 
 

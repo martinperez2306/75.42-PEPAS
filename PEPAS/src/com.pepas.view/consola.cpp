@@ -39,7 +39,6 @@ void Consola::cargarMenuPrincipal() {
 			case 1:
 			{
 				controller->logIn();
-
 			}
 				break;
 			case 2:
@@ -83,29 +82,32 @@ void *Consola::cargarPagina() {
 	cout<<"*********************************************"<<endl;
 	cout<<"-->";
 	cin>> numeroPagina;
-	switch(numeroPagina) {
-		case 1:
-			if (this->clienteController->conectarConElServidor() == -1) {
-				cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
-			} else {
-                cout<<"Haciendo cambio de puerto"<<endl;
-				this->clienteController->obtengoPuertoNuevoYHagoConectar();
-				socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
-				controller = this->clienteController;
-				socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
-				this->cargarMenuPrincipal();
-				
-				
+	terminado = false;
+	while(!terminado){
+		switch(numeroPagina) {
+			case 1:
+				if (this->clienteController->conectarConElServidor() == -1) {
+					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
+				} else {
+		            cout<<"Haciendo cambio de puerto"<<endl;
+					this->clienteController->obtengoPuertoNuevoYHagoConectar();
+					socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
+					controller = this->clienteController;
+					socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
+					this->cargarMenuPrincipal();
+					
+					
+				}
+				break;
+			case 2:
+			{
+				this->clienteController->salirDelPrograma();
+				terminado = true;				
 			}
-			break;
-		case 2:
-		{
-			this->clienteController->salirDelPrograma();
-			terminado = true;				
-		}
-			break;
-		default:{
-			cout << "Opcion incorrecta" << endl;
+				break;
+			default:{
+				cout << "Opcion incorrecta" << endl;
+			}
 		}
 	}
 }
