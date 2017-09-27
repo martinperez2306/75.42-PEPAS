@@ -185,7 +185,8 @@ void Cliente::parsearMensaje(std::string datos){
 			std::string mensaje = obtenerParametros(datos,&i);
             string msg = armarMensaje(usuario, mensaje);
             string buzon = "[BUZON]" + msg;
-            colaBuzon.push_back(buzon);
+            cout<<buzon<<endl;
+            this->colaBuzon.push_back(buzon);
 		}
 			break;
 		default:
@@ -218,4 +219,18 @@ list<string> Cliente::obtenerColaBuzon() {
 
 void Cliente::desloguearse(){
     this->logueado = false;
+}
+void Cliente::desencolarColaBuzon() {
+    colaBuzon.pop_front();
+}
+
+void Cliente::verBuzon() {
+
+    if (!this->estalogueado()){
+        cout<< "Debe loguearse para ver su buzon"<< endl;
+        return;
+    }
+    for (auto it=this->colaBuzon.begin(); it != this->colaBuzon.end(); it++) {
+        cout <<*it<<endl;
+    }
 }
