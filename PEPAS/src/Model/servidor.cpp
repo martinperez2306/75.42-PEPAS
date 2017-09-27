@@ -206,13 +206,17 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 			std::string mensaje = obtenerParametros(datos,&i);
             Usuario *usuarioDestinatario = this->obtenerBaseDeDatos()->getUsuario(destinatario);
             if (usuarioDestinatario == NULL) {
-                msg = "El destinatario al que se le envio el mensaje no existe";
-                this->enviarMensaje(msg, this->obtenerBaseDeDatos()->getUsuario(usuario)->getSocket());
+                msg = "/4/El destinatario al que se le envio el mensaje no existe";
+                unsigned long largoDelMensaje = msg.length();
+                string stringProcesado = this->agregarPadding(largoDelMensaje) + msg;
+                this->enviarMensaje(stringProcesado, this->obtenerBaseDeDatos()->getUsuario(usuario)->getSocket());
             }else{
                 unsigned long largoDelMensaje = datos.length();
                 string stringProcesado = this->agregarPadding(largoDelMensaje) + datos;
-                this->enviarMensaje(datos,usuarioDestinatario->getSocket());
+                loggear (stringProcesado,1);
+                this->enviarMensaje(stringProcesado,usuarioDestinatario->getSocket());
             }
+            break;
 		}
         case LOGOUT:{
             string msg = "El usuario se ha deslogueado correctamente";

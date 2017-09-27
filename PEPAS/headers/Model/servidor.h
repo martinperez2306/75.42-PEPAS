@@ -68,7 +68,7 @@ public:
 	~Servidor();
 
 
-    string validarCliente(string basic_string, string basicString, Socket* socket);
+    string validarCliente(string basic_string, string basicString, Socket* emisor);
 
 
     bool getTerminado();
