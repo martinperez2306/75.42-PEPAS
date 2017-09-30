@@ -118,37 +118,39 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
 
 std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
     bool socketShutDown = false;
+    //bool error = false;
+    string  cadenaAdevolver;
     ssize_t totalRecibido = 0;
     char buffer[MAX_DATA_SIZE] = {0};
     ssize_t ultimaCantidadRecibida = 0;
     while (totalRecibido < mensajeAleerLength && !socketShutDown) {
+
         ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
+
         loggear(buffer, 1);
         loggear(to_string(ultimaCantidadRecibida), 1);
         if (ultimaCantidadRecibida < 0) {
             string error = strerror(errno);
-            cout << "Error al recibir mensaje " << error << endl;
+            cout << "Error al recibir mensaje " << error << endl;  
+                      
         } else if (ultimaCantidadRecibida == 0) {
+            cadenaAdevolver="0005";
             socketShutDown = true;
         } else {
             totalRecibido += ultimaCantidadRecibida;
 
         }
     }
-    if (ultimaCantidadRecibida < 0) {
-        string error = strerror(errno);
-        loggear(error,1);
-        cout << "Error al recibir el mensaje " << error << endl;
-    }
 
-    string  cadenaAdevolver = chartoString (buffer);
+    if(ultimaCantidadRecibida>0)
+        cadenaAdevolver = chartoString (buffer);
     return cadenaAdevolver;
 
 }
 
 
 void Socket::CerrarConexion(int socket) {
-    int ret = shutdown(socket, SHUT_WR);
+    int ret = shutdown(socket, SHUT_RDWR);
 
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){

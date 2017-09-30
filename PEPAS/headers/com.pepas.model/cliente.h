@@ -26,6 +26,7 @@ private:
     Socket* socketCliente;
     int socketFD;
     bool logueado;
+    bool conectado;
     list<string> colaBuzon;
     list<string> colaChat;
 
@@ -78,6 +79,12 @@ public:
     void desencolarColaChat();
     void desencolarColaBuzon();
     void verBuzon();
+bool estaConectado();
+bool estaConectadoYLogueado();
+void conectarse();
+void desconectarse();
+void vaciarColaChat();
+void vaciarColaBuzon();
 };
 
 

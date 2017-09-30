@@ -13,10 +13,8 @@ recvThread::recvThread( Cliente* cliente) : cliente(cliente) {
 
 void recvThread::run() {
 
-    while (cliente->estalogueado()) {
+    while (cliente->estaConectado()) {
         cliente->parsearMensaje(cliente->recibirMensaje());
-
-
     }
 }
 

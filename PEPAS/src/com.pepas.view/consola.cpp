@@ -2,10 +2,6 @@
 
 enum { STATE_SEND, STATE_RECV } state = STATE_SEND;
 
-int socketFD;
-Socket *socketCliente;
-ClienteController *controller;
-
 pthread_t _send, _recv;
 
 Consola::Consola(){
@@ -13,13 +9,6 @@ Consola::Consola(){
    terminado = false;
 }
 
-void* mostrarMensajes(void* threadid) {
-	cout<<"estoy escuchando mensajes..."<<endl;
-	string mensaje = socketCliente->Recibir(socketFD, BUFLEN);
-	if(mensaje != "") {
-		cout<< "Nuevo mensaje: " << mensaje <<endl;
-	}
-}
 
 bool esint(std::string entrada){
 
@@ -35,13 +24,15 @@ void Consola::cargarMenuPrincipal() {
 		
 		cout<<"*********************************************"<<endl;
 		cout<<"Ingrese una opcion segun corresponda"<<endl;
-		cout<<"Seleccione 1 para loguearse"<<endl;
-		cout<<"Seleccione 2 para entrar al Chat"<<endl;
-		cout<<"Seleccione 3 para el enviar un mensaje privado"<<endl;
-		cout<<"Seleccione 4 para el Stress Test"<<endl;
-		cout<<"Seleccione 5 para el deslogearse"<<endl;
-		cout<<"Seleccione 6 para ver su buzon"<<endl;
-		cout<<"Cualquier tecla para desconectarse"<<endl;
+		cout<<"Seleccione 1 conectarse al servidor"<<endl;
+		cout<<"Seleccione 2 para loguearse"<<endl;
+		cout<<"Seleccione 3 para entrar al Chat"<<endl;
+		cout<<"Seleccione 4 para el enviar un mensaje privado"<<endl;
+		cout<<"Seleccione 5 para el Stress Test"<<endl;
+		cout<<"Seleccione 6 para el deslogearse"<<endl;
+		cout<<"Seleccione 7 para ver su buzon"<<endl;
+		cout<<"Seleccione 8 para desconectarce"<<endl;
+		cout<<"Seleccione 9 para salir"<<endl;
 		cout<<"*********************************************"<<endl;
 		cin>> entrada;
 		if(!esint(entrada)){
@@ -53,32 +44,44 @@ void Consola::cargarMenuPrincipal() {
 		switch(numeroPag) {
 			case 1:
 			{
-				controller->logIn();
+				this->clienteController->conectar();
 			}
 				break;
 			case 2:
-                controller->entrarAlChat();
+			{
+				this->clienteController->logIn();
+			}
 				break;
 			case 3:
-				controller->enviarMensajePrivado();
+                this->clienteController->entrarAlChat();
 				break;
 			case 4:
-				controller->stressTest();
+				this->clienteController->enviarMensajePrivado();
 				break;
 			case 5:
-				controller->logOut();
-				controller->dejarRecibir();
+				this->clienteController->stressTest();
 				break;
 			case 6:
-				controller->verBuzon();
+				this->clienteController->logOut();
+
+				break;
+			case 7:
+				this->clienteController->verBuzon();
+				break;
+			case 8:
+				this->clienteController->desconectarseDelServidor();	
+			break;
+			case 9:
+				this->clienteController->desconectarseDelServidor();
+				terminado = true;	
 			break;
 			default:
-				terminado = true;
+				cout << "Opcion incorrecta" << endl;
 		};
 	}
 	cout<<"Se va a cerrar la conexion con el servidor..."<<endl;
-	controller->desconectarseDelServidor();
-	this->cargarPagina();
+	this->clienteController->salirDelPrograma();
+	
 
 }
 
@@ -87,52 +90,52 @@ void* enviarMensajes(void* threadid) {
 	//cargarMenuPrincipal();
 }
 
-void *Consola::cargarPagina() {
-	terminado = false;
-	int numeroPagina;
-	string entrada;
-	while(!terminado){
+// void *Consola::cargarPagina() {
+// 	terminado = false;
+// 	int numeroPagina;
+// 	string entrada;
+// 	while(!terminado){
 		
-		cout<<"*********************************************"<<endl;
-		cout<<"Ingrese una opcion segun corresponda"<<endl;
-		cout<<"Seleccione 1 conectarse al servidor"<<endl;
-		cout<<"Seleccione 2 para salir"<<endl;
-		cout<<"*********************************************"<<endl;
-		cout<<"-->";
-		cin>> entrada;
+// 		cout<<"*********************************************"<<endl;
+// 		cout<<"Ingrese una opcion segun corresponda"<<endl;
+// 		cout<<"Seleccione 1 conectarse al servidor"<<endl;
+// 		cout<<"Seleccione 2 para salir"<<endl;
+// 		cout<<"*********************************************"<<endl;
+// 		cout<<"-->";
+// 		cin>> entrada;
 		
-		if(!esint(entrada)){
-			cout<<"Entrada invalida"<<endl;
-			continue;
-		}
-		numeroPagina = stoi(entrada,nullptr,10);
-		switch(numeroPagina) {
-			case 1:
-				if (this->clienteController->conectarConElServidor() == -1) {
-					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
-				} else {
-		            cout<<"Haciendo cambio de puerto"<<endl;
-					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-					socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
-					controller = this->clienteController;
-					socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
-					this->cargarMenuPrincipal();
+// 		if(!esint(entrada)){
+// 			cout<<"Entrada invalida"<<endl;
+// 			continue;
+// 		}
+// 		numeroPagina = stoi(entrada,nullptr,10);
+// 		switch(numeroPagina) {
+// 			case 1:
+// 				if (this->clienteController->conectarConElServidor() == -1) {
+// 					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
+// 				} else {
+// 		            cout<<"Haciendo cambio de puerto"<<endl;
+// 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
+// 					socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
+// 					controller = this->clienteController;
+// 					socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
+// 					this->cargarMenuPrincipal();
 					
 					
-				}
-				break;
-			case 2:
-			{
-				this->clienteController->salirDelPrograma();
-				terminado = true;				
-			}
-				break;
-			default:{
-				cout << "Opcion incorrecta" << endl;
-			}
-		}
-	}
-}
+// 				}
+// 				break;
+// 			case 2:
+// 			{
+// 				this->clienteController->salirDelPrograma();
+// 				terminado = true;				
+// 			}
+// 				break;
+// 			default:{
+				
+// 			}
+// 		}
+// 	}
+// }
 
 void Consola::cargarPaginaCrearCliente(){
 

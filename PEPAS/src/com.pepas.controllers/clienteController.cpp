@@ -8,10 +8,11 @@
 #include <zconf.h>
 
 ClienteController::ClienteController(){
-	this->socketData = this->clienteParser->parsearXML("cliente.xml");
-    //this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
+	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
+    this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
 	this->cliente= new Cliente();
 	this->threadRecibir = recvThread(cliente);
+	this->reconexion = false;
 
 }
 
@@ -25,18 +26,57 @@ ClienteController::ClienteController(ClienteParser *clientePaser) {
 //RESERVA Y LIBERA MEMORIA DEL SERVIDOR BUILDER. QUEDA USANDOSE LA MEMORIA PEDIDA PARA SERVIDOR (QUE PIDIO SERVIDOR BUILDER)
 
 
+void ClienteController::conectar(){
+
+	if(this->cliente->estaConectado()){
+		cout<< "Usted ya esta conectado" <<endl;
+		return;
+	}
+	
+	//Esto es para cerrar el thread de la conexion anterior.
+	if(reconexion){
+		this->dejarRecibir();
+	}
+		
+	if (this->conectarConElServidor() == -1) {
+		cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
+	} else {
+        cout<<"Haciendo cambio de puerto"<<endl;
+		this->obtengoPuertoNuevoYHagoConectar();
+		this->cliente->conectarse();
+		this->empezarRecibir();
+		this->reconexion = true;
+
+	}
+}
 
 int ClienteController::conectarConElServidor(){
     return this->cliente->conectarseAlServidor(socketData.ip, socketData.puerto);
 }
 
+
+
 void ClienteController::desconectarseDelServidor(){
+	if(!this->cliente->estaConectado()){
+		cout << "Usted no esta conectado" << endl;
+		return;
+	}
 	if (cliente->estalogueado()){
 		this->logOut();
 	}
+
+	this->cliente->desconectarse();
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
+	reconexion = false;
+	this->dejarRecibir();
+	this->cliente->vaciarColaChat();
+	this->cliente->vaciarColaBuzon();
+
+
+	cout<< "Se ha desconectado" << endl;
 
 }
+
 
 
 void ClienteController::logOut() {
@@ -52,6 +92,11 @@ void ClienteController::logOut() {
 }
 
 void ClienteController::logIn() {
+	if(!this->cliente->estaConectado()){
+		cout<< "Debe conectarse para loguearse" <<endl;
+		return;
+	}
+
 	if(cliente->estalogueado()){
         cout << "Usted ya esta logueado" << endl;
         return;
@@ -67,6 +112,12 @@ void ClienteController::logIn() {
 
 
 void ClienteController::stressTest(){
+
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para enviar un mensaje"<< endl;
+		return;
+	}
+
 	string milisegundos, totalmili;
 	cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
 	int mili, total;
@@ -205,7 +256,7 @@ void ClienteController::entrarAlChat() {
 			cout<<"\e[A";
 			enviarBroadcast(entrada);
 		}
-	}while(entrada.compare("&\0") != 0);
+	}while(entrada.compare("&\0") != 0 && cliente->estalogueado());
 }
 
 
@@ -213,12 +264,21 @@ void ClienteController::entrarAlChat() {
 
 
 void ClienteController::verBuzon() {
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para ver el buzon"<< endl;
+		return;
+	}
 
 	this->obtenerCliente()->verBuzon();
 }
 
 
 void ClienteController::enviarBroadcast(string entrada) {
+
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para enviar un mensaje"<< endl;
+		return;
+	}
 	string mensajeProcesado;
 	string destinatario = "";
 	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, entrada, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);

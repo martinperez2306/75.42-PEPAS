@@ -28,6 +28,7 @@ private:
     ClienteParser::SocketData socketData;
     Cliente* cliente;
     recvThread threadRecibir;
+    bool reconexion;
     
 
 public:
@@ -62,6 +63,7 @@ public:
     void verBuzon();
 
     void enviarBroadcast(string entradita);
+void conectar();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

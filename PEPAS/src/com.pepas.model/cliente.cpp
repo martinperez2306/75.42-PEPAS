@@ -5,12 +5,14 @@
 #define BROADCAST 2
 #define BUZON 3
 #define SERVIDOR 4
+#define ERROR 5
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->usuario = new Usuario();
     this->socketFD=0;
     this->logueado = false;
+    this->conectado = false;
     
 }
 
@@ -41,7 +43,7 @@ void Cliente::logIn(){
     this->obtenerUsuario()->setearNombre(usuario);
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
-    this->parsearMensaje(this->recibirMensaje());
+    //this->parsearMensaje(this->recibirMensaje());
  
 }
 
@@ -94,7 +96,9 @@ void Cliente::enviarMensaje(string  mensa){
 
 std::string Cliente::recibirMensaje(){
 	int largo = stoi(this->socketCliente->Recibir(this->socketFD, 4),nullptr,10);
-	return this->socketCliente->Recibir(this->socketFD, largo);
+    string aux = this->socketCliente->Recibir(this->socketFD, largo);
+    cout <<aux <<endl;
+	return aux;
 }
 /*Este procesador, codifica el mensaje con el codigo 1.
 <código_mensaje>/<usuario>/<password>*/
@@ -157,6 +161,7 @@ void Cliente::parsearMensaje(std::string datos){
 	int i = 0;
 	loggear("entro al parsear mensaje",1);
 	loggear (datos,1);
+
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
 	loggear("paso el stoi tragico",1 );
 	
@@ -188,6 +193,14 @@ void Cliente::parsearMensaje(std::string datos){
             cout<<buzon<<endl;
             this->colaBuzon.push_back(buzon);
 		}
+            case ERROR:{
+                cout << "Se desconecto el servidor" << endl;
+                this->logueado = false;
+                this->conectado = false;
+                this->obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
+                this->vaciarColaChat();
+                this->vaciarColaBuzon();
+        }
 			break;
 		default:
 			break;
@@ -232,5 +245,45 @@ void Cliente::verBuzon() {
     }
     for (auto it=this->colaBuzon.begin(); it != this->colaBuzon.end(); it++) {
         cout <<*it<<endl;
+    }
+}
+
+
+bool Cliente::estaConectado(){
+    return this->conectado;
+}
+
+bool Cliente::estaConectadoYLogueado(){
+    if(!estaConectado()){
+        cout<< "Debe conectarse previamente" <<endl;
+        return false;
+    }
+
+    if(!estalogueado()){
+        cout<< "Debe loguearse previamente" <<endl;
+        return false;
+    }
+
+    return true;
+}
+
+void Cliente::conectarse(){
+    this->conectado = true;
+}
+
+void Cliente::desconectarse(){
+    this->conectado = false;
+}
+
+
+void Cliente::vaciarColaChat(){
+    while(!this->colaChat.empty()){
+        colaChat.pop_front();
+    }
+}
+
+void Cliente::vaciarColaBuzon(){
+    while(!this->colaBuzon.empty()){
+        colaBuzon.pop_front();
     }
 }
