@@ -137,9 +137,9 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
             cout << "Error al recibir mensaje " << error << endl;
         } else if (ultimaCantidadRecibida == 0) {
             socketShutDown = true;
-            cadenaAdevolver = "/6/"+to_string(fd); //TODO se puede buggear
+            cadenaAdevolver = "0006/"+to_string(fd);
             loggear("Recibi un 0, cadenaAdevolver = 6",1);
-            CerrarConexion();
+           // CerrarConexion();
         } else {
             totalRecibido += ultimaCantidadRecibida;
 

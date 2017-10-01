@@ -213,7 +213,9 @@ std::string obtenerParametros(std::string mensaje, int* i){
 
 std::string Servidor::recibirMensaje(Socket* socket) {
     string msg;
+    string aux = socket->Recibir(4);
     int largo = stoi(socket->Recibir(4), nullptr, 10);
+
     if (largo == -1) {
         msg = "6"; // codigo 6
         loggear("Se recibio mensaje 0 de desconexion", 1);
@@ -290,6 +292,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
         case USER_DISCONNECT:{
             string msg = "Se ha desconectado un usuario";
             loggear (msg,1);
+            int fileD = stoi (usuario, nullptr,10);
+            (this->mapaSocket->find(fileD)->second)->CerrarConexion(fileD);
             mensajeAEnviar = "CerrarCliente";
 
         }
