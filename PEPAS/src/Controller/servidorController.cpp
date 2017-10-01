@@ -24,7 +24,7 @@ void ServidorController::mostrarUsuariosDisponibles(){
 }
 int ServidorController::getMaximoClientesServidor(){
 
-	return this->servidor->getCantidadDeConexiones();
+	return this->servidor->getCantidadMaximaDeConexiones();
 }
 
 int ServidorController::getPuertoServidor(){
@@ -37,8 +37,7 @@ Usuario* ServidorController::getUsuario(string username){
 }
 
 void ServidorController::mostrarUsuariosConectados(){
-	this->servidor->mostrarUsuariosConectados();
-	this->servidorBuilder->baseDeDatos->mostrarTodosLosUsuariosConectados();
+	this->servidor->mostrarTodosLosUsuariosConectados();
 }
 
 ServidorController::~ServidorController(){

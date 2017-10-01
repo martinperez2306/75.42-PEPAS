@@ -42,7 +42,7 @@ void ServidorBuilder::setPuerto(int puerto){
 
 Servidor* ServidorBuilder::build(){
 
-	this->servidor->setCantidadDeConexiones(this->getCantidadDeConexiones());
+	this->servidor->setCantidadMaximaDeConexiones(this->getCantidadDeConexiones());
 	this->servidor->setPuerto(this->getPuerto());
 	this->servidor->setBaseDeDatos(this->baseDeDatos);
 

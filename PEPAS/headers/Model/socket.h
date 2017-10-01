@@ -61,6 +61,8 @@ class Socket {
         void CerrarConexion();
         void CerrarConexion(int socket);
 
+        void CerrarSocket(int socket);
+
 
         int obtenerFD();
 

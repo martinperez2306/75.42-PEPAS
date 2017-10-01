@@ -13,7 +13,7 @@ class Servidor{
 
 private:
 	int puerto;
-	int cantidadDeConexiones;
+	int cantidadMaximaDeConexiones;
 	int conexiones;
 	int socketFD;
 	int socketEscucha;
@@ -36,8 +36,9 @@ public:
 	void setPuerto(int puerto);
 	int getPuerto();
 
-	void setCantidadDeConexiones(int cantidadDeConexiones);
-	int getCantidadDeConexiones();
+	void setCantidadMaximaDeConexiones(int cantidadMaximaDeConexiones);
+	int getCantidadMaximaDeConexiones();
+	void mostrarTodosLosUsuariosConectados();
 
 	void setBaseDeDatos(BaseDeDatos* baseDeDatos);
 	BaseDeDatos* getBaseDeDatos();

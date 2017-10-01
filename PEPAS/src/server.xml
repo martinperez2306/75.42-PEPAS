@@ -18,6 +18,10 @@
 			<username>Payas</username>
 			<password>JR</password>
 		</usuario>
+		<usuario>
+			<username>Bianchi</username>
+			<password>fiuba</password>
+		</usuario>
 	</usuarios>
 
 </servidor>

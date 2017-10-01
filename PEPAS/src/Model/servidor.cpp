@@ -5,6 +5,8 @@
 #define BROADCAST 2
 #define BUZON 3
 #define LOGOUT 5
+#define USER_DISCONNECT 6
+#define RECONETION_FAIL 8
 
 typedef pair<int, Socket*> socketConect;
 
@@ -20,7 +22,7 @@ std::list<int> crearPuertos(){
 
 Servidor::Servidor(){
 
-	this->cantidadDeConexiones = 0;
+    this->cantidadMaximaDeConexiones = 0;
 	this->puerto = 0;
 	this->baseDeDatos = NULL;
 	this->serverSocket= new Socket();
@@ -52,9 +54,9 @@ void Servidor::asignarSocketFD(int fd2){
 	this->socketFD = fd2;
 }
 
-int Servidor::getCantidadDeConexiones(){
+int Servidor::getCantidadMaximaDeConexiones(){
 
-	return this->cantidadDeConexiones;
+    return this->cantidadMaximaDeConexiones;
 }
 
 int Servidor::getPuerto(){
@@ -62,9 +64,11 @@ int Servidor::getPuerto(){
 	return this->puerto;
 }
 
-void Servidor::setCantidadDeConexiones(int cantidadDeConexiones){
-
-	this->cantidadDeConexiones = cantidadDeConexiones;
+void Servidor::setCantidadMaximaDeConexiones(int cantidadMaximaDeConexiones) {
+    this->cantidadMaximaDeConexiones = cantidadMaximaDeConexiones;
+}
+void Servidor::mostrarTodosLosUsuariosConectados(){
+    this->baseDeDatos->mostrarTodosLosUsuariosConectados();
 }
 
 void Servidor::setPuerto(int puerto){
@@ -106,7 +110,7 @@ Socket* Servidor::iniciarConexion(int puerto) {
     loggear (msg, 1);
     newSocket->Crear();
     newSocket->Enlazar(puerto);
-    newSocket->Escuchar(this->getCantidadDeConexiones());
+    newSocket->Escuchar(this->getCantidadMaximaDeConexiones());
     int fd = newSocket->AceptarConexion();
     mapFD.insert({puerto,fd});
     /*Agrego a la lista el puerto que estoy usando*/
@@ -118,32 +122,79 @@ Socket* Servidor::iniciarConexion(int puerto) {
 }
 
 
+/*
 Socket*  Servidor::aceptarConexiones() {
     loggear ("Escuchando conexiones",1);
 	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
     int fd = obtenerSocket()->AceptarConexion();
     loggear ("Conexion aceptada" , 1);
-	/*Toma un puerto de los disponibles*/
+	*/
+/*Toma un puerto de los disponibles*//*
+
     int puerto = this->puertosDisponibles.front();
     string msg = "Conexion nueva en puerto: " + to_string(puerto);
     loggear(msg,1);
-	/*Lo quita de la pila*/ //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
+	*/
+/*Lo quita de la pila*//*
+ //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
 	this->puertosDisponibles.pop_front();
     this->asignarSocketFD(fd);
 	this->obtenerSocket()->asignarFD(fd);
-	/*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
+	*/
+/*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*//*
+
     this->enviarMensaje(to_string(puerto), this->obtenerSocket());
     Socket* socketNuevo = this->iniciarConexion(puerto);
-    /*Cierro la conexion con el socket escucha*/
+    */
+/*Cierro la conexion con el socket escucha*//*
+
     obtenerSocket()->CerrarConexion(fd);
     this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
 
-    /*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*/
+    */
+/*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*//*
+
     this->mapaSocket->insert(socketConect(puerto,socketNuevo));
 
     return socketNuevo;
 }
+*/
 
+Socket*  Servidor::aceptarConexiones() {
+    /*Servidor recibe conexion de los clientes en el puerto de escucha*/
+    loggear ("Escuchando conexiones",1);
+    obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadMaximaDeConexiones());
+    int fd = obtenerSocket()->AceptarConexion();
+    loggear ("Conexion aceptada" , 1);
+    this->asignarSocketFD(fd);
+    this->obtenerSocket()->asignarFD(fd);
+    /*Valida que no se haya llegado al maximo de conexiones*/
+    if(this->conexiones == this->cantidadMaximaDeConexiones){
+        string msgError = "El servidor ha llegado a su maxima capacidad de conexiones.";
+        this->enviarMensaje(to_string(RECONETION_FAIL),this->obtenerSocket());
+        this->obtenerSocket()->CerrarConexion(fd);
+        this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
+        loggear(msgError,1);
+        return this->obtenerSocket();
+    }else{
+        /*Toma un puerto de los disponibles*/
+        int puerto = this->puertosDisponibles.front();
+        string msg = "Conexion nueva en puerto: " + to_string(puerto);
+        loggear(msg,1);
+        /*Lo quita de la pila*/ //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
+        this->puertosDisponibles.pop_front();
+        /*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
+        this->enviarMensaje(to_string(puerto), this->obtenerSocket());
+        Socket* socketNuevo = this->iniciarConexion(puerto);
+        /*Cierro la conexion con el socket escucha*/
+        obtenerSocket()->CerrarConexion(fd);
+        this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
+        /*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*/
+        this->mapaSocket->insert(socketConect(puerto,socketNuevo));
+        this->conexiones += 1;
+        return socketNuevo;
+    }
+}
 
 void Servidor::finalizarConexiones() {
 	obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
@@ -160,8 +211,14 @@ std::string obtenerParametros(std::string mensaje, int* i){
     return aux;
 }
 
-std::string Servidor::recibirMensaje(Socket* socket){
-	int largo = stoi(socket->Recibir(4),nullptr,10);
+std::string Servidor::recibirMensaje(Socket* socket) {
+    string msg;
+    int largo = stoi(socket->Recibir(4), nullptr, 10);
+    if (largo == -1) {
+        msg = "6"; // codigo 6
+        loggear("Se recibio mensaje 0 de desconexion", 1);
+    }
+    else msg = socket->Recibir(largo);
 	return socket->Recibir(largo);
 }
 
@@ -205,8 +262,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 			std::string destinatario = obtenerParametros(datos,&i);
 			std::string mensaje = obtenerParametros(datos,&i);
             Usuario *usuarioDestinatario = this->obtenerBaseDeDatos()->getUsuario(destinatario);
-            if (usuarioDestinatario == NULL) {
-                msg = "/4/El destinatario al que se le envio el mensaje no existe";
+            Usuario *usuarioEstaConectado = this->obtenerBaseDeDatos()->getUsuarioConectado(destinatario);
+            if (usuarioDestinatario == NULL || usuarioEstaConectado == NULL) {
+                msg = "/4/El destinatario no existe o no se encuentra conectado.";
                 unsigned long largoDelMensaje = msg.length();
                 string stringProcesado = this->agregarPadding(largoDelMensaje) + msg;
                 this->enviarMensaje(stringProcesado, this->obtenerBaseDeDatos()->getUsuario(usuario)->getSocket());
@@ -228,8 +286,14 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             string msgLogger = "Usuario " + usuario + "desconectado";
             loggear (msgLogger,1);
         }
-
 			break;
+        case USER_DISCONNECT:{
+            string msg = "Se ha desconectado un usuario";
+            loggear (msg,1);
+            mensajeAEnviar = "CerrarCliente";
+
+        }
+            break;
 		default:
 			break;
 	}
@@ -295,6 +359,8 @@ void Servidor::cerrarSockets() {
         puertosEnUso.pop_front();
         unordered_map<int,int>::const_iterator got = mapFD.find(puertoActual);
         this->obtenerSocket()->CerrarConexion(got->second);
+        //this->obtenerSocket()->CerrarSocket(got->second);
+
     }
 	this->obtenerSocket()->CerrarConexion(obtenerSocketEscucha());
 

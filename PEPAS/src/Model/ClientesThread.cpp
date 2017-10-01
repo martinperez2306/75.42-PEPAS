@@ -16,7 +16,11 @@ void ClientesThread::run() {
     loggear (msglogger,1);
     while (!estaCerrado) {
         string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
-        //cout<<msg<<endl;
+        if (msg == "CerrarCliente"){
+            borrable=true;
+            break;
+        }
+
         //srv->enviarMensaje(msg, this->socket);
     }
 }

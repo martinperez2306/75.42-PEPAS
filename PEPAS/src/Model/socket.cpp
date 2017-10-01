@@ -1,6 +1,6 @@
 #include "../../headers/Model/socket.h"
 #include "../../headers/Model/logger.h"
-
+#include <unistd.h>
 #define MAX_DATA_SIZE 9999
 
 using namespace std;
@@ -127,15 +127,19 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
 std::string Socket::Recibir( size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
+    string cadenaAdevolver;
     char buffer[MAX_DATA_SIZE] = {0};
     ssize_t ultimaCantidadRecibida = 0;
-    while (totalRecibido < mensajeAleerLength) { // && !socketShutDown
+    while (totalRecibido < mensajeAleerLength && !socketShutDown) { //
         ultimaCantidadRecibida = recv(fd, buffer, mensajeAleerLength - totalRecibido, 0);
         if (ultimaCantidadRecibida < 0) {
             string error = strerror(errno);
             cout << "Error al recibir mensaje " << error << endl;
         } else if (ultimaCantidadRecibida == 0) {
             socketShutDown = true;
+            cadenaAdevolver = "/6/"+to_string(fd); //TODO se puede buggear
+            loggear("Recibi un 0, cadenaAdevolver = 6",1);
+            CerrarConexion();
         } else {
             totalRecibido += ultimaCantidadRecibida;
 
@@ -147,12 +151,13 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
         cout << "Error al recibir el mensaje " << error << endl;
     }
 
-
-    string  cadenaAdevolver = chartoString (buffer);
-    string msgLogger =  "Antes de convertir a string: " + cadenaAdevolver;
-    loggear(msgLogger,1);
-    msgLogger = "El ultivo recv fue de " + to_string(ultimaCantidadRecibida) + "bytes";
-    loggear(msgLogger,1);
+    if (ultimaCantidadRecibida > 0) {
+        cadenaAdevolver = chartoString(buffer);
+        string msgLogger = "Antes de convertir a string: " + cadenaAdevolver;
+        loggear(msgLogger, 1);
+        msgLogger = "El ultivo recv fue de " + to_string(ultimaCantidadRecibida) + " bytes";
+        loggear(msgLogger, 1);
+    }
     return cadenaAdevolver;
 
 }
@@ -176,6 +181,13 @@ void Socket::CerrarConexion(int socket) {
         string error = strerror(errno);
         loggear(error,3);
         cout << "Error al cerrar conexion " << error << endl;
+    }
+}
+void Socket::CerrarSocket(int socket) {
+    int ret = close(socket);
+    if (ret == -1){
+        string error = strerror(errno);
+        cout<<"Error en el cierre del socket" <<error<<endl;
     }
 }
 
