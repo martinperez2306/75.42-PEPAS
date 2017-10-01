@@ -6,6 +6,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <algorithm>
 
 
 
@@ -23,8 +24,8 @@ private:
 	Socket* serverSocket;
 	std::list<int> puertosDisponibles;
 	std::list<int> puertosEnUso;
-	std::unordered_map<int,int> mapFD; // <puerto, socketFD>
-	map<int,Socket*>* mapaSocket;
+	unordered_map<int, int> mapFD; // <socketFD, puerto>
+	map<int,Socket*>* mapaSocket; // <puerto, Socket>
 
 
 public:

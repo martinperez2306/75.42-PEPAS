@@ -7,7 +7,7 @@
 void EscuchaThread::run() {
     servidor->iniciarServidor();
     while(!servidor->getTerminado()){
-        this->socket = servidor->aceptarConexiones();
+
         for (auto it = clientThreads.begin(); it != clientThreads.end();
              ++it) {
             if (it->esBorrable()) {
@@ -15,6 +15,7 @@ void EscuchaThread::run() {
                 it = clientThreads.erase(it);
             }
         }
+        this->socket = servidor->aceptarConexiones();
         clientThreads.emplace_back(this->socket, this->servidor, this->servidor->getTerminado());
         /*Se obtiene el ultimo de la pila y se lo ejecuta con start()*/
         clientThreads.back().start();

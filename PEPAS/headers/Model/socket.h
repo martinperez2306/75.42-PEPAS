@@ -15,6 +15,7 @@ class Socket {
 
     private:
         int fd;
+        int puerto;
 
     public:
 
@@ -65,6 +66,8 @@ class Socket {
 
 
         int obtenerFD();
+
+        int obtenerPuerto();
 
         ~Socket();
 

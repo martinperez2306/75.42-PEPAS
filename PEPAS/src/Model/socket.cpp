@@ -6,6 +6,7 @@
 using namespace std;
 Socket::Socket(){
     this->fd=0;
+    this->puerto=0;
 }
 
 int Socket::Crear(){
@@ -20,6 +21,7 @@ int Socket::Crear(){
 }
 
 void Socket::Enlazar(int puerto) {
+    this->puerto = puerto;
     struct sockaddr_in serverAddress;
     memset((char *)&serverAddress,0, sizeof(serverAddress));
     serverAddress.sin_family = AF_INET;
@@ -127,7 +129,7 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
 std::string Socket::Recibir( size_t mensajeAleerLength) {
     bool socketShutDown = false;
     ssize_t totalRecibido = 0;
-    string cadenaAdevolver;
+    string cadenaAdevolver ;//= "";
     char buffer[MAX_DATA_SIZE] = {0};
     ssize_t ultimaCantidadRecibida = 0;
     while (totalRecibido < mensajeAleerLength && !socketShutDown) { //
@@ -203,5 +205,9 @@ int Socket::obtenerFD() {
 void Socket::asignarFD(int newFD) {
     this->fd = newFD;
 
+}
+
+int Socket::obtenerPuerto() {
+    return this->puerto;
 }
 

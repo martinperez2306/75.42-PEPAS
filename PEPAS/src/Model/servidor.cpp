@@ -9,6 +9,7 @@
 #define RECONETION_FAIL 8
 
 typedef pair<int, Socket*> socketConect;
+typedef pair<int,int> mapPortFd;
 
 std::list<int> crearPuertos(){
 	
@@ -112,7 +113,7 @@ Socket* Servidor::iniciarConexion(int puerto) {
     newSocket->Enlazar(puerto);
     newSocket->Escuchar(this->getCantidadMaximaDeConexiones());
     int fd = newSocket->AceptarConexion();
-    mapFD.insert({puerto,fd});
+    mapFD.insert(mapPortFd(fd,puerto));
     /*Agrego a la lista el puerto que estoy usando*/
     puertosEnUso.push_back(puerto);
     /*Piso el valor del fd por el nuevo que contiene la conexion aceptada*/
@@ -122,43 +123,6 @@ Socket* Servidor::iniciarConexion(int puerto) {
 }
 
 
-/*
-Socket*  Servidor::aceptarConexiones() {
-    loggear ("Escuchando conexiones",1);
-	obtenerSocket()->Escuchar(this->obtenerSocketEscucha(),this->getCantidadDeConexiones());
-    int fd = obtenerSocket()->AceptarConexion();
-    loggear ("Conexion aceptada" , 1);
-	*/
-/*Toma un puerto de los disponibles*//*
-
-    int puerto = this->puertosDisponibles.front();
-    string msg = "Conexion nueva en puerto: " + to_string(puerto);
-    loggear(msg,1);
-	*/
-/*Lo quita de la pila*//*
- //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
-	this->puertosDisponibles.pop_front();
-    this->asignarSocketFD(fd);
-	this->obtenerSocket()->asignarFD(fd);
-	*/
-/*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*//*
-
-    this->enviarMensaje(to_string(puerto), this->obtenerSocket());
-    Socket* socketNuevo = this->iniciarConexion(puerto);
-    */
-/*Cierro la conexion con el socket escucha*//*
-
-    obtenerSocket()->CerrarConexion(fd);
-    this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
-
-    */
-/*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*//*
-
-    this->mapaSocket->insert(socketConect(puerto,socketNuevo));
-
-    return socketNuevo;
-}
-*/
 
 Socket*  Servidor::aceptarConexiones() {
     /*Servidor recibe conexion de los clientes en el puerto de escucha*/
@@ -181,7 +145,7 @@ Socket*  Servidor::aceptarConexiones() {
         int puerto = this->puertosDisponibles.front();
         string msg = "Conexion nueva en puerto: " + to_string(puerto);
         loggear(msg,1);
-        /*Lo quita de la pila*/ //TODO CUANDO UN CLIENTE SE DESCONECTA DEBERIA VOLVER A AGREGARLO A LA LISTA.
+        /*Lo quita de la pila*/
         this->puertosDisponibles.pop_front();
         /*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
         this->enviarMensaje(to_string(puerto), this->obtenerSocket());
@@ -213,14 +177,7 @@ std::string obtenerParametros(std::string mensaje, int* i){
 
 std::string Servidor::recibirMensaje(Socket* socket) {
     string msg;
-    string aux = socket->Recibir(4);
     int largo = stoi(socket->Recibir(4), nullptr, 10);
-
-    if (largo == -1) {
-        msg = "6"; // codigo 6
-        loggear("Se recibio mensaje 0 de desconexion", 1);
-    }
-    else msg = socket->Recibir(largo);
 	return socket->Recibir(largo);
 }
 
@@ -293,7 +250,20 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             string msg = "Se ha desconectado un usuario";
             loggear (msg,1);
             int fileD = stoi (usuario, nullptr,10);
-            (this->mapaSocket->find(fileD)->second)->CerrarConexion(fileD);
+            /*Obtengo el puerto a partir del FD*/
+            //int puerto = mapFD.find(fileD)->first;
+            int puerto = this->mapFD.find(fileD)->second;
+            loggear (to_string(puerto),1);
+            /*Cierro el socket*/
+            this->mapaSocket->find(puerto)->second->CerrarConexion(fileD);
+            /*Saco el puerto de uso*/
+            auto iter = std::find (puertosEnUso.begin(), puertosEnUso.end(), puerto);
+
+            /* Lo saco de la pila*/
+            puertosEnUso.erase(iter);
+            /*Lo pongo al principio de puertosDisponibles*/
+            //puertosDisponibles.push_front(puerto);
+
             mensajeAEnviar = "CerrarCliente";
 
         }
@@ -361,10 +331,9 @@ void Servidor::cerrarSockets() {
     while (!puertosEnUso.empty()){
         int puertoActual = puertosEnUso.front();
         puertosEnUso.pop_front();
-        unordered_map<int,int>::const_iterator got = mapFD.find(puertoActual);
-        this->obtenerSocket()->CerrarConexion(got->second);
+        auto got = mapaSocket->find(puertoActual);
+        this->obtenerSocket()->CerrarConexion(got->second->obtenerFD());
         //this->obtenerSocket()->CerrarSocket(got->second);
-
     }
 	this->obtenerSocket()->CerrarConexion(obtenerSocketEscucha());
 
