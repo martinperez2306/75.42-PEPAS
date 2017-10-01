@@ -63,7 +63,6 @@ void Consola::cargarMenuPrincipal() {
 				break;
 			case 6:
 				this->clienteController->logOut();
-
 				break;
 			case 7:
 				this->clienteController->verBuzon();
@@ -84,58 +83,6 @@ void Consola::cargarMenuPrincipal() {
 	
 
 }
-
-void* enviarMensajes(void* threadid) {
-
-	//cargarMenuPrincipal();
-}
-
-// void *Consola::cargarPagina() {
-// 	terminado = false;
-// 	int numeroPagina;
-// 	string entrada;
-// 	while(!terminado){
-		
-// 		cout<<"*********************************************"<<endl;
-// 		cout<<"Ingrese una opcion segun corresponda"<<endl;
-// 		cout<<"Seleccione 1 conectarse al servidor"<<endl;
-// 		cout<<"Seleccione 2 para salir"<<endl;
-// 		cout<<"*********************************************"<<endl;
-// 		cout<<"-->";
-// 		cin>> entrada;
-		
-// 		if(!esint(entrada)){
-// 			cout<<"Entrada invalida"<<endl;
-// 			continue;
-// 		}
-// 		numeroPagina = stoi(entrada,nullptr,10);
-// 		switch(numeroPagina) {
-// 			case 1:
-// 				if (this->clienteController->conectarConElServidor() == -1) {
-// 					cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
-// 				} else {
-// 		            cout<<"Haciendo cambio de puerto"<<endl;
-// 					this->clienteController->obtengoPuertoNuevoYHagoConectar();
-// 					socketFD = this->clienteController->obtenerCliente()->obtenerSocketFD();
-// 					controller = this->clienteController;
-// 					socketCliente = this->clienteController->obtenerCliente()->obtenerSocket();
-// 					this->cargarMenuPrincipal();
-					
-					
-// 				}
-// 				break;
-// 			case 2:
-// 			{
-// 				this->clienteController->salirDelPrograma();
-// 				terminado = true;				
-// 			}
-// 				break;
-// 			default:{
-				
-// 			}
-// 		}
-// 	}
-// }
 
 void Consola::cargarPaginaCrearCliente(){
 

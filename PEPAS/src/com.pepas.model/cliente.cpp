@@ -97,7 +97,6 @@ void Cliente::enviarMensaje(string  mensa){
 std::string Cliente::recibirMensaje(){
 	int largo = stoi(this->socketCliente->Recibir(this->socketFD, 4),nullptr,10);
     string aux = this->socketCliente->Recibir(this->socketFD, largo);
-    cout <<aux <<endl;
 	return aux;
 }
 /*Este procesador, codifica el mensaje con el codigo 1.
@@ -190,8 +189,8 @@ void Cliente::parsearMensaje(std::string datos){
 			std::string mensaje = obtenerParametros(datos,&i);
             string msg = armarMensaje(usuario, mensaje);
             string buzon = "[BUZON]" + msg;
-            cout<<buzon<<endl;
             this->colaBuzon.push_back(buzon);
+            break;
 		}
             case ERROR:{
                 cout << "Se desconecto el servidor" << endl;

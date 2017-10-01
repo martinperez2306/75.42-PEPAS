@@ -1,5 +1,6 @@
 #include "../../headers/com.pepas.model/socket.h"
 #include "../../headers/com.pepas.logger/Logger.h"
+#include <unistd.h>
 
 #define MAX_DATA_SIZE 1000
 
@@ -39,12 +40,14 @@ void Socket::Enlazar(int socket, int puerto, string serverIP) {
 
 int Socket::Conectar(int socket, int puerto, const char *IPremota) {
     struct sockaddr_in serverAddress;
+    int ret = -1;
     serverAddress.sin_family = AF_INET;
     serverAddress.sin_addr.s_addr = inet_addr(IPremota);
     serverAddress.sin_port = htons(puerto);
     socklen_t serverSize = sizeof(serverAddress);
     /*VERIFICACION DE ERRORES*/
-    if (connect(socket, (struct sockaddr *) &serverAddress, serverSize) < 0) {
+    ret = connect(socket, (struct sockaddr *) &serverAddress, serverSize);
+    if (ret < 0) {
         // logger info
         cout << "Error al conectar con el servidor " << strerror(errno) << endl;
         return -1;
@@ -161,7 +164,11 @@ void Socket::CerrarConexion(int socket) {
 }
 
 void Socket::CerrarSocket(int socket) {
-    //close(socket);
+    int ret = close(socket);
+    if (ret == -1){
+        string error = strerror(errno);
+        cout<<"Error en el cierre del socket" <<error<<endl;
+    }
 }
 
 Socket::~Socket(){

@@ -42,7 +42,7 @@ void ClienteController::conectar(){
 		cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 	} else {
         cout<<"Haciendo cambio de puerto"<<endl;
-		this->obtengoPuertoNuevoYHagoConectar();
+this->obtengoPuertoNuevoYHagoConectar();
 		this->cliente->conectarse();
 		this->empezarRecibir();
 		this->reconexion = true;
@@ -67,6 +67,7 @@ void ClienteController::desconectarseDelServidor(){
 
 	this->cliente->desconectarse();
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
+    //this->obtenerCliente()->obtenerSocket()->CerrarSocket(this->obtenerCliente()->obtenerSocketFD());
 	reconexion = false;
 	this->dejarRecibir();
 	this->cliente->vaciarColaChat();
@@ -111,50 +112,53 @@ void ClienteController::logIn() {
 }
 
 
+
 void ClienteController::stressTest(){
+    if (!cliente->estalogueado()){
+        cout<< "Debe loguearse para enviar un mensaje"<< endl;
+        return;
+    }
+    string milisegundos, totalmili;
+    cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
+    int mili, total;
+    try {
+        cin >> milisegundos;
+        mili = stoi(milisegundos, nullptr,10);
+        mili = mili * 1000;
+        cout<<"Ingrese cantidad de milisegundos en total: ";
+        cin>>totalmili;
+        total = stoi(totalmili, nullptr,10);
+        total = total * 1000;
+    }catch (std::invalid_argument)
+    {
+        cout << "Ingrese unicamente un numero " <<'\n';
+    }
+    ifstream myReadFile;
+    myReadFile.open("cliente_test_file");
+    string stressMsg;
+    if (myReadFile.is_open()) {
+        while (!myReadFile.eof()) {
+            getline(myReadFile,stressMsg);
+            myReadFile.ignore();
+        }
+    }
+    myReadFile.close();
 
-	if (!cliente->estalogueado()){
-		cout<< "Debe loguearse para enviar un mensaje"<< endl;
-		return;
-	}
+    int i=0;
+    do{
+        usleep(mili);
+        enviarBroadcast(stressMsg);
+        i += mili;
 
-	string milisegundos, totalmili;
-	cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
-	int mili, total;
-	try {
-		cin >> milisegundos;
-		mili = stoi(milisegundos, nullptr,10);
-		cout<<"Ingrese cantidad de milisegundos en total: ";
-		cin>>totalmili;
-		total = stoi(totalmili, nullptr,10);
-	}catch (std::invalid_argument)
-	{
-		cout << "Ingrese unicamente un numero " <<'\n';
-	}
-	ifstream myReadFile;
-	myReadFile.open("cliente_test_file");
-	string stressMsg;
-	if (myReadFile.is_open()) {
-		while (!myReadFile.eof()) {
-			//myReadFile >> output;
-			getline(myReadFile,stressMsg);
-			myReadFile.ignore();
-			cout<<stressMsg<<endl;
-		}
-	}
-	myReadFile.close();
-
-	int i=0;
-	do{
-		enviarBroadcast(stressMsg);
-		i += mili;
-		usleep(mili);
-	} while (i != total);
+    } while (i != total);
 
 
 
 
 }
+
+
+
 
 
 
@@ -247,7 +251,7 @@ void ClienteController::entrarAlChat() {
 			if (kbhit()){
 				break;
 			}
-			cout<<this->obtenerCliente()->obtenerColaChat().front()<<endl;
+            cout<<this->obtenerCliente()->obtenerColaChat().front()<<flush<<endl;
 			this->obtenerCliente()->desencolarColaChat();
 		}
 
