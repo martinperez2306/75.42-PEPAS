@@ -196,7 +196,7 @@ void Cliente::parsearMensaje(std::string datos){
                 cout << "Se desconecto el servidor" << endl;
                 this->logueado = false;
                 this->conectado = false;
-                this->obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
+                //this->obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
                 this->vaciarColaChat();
                 this->vaciarColaBuzon();
         }

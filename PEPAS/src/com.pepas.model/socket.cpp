@@ -86,7 +86,7 @@ void Socket::AceptarConexion(int listenSocket) {
 
 std::string chartoString (char* buffer){
     string string = "";
-    for (int i = 0; i< strlen(buffer);i++){
+    for (unsigned int i = 0; i< strlen(buffer);i++){
         string = string + buffer[i];
     }
     return string;
@@ -134,7 +134,8 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
         loggear(to_string(ultimaCantidadRecibida), 1);
         if (ultimaCantidadRecibida < 0) {
             string error = strerror(errno);
-            cout << "Error al recibir mensaje " << error << endl;  
+            cout << "Error al recibir mensaje " << error << endl;
+            socketShutDown = true;  
                       
         } else if (ultimaCantidadRecibida == 0) {
             cadenaAdevolver="0005";

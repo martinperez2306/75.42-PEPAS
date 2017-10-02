@@ -12,7 +12,6 @@
 ClienteParser::ClienteParser(){}
 
 ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
-	struct sockaddr_in sa;
 	ClienteParser::SocketData sd;
 	pugi::xml_document documento;
 	pugi::xml_parse_result result = documento.load_file(xmlPath, pugi::parse_default|pugi::parse_declaration);

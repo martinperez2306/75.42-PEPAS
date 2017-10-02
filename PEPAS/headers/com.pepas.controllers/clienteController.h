@@ -29,6 +29,7 @@ private:
     Cliente* cliente;
     recvThread threadRecibir;
     bool reconexion;
+   const char* ipAddress;
     
 
 public:

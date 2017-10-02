@@ -14,6 +14,7 @@ ClienteController::ClienteController(){
 	this->threadRecibir = recvThread(cliente);
 	this->reconexion = false;
 
+
 }
 
 
@@ -37,12 +38,12 @@ void ClienteController::conectar(){
 	if(reconexion){
 		this->dejarRecibir();
 	}
-		
+	this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
 	if (this->conectarConElServidor() == -1) {
 		cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 	} else {
         cout<<"Haciendo cambio de puerto"<<endl;
-this->obtengoPuertoNuevoYHagoConectar();
+		this->obtengoPuertoNuevoYHagoConectar();
 		this->cliente->conectarse();
 		this->empezarRecibir();
 		this->reconexion = true;
