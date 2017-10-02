@@ -110,7 +110,10 @@ Socket* Servidor::iniciarConexion(int puerto) {
     string msg = "El puerto del cliente es: " + to_string(puerto);
     loggear (msg, 1);
     newSocket->Crear();
-    newSocket->Enlazar(puerto);
+
+        while(!newSocket->Enlazar(puerto)){
+            puerto++;
+        }
     newSocket->Escuchar(this->getCantidadMaximaDeConexiones());
     int fd = newSocket->AceptarConexion();
     mapFD.insert(mapPortFd(fd,puerto));
@@ -142,21 +145,36 @@ Socket*  Servidor::aceptarConexiones() {
         return this->obtenerSocket();
     }else{
         /*Toma un puerto de los disponibles*/
-        int puerto = this->puertosDisponibles.front();
+        int puerto = 8000;
+        
+        /*Lo quita de la pila*/
+        /*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
+        Socket* newSocket= new Socket();
+        newSocket->Crear();
+
+        while(!newSocket->Enlazar(puerto)){
+            puerto++;
+        }
         string msg = "Conexion nueva en puerto: " + to_string(puerto);
         loggear(msg,1);
-        /*Lo quita de la pila*/
-        this->puertosDisponibles.pop_front();
-        /*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
+        cout<<msg<<endl;
         this->enviarMensaje(to_string(puerto), this->obtenerSocket());
-        Socket* socketNuevo = this->iniciarConexion(puerto);
+
+        newSocket->Escuchar(this->getCantidadMaximaDeConexiones());
+        int fdd = newSocket->AceptarConexion();
+        mapFD.insert(mapPortFd(fdd,puerto));
+        /*Agrego a la lista el puerto que estoy usando*/
+        puertosEnUso.push_back(puerto);
+        /*Piso el valor del fd por el nuevo que contiene la conexion aceptada*/
+        newSocket->asignarFD(fdd);
+        loggear ("Conexion aceptada", 1);
         /*Cierro la conexion con el socket escucha*/
         obtenerSocket()->CerrarConexion(fd);
         this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
         /*Agregamos el socket del cliente y el servidor donde se comunicaran a la lista*/
-        this->mapaSocket->insert(socketConect(puerto,socketNuevo));
+        this->mapaSocket->insert(socketConect(puerto,newSocket));
         this->conexiones += 1;
-        return socketNuevo;
+        return newSocket;
     }
 }
 

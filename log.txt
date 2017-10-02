@@ -641,3 +641,1335 @@ Hora: Sat Sep 23 19:05:21 2017
 
  
 **********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 15:54:44 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 15:57:46 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 15:57:49 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:00:03 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:02:31 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:04:15 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:05:53 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:13:59 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:15:04 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:16:15 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:17:33 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:18:12 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:18:59 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+El puerto del cliente es: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+El puerto del cliente es: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/15
+Paso el stoi tragico
+Se ha desconectado un usuario
+8003
+Conexion aceptada
+Mensaje enviado: 8
+El servidor ha llegado a su maxima capacidad de conexiones.
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:01 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:07 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:07 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:08 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:08 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:08 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:09 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:09 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:09 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:09 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:09 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:10 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:12 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:12 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:20:13 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:24:04 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:27:17 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+El puerto del cliente es: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:28:49 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+El puerto del cliente es: 8002
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:31:22 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:40:52 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+El puerto del cliente es: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+El puerto del cliente es: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/15
+Paso el stoi tragico
+Se ha desconectado un usuario
+8003
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:48:53 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:50:12 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:52:25 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+El puerto del cliente es: 8001
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+El puerto del cliente es: 8002
+Conexion aceptada
+Thread listo para correr cliente ... 
+Escuchando conexiones
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+El puerto del cliente es: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/15
+Paso el stoi tragico
+Se ha desconectado un usuario
+8003
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:57:33 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:57:54 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:58:08 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:58:26 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:58:49 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 16:58:54 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+El puerto del cliente es: 8000
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 17:17:01 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 17:20:39 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 17:23:01 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 17:23:28 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Mon Oct  2 17:23:50 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/hola
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/2/Augusto/hola
+Paso el stoi tragico
+Mensaje enviado: 0015/2/Augusto/hola
+Antes de convertir a string: 0012
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/&
+El ultivo recv fue de 12 bytes
+Entro al parsear mensaje
+/2/Augusto/&
+Paso el stoi tragico
+Mensaje enviado: 0012/2/Augusto/&
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /5/Augusto
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/5/Augusto
+Paso el stoi tragico
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001

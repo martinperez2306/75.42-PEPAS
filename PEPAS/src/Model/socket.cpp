@@ -20,7 +20,7 @@ int Socket::Crear(){
     return fd;
 }
 
-void Socket::Enlazar(int puerto) {
+bool Socket::Enlazar(int puerto) {
     this->puerto = puerto;
     struct sockaddr_in serverAddress;
     memset((char *)&serverAddress,0, sizeof(serverAddress));
@@ -34,8 +34,9 @@ void Socket::Enlazar(int puerto) {
         string error = strerror(errno);
         loggear(error,3);
         cout << "Error al hacer el enlazado " << error << endl;
-        exit(1);
+        return false;
     }
+    return true;
 }
 
 
