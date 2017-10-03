@@ -31,7 +31,7 @@ void Consola::cargarMenuPrincipal() {
 		cout<<"Seleccione 5 para el Stress Test"<<endl;
 		cout<<"Seleccione 6 para el deslogearse"<<endl;
 		cout<<"Seleccione 7 para ver su buzon"<<endl;
-		cout<<"Seleccione 8 para desconectarce"<<endl;
+		cout<<"Seleccione 8 para desconectarse"<<endl;
 		cout<<"Seleccione 9 para salir"<<endl;
 		cout<<"*********************************************"<<endl;
 		cin>> entrada;

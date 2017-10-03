@@ -44,9 +44,7 @@ void ClienteController::conectar(){
 	} else {
         cout<<"Haciendo cambio de puerto"<<endl;
 		this->obtengoPuertoNuevoYHagoConectar();
-		this->cliente->conectarse();
-		this->empezarRecibir();
-		this->reconexion = true;
+
 
 	}
 }
@@ -62,9 +60,9 @@ void ClienteController::desconectarseDelServidor(){
 		cout << "Usted no esta conectado" << endl;
 		return;
 	}
-	if (cliente->estalogueado()){
-		this->logOut();
-	}
+	 if (cliente->estalogueado()){
+	 	this->logOut();
+	 }
 
 	this->cliente->desconectarse();
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
@@ -199,6 +197,10 @@ Cliente *ClienteController::obtenerCliente() {
 void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	/*Recibo 4 bytes en donde ya se que voy a recibir 4 bytes con el puerto nuevo*/
 	string puerto = this->obtenerCliente()->obtenerSocket()->Recibir(this->obtenerCliente()->obtenerSocketFD(), 4);
+	if (puerto =="0005"){
+		cout<< "El servidor ya esta ocupado con su maxima capacidad" << endl;
+		return;
+	}
 	/*Cierro la conexion con el puerto del xml*/
     cout<<"El puerto recibido es: "<<puerto<<endl;
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
@@ -208,6 +210,9 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	/*Me conecto al nuevo servidor*/
 	this->obtenerCliente()->conectarseAlServidor(socketData.ip, socketData.puerto);
 	cout<<"Conectado satisfactorio con puerto: "<<socketData.puerto<<endl;
+	this->cliente->conectarse();
+	this->empezarRecibir();
+	this->reconexion = true;
 
 }
 
@@ -259,9 +264,11 @@ void ClienteController::entrarAlChat() {
 		if (kbhit()){
 			getline(cin,entrada);
 			cout<<"\e[A";
+			if(entrada.compare("&\0") == 0)
+				break;
 			enviarBroadcast(entrada);
 		}
-	}while(entrada.compare("&\0") != 0 && cliente->estalogueado());
+	}while(cliente->estalogueado());
 }
 
 
