@@ -26,6 +26,7 @@ private:
 	std::list<int> puertosEnUso;
 	unordered_map<int, int> mapFD; // <socketFD, puerto>
 	map<int,Socket*>* mapaSocket; // <puerto, Socket>
+	map<int, string>* mapUsuario;
 
 
 public:
@@ -77,6 +78,7 @@ public:
 
 	string procesarMensaje(string unMensaje);
 	string agregarPadding(int lenght);
+void desloguearse(string usuario,Socket* socketDelemisor);
 };
 
 

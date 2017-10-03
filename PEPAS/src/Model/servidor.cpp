@@ -10,6 +10,8 @@
 
 typedef pair<int, Socket*> socketConect;
 typedef pair<int,int> mapPortFd;
+typedef pair<int, string> usuarioConect;
+
 
 std::list<int> crearPuertos(){
 	
@@ -33,6 +35,7 @@ Servidor::Servidor(){
 	this->puertosDisponibles = crearPuertos();
 	this->terminado = false;
 	this->mapaSocket = new map<int,Socket*>();
+    this->mapUsuario = new map<int,string>();
 
 }
 
@@ -138,11 +141,10 @@ Socket*  Servidor::aceptarConexiones() {
     /*Valida que no se haya llegado al maximo de conexiones*/
     if(this->conexiones == this->cantidadMaximaDeConexiones){
         string msgError = "El servidor ha llegado a su maxima capacidad de conexiones.";
-        this->enviarMensaje(to_string(RECONETION_FAIL),this->obtenerSocket());
         this->obtenerSocket()->CerrarConexion(fd);
         this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
         loggear(msgError,1);
-        return this->obtenerSocket();
+        return NULL;
     }else{
         /*Toma un puerto de los disponibles*/
         int puerto = 8000;
@@ -254,14 +256,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             break;
 		}
         case LOGOUT:{
-            string msg = "El usuario se ha deslogueado correctamente";
-            msg = procesarMensaje(msg);
-            this->enviarMensaje(msg,socketDelemisor);
-            Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
-            usuarioLogOut->estaDesconectado();
-            this->obtenerBaseDeDatos()->sacarUsuarioConectadoABaseDeDatos(usuario);
-            string msgLogger = "Usuario " + usuario + "desconectado";
-            loggear (msgLogger,1);
+            this->desloguearse(usuario,socketDelemisor);
+
         }
 			break;
         case USER_DISCONNECT:{
@@ -271,6 +267,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             /*Obtengo el puerto a partir del FD*/
             //int puerto = mapFD.find(fileD)->first;
             int puerto = this->mapFD.find(fileD)->second;
+            if(this->mapUsuario->count(puerto) > 0)
+                this->desloguearse(this->mapUsuario->find(puerto)->second,socketDelemisor);
+
             loggear (to_string(puerto),1);
             /*Cierro el socket*/
             this->mapaSocket->find(puerto)->second->CerrarConexion(fileD);
@@ -295,6 +294,18 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 return mensajeAEnviar;
 }
 
+
+void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
+
+    string msg = "El usuario se ha deslogueado correctamente";
+    msg = procesarMensaje(msg);
+    this->enviarMensaje(msg,socketDelemisor);
+    Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
+    usuarioLogOut->estaDesconectado();
+    this->obtenerBaseDeDatos()->sacarUsuarioConectadoABaseDeDatos(usuario);
+    string msgLogger = "Usuario " + usuario + "desconectado";
+    loggear (msgLogger,1);
+}
 string Servidor::validarCliente(string usuario, string contrasenia, Socket* socketDelEmisor) {
     Usuario *usuarioAValidar = this->obtenerBaseDeDatos()->getUsuario(usuario);
     string msg, msgOK, msgAdevolver;
@@ -322,6 +333,8 @@ string Servidor::validarCliente(string usuario, string contrasenia, Socket* sock
                 usuarioAValidar->estaConectado();
                 usuarioAValidar->asignarSocket(socketDelEmisor);
                 this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
+                int puerto = this->mapFD.find(socketDelEmisor->obtenerFD())->second;
+                this->mapUsuario->insert(usuarioConect(puerto,usuario));
             }
 
     msgAdevolver = msgOK;

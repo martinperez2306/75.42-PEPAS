@@ -2748,3 +2748,1143 @@ Mensaje enviado: 8006
 Conexion aceptada
 Escuchando conexiones
 Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 11:18:59 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/15
+Paso el stoi tragico
+Se ha desconectado un usuario
+8003
+Conexion aceptada
+Conexion nueva en puerto: 8004
+Mensaje enviado: 8004
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/18
+Paso el stoi tragico
+Se ha desconectado un usuario
+8004
+Conexion aceptada
+Conexion nueva en puerto: 8005
+Mensaje enviado: 8005
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/21
+Paso el stoi tragico
+Se ha desconectado un usuario
+8005
+Conexion aceptada
+Conexion nueva en puerto: 8006
+Mensaje enviado: 8006
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8007
+Mensaje enviado: 8007
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8008
+Mensaje enviado: 8008
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8009
+Mensaje enviado: 8009
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Mensaje enviado: 8
+El servidor ha llegado a su maxima capacidad de conexiones.
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 12:37:20 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+El servidor ha llegado a su maxima capacidad de conexiones.
+Escuchando conexiones
+Thread listo para correr cliente ... 
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 12:47:18 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+El servidor ha llegado a su maxima capacidad de conexiones.
+Escuchando conexiones
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8004
+Mensaje enviado: 8004
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/19
+Paso el stoi tragico
+Se ha desconectado un usuario
+8004
+Conexion aceptada
+Conexion nueva en puerto: 8005
+Mensaje enviado: 8005
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+El servidor ha llegado a su maxima capacidad de conexiones.
+Escuchando conexiones
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0016
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Martin/tincho
+El ultivo recv fue de 16 bytes
+Entro al parsear mensaje
+/1/Martin/tincho
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0034
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/che chicos termine el tp
+El ultivo recv fue de 34 bytes
+Entro al parsear mensaje
+/2/Martin/che chicos termine el tp
+Paso el stoi tragico
+Mensaje enviado: 0034/2/Martin/che chicos termine el tp
+Mensaje enviado: 0034/2/Martin/che chicos termine el tp
+Mensaje enviado: 0034/2/Martin/che chicos termine el tp
+Mensaje enviado: 0034/2/Martin/che chicos termine el tp
+Antes de convertir a string: 0020
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/che estan?
+El ultivo recv fue de 20 bytes
+Entro al parsear mensaje
+/2/Martin/che estan?
+Paso el stoi tragico
+Mensaje enviado: 0020/2/Martin/che estan?
+Mensaje enviado: 0020/2/Martin/che estan?
+Mensaje enviado: 0020/2/Martin/che estan?
+Mensaje enviado: 0020/2/Martin/che estan?
+Antes de convertir a string: 0019
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/contesten
+El ultivo recv fue de 19 bytes
+Entro al parsear mensaje
+/2/Martin/contesten
+Paso el stoi tragico
+Mensaje enviado: 0019/2/Martin/contesten
+Mensaje enviado: 0019/2/Martin/contesten
+Mensaje enviado: 0019/2/Martin/contesten
+Mensaje enviado: 0019/2/Martin/contesten
+Antes de convertir a string: 0019
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/si estoy
+El ultivo recv fue de 19 bytes
+Entro al parsear mensaje
+/2/Augusto/si estoy
+Paso el stoi tragico
+Mensaje enviado: 0019/2/Augusto/si estoy
+Mensaje enviado: 0019/2/Augusto/si estoy
+Mensaje enviado: 0019/2/Augusto/si estoy
+Mensaje enviado: 0019/2/Augusto/si estoy
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/sory
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/2/Augusto/sory
+Paso el stoi tragico
+Mensaje enviado: 0015/2/Augusto/sory
+Mensaje enviado: 0015/2/Augusto/sory
+Mensaje enviado: 0015/2/Augusto/sory
+Mensaje enviado: 0015/2/Augusto/sory
+Antes de convertir a string: 0022
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/buena crack
+El ultivo recv fue de 22 bytes
+Entro al parsear mensaje
+/2/Augusto/buena crack
+Paso el stoi tragico
+Mensaje enviado: 0022/2/Augusto/buena crack
+Mensaje enviado: 0022/2/Augusto/buena crack
+Mensaje enviado: 0022/2/Augusto/buena crack
+Mensaje enviado: 0022/2/Augusto/buena crack
+Antes de convertir a string: 0023
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/dale campeon
+El ultivo recv fue de 23 bytes
+Entro al parsear mensaje
+/2/Augusto/dale campeon
+Paso el stoi tragico
+Mensaje enviado: 0023/2/Augusto/dale campeon
+Mensaje enviado: 0023/2/Augusto/dale campeon
+Mensaje enviado: 0023/2/Augusto/dale campeon
+Mensaje enviado: 0023/2/Augusto/dale campeon
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8001
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Antes de convertir a string: 0010
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/
+El ultivo recv fue de 10 bytes
+Entro al parsear mensaje
+/2/Martin/
+Paso el stoi tragico
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Mensaje enviado: 0010/2/Martin/
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/22
+Paso el stoi tragico
+Se ha desconectado un usuario
+8005
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:15:11 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:15:20 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:15:47 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:15:51 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:20:33 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/12
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+Conexion aceptada
+Conexion nueva en puerto: 8003
+Mensaje enviado: 8003
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+0049/4/El usuario ingresado ya se encuentra conectado
+Mensaje enviado: 0049/4/El usuario ingresado ya se encuentra conectado
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 13:21:28 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Conexion aceptada
+Conexion nueva en puerto: 8002
+Mensaje enviado: 8002
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0016
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Martin/tincho
+El ultivo recv fue de 16 bytes
+Entro al parsear mensaje
+/1/Martin/tincho
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Antes de convertir a string: 0014
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/hola
+El ultivo recv fue de 14 bytes
+Entro al parsear mensaje
+/2/Martin/hola
+Paso el stoi tragico
+Mensaje enviado: 0014/2/Martin/hola
+Mensaje enviado: 0014/2/Martin/hola
+Antes de convertir a string: 0014
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/chau
+El ultivo recv fue de 14 bytes
+Entro al parsear mensaje
+/2/Martin/chau
+Paso el stoi tragico
+Mensaje enviado: 0014/2/Martin/chau
+Mensaje enviado: 0014/2/Martin/chau
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/jeje
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/2/Augusto/jeje
+Paso el stoi tragico
+Mensaje enviado: 0015/2/Augusto/jeje
+Mensaje enviado: 0015/2/Augusto/jeje
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Augusto/puto
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/2/Augusto/puto
+Paso el stoi tragico
+Mensaje enviado: 0015/2/Augusto/puto
+Mensaje enviado: 0015/2/Augusto/puto
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+8000
+Antes de convertir a string: 0014
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/hola
+El ultivo recv fue de 14 bytes
+Entro al parsear mensaje
+/2/Martin/hola
+Paso el stoi tragico
+Mensaje enviado: 0014/2/Martin/hola
+Antes de convertir a string: 0022
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /2/Martin/keh leh ekeh
+El ultivo recv fue de 22 bytes
+Entro al parsear mensaje
+/2/Martin/keh leh ekeh
+Paso el stoi tragico
+Mensaje enviado: 0022/2/Martin/keh leh ekeh
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+8002
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Tue Oct  3 16:20:13 2017
+
+ 
+**********************************************************************************************************************************
+El puerto del servidor es: 27015
+Escuchando conexiones
+Conexion aceptada
+Conexion nueva en puerto: 8000
+Mensaje enviado: 8000
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/6
+Paso el stoi tragico
+Se ha desconectado un usuario
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+8000
+Conexion aceptada
+Conexion nueva en puerto: 8001
+Mensaje enviado: 8001
+Conexion aceptada
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Antes de convertir a string: 0015
+El ultivo recv fue de 4 bytes
+Antes de convertir a string: /1/Augusto/Turi
+El ultivo recv fue de 15 bytes
+Entro al parsear mensaje
+/1/Augusto/Turi
+Paso el stoi tragico
+Bienvenido
+
+0014/4/Bienvenido
+
+Mensaje enviado: 0014/4/Bienvenido
+
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+0006/9
+Paso el stoi tragico
+Se ha desconectado un usuario
+0045/4/El usuario se ha deslogueado correctamente
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Usuario Augustodesconectado
+8001

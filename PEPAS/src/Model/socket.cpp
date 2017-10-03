@@ -132,6 +132,7 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
     while (totalRecibido < mensajeAleerLength && !socketShutDown) { //
         ultimaCantidadRecibida = recv(fd, buffer, mensajeAleerLength - totalRecibido, 0);
         if (ultimaCantidadRecibida < 0) {
+            socketShutDown = true;
             string error = strerror(errno);
             cout << "Error al recibir mensaje " << error << endl;
         } else if (ultimaCantidadRecibida == 0) {

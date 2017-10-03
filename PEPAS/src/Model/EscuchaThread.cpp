@@ -16,9 +16,11 @@ void EscuchaThread::run() {
             }
         }
         this->socket = servidor->aceptarConexiones();
-        clientThreads.emplace_back(this->socket, this->servidor, this->servidor->getTerminado());
-        /*Se obtiene el ultimo de la pila y se lo ejecuta con start()*/
-        clientThreads.back().start();
+        if (this->socket){
+            clientThreads.emplace_back(this->socket, this->servidor, this->servidor->getTerminado());
+            /*Se obtiene el ultimo de la pila y se lo ejecuta con start()*/
+            clientThreads.back().start();
+        }
     }
 
     /*Cierro todas las conexiones abiertas*/
