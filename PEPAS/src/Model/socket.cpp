@@ -112,18 +112,14 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
             string error = strerror(errno);
             loggear(error,3);
             cout << "Error al enviar mensaje " << error << endl;
+            break;
 
         } else {
             totalEnviado += ultimaCantidadEnviada;
 
         }
     }
-    if(ultimaCantidadEnviada < 0){
-        string error = strerror(errno);
-        cout << "Error al enviar mensaje " << error << endl;
-        loggear(error,3);
 
-    }
 }
 
 

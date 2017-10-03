@@ -274,14 +274,17 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             loggear (to_string(puerto),1);
             /*Cierro el socket*/
             this->mapaSocket->find(puerto)->second->CerrarConexion(fileD);
-            /*Saco el puerto de uso*/
+            std::map<int,Socket*>::iterator it;
+            it = this->mapaSocket->find(puerto);
+            mapaSocket->erase(it);
+           /*Saco el puerto de uso*/
             auto iter = std::find (puertosEnUso.begin(), puertosEnUso.end(), puerto);
 
             /* Lo saco de la pila*/
             puertosEnUso.erase(iter);
             /*Lo pongo al principio de puertosDisponibles*/
             //puertosDisponibles.push_front(puerto);
-
+            this->conexiones -= 1;
             mensajeAEnviar = "CerrarCliente";
 
         }
