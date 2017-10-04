@@ -28,8 +28,10 @@ public:
 		int puerto;
 		//HDC
 		int puerto2;
-		char *rutaFile;
+        const char* rutafile;
+		
 	};
+    
 	ClienteParser();
 
 	ClienteParser::SocketData parsearXML(char* xmlPath);

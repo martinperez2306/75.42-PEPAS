@@ -38,6 +38,8 @@ ClienteParser::SocketData ClienteParser::parsearXML(char* xmlPath) {
 		}
 		sd.ip = ip;
 		sd.puerto = atoi(puerto);
+		sd.rutafile = testFile;
+	
 		return sd;
 	} else {
 		//return ClienteParser::parsearXML("clienteDefault.xml");
@@ -78,3 +80,6 @@ bool ClienteParser::pathValido(const char* path) {
 	return !!test;
 //	return true;
 }
+
+
+

@@ -28,8 +28,9 @@ private:
     ClienteParser::SocketData socketData;
     Cliente* cliente;
     recvThread threadRecibir;
-    bool reconexion;
-   const char* ipAddress;
+    bool reconexion; 
+    char ipAddress[20];
+    char testFile [100];
     
 
 public:

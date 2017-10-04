@@ -13,6 +13,9 @@ ClienteController::ClienteController(){
 	this->cliente= new Cliente();
 	this->threadRecibir = recvThread(cliente);
 	this->reconexion = false;
+	strcpy(this->ipAddress,socketData.ip);
+	strcpy(this->testFile ,socketData.rutafile);
+
 
 
 }
@@ -37,6 +40,7 @@ void ClienteController::conectar(){
 	//Esto es para cerrar el thread de la conexion anterior.
 	if(reconexion){
 		this->dejarRecibir();
+		reconexion = false;
 	}
 	this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
 	if (this->conectarConElServidor() == -1) {
@@ -49,9 +53,11 @@ void ClienteController::conectar(){
 	}
 }
 
+
 int ClienteController::conectarConElServidor(){
-    return this->cliente->conectarseAlServidor(socketData.ip, socketData.puerto);
+	return this->cliente->conectarseAlServidor(this->ipAddress, socketData.puerto);
 }
+
 
 
 
@@ -111,51 +117,58 @@ void ClienteController::logIn() {
 }
 
 
-
 void ClienteController::stressTest(){
-    if (!cliente->estalogueado()){
-        cout<< "Debe loguearse para enviar un mensaje"<< endl;
-        return;
-    }
-    string milisegundos, totalmili;
-    cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
-    int mili, total;
-    try {
-        cin >> milisegundos;
-        mili = stoi(milisegundos, nullptr,10);
-        mili = mili * 1000;
-        cout<<"Ingrese cantidad de milisegundos en total: ";
-        cin>>totalmili;
-        total = stoi(totalmili, nullptr,10);
-        total = total * 1000;
-    }catch (std::invalid_argument)
-    {
-        cout << "Ingrese unicamente un numero " <<'\n';
-    }
-    ifstream myReadFile;
-    myReadFile.open("cliente_test_file");
-    string stressMsg;
-    if (myReadFile.is_open()) {
-        while (!myReadFile.eof()) {
-            getline(myReadFile,stressMsg);
-            myReadFile.ignore();
-        }
-    }
-    myReadFile.close();
+	if (!cliente->estalogueado()){
+		cout<< "Debe loguearse para enviar un mensaje"<< endl;
+		return;
+	}
+	string milisegundos, totalmili;
+	cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
+	int mili, total, multiplo;
+	bool valido = true;
 
-    int i=0;
-    do{
-        usleep(mili);
-        enviarBroadcast(stressMsg);
-        i += mili;
+	try {
+		cin >> milisegundos;
+		mili = stoi(milisegundos, nullptr, 10);
+		mili = mili * 1000;
+		cout << "Ingrese cantidad de milisegundos en total: ";
+		cin >> totalmili;
+		total = stoi(totalmili, nullptr, 10);
+		total = total * 1000;
+		//multiplo = total % mili;
+		if (total%mili != 0){
+			valido = false;
+			cout<<"Datos ingresados invalidos, deben ser multiplo"<<endl;
+			loggear("Datos ingresados invalidos, deben ser multiplo",1);
+		}
+	} catch (std::invalid_argument) {
+		cout << "Ingrese unicamente un numero " << '\n';
+	}
 
-    } while (i != total);
+	ifstream myReadFile;
+	myReadFile.open(testFile); //this->clienteParser->obtenerRutaTestFile() 
+	string stressMsg;
+	if (myReadFile.is_open() && valido) {
+		while (!myReadFile.eof()) {
+			getline(myReadFile,stressMsg);
+			myReadFile.ignore();
+		}
+	}
+	myReadFile.close();
 
+	int i=0;
+	if (valido) {
+		do {
+			usleep(mili);
+			enviarBroadcast(stressMsg);
+			i += mili;
+
+		} while (i != total);
+	}
 
 
 
 }
-
 
 
 
@@ -202,14 +215,12 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 		return;
 	}
 	/*Cierro la conexion con el puerto del xml*/
-    cout<<"El puerto recibido es: "<<puerto<<endl;
+	cout<<"El puerto recibido es: "<<puerto<<endl;
 	this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
 
-	/*Seteo mi nuevo puerto*/
-	this->socketData.puerto= stoi(puerto,nullptr,10);
 	/*Me conecto al nuevo servidor*/
-	this->obtenerCliente()->conectarseAlServidor(socketData.ip, socketData.puerto);
-	cout<<"Conectado satisfactorio con puerto: "<<socketData.puerto<<endl;
+	this->obtenerCliente()->conectarseAlServidor(this->ipAddress, stoi(puerto,nullptr,10));
+	cout<<"Conectado satisfactorio con puerto: "<<puerto<<endl;
 	this->cliente->conectarse();
 	this->empezarRecibir();
 	this->reconexion = true;
