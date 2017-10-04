@@ -1,25 +1,80 @@
-Recibi un 0, cadenaAdevolver = 6
-Salio del recibirMensaje
- 
-Recibi un 0, cadenaAdevolver = 6
-Entro al parsear mensaje
-Codigo de desconexion
-Chequeo si el usuario que se desconecto estaba logueado
-Invalid argument
-0045/4/El usuario se ha deslogueado correctamente
-Entro al enviarMensaje
-Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
 **********************************************************************************************************************************
  
 Inicio del logueo:
-Hora: Wed Oct  4 01:27:35 2017
+Hora: Wed Oct  4 12:12:52 2017
 
  
 **********************************************************************************************************************************
-Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+0045/4/El usuario se ha deslogueado correctamente
+Error al enviar mensaje: Broken pipe
+Error al cerrar conexion Transport endpoint is not connected
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:14:06 2017
+
+ 
+**********************************************************************************************************************************
+Entro al contructor de ServidorController
+Salio contructor de ServidorController
+ 
+Servidor Creado
+Entro al crearServidor
+Entro al constructor del Servidor
+Salio del constructor del Servidor
+ 
+Entro al constructor de BaseDeDatos
+Salio del constructor de BaseDeDatos
+ 
+salio del crearServidor
+ 
+Entro al iniciar Servidor
+Crea el socket
+El puerto del servidor es: 27015
+Salgo del iniciar Servidor
+ 
+Entro al aceptarConexiones
+Escuchando conexiones
+Conexion aceptada con fd: 4
+Asigno fd a socket
+Chequeo maximas conexiones
+El servidor tiene conexiones disponibles
+Creo socket para la reconexion
+Busco puertos no usados para enlazar
+Conexion nueva en puerto: 8000
+Le aviso al cliente el puerto al cual reconectarse
+Entro al enviarMensaje
+Mensaje enviado: 8000
+Salio del enviarMensaje
+ 
+Escucho en el nuevo puerto
+AceptoConexion
+Meto el fd y el puerto del nuevo socket en el map(FD = 6 , puerto = 8000 )
+Pusheo a la lista de puertos en uso el puerto: 8000
+Asigno el nuevo fd al socket:6
+Cierro la conexion con el fd viejo(el de escucha)
+Reasigno el fd del socket escucha
+Meto el puerto y el  nuevo socket en el map(puerto = 8000 , socket)
+Aumento la cantidad de conexiones actuales
+Cantidad de conexiones actuales: 1
+Conexion exitosa
+Salgo del aceptarConexiones
+ 
+Entro al aceptarConexiones
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Entro al recibirMensaje
+El largo del string recibido sera: 15
 Salio del recibirMensaje
  
 Entro al parsear mensaje
+El string recibido fue: /1/Augusto/Turi
+Paso el stoi tragico
 Codigo de login
 Entro al validar cliente
 Chequeo el usuario
@@ -36,40 +91,154 @@ Salio del enviarMensaje
 Salgo del parsearMensaje
 
 Entro al recibirMensaje
+El largo del string recibido sera: 10
 Salio del recibirMensaje
  
 Entro al parsear mensaje
-Codigo de broadcast
+El string recibido fue: /5/Augusto
+Paso el stoi tragico
+Codigo de logout
+0045/4/El usuario se ha deslogueado correctamente
 Entro al enviarMensaje
-Mensaje enviado: 0015/2/Augusto/hola
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Salio del enviarMensaje
+ 
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
+Salgo del parsearMensaje
+
+Entro al recibirMensaje
+Recibi un 0, cadenaAdevolver = 6
+El largo del string recibido sera: 6
+Salio del recibirMensaje
+ 
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+El string recibido fue: 0006/6
+Paso el stoi tragico
+Codigo de desconexion
+Se desconecto el usuario con el FD: 6
+Obtengo el par (FD = 6 , puerto = 8000 )
+Chequeo si el usuario que se desconecto estaba logueado
+Estaba logueado
+0045/4/El usuario se ha deslogueado correctamente
+Entro al enviarMensaje
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Error al enviar mensaje: Broken pipe
+Salio del enviarMensaje
+ 
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
+Cierro conexion con el socket
+Error al cerrar conexion Transport endpoint is not connected
+Lo saco del map
+Disminuyo las conexiones actuales
+Conexiones actuales: 0
+Salgo del parsearMensaje
+
+Conexion aceptada con fd: 8
+Asigno fd a socket
+Chequeo maximas conexiones
+El servidor tiene conexiones disponibles
+Creo socket para la reconexion
+Busco puertos no usados para enlazar
+Address already in use
+Puerto usado: 8000
+Conexion nueva en puerto: 8001
+Le aviso al cliente el puerto al cual reconectarse
+Entro al enviarMensaje
+Mensaje enviado: 8001
+Salio del enviarMensaje
+ 
+Escucho en el nuevo puerto
+AceptoConexion
+Meto el fd y el puerto del nuevo socket en el map(FD = 9 , puerto = 8001 )
+Pusheo a la lista de puertos en uso el puerto: 8001
+Asigno el nuevo fd al socket:9
+Cierro la conexion con el fd viejo(el de escucha)
+Reasigno el fd del socket escucha
+Meto el puerto y el  nuevo socket en el map(puerto = 8001 , socket)
+Aumento la cantidad de conexiones actuales
+Cantidad de conexiones actuales: 1
+Conexion exitosa
+Salgo del aceptarConexiones
+ 
+Entro al aceptarConexiones
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Entro al recibirMensaje
+El largo del string recibido sera: 15
+Salio del recibirMensaje
+ 
+Entro al parsear mensaje
+El string recibido fue: /1/Augusto/Turi
+Paso el stoi tragico
+Codigo de login
+Entro al validar cliente
+Chequeo el usuario
+Bienvenido
+
+0014/4/Bienvenido
+
+Salio del validar cliente
+Entro al enviarMensaje
+Mensaje enviado: 0014/4/Bienvenido
+
 Salio del enviarMensaje
  
 Salgo del parsearMensaje
 
 Entro al recibirMensaje
+El largo del string recibido sera: 10
 Salio del recibirMensaje
  
 Entro al parsear mensaje
-Codigo de broadcast
+El string recibido fue: /5/Augusto
+Paso el stoi tragico
+Codigo de logout
+0045/4/El usuario se ha deslogueado correctamente
 Entro al enviarMensaje
-Mensaje enviado: 0025/2/Augusto/jejeje quehace
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
 Salio del enviarMensaje
  
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
 Salgo del parsearMensaje
 
 Entro al recibirMensaje
+Recibi un 0, cadenaAdevolver = 6
+El largo del string recibido sera: 6
 Salio del recibirMensaje
  
+Recibi un 0, cadenaAdevolver = 6
 Entro al parsear mensaje
-Codigo de broadcast
+El string recibido fue: 0006/9
+Paso el stoi tragico
+Codigo de desconexion
+Se desconecto el usuario con el FD: 9
+Obtengo el par (FD = 9 , puerto = 8001 )
+Chequeo si el usuario que se desconecto estaba logueado
+Estaba logueado
+0045/4/El usuario se ha deslogueado correctamente
 Entro al enviarMensaje
-Mensaje enviado: 0019/2/Augusto/kaskaksa
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Error al enviar mensaje: Broken pipe
 Salio del enviarMensaje
  
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
+Cierro conexion con el socket
+Error al cerrar conexion Transport endpoint is not connected
+Lo saco del map
+Disminuyo las conexiones actuales
+Conexiones actuales: 0
 Salgo del parsearMensaje
 
-Entro al recibirMensaje
-Conexion aceptada con fd: 7
+Conexion aceptada con fd: 10
 Asigno fd a socket
 Chequeo maximas conexiones
 El servidor tiene conexiones disponibles
@@ -87,26 +256,26 @@ Salio del enviarMensaje
  
 Escucho en el nuevo puerto
 AceptoConexion
-Meto el fd y el puerto del nuevo socket en el map(FD = 9 , puerto = 8002 )
+Meto el fd y el puerto del nuevo socket en el map(FD = 12 , puerto = 8002 )
 Pusheo a la lista de puertos en uso el puerto: 8002
-Asigno el nuevo fd al socket:9
+Asigno el nuevo fd al socket:12
 Cierro la conexion con el fd viejo(el de escucha)
 Reasigno el fd del socket escucha
 Meto el puerto y el  nuevo socket en el map(puerto = 8002 , socket)
 Aumento la cantidad de conexiones actuales
-Cantidad de conexiones actuales: 2
+Cantidad de conexiones actuales: 1
 Conexion exitosa
 Salgo del aceptarConexiones
  
 Entro al aceptarConexiones
-Escuchando conexiones
 Thread listo para correr cliente ... 
+Escuchando conexiones
 Entro al recibirMensaje
-El largo del string recibido sera: 14
+El largo del string recibido sera: 15
 Salio del recibirMensaje
  
 Entro al parsear mensaje
-El string recibido fue: /1/payas/payas
+El string recibido fue: /1/Augusto/Turi
 Paso el stoi tragico
 Codigo de login
 Entro al validar cliente
@@ -124,104 +293,41 @@ Salio del enviarMensaje
 Salgo del parsearMensaje
 
 Entro al recibirMensaje
-El largo del string recibido sera: 13
+El largo del string recibido sera: 10
 Salio del recibirMensaje
  
 Entro al parsear mensaje
-El string recibido fue: /2/payas/puto
+El string recibido fue: /5/Augusto
 Paso el stoi tragico
-Codigo de broadcast
-Entro al enviarMensaje
-Mensaje enviado: 0013/2/payas/puto
-Salio del enviarMensaje
- 
-Entro al enviarMensaje
-Mensaje enviado: 0013/2/payas/puto
-Salio del enviarMensaje
- 
-Salgo del parsearMensaje
-
-Entro al recibirMensaje
-El largo del string recibido sera: 21
-Salio del recibirMensaje
- 
-Entro al parsear mensaje
-El string recibido fue: /2/payas/que hace aca
-Paso el stoi tragico
-Codigo de broadcast
-Entro al enviarMensaje
-Mensaje enviado: 0021/2/payas/que hace aca
-Salio del enviarMensaje
- 
-Entro al enviarMensaje
-Mensaje enviado: 0021/2/payas/que hace aca
-Salio del enviarMensaje
- 
-Salgo del parsearMensaje
-
-Entro al recibirMensaje
-El largo del string recibido sera: 21
-Salio del recibirMensaje
- 
-Entro al parsear mensaje
-El string recibido fue: /2/payas/ese re tarde
-Paso el stoi tragico
-Codigo de broadcast
-Entro al enviarMensaje
-Mensaje enviado: 0021/2/payas/ese re tarde
-Salio del enviarMensaje
- 
-Entro al enviarMensaje
-Mensaje enviado: 0021/2/payas/ese re tarde
-Salio del enviarMensaje
- 
-Salgo del parsearMensaje
-
-Entro al recibirMensaje
-Recibi un 0, cadenaAdevolver = 6
-El largo del string recibido sera: 6
-Salio del recibirMensaje
- 
-Recibi un 0, cadenaAdevolver = 6
-Entro al parsear mensaje
-El string recibido fue: 0006/9
-Paso el stoi tragico
-Codigo de desconexion
-Se desconecto el usuario con el FD: 9
-Obtengo el par (FD = 9 , puerto = 8002 )
-Chequeo si el usuario que se desconecto estaba logueado
-Estaba logueado
+Codigo de logout
 0045/4/El usuario se ha deslogueado correctamente
 Entro al enviarMensaje
 Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
 Salio del enviarMensaje
  
 Saco al usuario de la base de datos
-Usuario payasdesconectado
+Usuario Augustodesconectado
 0045/4/El usuario se ha deslogueado correctamente
-Cierro conexion con el socket
-Error al cerrar conexion Transport endpoint is not connected
-Lo saco del map
-Disminuyo las conexiones actuales
-Conexiones actuales: 1
 Salgo del parsearMensaje
 
+Entro al recibirMensaje
 Recibi un 0, cadenaAdevolver = 6
 El largo del string recibido sera: 6
 Salio del recibirMensaje
  
 Recibi un 0, cadenaAdevolver = 6
 Entro al parsear mensaje
-El string recibido fue: 0006/6
+El string recibido fue: 0006/12
 Paso el stoi tragico
 Codigo de desconexion
-Se desconecto el usuario con el FD: 6
-Obtengo el par (FD = 6 , puerto = 8001 )
+Se desconecto el usuario con el FD: 12
+Obtengo el par (FD = 12 , puerto = 8002 )
 Chequeo si el usuario que se desconecto estaba logueado
 Estaba logueado
 0045/4/El usuario se ha deslogueado correctamente
 Entro al enviarMensaje
 Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Error al enviar mensaje: Broken pipe
 Salio del enviarMensaje
  
 Saco al usuario de la base de datos
@@ -234,3 +340,438 @@ Disminuyo las conexiones actuales
 Conexiones actuales: 0
 Salgo del parsearMensaje
 
+Conexion aceptada con fd: 14
+Asigno fd a socket
+Chequeo maximas conexiones
+El servidor tiene conexiones disponibles
+Creo socket para la reconexion
+Busco puertos no usados para enlazar
+Address already in use
+Puerto usado: 8000
+Address already in use
+Puerto usado: 8001
+Address already in use
+Puerto usado: 8002
+Conexion nueva en puerto: 8003
+Le aviso al cliente el puerto al cual reconectarse
+Entro al enviarMensaje
+Mensaje enviado: 8003
+Salio del enviarMensaje
+ 
+Escucho en el nuevo puerto
+AceptoConexion
+Meto el fd y el puerto del nuevo socket en el map(FD = 15 , puerto = 8003 )
+Pusheo a la lista de puertos en uso el puerto: 8003
+Asigno el nuevo fd al socket:15
+Cierro la conexion con el fd viejo(el de escucha)
+Reasigno el fd del socket escucha
+Meto el puerto y el  nuevo socket en el map(puerto = 8003 , socket)
+Aumento la cantidad de conexiones actuales
+Cantidad de conexiones actuales: 1
+Conexion exitosa
+Salgo del aceptarConexiones
+ 
+Entro al aceptarConexiones
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Entro al recibirMensaje
+El largo del string recibido sera: 15
+Salio del recibirMensaje
+ 
+Entro al parsear mensaje
+El string recibido fue: /1/Augusto/Turi
+Paso el stoi tragico
+Codigo de login
+Entro al validar cliente
+Chequeo el usuario
+Bienvenido
+
+0014/4/Bienvenido
+
+Salio del validar cliente
+Entro al enviarMensaje
+Mensaje enviado: 0014/4/Bienvenido
+
+Salio del enviarMensaje
+ 
+Salgo del parsearMensaje
+
+Entro al recibirMensaje
+El largo del string recibido sera: 10
+Salio del recibirMensaje
+ 
+Entro al parsear mensaje
+El string recibido fue: /5/Augusto
+Paso el stoi tragico
+Codigo de logout
+0045/4/El usuario se ha deslogueado correctamente
+Entro al enviarMensaje
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Salio del enviarMensaje
+ 
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
+Salgo del parsearMensaje
+
+Entro al recibirMensaje
+Recibi un 0, cadenaAdevolver = 6
+El largo del string recibido sera: 6
+Salio del recibirMensaje
+ 
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+El string recibido fue: 0006/15
+Paso el stoi tragico
+Codigo de desconexion
+Se desconecto el usuario con el FD: 15
+Obtengo el par (FD = 15 , puerto = 8003 )
+Chequeo si el usuario que se desconecto estaba logueado
+Estaba logueado
+0045/4/El usuario se ha deslogueado correctamente
+Entro al enviarMensaje
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Error al enviar mensaje: Broken pipe
+Salio del enviarMensaje
+ 
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+0045/4/El usuario se ha deslogueado correctamente
+Cierro conexion con el socket
+Error al cerrar conexion Transport endpoint is not connected
+Lo saco del map
+Disminuyo las conexiones actuales
+Conexiones actuales: 0
+Salgo del parsearMensaje
+
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:24:51 2017
+
+ 
+**********************************************************************************************************************************
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:28:06 2017
+
+ 
+**********************************************************************************************************************************
+Se cambio el nivel de loggeo a debug
+Conexion aceptada con fd: 4
+Asigno fd a socket
+Chequeo maximas conexiones
+El servidor tiene conexiones disponibles
+Creo socket para la reconexion
+Busco puertos no usados para enlazar
+Conexion nueva en puerto: 8000
+Le aviso al cliente el puerto al cual reconectarse
+Entro al enviarMensaje
+Mensaje enviado: 8000
+Salio del enviarMensaje
+ 
+Escucho en el nuevo puerto
+AceptoConexion
+Meto el fd y el puerto del nuevo socket en el map(FD = 6 , puerto = 8000 )
+Pusheo a la lista de puertos en uso el puerto: 8000
+Asigno el nuevo fd al socket:6
+Cierro la conexion con el fd viejo(el de escucha)
+Reasigno el fd del socket escucha
+Meto el puerto y el  nuevo socket en el map(puerto = 8000 , socket)
+Aumento la cantidad de conexiones actuales
+Cantidad de conexiones actuales: 1
+Conexion exitosa
+Salgo del aceptarConexiones
+ 
+Entro al aceptarConexiones
+Escuchando conexiones
+Thread listo para correr cliente ... 
+Entro al recibirMensaje
+El largo del string recibido sera: 15
+Salio del recibirMensaje
+ 
+Entro al parsear mensaje
+El string recibido fue: /1/Augusto/Turi
+Paso el stoi tragico
+Codigo de login
+Entro al validar cliente
+Chequeo el usuario
+Bienvenido
+
+0014/4/Bienvenido
+
+Salio del validar cliente
+Entro al enviarMensaje
+Mensaje enviado: 0014/4/Bienvenido
+
+Salio del enviarMensaje
+ 
+Salgo del parsearMensaje
+
+Entro al recibirMensaje
+El largo del string recibido sera: 10
+Salio del recibirMensaje
+ 
+Entro al parsear mensaje
+El string recibido fue: /5/Augusto
+Paso el stoi tragico
+Codigo de logout
+El usuario se ha deslogueado correctamente
+0045/4/El usuario se ha deslogueado correctamente
+Entro al enviarMensaje
+Mensaje enviado: 0045/4/El usuario se ha deslogueado correctamente
+Salio del enviarMensaje
+ 
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+Salgo del parsearMensaje
+
+Entro al recibirMensaje
+Recibi un 0, cadenaAdevolver = 6
+El largo del string recibido sera: 6
+Salio del recibirMensaje
+ 
+Recibi un 0, cadenaAdevolver = 6
+Entro al parsear mensaje
+El string recibido fue: 0006/6
+Paso el stoi tragico
+Codigo de desconexion
+Se desconecto el usuario con el FD: 6
+Obtengo el par (FD = 6 , puerto = 8000 )
+Chequeo si el usuario que se desconecto estaba logueado
+Estaba logueado
+Saco al usuario de la base de datos
+Usuario Augustodesconectado
+Cierro conexion con el socket
+Lo saco del map
+Disminuyo las conexiones actuales
+Conexiones actuales: 0
+Salgo del parsearMensaje
+
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:49:19 2017
+
+ 
+**********************************************************************************************************************************
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:50:47 2017
+
+ 
+**********************************************************************************************************************************
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Address already in use
+Address already in use
+Address already in use
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Address already in use
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:23:13 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:24:09 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:45:28 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:45:47 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:45:59 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:49:12 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 13:49:50 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:05:55 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:08:50 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:09:09 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:09:54 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:16:45 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:18:48 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:19:01 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:21:03 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:33:04 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:35:52 2017
+
+ 
+**********************************************************************************************************************************
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected
+Address already in use
+Address already in use
+0014/4/Bienvenido
+
+0045/4/El usuario se ha deslogueado correctamente
+Recibi un 0, cadenaAdevolver = 6
+Recibi un 0, cadenaAdevolver = 6
+Error al cerrar conexion Transport endpoint is not connected

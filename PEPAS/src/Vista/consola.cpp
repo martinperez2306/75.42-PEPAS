@@ -97,12 +97,12 @@ void Consola::cargarPaginaCaracteristicasDelServidor(){
 	this->servidorController->mostrarUsuariosDisponibles();
 }
 
-void Consola::cargarPaginaCrearServidor(){
+void Consola::cargarPaginaCrearServidor(const char* archivo){
 
 
 	cout<<"CREANDO SERVIDOR..............."<<endl;
 	loggear("Servidor Creado",3);
-	this->servidorController->crearServidor();
+	this->servidorController->crearServidor(archivo);
 	for(int i = 0;i<10;i++){
 		cout<<"."<<endl;
 	}

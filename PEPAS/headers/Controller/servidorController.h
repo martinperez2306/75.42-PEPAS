@@ -22,7 +22,7 @@ public:
 
 	ServidorController();
 
-	void crearServidor();
+	void crearServidor(const char* archivo);
 
 	void mostrarUsuariosDisponibles();
 

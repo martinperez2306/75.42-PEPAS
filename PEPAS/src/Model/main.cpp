@@ -14,37 +14,14 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
 
-	////////////////////////////////////////TESTS/////////////////////////////////////////
-
-	//BASE DE DATOS TESTS
-
-//	BaseDeDatosTest* bdt = new BaseDeDatosTest();
-//	bdt->agregarUnUsuario("Martin","tincho");
-//	delete bdt;
-
-//	BaseDeDatosTest* bdt = new BaseDeDatosTest();
-//	bdt->obtenerUnUsuario("martin");
-//	delete bdt;
-
-
-	//THREADS TESTS
-//	pthread_t thread;
-//	pthread_t thread2;
-//	cout<<"creando thread 1"<<endl;
-//	pthread_create(&thread,NULL,PrintHello,NULL);
-//	cout<<"creadno thread 2"<<endl;
-//	pthread_create(&thread2,NULL,PrintHello,NULL);
-//	ThreadsTests test;
-//	test.crearUnNuevoThreadYCerrarloLuegoDeMain();
-//	Thread::terminar();
-
-	//////////////////////////////////////////////////////////////////////////////////////
-
-	//////////////////////////////////MAIN EXECUTE///////////////////////////////////////
 
 	crear_logger();
 	Consola* consola = new Consola();
-    consola->cargarPaginaCrearServidor();
+
+	if (argc !=2)
+    	consola->cargarPaginaCrearServidor("1");
+    else
+    	consola->cargarPaginaCrearServidor(argv[1]);
 
     ConsolaThread intefazMenu(consola);
     Servidor* servidor = consola->obtenerServidorController()->obtenerServidor();

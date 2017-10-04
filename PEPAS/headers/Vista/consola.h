@@ -26,7 +26,7 @@ public:
 	void cargarPaginaPrincipal();
 	void cargarIngresarUsuario();
 	void cargarPaginaCaracteristicasDelServidor();
-	void cargarPaginaCrearServidor();
+	void cargarPaginaCrearServidor(const char* archivo);
 	void cargarCambioLoggeo();
 	void abrirServidorAClientes();
 	ServidorController* obtenerServidorController();

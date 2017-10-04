@@ -32,7 +32,12 @@ public:
 	int getPuerto();
 	int getCantidadDeConexiones();
 
-	void parsearXML();
+	void parsearXML(const char* archivo);
+
+	bool puertoValido(const char* puertoTxt);
+
+	bool sonDigitos(const char* str);
+
 
 	//no libera la memoria del servidor. Recordar Eliminarla en el programa principal.
 	~ServidorBuilder();

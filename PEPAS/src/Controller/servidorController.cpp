@@ -12,11 +12,11 @@ ServidorController::ServidorController() {
 
 
 //RESERVA Y LIBERA MEMORIA DEL SERVIDOR BUILDER. QUEDA USANDOSE LA MEMORIA PEDIDA PARA SERVIDOR (QUE PIDIO SERVIDOR BUILDER)
-void ServidorController::crearServidor(){
+void ServidorController::crearServidor(const char* archivo){
 
 	loggear("Entro al crearServidor",2);
 	this->servidorBuilder = new ServidorBuilder();
-	this->servidorBuilder->parsearXML();
+	this->servidorBuilder->parsearXML(archivo);
 	this->servidor = this->servidorBuilder->build();
 	delete servidorBuilder;
 	loggear("salio del crearServidor",2);

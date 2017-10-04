@@ -313,6 +313,10 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 		}
         case LOGOUT:{
             loggear("Codigo de logout",2);
+            string msg = "El usuario se ha deslogueado correctamente";
+            loggear(msg,2);
+            msg = procesarMensaje(msg);
+            this->enviarMensaje(msg,socketDelemisor);
             this->desloguearse(usuario,socketDelemisor);
 
         }
@@ -365,16 +369,14 @@ return mensajeAEnviar;
 
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
 
-    string msg = "El usuario se ha deslogueado correctamente";
-    msg = procesarMensaje(msg);
-    this->enviarMensaje(msg,socketDelemisor);
+    
     loggear("Saco al usuario de la base de datos",2);
     Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
     usuarioLogOut->estaDesconectado();
     this->obtenerBaseDeDatos()->sacarUsuarioConectadoABaseDeDatos(usuario);
     string msgLogger = "Usuario " + usuario + "desconectado";
     loggear (msgLogger,3);
-    loggear(msg,2);
+    
 }
 
 string Servidor::validarCliente(string usuario, string contrasenia, Socket* socketDelEmisor) {
