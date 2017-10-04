@@ -124,7 +124,7 @@ void ClienteController::stressTest(){
 	}
 	string milisegundos, totalmili;
 	cout<<"Ingrese cantidad de milisegundos entre mensajes: ";
-	int mili, total, multiplo;
+	int mili, total;
 	bool valido = true;
 
 	try {

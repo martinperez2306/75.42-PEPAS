@@ -131,10 +131,11 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
         ultimaCantidadRecibida = recv(socket, buffer, mensajeAleerLength - totalRecibido, 0);
 
         loggear(buffer, 1);
-        loggear(to_string(ultimaCantidadRecibida), 1);
+        loggear("Ultima cantidad recibida " + to_string(ultimaCantidadRecibida), 1);
         if (ultimaCantidadRecibida < 0) {
+            cadenaAdevolver="0005";
             string error = strerror(errno);
-            cout << "Error al recibir mensaje " << error << endl;
+            loggear("Error al recibir mensaje " + error,1);
             socketShutDown = true;  
                       
         } else if (ultimaCantidadRecibida == 0) {

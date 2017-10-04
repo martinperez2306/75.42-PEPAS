@@ -1,61 +1,18 @@
 **********************************************************************************************************************************
  
-Fin del logueo:
-Hora: Mon Oct  2 17:20:37 2017
+Inicio del logueo:
+Hora: Wed Oct  4 12:07:09 2017
 
  
 **********************************************************************************************************************************
 **********************************************************************************************************************************
  
 Inicio del logueo:
-Hora: Mon Oct  2 17:20:38 2017
-
- 
-**********************************************************************************************************************************
-8002
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 17:23:05 2017
+Hora: Wed Oct  4 12:08:59 2017
 
  
 **********************************************************************************************************************************
 8000
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8001
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8000
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8002
 4
 0014
 4
@@ -66,35 +23,16 @@ entro al parsear mensaje
 /4/Bienvenido
 
 paso el stoi tragico
-0015
-4
-/2/Augusto/hola
-15
-entro al parsear mensaje
-/2/Augusto/hola
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
+
+0
 
 -1
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 17:24:52 2017
+entro al parsear mensaje
 
- 
-**********************************************************************************************************************************
-8001
-4
 **********************************************************************************************************************************
  
 Inicio del logueo:
-Hora: Mon Oct  2 19:22:59 2017
+Hora: Wed Oct  4 12:10:09 2017
 
  
 **********************************************************************************************************************************
@@ -163,435 +101,6 @@ entro al parsear mensaje
 /4/Bienvenido
 
 paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 19:27:46 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 19:32:42 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8001
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0015
-4
-/2/Augusto/hola
-15
-entro al parsear mensaje
-/2/Augusto/hola
-paso el stoi tragico
-0015
-4
-/2/Augusto/chau
-15
-entro al parsear mensaje
-/2/Augusto/chau
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 19:35:01 2017
-
- 
-**********************************************************************************************************************************
-8002
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
-
--1
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 19:43:46 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 19:43:57 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-8001
-4
-0049
-4
-/4/El usuario ingresado ya se encuentra conectado
-49
-entro al parsear mensaje
-/4/El usuario ingresado ya se encuentra conectado
-paso el stoi tragico
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0014
-4
-/2/Martin/chau
-14
-entro al parsear mensaje
-/2/Martin/chau
-paso el stoi tragico
-0014
-4
-/2/Martin/chau
-14
-entro al parsear mensaje
-/2/Martin/chau
-paso el stoi tragico
-0016
-4
-/2/Augusto/kease
-16
-entro al parsear mensaje
-/2/Augusto/kease
-paso el stoi tragico
-0016
-4
-/2/Augusto/kease
-16
-entro al parsear mensaje
-/2/Augusto/kease
-paso el stoi tragico
-0015
-4
-/2/Augusto/jeje
-15
-entro al parsear mensaje
-/2/Augusto/jeje
-paso el stoi tragico
-0015
-4
-/2/Augusto/jeje
-15
-entro al parsear mensaje
-/2/Augusto/jeje
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8002
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0033
-4
-/2/Augusto/sory, se me desconecto
-33
-entro al parsear mensaje
-/2/Augusto/sory, se me desconecto
-paso el stoi tragico
-0033
-4
-/2/Augusto/sory, se me desconecto
-33
-entro al parsear mensaje
-/2/Augusto/sory, se me desconecto
-paso el stoi tragico
-0020
-4
-/2/Martin/no pasa na
-20
-entro al parsear mensaje
-/2/Martin/no pasa na
-paso el stoi tragico
-0020
-4
-/2/Martin/no pasa na
-20
-entro al parsear mensaje
-/2/Martin/no pasa na
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 20:00:19 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 20:00:34 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8000
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8001
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0015
-4
-/2/Augusto/hola
-15
-entro al parsear mensaje
-/2/Augusto/hola
-paso el stoi tragico
-0015
-4
-/2/Augusto/chau
-15
-entro al parsear mensaje
-/2/Augusto/chau
-paso el stoi tragico
-0019
-4
-/2/Augusto/jejejeje
-19
-entro al parsear mensaje
-/2/Augusto/jejejeje
-paso el stoi tragico
-0012
-4
-/2/Augusto/&
-12
-entro al parsear mensaje
-/2/Augusto/&
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8002
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8003
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8
-1
-8
-0
-
--1
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Mon Oct  2 21:23:22 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8001
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8002
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8003
-4
 
 0
 
@@ -601,6 +110,22 @@ entro al parsear mensaje
 paso el stoi tragico
 8004
 4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0045
+4
+/4/El usuario se ha deslogueado correctamente
+45
+entro al parsear mensaje
+/4/El usuario se ha deslogueado correctamente
+paso el stoi tragico
 
 0
 
@@ -610,1417 +135,363 @@ entro al parsear mensaje
 paso el stoi tragico
 8005
 4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
 
 0
 
 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Wed Oct  4 12:11:24 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:11:45 2017
+
+ 
+**********************************************************************************************************************************
+8000
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+-1
+entro al parsear mensaje
+
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:12:48 2017
+
+ 
+**********************************************************************************************************************************
+8000
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+-1
+entro al parsear mensaje
+
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:14:10 2017
+
+ 
+**********************************************************************************************************************************
+8000
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8001
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8002
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8003
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:24:45 2017
+
+ 
+**********************************************************************************************************************************
+8000
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8001
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+0
+
+-1
+entro al parsear mensaje
+
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:28:01 2017
+
+ 
+**********************************************************************************************************************************
+8000
+4
+0014
+4
+/4/Bienvenido
+
+14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+-1
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:49:16 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8001
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida -1
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 12:51:04 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida -1
+Error al recibir mensaje Success
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8001
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8002
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0045
+Ultima cantidad recibida 4
+/4/El usuario se ha deslogueado correctamente
+Ultima cantidad recibida 45
+entro al parsear mensaje
+/4/El usuario se ha deslogueado correctamente
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8003
+Ultima cantidad recibida 4
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8004
+Ultima cantidad recibida 4
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8005
+Ultima cantidad recibida 4
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
 entro al parsear mensaje
 0005
 paso el stoi tragico
 8006
-4
+Ultima cantidad recibida 4
 
-0
+Ultima cantidad recibida 0
 
-0
+Ultima cantidad recibida 0
 entro al parsear mensaje
 0005
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 11:18:18 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8001
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8002
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8003
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8004
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8005
-4
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8006
-4
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 11:20:33 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 11:20:44 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 11:20:50 2017
-
- 
-**********************************************************************************************************************************
-8007
-4
-8008
-4
-8009
-4
-8
-1
-8
-0
-
--1
-
-
-0
-0
-
-
-0
-0
-entro al parsear mensaje
-entro al parsear mensaje
-0005
-0005
-paso el stoi tragico
-paso el stoi tragico
-
-
-0
-0
-
-
-0
-0
-entro al parsear mensaje
-entro al parsear mensaje
-0005
-0005
-paso el stoi tragico
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:37:18 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:37:47 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:37:50 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:37:54 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:37:58 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:38:06 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-8001
-4
-8002
-4
-8003
-4
-
-0
-
-
-0
-0
-
-
-0
-0
-entro al parsear mensaje
-entro al parsear mensaje
-0005
-0005
-paso el stoi tragico
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8000
-4
-8001
-4
-8002
-4
-8003
-4
-
-0
-
-0
-
-0
-entro al parsear mensaje
-0005
-paso el stoi tragico
-8004
-4
-8005
-4
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 12:48:53 2017
-
- 
-**********************************************************************************************************************************
-
-0
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0034
-4
-/2/Martin/che chicos termine el tp
-34
-entro al parsear mensaje
-/2/Martin/che chicos termine el tp
-paso el stoi tragico
-0034
-4
-/2/Martin/che chicos termine el tp
-34
-entro al parsear mensaje
-/2/Martin/che chicos termine el tp
-paso el stoi tragico
-0034
-4
-/2/Martin/che chicos termine el tp
-34
-entro al parsear mensaje
-/2/Martin/che chicos termine el tp
-paso el stoi tragico
-0034
-4
-/2/Martin/che chicos termine el tp
-34
-entro al parsear mensaje
-/2/Martin/che chicos termine el tp
-paso el stoi tragico
-0020
-4
-/2/Martin/che estan?
-20
-entro al parsear mensaje
-/2/Martin/che estan?
-0020
-paso el stoi tragico
-4
-/2/Martin/che estan?
-20
-entro al parsear mensaje
-/2/Martin/che estan?
-paso el stoi tragico
-0020
-4
-0020
-/2/Martin/che estan?
-4
-20
-/2/Martin/che estan?
-entro al parsear mensaje
-20
-/2/Martin/che estan?
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/che estan?
-paso el stoi tragico
-0019
-4
-/2/Martin/contesten
-19
-0019
-entro al parsear mensaje
-4
-/2/Martin/contesten
-/2/Martin/contesten
-paso el stoi tragico
-19
-entro al parsear mensaje
-0019
-/2/Martin/contesten
-4
-paso el stoi tragico
-/2/Martin/contesten
-19
-0019
-entro al parsear mensaje
-4
-/2/Martin/contesten
-/2/Martin/contesten
-paso el stoi tragico
-19
-entro al parsear mensaje
-/2/Martin/contesten
-paso el stoi tragico
-0019
-4
-/2/Augusto/si estoy
-19
-entro al parsear mensaje
-/2/Augusto/si estoy
-paso el stoi tragico
-0019
-4
-/2/Augusto/si estoy
-19
-entro al parsear mensaje
-/2/Augusto/si estoy
-paso el stoi tragico
-0019
-4
-/2/Augusto/si estoy
-19
-entro al parsear mensaje
-/2/Augusto/si estoy
-paso el stoi tragico
-0019
-4
-/2/Augusto/si estoy
-19
-entro al parsear mensaje
-/2/Augusto/si estoy
-paso el stoi tragico
-0015
-4
-/2/Augusto/sory
-15
-entro al parsear mensaje
-/2/Augusto/sory
-paso el stoi tragico
-0015
-4
-/2/Augusto/sory
-15
-entro al parsear mensaje
-/2/Augusto/sory
-paso el stoi tragico
-0015
-4
-/2/Augusto/sory
-15
-entro al parsear mensaje
-/2/Augusto/sory
-paso el stoi tragico
-0015
-4
-/2/Augusto/sory
-15
-entro al parsear mensaje
-/2/Augusto/sory
-paso el stoi tragico
-0022
-4
-/2/Augusto/buena crack
-22
-0022
-entro al parsear mensaje
-4
-/2/Augusto/buena crack
-/2/Augusto/buena crack
-paso el stoi tragico
-22
-entro al parsear mensaje
-/2/Augusto/buena crack
-paso el stoi tragico
-0022
-4
-/2/Augusto/buena crack
-22
-entro al parsear mensaje
-/2/Augusto/buena crack
-paso el stoi tragico
-0022
-4
-/2/Augusto/buena crack
-22
-entro al parsear mensaje
-/2/Augusto/buena crack
-paso el stoi tragico
-0023
-4
-/2/Augusto/dale campeon
-23
-entro al parsear mensaje
-/2/Augusto/dale campeon
-paso el stoi tragico
-0023
-4
-/2/Augusto/dale campeon
-23
-entro al parsear mensaje
-/2/Augusto/dale campeon
-paso el stoi tragico
-0023
-4
-/2/Augusto/dale campeon
-23
-entro al parsear mensaje
-/2/Augusto/dale campeon
-paso el stoi tragico
-0023
-4
-/2/Augusto/dale campeon
-23
-entro al parsear mensaje
-/2/Augusto/dale campeon
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-4
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-4
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-4
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-4
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-entro al parsear mensaje
-paso el stoi tragico
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-4
-10
-/2/Martin/
-entro al parsear mensaje
-10
-/2/Martin/
-paso el stoi tragico
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-0010
-4
-4
-/2/Martin/
-/2/Martin/
-10
-10
-entro al parsear mensaje
-entro al parsear mensaje
-/2/Martin/
-/2/Martin/
-paso el stoi tragico
-paso el stoi tragico
-0010
-4
-/2/Martin/
-0010
-10
-4
-entro al parsear mensaje
-/2/Martin/
-/2/Martin/
-paso el stoi tragico
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-4
-0010
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-4
-/2/Martin/
-10
-entro al parsear mensaje
-/2/Martin/
-paso el stoi tragico
-0010
-0010
-4
-4
-/2/Martin/
-/2/Martin/
-10
-10
-entro al parsear mensaje
-entro al parsear mensaje
-/2/Martin/
-/2/Martin/
-paso el stoi tragico
-paso el stoi tragico
-
-
-0
-0
-
-
-0
-0
-entro al parsear mensaje
-entro al parsear mensaje
-0005
-0005
-paso el stoi tragico
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Fin del logueo:
-Hora: Tue Oct  3 13:15:34 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Fin del logueo:
-Hora: Tue Oct  3 13:15:36 2017
-
- 
-**********************************************************************************************************************************
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 13:15:40 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 13:20:43 2017
-
- 
-**********************************************************************************************************************************
-8001
-4
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 13:20:50 2017
-
- 
-**********************************************************************************************************************************
-8002
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 13:21:09 2017
-
- 
-**********************************************************************************************************************************
-8003
-4
-0049
-4
-/4/El usuario ingresado ya se encuentra conectado
-49
-entro al parsear mensaje
-/4/El usuario ingresado ya se encuentra conectado
-paso el stoi tragico
-
-
-0
-0
-
-
-0
-0
-entro al parsear mensaje
-entro al parsear mensaje
-0005
-0005
-paso el stoi tragico
-paso el stoi tragico
-8000
-4
-8002
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0014
-4
-/2/Martin/chau
-14
-entro al parsear mensaje
-/2/Martin/chau
-paso el stoi tragico
-0014
-4
-/2/Martin/chau
-14
-entro al parsear mensaje
-/2/Martin/chau
-paso el stoi tragico
-0015
-4
-/2/Augusto/jeje
-15
-entro al parsear mensaje
-/2/Augusto/jeje
-paso el stoi tragico
-0015
-4
-/2/Augusto/jeje
-15
-entro al parsear mensaje
-/2/Augusto/jeje
-paso el stoi tragico
-0015
-4
-/2/Augusto/puto
-15
-entro al parsear mensaje
-/2/Augusto/puto
-paso el stoi tragico
-0015
-4
-/2/Augusto/puto
-15
-entro al parsear mensaje
-/2/Augusto/puto
-paso el stoi tragico
-0014
-4
-/2/Martin/hola
-14
-entro al parsear mensaje
-/2/Martin/hola
-paso el stoi tragico
-0022
-4
-/2/Martin/keh leh ekeh
-22
-entro al parsear mensaje
-/2/Martin/keh leh ekeh
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 16:20:20 2017
-
- 
-**********************************************************************************************************************************
-8000
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
-paso el stoi tragico
-**********************************************************************************************************************************
- 
-Inicio del logueo:
-Hora: Tue Oct  3 16:20:41 2017
-
- 
-**********************************************************************************************************************************
-8001
-4
-0014
-4
-/4/Bienvenido
-
-14
-entro al parsear mensaje
-/4/Bienvenido
-
 paso el stoi tragico

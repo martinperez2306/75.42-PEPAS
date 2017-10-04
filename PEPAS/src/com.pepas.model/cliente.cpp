@@ -193,7 +193,7 @@ void Cliente::parsearMensaje(std::string datos){
             break;
 		}
             case ERROR:{
-                cout << "Se desconecto el servidor" << endl;
+                cout << "Se desconecto del servidor" << endl;
                 this->logueado = false;
                 this->conectado = false;
                 //this->obtenerSocket()->CerrarConexion(this->obtenerSocketFD());
