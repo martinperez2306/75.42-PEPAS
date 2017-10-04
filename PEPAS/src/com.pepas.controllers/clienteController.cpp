@@ -7,9 +7,8 @@
 
 #include <zconf.h>
 
-ClienteController::ClienteController(){
-	//this->socketData = this->clienteParser->parsearXML("cliente.xml");
-    this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
+ClienteController::ClienteController(const char* archivo){
+    this->socketData = this->clienteParser->parsearXML(archivo);
 	this->cliente= new Cliente();
 	this->threadRecibir = recvThread(cliente);
 	this->reconexion = false;
@@ -42,7 +41,6 @@ void ClienteController::conectar(){
 		this->dejarRecibir();
 		reconexion = false;
 	}
-	this->socketData = this->clienteParser->parsearXML("../75.42-PEPAS/PEPAS/cliente.xml");
 	if (this->conectarConElServidor() == -1) {
 		cout<<"Ocurrio un error al intentar conectarse, intente nuevamente"<<endl;
 	} else {

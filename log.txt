@@ -495,3 +495,99 @@ Ultima cantidad recibida 0
 entro al parsear mensaje
 0005
 paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:08:14 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:31:34 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:32:22 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:32:45 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:34:33 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Wed Oct  4 14:35:57 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8001
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+8002
+Ultima cantidad recibida 4
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico

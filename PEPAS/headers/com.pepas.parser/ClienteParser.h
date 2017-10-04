@@ -34,7 +34,7 @@ public:
     
 	ClienteParser();
 
-	ClienteParser::SocketData parsearXML(char* xmlPath);
+	ClienteParser::SocketData parsearXML(const char* xmlPath);
 	bool validarIp(const char *ip);
 	bool puertoValido(const char* puerto);
 	bool sonDigitos(const char* puerto);

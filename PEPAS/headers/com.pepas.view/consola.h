@@ -19,7 +19,7 @@ private:
     bool terminado;
 public:
 
-    Consola();
+    Consola(const char* archivo);
 
     /////////////////Cargar Paginas/////////////////
     void *cargarPagina();

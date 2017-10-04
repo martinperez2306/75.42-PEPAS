@@ -35,7 +35,7 @@ private:
 
 public:
     
-    ClienteController();
+    ClienteController(const char* archivo);
 
     ClienteController(ClienteParser *ClienteParser);
 

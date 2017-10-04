@@ -10,9 +10,19 @@ using namespace std;
 
 
 int main(int argc, char *argv[]) {
+
+
 	crear_logger();
-	Consola *consola = new Consola();
-	consola->cargarMenuPrincipal();
+	if(argc != 2){
+		Consola *consola = new Consola("1");
+		consola->cargarMenuPrincipal();
+	}
+	else{
+		Consola *consola = new Consola(argv[1]);
+		consola->cargarMenuPrincipal();
+	}
+
+	
 	cerrar_logger();
 	
 

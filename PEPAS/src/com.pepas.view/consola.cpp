@@ -1,11 +1,8 @@
 #include "../../headers/com.pepas.view/consola.h"
 
-enum { STATE_SEND, STATE_RECV } state = STATE_SEND;
 
-pthread_t _send, _recv;
-
-Consola::Consola(){
-   this->clienteController = new ClienteController();
+Consola::Consola(const char* archivo){
+   this->clienteController = new ClienteController(archivo);
    terminado = false;
 }
 

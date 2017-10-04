@@ -96,7 +96,7 @@ std::string chartoString (char* buffer){
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
         ssize_t ultimaCantidadEnviada = 0;
-        while (totalEnviado < mensajeLength){
+        while (totalEnviado < (int)mensajeLength){
             ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
             if (ultimaCantidadEnviada < 0) {
                     string error = strerror(errno);
