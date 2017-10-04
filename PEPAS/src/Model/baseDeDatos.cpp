@@ -1,12 +1,15 @@
 #include "../../headers/Model/baseDeDatos.h"
+#include "../../headers/Model/logger.h"
 
 
 typedef pair<string, Usuario*> user;
 
 BaseDeDatos::BaseDeDatos(){
-
+	loggear ("Entro al constructor de BaseDeDatos",2);
 	this->usuarios = new map<string,Usuario*>;
 	this->usuariosConectados = new map<string,Usuario*>;
+	loggear ("Salio del constructor de BaseDeDatos",2);
+	loggear (" ",2);
 
 }
 

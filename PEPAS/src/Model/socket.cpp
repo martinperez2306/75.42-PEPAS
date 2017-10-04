@@ -14,7 +14,7 @@ int Socket::Crear(){
     if (fd < 0) {
         cout << "\nError en la creacion del socket" << endl;
         string error = strerror(errno);
-        loggear(error,3);
+        loggear(error,1);
         exit(1);
     }
     return fd;
@@ -32,8 +32,8 @@ bool Socket::Enlazar(int puerto) {
     /*VERIFICACION DE ERRORES*/
     if (bind(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
-        loggear(error,3);
-        cout << "Error al hacer el enlazado " << error << endl;
+        loggear(error,1);
+       // cout << "Error al hacer el enlazado " << error << endl;
         return false;
     }
     return true;
@@ -51,8 +51,8 @@ void Socket::Conectar( int puerto, string IPremota) {
     /*VERIFICACION DE ERRORES*/
     if (connect(fd, (struct sockaddr *) &serverAddress, serverSize) < 0) {
         string error = strerror(errno);
-        loggear(error,3);
-        cout << "Error al conectar con el servidor " << strerror(errno) << endl;
+        loggear(error,1);
+        //cout << "Error al conectar con el servidor " << strerror(errno) << endl;
     }
 
 }
@@ -62,8 +62,8 @@ void Socket::Escuchar(int socket, int maximasConexionesAlaVez) {
     /*VERIFICACION DE ERRORES*/
     if (ret  < 0){
         string error = strerror(errno);
-        cout << "Error al escuchar conexiones " << error << endl;
-        loggear(error,3);
+       // cout << "Error al escuchar conexiones " << error << endl;
+        loggear(error,1);
     }
 
 }
@@ -73,8 +73,8 @@ void Socket::Escuchar(int maximasConexionesAlaVez) {
     /*VERIFICACION DE ERRORES*/
     if (ret  < 0){
         string error = strerror(errno);
-        cout << "Error al escuchar conexiones " << error << endl;
-        loggear(error,3);
+       // cout << "Error al escuchar conexiones " << error << endl;
+        loggear(error,1);
     }
 
 }
@@ -86,9 +86,9 @@ int Socket::AceptarConexion() {
     socketFD = accept(fd, (struct sockaddr *) &clientAddress, &clientSize);
     if (socketFD < 0) {
         string error = strerror(errno);
-        loggear(error,3);
+        loggear(error,1);
 
-        cout << "Error al conectar con el cliente " << error << endl;
+        //cout << "Error al conectar con el cliente " << error << endl;
 
         exit(1);
     }
@@ -110,8 +110,8 @@ void Socket::Enviar(const void *mensaje, size_t mensajeLength) {
         ultimaCantidadEnviada = send(fd, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
         if (ultimaCantidadEnviada < 0) {
             string error = strerror(errno);
-            loggear(error,3);
-            cout << "Error al enviar mensaje " << error << endl;
+            loggear("Error al enviar mensaje: " + error,1);
+           // cout << "Error al enviar mensaje " << error << endl;
             break;
 
         } else {
@@ -134,7 +134,8 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
         if (ultimaCantidadRecibida < 0) {
             socketShutDown = true;
             string error = strerror(errno);
-            cout << "Error al recibir mensaje " << error << endl;
+            //cout << "Error al recibir mensaje " << error << endl;
+            loggear("Error al recibir mensaje: " + error,1);
         } else if (ultimaCantidadRecibida == 0) {
             socketShutDown = true;
             cadenaAdevolver = "0006/"+to_string(fd);
@@ -147,16 +148,13 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
     }
     if (ultimaCantidadRecibida < 0) {
         string error = strerror(errno);
-        loggear(error,3);
-        cout << "Error al recibir el mensaje " << error << endl;
+        loggear(error,1);
+       // cout << "Error al recibir el mensaje " << error << endl;
     }
 
     if (ultimaCantidadRecibida > 0) {
         cadenaAdevolver = chartoString(buffer);
-        string msgLogger = "Antes de convertir a string: " + cadenaAdevolver;
-        loggear(msgLogger, 1);
-        msgLogger = "El ultivo recv fue de " + to_string(ultimaCantidadRecibida) + " bytes";
-        loggear(msgLogger, 1);
+;
     }
     return cadenaAdevolver;
 
@@ -169,8 +167,8 @@ void Socket::CerrarConexion() {
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
         string error = strerror(errno);
-        loggear(error,3);
-        cout << "Error al cerrar conexion " << error << endl;
+        loggear("Error al cerrar conexion: " + error,1);
+       // cout << "Error al cerrar conexion " << error << endl;
     }
 }
 void Socket::CerrarConexion(int socket) {
@@ -179,8 +177,7 @@ void Socket::CerrarConexion(int socket) {
     /*VERIFICACION DE ERRORES*/
     if (ret < 0){
         string error = strerror(errno);
-        loggear(error,3);
-        cout << "Error al cerrar conexion " << error << endl;
+loggear("Error al cerrar conexion " + error,1);
     }
 }
 void Socket::CerrarSocket(int socket) {

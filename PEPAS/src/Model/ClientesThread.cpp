@@ -13,7 +13,7 @@ ClientesThread::ClientesThread( Socket* socket, Servidor* server, bool CerrarSer
 void ClientesThread::run() {
     //bool socketEstaCerrado = false;
     string msglogger = "Thread listo para correr cliente ... ";
-    loggear (msglogger,1);
+    loggear (msglogger,2);
     while (!estaCerrado) {
         string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
         if (msg == "CerrarCliente"){

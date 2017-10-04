@@ -1,7 +1,6 @@
 #include "../../headers/Vista/consola.h"
 #include "../../headers/Model/usuario.h"
 #include "../../headers/Model/logger.h"
-#include "../../headers/Model/ShutdownThread.h"
 #include <string>
 
 Consola::Consola(){
@@ -48,14 +47,16 @@ void Consola::cargarCambioLoggeo(){
       i++;
    }
 
-   if(nivel.compare("error")==0)
+   if(nivel.compare("error")==0){
    		setNivelLogger(1);
-   else if (nivel.compare("actividad")==0)
+   		loggear("Se cambio el nivel de loggeo a error",2);
+   }else if (nivel.compare("actividad")==0){
    		setNivelLogger(2);
-   else if(nivel.compare("debug")==0)
+   		loggear("Se cambio el nivel de loggeo a actividad",2);
+   }else if(nivel.compare("debug")==0){
    		setNivelLogger(3);
-   else 
-   {
+   		loggear("Se cambio el nivel de loggeo a debug",2);
+   }else {
      	cout << "Opcion invalida" << endl;
       	loggear("Opcion invalida ingresada para el cambio del logger",2);
    } 
