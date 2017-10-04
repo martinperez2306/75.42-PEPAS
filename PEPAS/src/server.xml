@@ -6,6 +6,7 @@
 	<puerto>27015</puerto>
 	
 	<usuarios>
+		
 		<usuario>
 			<username>Martin</username>
 			<password>tincho</password>
@@ -15,12 +16,12 @@
 			<password>Turi</password>
 		</usuario>
 		<usuario>
-			<username>Payas</username>
-			<password>JR</password>
+			<username>payas</username>
+			<password>payas</password>
 		</usuario>
 		<usuario>
-			<username>Bianchi</username>
-			<password>fiuba</password>
+			<username>bianchi</username>
+			<password>bianchi</password>
 		</usuario>
 	</usuarios>
 

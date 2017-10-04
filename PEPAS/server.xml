@@ -15,6 +15,14 @@
 			<username>Augusto</username>
 			<password>Turi</password>
 		</usuario>
+		<usuario>
+			<username>payas</username>
+			<password>payas</password>
+		</usuario>
+		<usuario>
+			<username>bianchi</username>
+			<password>bianchi</password>
+		</usuario>
 	</usuarios>
 
 </servidor>
