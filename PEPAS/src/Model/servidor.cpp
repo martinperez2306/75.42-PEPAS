@@ -6,7 +6,7 @@
 #define BUZON 3
 #define LOGOUT 5
 #define USER_DISCONNECT 6
-#define RECONETION_FAIL 8
+#define SIGNAL_CONNECT 7
 
 typedef pair<int, Socket*> socketConect;
 typedef pair<int,int> mapPortFd;
@@ -32,6 +32,7 @@ Servidor::Servidor(){
 	this->conexiones = 0;
 	this->socketEscucha = 0;
 	this->socketFD = 0;
+    this->aliveCounter = 0;
 	this->puertosDisponibles = crearPuertos();
 	this->terminado = false;
 	this->mapaSocket = new map<int,Socket*>();
@@ -358,6 +359,15 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
         }
             break;
+        case SIGNAL_CONNECT:{
+            this->aliveCounter += 1;
+            string msgLog = "El contador es: " + to_string(aliveCounter);
+            loggear(msgLog,3);
+            loggear ("Cliente se encuentra conectado por red", 2);
+            string msg = "0009" + datos;
+            this->enviarMensaje(msg, socketDelemisor);
+    }
+        break;
 		default:
 			break;
 	}
@@ -435,15 +445,14 @@ Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->baseDeDatos;
 }
-//TODO CERRARSOCKETS
+
 void Servidor::cerrarSockets() {
     //*Recorro lista de puertos y hasheo el puerto con el socket*//*
     while (!puertosEnUso.empty()){
         int puertoActual = puertosEnUso.front();
         puertosEnUso.pop_front();
         auto got = mapaSocket->find(puertoActual);
-        this->obtenerSocket()->CerrarConexion(got->second->obtenerFD());
-        //this->obtenerSocket()->CerrarSocket(got->second);
+        //this->obtenerSocket()->CerrarConexion(got->second->obtenerFD());
     }
 	this->obtenerSocket()->CerrarConexion(obtenerSocketEscucha());
 
@@ -477,6 +486,10 @@ string Servidor::procesarMensaje(string mensa) {
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
     return stringProcesado;
+}
+
+int Servidor::obtenerAlive() {
+    return aliveCounter;
 }
 
 

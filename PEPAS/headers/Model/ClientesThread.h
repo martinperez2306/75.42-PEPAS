@@ -7,6 +7,7 @@
 
 #include "thread.h"
 #include "servidor.h"
+#include "AliveThread.h"
 
 
 class ClientesThread : public Thread {
@@ -15,6 +16,7 @@ private:
     Servidor* srv;
     bool estaCerrado;
     bool borrable; // para saber si se puede borrar el thread.
+    AliveThread aliveThread = AliveThread(srv, estaCerrado);
 public:
 
     ClientesThread(Socket* socket, Servidor* sv, bool CerrarServidor);

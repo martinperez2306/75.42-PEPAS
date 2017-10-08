@@ -18,6 +18,7 @@ private:
 	int conexiones;
 	int socketFD;
 	int socketEscucha;
+
 	bool terminado;
 	BaseDeDatos* baseDeDatos;
 	Socket* iniciarConexion(int puerto);
@@ -30,6 +31,7 @@ private:
 
 
 public:
+	int aliveCounter;
 	Servidor();
 
 	void asignarSocketEscucha(int fd);
@@ -79,6 +81,8 @@ public:
 	string procesarMensaje(string unMensaje);
 	string agregarPadding(int lenght);
 void desloguearse(string usuario,Socket* socketDelemisor);
+
+	int obtenerAlive ();
 };
 
 

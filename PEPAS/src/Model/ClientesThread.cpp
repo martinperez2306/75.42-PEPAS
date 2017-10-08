@@ -14,20 +14,25 @@ void ClientesThread::run() {
     //bool socketEstaCerrado = false;
     string msglogger = "Thread listo para correr cliente ... ";
     loggear (msglogger,2);
+    aliveThread.start();
+    loggear ("aliveThread corriendo ...",3);
     while (!estaCerrado) {
         string msg = srv->parsearMensaje(srv->recibirMensaje(this->socket), this->socket);
+        aliveThread.asignarContador(srv->obtenerAlive());
         if (msg == "CerrarCliente"){
             borrable=true;
+            aliveThread.cerrarContador();
             break;
         }
-
-        //srv->enviarMensaje(msg, this->socket);
     }
+    aliveThread.join();
 }
 
 bool ClientesThread::esBorrable() {
     return this->borrable;
 }
+
+
 
 
 

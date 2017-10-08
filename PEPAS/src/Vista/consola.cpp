@@ -128,38 +128,6 @@ Consola::~Consola(){
 
 	delete this->servidorController;
 }
-/*void Consola::abrirServidorAClientes() {
-
-	this->servidorController->obtenerServidor()->iniciarServidor();
-	this->obtenerServidorController()->obtenerServidor()->obtenerSocket()->Escuchar(
-			this->obtenerServidorController()->obtenerServidor()->obtenerSocketEscucha(),
-			this->obtenerServidorController()->obtenerServidor()->getCantidadDeConexiones());
-	cout << "Escuchando conexiones ..." << endl;
-
-	*//*ShutdownThread shutdownThread(this->terminado, this->servidorController->obtenerServidor());
-	shutdownThread.start();*//*
-
-	while (!this->terminado) {
-		//saco los threads que ya no se usan
-		for (auto it = clientThreads.begin(); it != clientThreads.end();
-			 ++it) {
-			if (it->esBorrable()) {
-				it->join();
-				it = clientThreads.erase(it);
-			}
-		}
-        *//*Cuando se acepta la conexion se crea un nuevo SocketFD que es el que se
-         * utiliza para la comunicacion*//*
-		clientThreads.emplace_back(this->servidorController->obtenerServidor()->aceptarConexiones(),
-								   this->servidorController->obtenerServidor(), this->terminado);
-        *//*Se obtiene el ultimo de la pila y se lo ejecuta con start()*//*
-		clientThreads.back().start();
-        loggear("-------------Nuevo cliente conectado-------------",1);
-	}
-    for (auto it = clientThreads.begin(); it != clientThreads.end(); ++it){
-        (*it).join();
-    }
-}*/
 
 ServidorController *Consola::obtenerServidorController() {
     return this->servidorController;

@@ -15,6 +15,7 @@ void EscuchaThread::run() {
                 it = clientThreads.erase(it);
             }
         }
+
         this->socket = servidor->aceptarConexiones();
         if (this->socket){
             clientThreads.emplace_back(this->socket, this->servidor, this->servidor->getTerminado());
@@ -31,6 +32,7 @@ void EscuchaThread::run() {
     for (auto it = clientThreads.begin(); it != clientThreads.end(); ++it){
         (*it).join();
     }
+
 
 }
 

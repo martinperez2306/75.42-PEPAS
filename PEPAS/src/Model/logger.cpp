@@ -5,7 +5,7 @@ using namespace std;
 int LOG_LEVEL; 
 
 void crear_logger() {
-   LOG_LEVEL = 1;
+   LOG_LEVEL = 3;
 
    ofstream logger("log.txt",ios::app);
 
