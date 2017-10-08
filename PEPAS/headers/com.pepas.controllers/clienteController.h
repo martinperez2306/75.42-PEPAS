@@ -13,6 +13,7 @@
 // Created by florencia on 03/09/17.
 //
 #include "../com.pepas.model/recvThread.h"
+#include "../com.pepas.model/aliveSignalThread.h"
 #include "../com.pepas.model/cliente.h"
 #include "../com.pepas.model/Mensaje.h"
 #include "../com.pepas.parser/ClienteParser.h"
@@ -28,6 +29,7 @@ private:
     ClienteParser::SocketData socketData;
     Cliente* cliente;
     recvThread threadRecibir;
+    aliveSignalThread threadEnviar;
     bool reconexion; 
     char ipAddress[20];
     char testFile [100];

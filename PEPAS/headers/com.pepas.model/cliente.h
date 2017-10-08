@@ -25,6 +25,7 @@ private:
     Usuario* usuario;
     Socket* socketCliente;
     int socketFD;
+    int aliveCounter;
     bool logueado;
     bool conectado;
     list<string> colaBuzon;
@@ -85,6 +86,7 @@ void conectarse();
 void desconectarse();
 void vaciarColaChat();
 void vaciarColaBuzon();
+    int obtenerAliveCounter();
 };
 
 

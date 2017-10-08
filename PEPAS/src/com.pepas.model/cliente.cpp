@@ -6,11 +6,13 @@
 #define BUZON 3
 #define SERVIDOR 4
 #define ERROR 5
+#define SIGNAL_CONNECT 7
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->usuario = new Usuario();
     this->socketFD=0;
+    this->aliveCounter=0;
     this->logueado = false;
     this->conectado = false;
     
@@ -201,6 +203,14 @@ void Cliente::parsearMensaje(std::string datos){
                 this->vaciarColaBuzon();
         }
 			break;
+        case SIGNAL_CONNECT:{
+            this->aliveCounter += 1;
+            string msgLog = "El contador es: " + to_string(aliveCounter);
+            loggear(msgLog,3);
+            loggear ("Cliente se encuentra conectado por red", 2);
+
+        }
+            break;
 		default:
 			break;
 	}
@@ -285,4 +295,8 @@ void Cliente::vaciarColaBuzon(){
     while(!this->colaBuzon.empty()){
         colaBuzon.pop_front();
     }
+}
+
+int Cliente::obtenerAliveCounter() {
+    return this->aliveCounter;
 }

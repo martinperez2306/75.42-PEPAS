@@ -11,6 +11,7 @@ ClienteController::ClienteController(const char* archivo){
     this->socketData = this->clienteParser->parsearXML(archivo);
 	this->cliente= new Cliente();
 	this->threadRecibir = recvThread(cliente);
+	this->threadEnviar = aliveSignalThread(cliente);
 	this->reconexion = false;
 	strcpy(this->ipAddress,socketData.ip);
 	strcpy(this->testFile ,socketData.rutafile);
@@ -92,6 +93,9 @@ void ClienteController::logOut() {
 	this->obtenerCliente()->desloguearse();
 	string usuario = this->obtenerCliente()->obtenerUsuario()->getNombre();
 	this->obtenerCliente()->enviarMensaje(this->obtenerCliente()->procesarMensaje(usuario));
+	this->obtenerCliente()->vaciarColaChat();
+	this->obtenerCliente()->vaciarColaBuzon();
+
 
 }
 
@@ -227,10 +231,12 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 
 void ClienteController::empezarRecibir(){
 	this->threadRecibir.start();
+    this->threadEnviar.start();
 }
 
 void ClienteController::dejarRecibir(){
 	this->threadRecibir.join();
+    this->threadEnviar.join();
 }
 
 
