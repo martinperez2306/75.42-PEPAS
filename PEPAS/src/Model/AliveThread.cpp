@@ -22,10 +22,10 @@ void AliveThread::run(){
         int valorActual = contador;
         sleep (5);
         if (valorActual == contador) {
-            estaCableado = false;
-            loggear("----->ERROR, Se desconecto el cable", 2);
+            //estaCableado = false;
+            loggear("----->ERROR, Se desconecto el cable", 1);
             cout<<"****Se detecto desconexion de red****"<<endl;
-            srv->cerrarSockets();
+           // srv->cerrarSockets();
         }
     }
 }
