@@ -20,12 +20,11 @@ void aliveSignalThread::run() {
         sleep (4);
         if (cliente->obtenerAliveCounter() == signalActual){
             cout <<"**** Se detecto problemas en la conexion de red ****"<<endl;
-            cliente->parsearMensaje("0005");
-            break;
+            //cliente->parsearMensaje("0005");
+            //break;
         }
 
     }
-
 }
 
 aliveSignalThread::aliveSignalThread() {

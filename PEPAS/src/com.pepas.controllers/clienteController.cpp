@@ -235,8 +235,9 @@ void ClienteController::empezarRecibir(){
 }
 
 void ClienteController::dejarRecibir(){
+	this->threadEnviar.join();
 	this->threadRecibir.join();
-    this->threadEnviar.join();
+    
 }
 
 
