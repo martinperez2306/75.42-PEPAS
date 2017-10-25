@@ -7,6 +7,8 @@
 #include <string>
 #include <unordered_map>
 #include <algorithm>
+#include "minimapa.h"
+#include "pistaParser.h"
 
 
 
@@ -28,6 +30,8 @@ private:
 	unordered_map<int, int> mapFD; // <socketFD, puerto>
 	map<int,Socket*>* mapaSocket; // <puerto, Socket>
 	map<int, string>* mapUsuario;
+
+	PistaParser* pistaParser;
 
 
 public:
@@ -80,9 +84,14 @@ public:
 
 	string procesarMensaje(string unMensaje);
 	string agregarPadding(int lenght);
-void desloguearse(string usuario,Socket* socketDelemisor);
+	void desloguearse(string usuario,Socket* socketDelemisor);
 
 	int obtenerAlive ();
+
+	string procesarMensajeMinimapa(int x1, int y1, int x2, int y2, int izquierda, int derecha);
+	void generarMinimapa();
+	void enviarMinimapaAClientes();
+	string procesarMensajeFinMinimapa();
 };
 
 

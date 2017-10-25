@@ -8,19 +8,21 @@
 #define USER_DISCONNECT 6
 #define SIGNAL_CONNECT 7
 
+using namespace std;
+
 typedef pair<int, Socket*> socketConect;
 typedef pair<int,int> mapPortFd;
 typedef pair<int, string> usuarioConect;
 
 
 std::list<int> crearPuertos(){
-	
+
 	std::list<int> puertos;
 	for(int i = 8000; i <= 8007; i++)
 		puertos.push_back(i);
 
 	return puertos;
-	
+
 }
 
 Servidor::Servidor(){
@@ -39,6 +41,7 @@ Servidor::Servidor(){
     this->mapUsuario = new map<int,string>();
     loggear ("Salio del constructor del Servidor",2);
     loggear (" ",2);
+    this->pistaParser=NULL;
 
 }
 
@@ -105,7 +108,7 @@ Socket* Servidor::obtenerSocket(){
 void Servidor::iniciarServidor() {
     loggear ("Entro al iniciar Servidor",2);
 	/*Aqui se crea el socket escucha del servidor el cual es leido del XML*/
-    
+
     loggear ("Crea el socket",2);
     asignarSocketEscucha(obtenerSocket()->Crear());
     string msg = "El puerto del servidor es: " + to_string(this->getPuerto());
@@ -113,7 +116,7 @@ void Servidor::iniciarServidor() {
     obtenerSocket()->Enlazar(this->getPuerto());
     loggear ("Salgo del iniciar Servidor",2);
     loggear (" ",2);
-   	
+
 }
 
 Socket* Servidor::iniciarConexion(int puerto) {
@@ -167,7 +170,7 @@ Socket*  Servidor::aceptarConexiones() {
         loggear ("El servidor tiene conexiones disponibles",2);
         /*Toma un puerto de los disponibles*/
         int puerto = 8000;
-        
+
         /*Lo quita de la pila*/
         /*Envia un mensaje al cliente con el nuevo puerto al que se debe conectar*/
         loggear ("Creo socket para la reconexion",2);
@@ -201,7 +204,7 @@ Socket*  Servidor::aceptarConexiones() {
         msg = "Asigno el nuevo fd al socket:" + to_string(fdd);
         loggear(msg,3);
         newSocket->asignarFD(fdd);
-        
+
         /*Cierro la conexion con el socket escucha*/
         loggear ("Cierro la conexion con el fd viejo(el de escucha)", 2);
         obtenerSocket()->CerrarConexion(fd);
@@ -263,6 +266,7 @@ void Servidor::enviarMensaje(string  mensa, Socket* socket){
 string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
 	int i = 0;
+    int j=0;
 	loggear("Entro al parsear mensaje",2);
 	loggear ("El string recibido fue: " + datos,3);
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -276,6 +280,13 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 			std::string password = obtenerParametros(datos,&i);
             mensajeAEnviar = validarCliente(usuario, password, socketDelemisor);
             enviarMensaje(mensajeAEnviar, socketDelemisor);
+            ////////////////
+            int cod = stoi(obtenerParametros(mensajeAEnviar,&j),nullptr,10);
+            std::string mensaje = obtenerParametros(datos,&j);
+            ////////////////////
+            if(mensaje=="Bienvenido"){
+                enviarMinimapaAClientes();
+            }
 		}
 			break;
 		case BROADCAST:{
@@ -379,14 +390,14 @@ return mensajeAEnviar;
 
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
 
-    
+
     loggear("Saco al usuario de la base de datos",2);
     Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
     usuarioLogOut->estaDesconectado();
     this->obtenerBaseDeDatos()->sacarUsuarioConectadoABaseDeDatos(usuario);
     string msgLogger = "Usuario " + usuario + "desconectado";
     loggear (msgLogger,3);
-    
+
 }
 
 string Servidor::validarCliente(string usuario, string contrasenia, Socket* socketDelEmisor) {
@@ -411,6 +422,7 @@ string Servidor::validarCliente(string usuario, string contrasenia, Socket* sock
                 loggear(msg, 2);
                 msg = procesarMensaje(msg);
                 fallo = true;
+
             } else {
                 msgOK = "Bienvenido\n";
                 loggear(msgOK, 2);
@@ -420,6 +432,8 @@ string Servidor::validarCliente(string usuario, string contrasenia, Socket* sock
                 this->baseDeDatos->agregarUsuarioConectadoABaseDeDatos(usuario);
                 int puerto = this->mapFD.find(socketDelEmisor->obtenerFD())->second;
                 this->mapUsuario->insert(usuarioConect(puerto,usuario));
+
+                /////////////////7
             }
 
     msgAdevolver = msgOK;
@@ -487,6 +501,81 @@ string Servidor::procesarMensaje(string mensa) {
     loggear(stringProcesado,1);
     return stringProcesado;
 }
+void Servidor::generarMinimapa(){
+    this->pistaParser->parsearMinimapa();
+}
+
+
+void Servidor::enviarMinimapaAClientes(){
+    map<Segmento*,Objetos*>* minimapa=this->pistaParser->getMinimapa()->getMinimapa();
+    for (map<Segmento*,Objetos*>::iterator it=minimapa->begin(); it!=minimapa->end(); ++it){
+         int X1= it->first->getPosicionInicial()->getX();
+         int Y1 =it->first->getPosicionInicial()->getY();
+         int X2= it->first->getPosicionFinal()->getX();
+         int Y2= it->first->getPosicionFinal()->getY();
+         int arbolD=it->second->getObjetoDerecha()->getArbol(); //tengo 0 o 2
+         int cartelD= it->second->getObjetoDerecha()->getCartel(); //tengo 0 o la veloc del cartel
+         int arbolI= it->second->getObjetoIzquierda()->getArbol(); //tengo 0 o 2
+         int cartelI= it->second->getObjetoIzquierda()->getCartel(); ////tengo 0 o la veloc del cartel
+         int izquierda;
+         int derecha;
+        if(arbolD == 0 && cartelD==0){
+            derecha=0;
+        }
+        if(arbolI == 0 && cartelI==0){
+            izquierda=0;
+        }
+        if(arbolD==2){
+            derecha=2;
+        }else{
+            derecha=cartelD;
+        }
+        if(arbolI==2){
+            izquierda=2;
+        }else{
+            derecha=cartelI;
+        }
+        string mensajeAEnviar= this->procesarMensajeMinimapa(X1,Y1,X2,Y2,izquierda,derecha);
+        for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+                    this->enviarMensaje(mensajeAEnviar,it->second);
+        }
+
+    }
+    string mensajeFin= this->procesarMensajeFinMinimapa();
+    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+                    this->enviarMensaje(mensajeFin,it->second);
+        }
+
+}
+
+
+string Servidor::procesarMensajeMinimapa(int x1, int y1, int x2, int y2, int izquierda, int derecha) {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string X1=to_string(x1);
+    string X2=to_string(x2);
+    string Y1=to_string(y1);
+    string Y2=to_string(y2);
+    string izq =to_string(izquierda);
+    string dcha=to_string(derecha);
+    stringACrear = separador + "8" + separador + X1 + separador + Y1 + separador + X2 + separador + Y2 + separador + izq + separador + dcha;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    loggear(stringProcesado,1);
+    return stringProcesado;
+}
+
+string Servidor::procesarMensajeFinMinimapa(){
+    string stringACrear,stringProcesado;
+    string separador="/";
+    stringACrear = separador + "9" + separador;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    loggear(stringProcesado,1);
+    return stringProcesado;
+}
+
+
 
 int Servidor::obtenerAlive() {
     return aliveCounter;
