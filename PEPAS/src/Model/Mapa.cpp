@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/Mapa.h"
+#include "../../headers/Model/Mapa.h"
 
 Mapa::Mapa(int lengthX, int lengthY) {
 	this->mapa = NULL;

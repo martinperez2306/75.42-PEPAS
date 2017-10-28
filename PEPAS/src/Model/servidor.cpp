@@ -41,8 +41,8 @@ Servidor::Servidor(){
     this->mapUsuario = new map<int,string>();
     loggear ("Salio del constructor del Servidor",2);
     loggear (" ",2);
-    this->pistaParser=NULL;
-
+    this->pistaParser= new PistaParser();
+    this->minimapa = NULL;
 }
 
 
@@ -285,7 +285,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             std::string mensaje = obtenerParametros(datos,&j);
             ////////////////////
             if(mensaje=="Bienvenido"){
-                enviarMinimapaAClientes();
+                enviarMinimapaACliente(socketDelemisor);
             }
 		}
 			break;
@@ -503,62 +503,64 @@ string Servidor::procesarMensaje(string mensa) {
 }
 void Servidor::generarMinimapa(){
     this->pistaParser->parsearMinimapa();
+    this->minimapa = this->pistaParser->getMinimapa();
+    delete this->pistaParser;
 }
 
 
-void Servidor::enviarMinimapaAClientes(){
-    map<Segmento*,Objetos*>* minimapa=this->pistaParser->getMinimapa()->getMinimapa();
-    for (map<Segmento*,Objetos*>::iterator it=minimapa->begin(); it!=minimapa->end(); ++it){
-         int X1= it->first->getPosicionInicial()->getX();
-         int Y1 =it->first->getPosicionInicial()->getY();
-         int X2= it->first->getPosicionFinal()->getX();
-         int Y2= it->first->getPosicionFinal()->getY();
-         int arbolD=it->second->getObjetoDerecha()->getArbol(); //tengo 0 o 2
-         int cartelD= it->second->getObjetoDerecha()->getCartel(); //tengo 0 o la veloc del cartel
-         int arbolI= it->second->getObjetoIzquierda()->getArbol(); //tengo 0 o 2
-         int cartelI= it->second->getObjetoIzquierda()->getCartel(); ////tengo 0 o la veloc del cartel
-         int izquierda;
-         int derecha;
-        if(arbolD == 0 && cartelD==0){
-            derecha=0;
-        }
-        if(arbolI == 0 && cartelI==0){
-            izquierda=0;
-        }
-        if(arbolD==2){
-            derecha=2;
-        }else{
-            derecha=cartelD;
-        }
-        if(arbolI==2){
-            izquierda=2;
-        }else{
-            derecha=cartelI;
-        }
-        string mensajeAEnviar= this->procesarMensajeMinimapa(X1,Y1,X2,Y2,izquierda,derecha);
-        for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
-                    this->enviarMensaje(mensajeAEnviar,it->second);
-        }
+void Servidor::enviarMinimapaACliente(Socket* socket){
+    map<Segmento*,Objetos*>* minimapa=this->minimapa->getMinimapa();
+    list<Segmento*>* pista = this->minimapa->getSegmentos();
+    list<Objeto*>* objetos = this->minimapa->getObjetos();
 
+    for(list<Segmento*>::iterator it = pista->begin(); it != pista->end();++it){
+    	Segmento* seg = *it;
+    	int X1= seg->getPosicionInicial()->getX();
+    	int Y1 =seg->getPosicionInicial()->getY();
+    	int X2= seg->getPosicionFinal()->getX();
+    	int Y2= seg->getPosicionFinal()->getY();
+    	string mensajeAEnviar= this->procesarMensajeRutaMinimapa(X1,Y1,X2,Y2);
+    	this->enviarMensaje(mensajeAEnviar,socket);
+    	}
+
+
+    for (list<Objeto*>::iterator it = objetos->begin(); it != objetos->end(); ++it){
+    	Objeto* obj = *it;
+    	int tipoArbol = obj->getArbol();
+    	int tipoCartel = obj->getCartel();
+    	int distancia = obj->getDistancia();
+    	string ladoDelObjeto = obj->getLado();
+    	string mensajeAEnviar = this->procesarMensajeObjetoMinimapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+    	this->enviarMensaje(mensajeAEnviar,socket);
     }
+
     string mensajeFin= this->procesarMensajeFinMinimapa();
     for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
-                    this->enviarMensaje(mensajeFin,it->second);
-        }
-
+    	this->enviarMensaje(mensajeFin,it->second);
+    }
 }
 
+string Servidor::procesarMensajeObjetoMinimapa(int arbol, int cartel, int distancia, string lado){
+	string stringACrear, stringProcesado;
+	string separador = "/";
+	string arb = to_string(arbol);
+	string cart = to_string(cartel);
+	string dist = to_string(distancia);
+	stringACrear = separador + "9" + separador + arb + separador + cart + separador + dist + separador +lado;
+	unsigned long largoDelMensaje = stringACrear.length();
+	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+	loggear(stringProcesado,1);
+	return stringProcesado;
+}
 
-string Servidor::procesarMensajeMinimapa(int x1, int y1, int x2, int y2, int izquierda, int derecha) {
+string Servidor::procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2) {
     string stringACrear, stringProcesado;
     string separador = "/";
     string X1=to_string(x1);
     string X2=to_string(x2);
     string Y1=to_string(y1);
     string Y2=to_string(y2);
-    string izq =to_string(izquierda);
-    string dcha=to_string(derecha);
-    stringACrear = separador + "8" + separador + X1 + separador + Y1 + separador + X2 + separador + Y2 + separador + izq + separador + dcha;
+    stringACrear = separador + "8" + separador + X1 + separador + Y1 + separador + X2 + separador + Y2 + separador +  separador;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
@@ -568,14 +570,12 @@ string Servidor::procesarMensajeMinimapa(int x1, int y1, int x2, int y2, int izq
 string Servidor::procesarMensajeFinMinimapa(){
     string stringACrear,stringProcesado;
     string separador="/";
-    stringACrear = separador + "9" + separador;
+    stringACrear = separador + "10" + separador;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
     return stringProcesado;
 }
-
-
 
 int Servidor::obtenerAlive() {
     return aliveCounter;

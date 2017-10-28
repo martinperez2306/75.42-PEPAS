@@ -2,13 +2,15 @@
 #define PUNTERO_H_
 
 #include "posicion.h"
+#include <string>
+using namespace std;
 
 class Puntero{
 
 private:
 	int angulo;
 	void unificarAngulo();
-	int distancia;
+	int distanciaRecorrida;
 
 public:
 
@@ -23,6 +25,7 @@ public:
 	void girarIzquierda();
 	void girarDerecha();
 	Posicion* avanzar(Posicion* posicion,int distancia);
+	Posicion* calcularPosicionObjeto(string posicion);
 
 	~Puntero();
 };

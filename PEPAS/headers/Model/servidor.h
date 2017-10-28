@@ -33,6 +33,8 @@ private:
 
 	PistaParser* pistaParser;
 
+	Minimapa* minimapa;
+
 
 public:
 	int aliveCounter;
@@ -88,9 +90,10 @@ public:
 
 	int obtenerAlive ();
 
-	string procesarMensajeMinimapa(int x1, int y1, int x2, int y2, int izquierda, int derecha);
+	string procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2);
+	string procesarMensajeObjetoMinimapa(int arbol,int cartel,int distancia,string lado);
 	void generarMinimapa();
-	void enviarMinimapaAClientes();
+	void enviarMinimapaACliente(Socket* socketCliente);
 	string procesarMensajeFinMinimapa();
 };
 

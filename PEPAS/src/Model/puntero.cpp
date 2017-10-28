@@ -1,16 +1,16 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/puntero.h"
+#include "../../headers/Model/puntero.h"
 
 Puntero::Puntero(){
 	this->angulo = 0;
-	this->distancia = 0;
+	this->distanciaRecorrida = 0;
 }
 
 void Puntero::setDistancia(int distancia){
-	this->distancia = distancia;
+	this->distanciaRecorrida = distancia;
 }
 
 int Puntero::getDistancia(){
-	return this->distancia;
+	return this->distanciaRecorrida;
 }
 
 void Puntero::setAngulo(int angulo){
@@ -52,28 +52,28 @@ Posicion* Puntero::avanzar(Posicion* posicion,int distancia){
 		break;
 	case 45:
 		posFinal->setX(posFinal->getX() + 1);
-		posFinal->setY(posFinal->getY() + 1);
+		posFinal->setY(posFinal->getY() - 1);
 		break;
 	case 90:
-		posFinal->setY(posFinal->getY() + 1);
+		posFinal->setY(posFinal->getY() - 1);
 		break;
 	case 135:
 		posFinal->setX(posFinal->getX() - 1);
-		posFinal->setY(posFinal->getY() + 1);
+		posFinal->setY(posFinal->getY() - 1);
 		break;
 	case 180:
 		posFinal->setX(posFinal->getX() - 1);
 		break;
 	case 225:
 		posFinal->setX(posFinal->getX() - 1);
-		posFinal->setY(posFinal->getY() - 1);
+		posFinal->setY(posFinal->getY() + 1);
 		break;
 	case 270:
-		posFinal->setY(posFinal->getY() - 1);
+		posFinal->setY(posFinal->getY() + 1);
 		break;
 	case 315:
 		posFinal->setX(posFinal->getX() + 1);
-		posFinal->setY(posFinal->getY() - 1);
+		posFinal->setY(posFinal->getY() + 1);
 		break;
 	}
 	inicio ++;

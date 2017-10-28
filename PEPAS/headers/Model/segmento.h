@@ -23,6 +23,8 @@ public:
 	Posicion* getPosicionInicial();
 	Posicion* getPosicionFinal();
 
+	//Eliminar memoria pedida para la posicion Inicia y pos final (el delete verifica si alguna de las dos ya fue
+	//eliminada por otro segmento, ya que segmentos pueden compartir una misma pos)
 	~Segmento();
 };
 

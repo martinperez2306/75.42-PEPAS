@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/Zoomer.h"
+#include "../../headers/Model/Zoomer.h"
 
 Zoomer::Zoomer() {
 	this->tamanioZoom = 0;

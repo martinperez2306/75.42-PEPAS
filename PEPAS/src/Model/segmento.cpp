@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/segmento.h"
+#include "../../headers/Model/segmento.h"
 
 Segmento::Segmento(){
 	this->posicionFinal= NULL;
@@ -16,6 +16,11 @@ Posicion* Segmento::getPosicionFinal(){
 
 Posicion* Segmento::getPosicionInicial(){
 	return this->posicionInicial;
+}
+
+Segmento::~Segmento(){
+	delete this->posicionFinal;
+	delete this->posicionInicial;
 }
 
 

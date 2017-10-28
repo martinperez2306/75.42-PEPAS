@@ -6,6 +6,7 @@
 #include "pugixml.hpp"
 #include "segmento.h"
 #include "objetos.h"
+#include "Objeto.h"
 
 class PistaParser{
 
@@ -18,8 +19,8 @@ private:
 	Puntero* puntero;
 	Posicion* posicionActual;
 	int generarDireccion(string direccion);
-	void girarYAvanzar(string direccion, int distancia,Objetos* objetos);
-	void generarObjetos(Objetos* objetos, string ladoDeLosObjetos,pugi::xml_node objeto);
+	void girarYAvanzar(string direccion, int distancia);
+	void generarObjeto(int distancia,string ladoDelObjeto,pugi::xml_node tipoDeObjeto);
 
 
 public:
@@ -34,6 +35,7 @@ public:
 
 	void prueba();
 
+	//Eliminar referencia a minimapa y a puntero
 	~PistaParser();
 
 };

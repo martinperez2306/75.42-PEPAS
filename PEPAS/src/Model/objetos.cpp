@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/objetos.h"
+#include "../../headers/Model/objetos.h"
 
 Objetos::Objetos(){
 	this->objetoADerecha = new Casillero();

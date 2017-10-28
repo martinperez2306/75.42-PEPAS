@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/posicion.h"
+#include "../../headers/Model/posicion.h"
 
 Posicion::Posicion(){
 
@@ -25,4 +25,8 @@ int Posicion::getX(){
 
 int Posicion::getY(){
 	return this->y;
+}
+
+Posicion::~Posicion(){
+
 }

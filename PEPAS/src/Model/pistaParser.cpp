@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-servidor/PEPAS/headers/Model/pistaParser.h"
+#include "../../headers/Model/pistaParser.h"
 
 PistaParser::PistaParser(){
 	this->minimapa = new Minimapa();
@@ -45,7 +45,7 @@ int PistaParser::generarDireccion(string direccion){
 	return angulo;
 }
 
-void PistaParser::girarYAvanzar(string direccion,int distancia,Objetos* objetos){
+void PistaParser::girarYAvanzar(string direccion,int distancia){
 
 	Posicion* posicionAuxiliar = this->posicionActual;
 	Posicion* posicionFinal = this->posicionActual;
@@ -63,36 +63,52 @@ void PistaParser::girarYAvanzar(string direccion,int distancia,Objetos* objetos)
 	}
 	//ACA CREAMOS UN SUBSEGMENTO!!(OJO: CLASE SE LLAMA SEGMENTO PERO ES UN SUBSEGMENTO)
 	Segmento* segm = new Segmento(posicionAuxiliar,posicionFinal);
-	this->minimapa->setObjetos(segm,objetos);
+	this->minimapa->agregarSegmento(segm);
 	this->posicionActual = posicionFinal;
 }
 
-void PistaParser::generarObjetos(Objetos* objetos, string ladoDeLosObjetos,pugi::xml_node objeto){
+void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_node tipoDeObjeto){
 
-	Casillero* casilleroIzquierda = objetos->getObjetoIzquierda();
-	Casillero* casilleroDerecha = objetos->getObjetoDerecha();
+	Objeto* objeto = new Objeto();
 
+	pugi::xml_node nodeType = tipoDeObjeto.first_child();
+
+	//LADO DEL OBJETO
 	if(ladoDeLosObjetos.compare("derecha") == 0){
-		string obj = objeto.name();
-		if(obj.compare("arbol") == 0){
-			casilleroDerecha->setArbol();
-		}
-		if(obj.compare("cartel") == 0){
-			int velocidadMaxima = objeto.text().as_int();
-			casilleroDerecha->setCartel(velocidadMaxima);
-		}
-	}
-	if(ladoDeLosObjetos.compare("izquierda")== 0){
-		string obj = objeto.name();
-		if(obj.compare("arbol") == 0){
-			casilleroIzquierda->setArbol();
-		}
-		if(obj.compare("cartel") == 0){
-			int velocidadMaxima = objeto.text().as_int();
-			casilleroIzquierda->setCartel(velocidadMaxima);
-		}
 
+		objeto->setLado("D");
+
+		string obj = nodeType.name();
+
+		//TIPO DE OBJETO
+		if(obj.compare("arbol") == 0){
+			objeto->setArbol(ARBOL);
+		}
+		if(obj.compare("cartel") == 0){
+			int velocidadMaxima = nodeType.text().as_int();
+			objeto->setCartel(velocidadMaxima);
+		}
 	}
+	//LADO DEL OBJETO
+	if(ladoDeLosObjetos.compare("izquierda")== 0){
+
+		objeto->setLado("I");
+
+		string obj = nodeType.name();
+
+		//TIPO DE OBJETO
+		if(obj.compare("arbol") == 0){
+			objeto->setArbol(ARBOL);
+		}
+		if(obj.compare("cartel") == 0){
+			int velocidadMaxima = nodeType.text().as_int();
+			objeto->setCartel(velocidadMaxima);
+		}
+	}
+	//DISTANCIA DEL OBJETO
+	objeto->setDistancia(distancia);
+
+	this->minimapa->agregarObjeto(objeto);
 }
 
 
@@ -115,31 +131,30 @@ void PistaParser::parsearMinimapa(){
 
 			//Buscamos en todos los segmentos del xml
 			pugi::xml_node nodeSegments = documento.child("minimapa").child("segmentos");
-			for (pugi::xml_node nodeSegment = nodeSegments.first_child(); nodeSegment ;nodeSegment = nodeSegment.next_sibling()){
-				//Detectamos los objetos que contendra el segmento (arboles, carteles, etc)
-				pugi::xml_node nodeObjects = nodeSegment.child("objetos");
-				Objetos* objetos = new Objetos();
-				//Buscamos de que lado estaran los objetos
-				for(pugi::xml_node nodeSide = nodeObjects.first_child(); nodeSide; nodeSide = nodeSide.next_sibling()){
-					//Solo puede haber en un lado del segmento un tipo de objeto (POR AHORA)
-					pugi::xml_node nodeObject = nodeSide.first_child();
-					this->generarObjetos(objetos,nodeSide.name(),nodeObject);
-				}
-				//Detectamos la ruta y creamos los segmentos de ruta con sus correspondientes objetos
-				pugi::xml_node nodeRoute = nodeSegment.child("ruta");
-				for(pugi::xml_node nodeDirection = nodeRoute.first_child(); nodeDirection; nodeDirection = nodeDirection.next_sibling()){
-					this->girarYAvanzar(nodeDirection.name(),nodeDirection.text().as_int(),objetos);
-				}
-
+			//Detectamos la ruta y creamos los segmentos de ruta con sus correspondientes objetos
+			pugi::xml_node nodeRoute = nodeSegments.child("ruta");
+			for(pugi::xml_node nodeDirection = nodeRoute.first_child(); nodeDirection; nodeDirection = nodeDirection.next_sibling()){
+				this->girarYAvanzar(nodeDirection.name(),nodeDirection.text().as_int());
+			}
+			//Detectamos los objetos que contendra el segmento (arboles, carteles, etc)
+			pugi::xml_node nodeObjects = nodeSegments.child("objetos");
+			for(pugi::xml_node nodeObject = nodeObjects.first_child(); nodeObject;nodeObject = nodeObject.next_sibling()){
+				pugi::xml_node nodeObjectDist = nodeObject.child("distancia");
+				pugi::xml_node nodeObjectPos = nodeObject.child("posicion");
+				pugi::xml_node nodeObjectType = nodeObject.child("tipo");
+				this->generarObjeto(nodeObjectDist.text().as_int(),nodeObjectPos.text().as_string(),nodeObjectType);
 			}
 		}
 }
+
 
 Minimapa* PistaParser::getMinimapa(){
 	return this->minimapa;
 }
 void PistaParser::prueba(){
-	this->minimapa->getAllPosiciones();
+//	this->minimapa->getAllPosiciones();
+	this->minimapa->mostrarSegmentos();
+	this->minimapa->mostrarObjetos();
 }
 
 PistaParser::~PistaParser(){
