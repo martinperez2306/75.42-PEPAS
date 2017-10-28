@@ -1,5 +1,7 @@
 #include "../../headers/com.pepas.model/cliente.h"
 #include "../../headers/com.pepas.logger/Logger.h"
+#include "../../headers/com.pepas.view/vista.h"
+
 
 #define LOGIN 4
 #define BROADCAST 2
@@ -7,6 +9,9 @@
 #define SERVIDOR 4
 #define ERROR 5
 #define SIGNAL_CONNECT 7
+#define MINIMAPA 8
+#define FINMINIMAPA 9
+#define INFINITO 2147483647
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -14,9 +19,32 @@ Cliente::Cliente() {
     this->socketFD=0;
     this->aliveCounter=0;
     this->logueado = false;
+    this->minimapaCompleto=false;
     this->conectado = false;
-    
+    this->minimapa=new Minimapa();
+    this->vista=new Vista();
+
 }
+bool Cliente::minimapaEstaCompleto(){
+    return (this->minimapaCompleto);
+}
+/////////////////MINIMAPA///////////////////////////////////
+void Cliente::actualizarMiniMapa(int x1, int y1, int x2,int y2, int izq, int dcha){
+    Posicion* pos1=new Posicion(x1,y1);
+    Posicion* pos2=new Posicion(x2,y2);
+    Segmento* segmento= new Segmento(pos1,pos2);
+    Objetos* objetos=new Objetos();
+    objetos->agregarObjetoADerecha(dcha);
+    objetos->agregarObjetoAIzquierda(izq);
+    this->minimapa->setObjetos(segmento,objetos);
+}
+   //////////////////////////////////////////////////////////
+
+void Cliente::graficarMinimapa(){
+    vista->graficarMinimapa(this->minimapa);
+}
+
+
 
 
 std::string obtenerParametros(std::string mensaje, int* i){
@@ -46,7 +74,7 @@ void Cliente::logIn(){
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());
     //this->parsearMensaje(this->recibirMensaje());
- 
+
 }
 
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
@@ -164,10 +192,24 @@ void Cliente::parsearMensaje(std::string datos){
 	loggear (datos,1);
 
 	int codigo = stoi(obtenerParametros(datos,&i),nullptr,10);
+
 	loggear("paso el stoi tragico",1 );
-	
+
 
 	switch(codigo){
+        case MINIMAPA:{
+            int x1 = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int x2 = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int y1 = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int y2 = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int izquierda = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int derecha = stoi(obtenerParametros(datos,&i),nullptr,10);
+            this->actualizarMiniMapa(x1,x2,y1,y2,izquierda,derecha);
+
+        }
+        case FINMINIMAPA:{
+            this->minimapaCompleto=true;
+        }
 		case LOGIN:{
             string mensaje = obtenerParametros(datos,&i);
 			cout << mensaje << endl;

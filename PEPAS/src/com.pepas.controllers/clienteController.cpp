@@ -3,9 +3,11 @@
 //
 
 #include <iomanip>
-#include "../../headers/com.pepas.controllers/clienteController.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.controllers/clienteController.h"
 
 #include <zconf.h>
+
+using namespace std;
 
 ClienteController::ClienteController(const char* archivo){
     this->socketData = this->clienteParser->parsearXML(archivo);
@@ -15,8 +17,7 @@ ClienteController::ClienteController(const char* archivo){
 	this->reconexion = false;
 	strcpy(this->ipAddress,socketData.ip);
 	strcpy(this->testFile ,socketData.rutafile);
-
-
+	this->threadGraficoMinimapa=threadMinimapa(cliente);
 
 }
 
@@ -36,7 +37,7 @@ void ClienteController::conectar(){
 		cout<< "Usted ya esta conectado" <<endl;
 		return;
 	}
-	
+
 	//Esto es para cerrar el thread de la conexion anterior.
 	if(reconexion){
 		this->dejarRecibir();
@@ -55,6 +56,7 @@ void ClienteController::conectar(){
 
 int ClienteController::conectarConElServidor(){
 	return this->cliente->conectarseAlServidor(this->ipAddress, socketData.puerto);
+
 }
 
 
@@ -109,11 +111,12 @@ void ClienteController::logIn() {
         cout << "Usted ya esta logueado" << endl;
         return;
     }
-	
+
 	this->cliente->logIn();
 
 	if (this->cliente->estalogueado()){
 		this->empezarRecibir();
+		this->verMinimapa();
 	}
 
 }
@@ -131,7 +134,7 @@ void ClienteController::stressTest(){
 
 	try {
 		cin >> milisegundos;
-		mili = stoi(milisegundos, nullptr, 10);
+		mili = stoi(milisegundos,nullptr, 10);
 		mili = mili * 1000;
 		cout << "Ingrese cantidad de milisegundos en total: ";
 		cin >> totalmili;
@@ -143,12 +146,12 @@ void ClienteController::stressTest(){
 			cout<<"Datos ingresados invalidos, deben ser multiplo"<<endl;
 			loggear("Datos ingresados invalidos, deben ser multiplo",1);
 		}
-	} catch (std::invalid_argument) {
+	}catch (std::invalid_argument) {
 		cout << "Ingrese unicamente un numero " << '\n';
 	}
 
 	ifstream myReadFile;
-	myReadFile.open(testFile); //this->clienteParser->obtenerRutaTestFile() 
+	myReadFile.open(testFile); //this->clienteParser->obtenerRutaTestFile()
 	string stressMsg;
 	if (myReadFile.is_open() && valido) {
 		while (!myReadFile.eof()) {
@@ -197,7 +200,7 @@ void ClienteController::enviarMensajePrivado(){
 
 void ClienteController::salirDelPrograma() {
 	cout<<"SALISTE"<<endl;
-	
+
 }
 
 ClienteController::~ClienteController(){
@@ -237,8 +240,22 @@ void ClienteController::empezarRecibir(){
 void ClienteController::dejarRecibir(){
 	this->threadEnviar.join();
 	this->threadRecibir.join();
-    
+
 }
+
+////////////////////////////7
+void ClienteController::verMinimapa(){
+    bool completo=this->cliente->minimapaEstaCompleto();
+    bool logeado=this->cliente->estalogueado();
+	if(completo &&logeado){
+		this->threadGraficoMinimapa.start();
+	}
+	else{
+		cout<<"No esta conectado"<<endl;
+	}
+
+}
+/////////////////////////////////
 
 
 
@@ -314,4 +331,5 @@ void ClienteController::enviarBroadcast(string entrada) {
 	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
 
 }
+
 

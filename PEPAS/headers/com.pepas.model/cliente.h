@@ -10,12 +10,15 @@
 
 
 #include <string>
-#include "../../headers/com.pepas.model/usuario.h"
-#include "../../headers/com.pepas.model/socket.h"
-#include "../../headers/com.pepas.model/Mensaje.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/usuario.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/socket.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Mensaje.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/minimapa.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.view/vista.h"
 #include <iostream>
 #include <cstring>
 #include <list>
+
 
 using namespace std;
 
@@ -28,13 +31,16 @@ private:
     int aliveCounter;
     bool logueado;
     bool conectado;
+    bool minimapaCompleto;
     list<string> colaBuzon;
     list<string> colaChat;
+    Minimapa* minimapa;
+    Vista* vista;
 
 
 public:
     Cliente();
-
+    bool minimapaEstaCompleto();
     void logIn();
 
     //metodo para loquearse?
@@ -87,6 +93,10 @@ void desconectarse();
 void vaciarColaChat();
 void vaciarColaBuzon();
     int obtenerAliveCounter();
+    void graficarMinimapa();
+void actualizarMiniMapa(int x1, int y1, int x2,int y2, int izq, int dcha);
+
+
 };
 
 

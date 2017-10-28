@@ -47,6 +47,7 @@ void Consola::cargarMenuPrincipal() {
 			case 2:
 			{
 				this->clienteController->logIn();
+				
 			}
 				break;
 			case 3:

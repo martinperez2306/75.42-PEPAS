@@ -2,7 +2,7 @@
 // Created by florencia on 06/09/17.
 //
 
-#include "../../headers/com.pepas.model/usuario.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/usuario.h"
 
 Usuario::Usuario(){
     this->nombre = "";

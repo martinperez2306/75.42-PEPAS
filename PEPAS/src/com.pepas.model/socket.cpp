@@ -1,5 +1,5 @@
-#include "../../headers/com.pepas.model/socket.h"
-#include "../../headers/com.pepas.logger/Logger.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/socket.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.logger/Logger.h"
 #include <unistd.h>
 
 #define MAX_DATA_SIZE 1000
@@ -136,8 +136,8 @@ std::string Socket::Recibir(int socket, size_t mensajeAleerLength) {
             cadenaAdevolver="0005";
             string error = strerror(errno);
             loggear("Error al recibir mensaje " + error,1);
-            socketShutDown = true;  
-                      
+            socketShutDown = true;
+
         } else if (ultimaCantidadRecibida == 0) {
             cadenaAdevolver="0005";
             socketShutDown = true;

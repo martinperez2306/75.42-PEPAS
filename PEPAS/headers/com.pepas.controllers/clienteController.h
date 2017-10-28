@@ -9,14 +9,16 @@
 #define COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_
 
 
+
 //
 // Created by florencia on 03/09/17.
 //
-#include "../com.pepas.model/recvThread.h"
-#include "../com.pepas.model/aliveSignalThread.h"
-#include "../com.pepas.model/cliente.h"
-#include "../com.pepas.model/Mensaje.h"
-#include "../com.pepas.parser/ClienteParser.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/recvThread.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/aliveSignalThread.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/threadMinimapa.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/cliente.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Mensaje.h"
+#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.parser/ClienteParser.h"
 
 
 class ClienteController{
@@ -30,13 +32,14 @@ private:
     Cliente* cliente;
     recvThread threadRecibir;
     aliveSignalThread threadEnviar;
-    bool reconexion; 
+    threadMinimapa threadGraficoMinimapa;
+    bool reconexion;
     char ipAddress[20];
     char testFile [100];
-    
+
 
 public:
-    
+
     ClienteController(const char* archivo);
 
     ClienteController(ClienteParser *ClienteParser);
@@ -67,7 +70,9 @@ public:
     void verBuzon();
 
     void enviarBroadcast(string entradita);
-void conectar();
+    void conectar();
+    void verMinimapa();
+
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */
