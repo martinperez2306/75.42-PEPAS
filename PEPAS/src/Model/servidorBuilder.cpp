@@ -46,6 +46,8 @@ Servidor* ServidorBuilder::build(){
 	this->servidor->setCantidadMaximaDeConexiones(this->getCantidadDeConexiones());
 	this->servidor->setPuerto(this->getPuerto());
 	this->servidor->setBaseDeDatos(this->baseDeDatos);
+	this->servidor->setZoomEntreMapaYMinimapa(5);
+	this->servidor->generarMapa();
 	this->servidor->generarMinimapa();
 	return this->getServidor();
 }

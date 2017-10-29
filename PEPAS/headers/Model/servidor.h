@@ -9,7 +9,7 @@
 #include <algorithm>
 #include "minimapa.h"
 #include "pistaParser.h"
-
+#include "Zoomer.h"
 
 
 class Servidor{
@@ -32,9 +32,9 @@ private:
 	map<int, string>* mapUsuario;
 
 	PistaParser* pistaParser;
-
+	Mapa* mapa;
 	Minimapa* minimapa;
-
+	Zoomer* zoomer;
 
 public:
 	int aliveCounter;
@@ -90,8 +90,10 @@ public:
 
 	int obtenerAlive ();
 
+	void setZoomEntreMapaYMinimapa(int zoom);
 	string procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2);
 	string procesarMensajeObjetoMinimapa(int arbol,int cartel,int distancia,string lado);
+	void generarMapa();
 	void generarMinimapa();
 	void enviarMinimapaACliente(Socket* socketCliente);
 	string procesarMensajeFinMinimapa();

@@ -42,7 +42,11 @@ Servidor::Servidor(){
     loggear ("Salio del constructor del Servidor",2);
     loggear (" ",2);
     this->pistaParser= new PistaParser();
-    this->minimapa = NULL;
+    //Mapa generado por pista parser
+    this->mapa = NULL;
+    //Minimapa seteado por zoomer
+    this->minimapa = new Minimapa();
+    this->zoomer = new Zoomer();
 }
 
 
@@ -457,6 +461,8 @@ BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
 Servidor::~Servidor(){
 	//this->finalizarConexiones();
+	delete this->minimapa;
+	delete this->mapa;
 	delete this->baseDeDatos;
 }
 
@@ -501,11 +507,23 @@ string Servidor::procesarMensaje(string mensa) {
     loggear(stringProcesado,1);
     return stringProcesado;
 }
+
+void Servidor::setZoomEntreMapaYMinimapa(int zoom){
+	this->zoomer->setTamanioZoom(zoom);
+}
+
+void Servidor::generarMapa(){
+	this->pistaParser->parsearMapa();
+	this->mapa = this->pistaParser->getMapa();
+	this->mapa->mostrarSegmentos();
+	this->mapa->mostrarObjetos();
+	delete this->pistaParser;
+}
 void Servidor::generarMinimapa(){
-    this->pistaParser->parsearMinimapa();
-    this->minimapa = this->pistaParser->getMinimapa();
-    this->pistaParser->prueba();
-    delete this->pistaParser;
+	this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa);
+	this->minimapa->mostrarSegmentos();
+	this->minimapa->mostrarObjetos();
+	delete this->zoomer;
 }
 
 

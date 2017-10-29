@@ -7,6 +7,7 @@
 #include "segmento.h"
 #include "objetos.h"
 #include "Objeto.h"
+#include "Mapa.h"
 
 class PistaParser{
 
@@ -15,6 +16,7 @@ class PistaParser{
 
 private:
 
+	Mapa* mapa;
 	Minimapa* minimapa;
 	Puntero* puntero;
 	Posicion* posicionActual;
@@ -30,12 +32,13 @@ public:
 	void setPosicionActual(Posicion* posActual);
 	Posicion* getPosicionActual();
 
-	void parsearMinimapa();
+	void parsearMapa();
 	Minimapa* getMinimapa();
+	Mapa* getMapa();
 
 	void prueba();
 
-	//Eliminar referencia a minimapa y a puntero
+	//Eliminar referencia a puntero solamente (lo demas es usado por el servidor)
 	~PistaParser();
 
 };

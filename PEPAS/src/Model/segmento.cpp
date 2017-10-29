@@ -10,6 +10,14 @@ Segmento::Segmento(Posicion* posInicial,Posicion* posFinal){
 	this->posicionInicial = posInicial;
 }
 
+void Segmento::setPosicionFinal(Posicion* posicionFinal){
+	this->posicionFinal = posicionFinal;
+}
+
+void Segmento::setPosicionInicial(Posicion* posicionInicial){
+	this->posicionInicial = posicionInicial;
+}
+
 Posicion* Segmento::getPosicionFinal(){
 	return this->posicionFinal;
 }

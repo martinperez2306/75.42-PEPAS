@@ -4,6 +4,7 @@ PistaParser::PistaParser(){
 	this->minimapa = new Minimapa();
 	this->puntero = new Puntero();
 	this->posicionActual = NULL;
+	this->mapa = new Mapa();
 }
 
 void PistaParser::setPosicionActual(Posicion* posActual){
@@ -63,7 +64,7 @@ void PistaParser::girarYAvanzar(string direccion,int distancia){
 	}
 	//ACA CREAMOS UN SUBSEGMENTO!!(OJO: CLASE SE LLAMA SEGMENTO PERO ES UN SUBSEGMENTO)
 	Segmento* segm = new Segmento(posicionAuxiliar,posicionFinal);
-	this->minimapa->agregarSegmento(segm);
+	this->mapa->agregarSegmento(segm);
 	this->posicionActual = posicionFinal;
 }
 
@@ -108,11 +109,11 @@ void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_
 	//DISTANCIA DEL OBJETO
 	objeto->setDistancia(distancia);
 
-	this->minimapa->agregarObjeto(objeto);
+	this->mapa->agregarObjeto(objeto);
 }
 
 
-void PistaParser::parsearMinimapa(){
+void PistaParser::parsearMapa(){
 	pugi::xml_document documento;
 		pugi::xml_parse_result result = documento.load_file("pista.xml");
 		cout << "Load Result: " << result.description() <<endl;
@@ -151,11 +152,17 @@ void PistaParser::parsearMinimapa(){
 Minimapa* PistaParser::getMinimapa(){
 	return this->minimapa;
 }
+
+Mapa* PistaParser::getMapa(){
+	return this->mapa;
+}
+
 void PistaParser::prueba(){
-//	this->minimapa->getAllPosiciones();
 	this->minimapa->mostrarSegmentos();
 	this->minimapa->mostrarObjetos();
 }
+
+//Eliminamos el puntero (el mapa y las posiciones deben mantenerse vivas)
 
 PistaParser::~PistaParser(){
 	delete this->puntero;

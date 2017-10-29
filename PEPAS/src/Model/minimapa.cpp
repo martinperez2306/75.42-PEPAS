@@ -49,6 +49,7 @@ void Minimapa::mostrarObjetos(){
 		cout<<"Objeto"<<endl;
 		cout<<"Arbol: "<<arbol<<" Cartel: "<<cartel<<endl;
 		cout<<"Distancia: "<<distancia<<endl;
+		cout<<"Lado: "<<obj->getLado()<<endl;
 
 	}
 }

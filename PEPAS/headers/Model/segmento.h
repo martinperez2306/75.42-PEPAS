@@ -20,6 +20,9 @@ public:
 
 	Segmento(Posicion* posInicial,Posicion* posFinal);
 
+	void setPosicionInicial(Posicion* posicionInicial);
+	void setPosicionFinal(Posicion* posicionFinal);
+
 	Posicion* getPosicionInicial();
 	Posicion* getPosicionFinal();
 
