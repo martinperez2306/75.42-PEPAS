@@ -4,22 +4,23 @@
 #include <stdio.h>
 #include <string>
 #include <cmath>
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/minimapa.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/posicion.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/objetos.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/segmento.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Recta.h"
+#include "../../headers/com.pepas.model/minimapa.h"
+#include "../../headers/com.pepas.model/posicion.h"
+#include "../../headers/com.pepas.model/objetos.h"
+#include "../../headers/com.pepas.model/segmento.h"
+#include "../../headers/com.pepas.model/Recta.h"
 
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.view/vista.h"
+#include "../../headers/com.pepas.view/vista.h"
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_HEIGHT = 400;
 
 Vista::Vista(){
 
 	this->gWindow=NULL;
 	this->gRenderer =NULL;
-
+	this->graficado = false;
+	this->recorredor = new Recorredor();
 }
 
 bool Vista::init()
@@ -98,6 +99,10 @@ void Vista::close()
 	SDL_Quit();
 }
 
+bool Vista::minimapaGraficado(){
+	return this->graficado;
+}
+
 SDL_Texture* Vista::loadTexture( std::string path )
 {
 	//The final texture
@@ -147,6 +152,7 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 			SDL_Event e;
 
 			//While application is running
+			this->graficado = true;
 			while( !quit )
 			{
 				//Handle events on queue
@@ -160,114 +166,41 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 				}
 
 				///////////////////
-                map<Segmento*,Objetos*>* mapa=minimapa->getMinimapa();
-				for (map<Segmento*,Objetos*>::iterator it=mapa->begin(); it!=mapa->end(); ++it){
-        			int X1= it->first->getPosicionInicial()->getX();
-         			int Y1 =it->first->getPosicionInicial()->getY();
-        			int X2= it->first->getPosicionFinal()->getX();
-         			int Y2= it->first->getPosicionFinal()->getY();
-        			int derecha=it->second->getObjetoDerecha();
-         			int izquierda=it->second->getObjetoIzquierda();
-        			Recta* recta= new Recta();
-         			recta->calcularEcuacionDeLaRecta(X1,Y1,X2,Y2);
-         			int pendiente=recta->getA();
-        			 ///Pinto pista
-         			 SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-        			 SDL_RenderDrawLine( gRenderer,X1,Y1,X2,Y2);
+				list<Segmento*>* ruta = minimapa->getRuta();
+				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
+					Segmento* segm = *it;
+					int X1 = (segm->getPosicionInicial()->getX()/10);
+					int Y1 = (segm->getPosicionInicial()->getY()/10);
+					int Y2 = (segm->getPosicionFinal()->getY()/10);
+					int X2 = (segm->getPosicionFinal()->getX()/10);
+					///Pinto pista
+					SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
+					SDL_RenderDrawLine( gRenderer,X1,Y1,X2,Y2);
 
-        			if(X1>X2 || Y1<Y2){
-            			int aux ;
-            			aux=X1;
-           				X1=X2;
-           				X2=aux;
-           				aux=Y1;
-           				Y1=Y2;
-           				Y2=aux;
-        			}
-        			 ////pinto objetos a los lados////
-         			switch(pendiente){
-         				case 0:
-                   			 if(derecha =2){
-                   			 	SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-								SDL_RenderDrawLine( gRenderer,X1,Y1-1,X2,Y2-1);
-                    		}
-                   			 if (derecha !=2 && derecha >2){
-                   			 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                        		SDL_RenderDrawLine( gRenderer,X1,Y1-1,X2,Y2-1);
-                    		}
-                 		  	if(izquierda =2){
-                 		  		SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                       			 SDL_RenderDrawLine( gRenderer,X1,Y1+1,X2,Y2+1);
-                   			}
-                   			 if (izquierda !=2 && izquierda >2){
-                   			 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                       			 SDL_RenderDrawLine( gRenderer,X1,Y1+1,X2,Y2+1);
-                    		}
-               		 		break;
-            			case 1:
-                 			   if(derecha =2){
-                 			   	SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1+1,Y1-1,X2+1,Y2-1);
-                   				 }
-                   				 if (derecha !=2 && derecha >2){
-                   				 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                      					SDL_RenderDrawLine( gRenderer,X1+1,Y1-1,X2+1,Y2-1);
-                   				 }
-                    			if(izquierda =2){
-                    				SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                     			   SDL_RenderDrawLine( gRenderer,X1-1,Y1+1,X2-1,Y2+1);
-                   				 }
-                    			if (izquierda !=2 && izquierda >2){
-                    				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                       				 SDL_RenderDrawLine( gRenderer,X1-1,Y1+1,X2-1,Y2+1);
-                    			}
-                			break;
-            			case -1:
-                 				  if(derecha =2){+
-                 				  	SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1+1,Y1+1,X2+1,Y2-1);
-                   				 }
-                    			if (derecha !=2 && derecha >2){
-                    				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1+1,Y1+1,X2+1,Y2-1);
-                    			}
-                    			if(izquierda =2){
-                    				SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                       				 SDL_RenderDrawLine( gRenderer,X1-1,Y1-1,X2-1,Y2-1);
-                   				 }
-                   				 if (izquierda !=2 && izquierda >2){
-                   				 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1-1,Y1-1,X2-1,Y2-1);
-                  				  }
-                			break;
-            			case 2147483647:
-                 			   if(derecha =2){
-                 			   	SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1+1,Y1,X2+1,Y2);
-                    			}
-                    			if (derecha !=2 && derecha >2){
-                    				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                       				 SDL_RenderDrawLine( gRenderer,X1+1,Y1,X2+1,Y2);
-                   				 }
-                   				 if(izquierda =2){
-                   				 	SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1-1,Y1,X2-1,Y2);
-                    			}
-                   				 if (izquierda !=2 && izquierda >2){
-                   				 	SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
-                      				  SDL_RenderDrawLine( gRenderer,X1-1,Y1,X2-1,Y2);
-                  				 }
-                			break;
-        			}
+				}
+				list<Objeto*>* objetos = minimapa->getObjetos();
+				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
+					Segmento* segm = *it;
+					this->recorredor->recorrer(segm,objetos);
 
-   				 }
-				/////////////////
+				}
+				list<Posicion*>* posicionesDeLosObjetos = this->recorredor->getPosicionesDeLosObjetos();
+				for(list<Posicion*>::iterator it = posicionesDeLosObjetos->begin() ; it!= posicionesDeLosObjetos->end(); ++it){
+					Posicion* pos = *it;
+					int x = (pos->getX() / 10);
+					int y = (pos->getY() / 10);
+					cout<<x<<endl;
+					cout<<y<<endl;
+					///Pinto objeto
+					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
+					SDL_RenderDrawPoint(gRenderer,x,y);
+				}
 
-				//Draw vertical line of yellow dots
-				SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-                SDL_RenderDrawPoint( gRenderer, 200, 200 );
-
-
+//				//Draw vertical line of yellow dots
+//				SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
+//                SDL_RenderDrawPoint( gRenderer, 200, 200 );
+//
+//
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 			}
@@ -275,6 +208,6 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 	}
 
 	//Free resources and close SDL
+	this->graficado = false;
 	close();
-
 }

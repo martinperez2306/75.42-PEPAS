@@ -1,5 +1,5 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/socket.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.logger/Logger.h"
+#include "../../headers/com.pepas.model/socket.h"
+#include "../../headers/com.pepas.logger/Logger.h"
 #include <unistd.h>
 
 #define MAX_DATA_SIZE 1000

@@ -6,9 +6,11 @@
 #include <string>
 #include <utility>
 #include <iostream>
+#include <list>
 
 #include "segmento.h"
 #include "objetos.h"
+#include "Objeto.h"
 
 using namespace std;
 
@@ -16,7 +18,8 @@ class Minimapa{
 
 private:
 	map<Segmento*,Objetos*>* minimapa;
-
+	list<Segmento*>* ruta;
+	list<Objeto*>* objetos;
 
 public:
 
@@ -28,10 +31,15 @@ public:
 	void setLengthX(int x);
 	void setLengthY(int y);
 
+	void agregarSegmento(Segmento* segmento);
+	void agregarObjetos(Objeto* objeto);
+
 	int getLengthX();
 	int getLengthY();
 
 	map<Segmento*,Objetos*>* getMinimapa();
+	list<Segmento*>* getRuta();
+	list<Objeto*>* getObjetos();
 
 	void getAllPosiciones();
 

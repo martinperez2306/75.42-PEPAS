@@ -9,8 +9,9 @@
 #define SERVIDOR 4
 #define ERROR 5
 #define SIGNAL_CONNECT 7
-#define MINIMAPA 8
-#define FINMINIMAPA 9
+#define RUTA 8
+#define OBJETOS 9
+#define FINMINIMAPA 10
 #define INFINITO 2147483647
 
 Cliente::Cliente() {
@@ -29,19 +30,27 @@ bool Cliente::minimapaEstaCompleto(){
     return (this->minimapaCompleto);
 }
 /////////////////MINIMAPA///////////////////////////////////
-void Cliente::actualizarMiniMapa(int x1, int y1, int x2,int y2, int izq, int dcha){
+void Cliente::actualizarRutaMiniMapa(int x1, int y1, int x2,int y2){
     Posicion* pos1=new Posicion(x1,y1);
     Posicion* pos2=new Posicion(x2,y2);
     Segmento* segmento= new Segmento(pos1,pos2);
-    Objetos* objetos=new Objetos();
-    objetos->agregarObjetoADerecha(dcha);
-    objetos->agregarObjetoAIzquierda(izq);
-    this->minimapa->setObjetos(segmento,objetos);
+    this->minimapa->agregarSegmento(segmento);
+}
+
+void Cliente::actualizarObjetosMiniMapa(int arbol,int cartel,int distancia,string lado){
+	Objeto* objeto = new Objeto();
+	objeto->setArbol(arbol);
+	objeto->setCartel(cartel);
+	objeto->setDistancia(distancia);
+	objeto->setLado(lado);
+	this->minimapa->agregarObjetos(objeto);
 }
    //////////////////////////////////////////////////////////
 
 void Cliente::graficarMinimapa(){
-    vista->graficarMinimapa(this->minimapa);
+	if(!vista->minimapaGraficado()){
+		vista->graficarMinimapa(this->minimapa);
+	}
 }
 
 
@@ -197,19 +206,24 @@ void Cliente::parsearMensaje(std::string datos){
 
 
 	switch(codigo){
-        case MINIMAPA:{
+        case RUTA:{
             int x1 = stoi(obtenerParametros(datos,&i),nullptr,10);
             int x2 = stoi(obtenerParametros(datos,&i),nullptr,10);
             int y1 = stoi(obtenerParametros(datos,&i),nullptr,10);
             int y2 = stoi(obtenerParametros(datos,&i),nullptr,10);
-            int izquierda = stoi(obtenerParametros(datos,&i),nullptr,10);
-            int derecha = stoi(obtenerParametros(datos,&i),nullptr,10);
-            this->actualizarMiniMapa(x1,x2,y1,y2,izquierda,derecha);
+            this->actualizarRutaMiniMapa(x1,x2,y1,y2);
 
-        }
+        }break;
+        case OBJETOS:{
+        	int arbol = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	int cartel = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	int distancia = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	string lado = obtenerParametros(datos,&i);
+        	this->actualizarObjetosMiniMapa(arbol,cartel,distancia,lado);
+        }break;
         case FINMINIMAPA:{
             this->minimapaCompleto=true;
-        }
+        }break;
 		case LOGIN:{
             string mensaje = obtenerParametros(datos,&i);
 			cout << mensaje << endl;

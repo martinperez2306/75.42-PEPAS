@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/threadMinimapa.h"
+#include "../../headers/com.pepas.model/threadMinimapa.h"
 
 /*
 recvThread::recvThread( Cliente* cliente) : cliente(cliente) {
@@ -9,9 +9,10 @@ recvThread::recvThread( Cliente* cliente) : cliente(cliente) {
 
 void threadMinimapa::run() {
 
-    while (cliente->estaConectado()) {
-        cliente->graficarMinimapa();
-
+    while (cliente->estaConectado()){
+        if(cliente->estalogueado()&&cliente->minimapaEstaCompleto()){
+        	cliente->graficarMinimapa();
+        }
     }
 }
 

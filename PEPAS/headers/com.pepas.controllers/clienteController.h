@@ -13,12 +13,12 @@
 //
 // Created by florencia on 03/09/17.
 //
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/recvThread.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/aliveSignalThread.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/threadMinimapa.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/cliente.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Mensaje.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.parser/ClienteParser.h"
+#include "../com.pepas.model/recvThread.h"
+#include "../com.pepas.model/aliveSignalThread.h"
+#include "../com.pepas.model/threadMinimapa.h"
+#include "../com.pepas.model/cliente.h"
+#include "../com.pepas.model/Mensaje.h"
+#include "../com.pepas.parser/ClienteParser.h"
 
 
 class ClienteController{

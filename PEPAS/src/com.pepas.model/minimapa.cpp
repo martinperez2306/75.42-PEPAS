@@ -1,13 +1,23 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/minimapa.h"
+#include "../../headers/com.pepas.model/minimapa.h"
 
 typedef pair<Segmento*,Objetos*> segObj;
 
 Minimapa::Minimapa(){
 	this->minimapa = new map<Segmento*,Objetos*>();
+	this->ruta = new list<Segmento*>();
+	this->objetos = new list<Objeto*>();
 }
 
 void Minimapa::setObjetos(Segmento* seg,Objetos* objetos){
 	this->minimapa->insert(segObj(seg,objetos));
+}
+
+void Minimapa::agregarSegmento(Segmento* segmento){
+	this->ruta->push_back(segmento);
+}
+
+void Minimapa::agregarObjetos(Objeto* objeto){
+	this->objetos->push_back(objeto);
 }
 
 
@@ -23,6 +33,14 @@ void Minimapa::getAllPosiciones(){
 
 map<Segmento*,Objetos*>* Minimapa::getMinimapa(){
 	return this->minimapa;
+}
+
+list<Segmento*>* Minimapa::getRuta(){
+	return this->ruta;
+}
+
+list<Objeto*>* Minimapa::getObjetos(){
+	return this->objetos;
 }
 
 Minimapa::~Minimapa(){

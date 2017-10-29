@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/posicion.h"
+#include "../../headers/com.pepas.model/posicion.h"
 
 Posicion::Posicion(){
 

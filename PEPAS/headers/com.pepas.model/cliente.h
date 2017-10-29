@@ -10,11 +10,11 @@
 
 
 #include <string>
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/usuario.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/socket.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Mensaje.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/minimapa.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.view/vista.h"
+#include "usuario.h"
+#include "socket.h"
+#include "Mensaje.h"
+#include "minimapa.h"
+#include "../com.pepas.view/vista.h"
 #include <iostream>
 #include <cstring>
 #include <list>
@@ -86,16 +86,16 @@ public:
     void desencolarColaChat();
     void desencolarColaBuzon();
     void verBuzon();
-bool estaConectado();
-bool estaConectadoYLogueado();
-void conectarse();
-void desconectarse();
-void vaciarColaChat();
-void vaciarColaBuzon();
+    bool estaConectado();
+    bool estaConectadoYLogueado();
+    void conectarse();
+    void desconectarse();
+    void vaciarColaChat();
+    void vaciarColaBuzon();
     int obtenerAliveCounter();
     void graficarMinimapa();
-void actualizarMiniMapa(int x1, int y1, int x2,int y2, int izq, int dcha);
-
+    void actualizarRutaMiniMapa(int x1, int y1, int x2,int y2);
+    void actualizarObjetosMiniMapa(int arbol, int cartel, int distancia, string lado);
 
 };
 

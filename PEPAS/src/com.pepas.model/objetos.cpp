@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/objetos.h"
+#include "../../headers/com.pepas.model/objetos.h"
 
 Objetos::Objetos(){
 	this->objetoADerecha = 0;

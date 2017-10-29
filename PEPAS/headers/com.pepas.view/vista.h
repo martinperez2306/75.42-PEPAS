@@ -12,25 +12,27 @@
 #include <string>
 #include <cmath>
 
-
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/minimapa.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/posicion.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/objetos.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/segmento.h"
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Recta.h"
-
-
+#include "../com.pepas.model/minimapa.h"
+#include "../com.pepas.model/posicion.h"
+#include "../com.pepas.model/objetos.h"
+#include "../com.pepas.model/segmento.h"
+#include "../com.pepas.model/Recta.h"
+#include "../com.pepas.model/Recorredor.h"
 
 using namespace std;
-Class Vista{
-    private:   //The window we'll be rendering to
+
+class Vista{
+
+private:   //The window we'll be rendering to
         SDL_Window* gWindow;
         //The window renderer
         SDL_Renderer* gRenderer;
-    public:
+        bool graficado;
+        Recorredor* recorredor;
 
+public:
 
-        Vista();
+       Vista();
 
       //Starts up SDL and creates window
         bool init();
@@ -46,7 +48,12 @@ Class Vista{
     //Loads individual image as texture
     SDL_Texture* loadTexture( std::string path );
 
+
+    //SDL TRABAJA CON EL EJE Y INVERTIDO A LO ORDINARIO
+    //VER RECORREDOR PARA ENTENDER LA LOGICA DE LOS EJES CARTESIANOS Y PUNTOS CARDINALES
     void graficarMinimapa(Minimapa* minimapa);
+
+    bool minimapaGraficado();
 
     ~Vista();
 };

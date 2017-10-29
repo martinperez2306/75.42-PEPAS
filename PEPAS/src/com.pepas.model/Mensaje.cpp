@@ -5,7 +5,7 @@
  *      Author: bigfatpancha
  */
 
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Mensaje.h"
+#include "../../headers/com.pepas.model/Mensaje.h"
 
 namespace std {
 

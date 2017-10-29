@@ -3,7 +3,7 @@
 //
 
 #include <iomanip>
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.controllers/clienteController.h"
+#include "../../headers/com.pepas.controllers/clienteController.h"
 
 #include <zconf.h>
 
@@ -18,7 +18,6 @@ ClienteController::ClienteController(const char* archivo){
 	strcpy(this->ipAddress,socketData.ip);
 	strcpy(this->testFile ,socketData.rutafile);
 	this->threadGraficoMinimapa=threadMinimapa(cliente);
-
 }
 
 
@@ -48,8 +47,6 @@ void ClienteController::conectar(){
 	} else {
         cout<<"Haciendo cambio de puerto"<<endl;
 		this->obtengoPuertoNuevoYHagoConectar();
-
-
 	}
 }
 
@@ -113,12 +110,6 @@ void ClienteController::logIn() {
     }
 
 	this->cliente->logIn();
-
-	if (this->cliente->estalogueado()){
-		this->empezarRecibir();
-		this->verMinimapa();
-	}
-
 }
 
 
@@ -228,6 +219,7 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	cout<<"Conectado satisfactorio con puerto: "<<puerto<<endl;
 	this->cliente->conectarse();
 	this->empezarRecibir();
+	this->verMinimapa();
 	this->reconexion = true;
 
 }
@@ -243,16 +235,9 @@ void ClienteController::dejarRecibir(){
 
 }
 
-////////////////////////////7
+////////////////////////////
 void ClienteController::verMinimapa(){
-    bool completo=this->cliente->minimapaEstaCompleto();
-    bool logeado=this->cliente->estalogueado();
-	if(completo &&logeado){
-		this->threadGraficoMinimapa.start();
-	}
-	else{
-		cout<<"No esta conectado"<<endl;
-	}
+   this->threadGraficoMinimapa.start();
 
 }
 /////////////////////////////////

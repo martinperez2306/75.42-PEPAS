@@ -1,4 +1,4 @@
-#include "/home/barbarasanchez/Desktop/75.42-PEPAS-cliente/PEPAS/headers/com.pepas.model/Recta.h"
+#include "../../headers/com.pepas.model/Recta.h"
 Recta::Recta(){
 	this->a = 0;
 	this->b = 0;
