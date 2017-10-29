@@ -158,7 +158,6 @@ void PistaParser::prueba(){
 }
 
 PistaParser::~PistaParser(){
-	delete this->minimapa;
 	delete this->puntero;
 }
 

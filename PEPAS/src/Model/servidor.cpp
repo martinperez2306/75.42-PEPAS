@@ -284,7 +284,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             int cod = stoi(obtenerParametros(mensajeAEnviar,&j),nullptr,10);
             std::string mensaje = obtenerParametros(datos,&j);
             ////////////////////
-            if(mensaje=="Bienvenido"){
+            if(mensaje.compare("Bienvenido")){
                 enviarMinimapaACliente(socketDelemisor);
             }
 		}
@@ -504,12 +504,13 @@ string Servidor::procesarMensaje(string mensa) {
 void Servidor::generarMinimapa(){
     this->pistaParser->parsearMinimapa();
     this->minimapa = this->pistaParser->getMinimapa();
+    this->pistaParser->prueba();
     delete this->pistaParser;
 }
 
 
 void Servidor::enviarMinimapaACliente(Socket* socket){
-    map<Segmento*,Objetos*>* minimapa=this->minimapa->getMinimapa();
+
     list<Segmento*>* pista = this->minimapa->getSegmentos();
     list<Objeto*>* objetos = this->minimapa->getObjetos();
 
