@@ -222,6 +222,8 @@ void Cliente::parsearMensaje(std::string datos){
         	this->actualizarObjetosMiniMapa(arbol,cartel,distancia,lado);
         }break;
         case FINMINIMAPA:{
+        	this->minimapa->mostrarSegmentos();
+        	this->minimapa->mostrarObjetos();
             this->minimapaCompleto=true;
         }break;
 		case LOGIN:{

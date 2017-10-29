@@ -131,6 +131,8 @@ SDL_Texture* Vista::loadTexture( std::string path )
 }
 
 void Vista::graficarMinimapa(Minimapa* minimapa){
+
+
 	//Start up SDL and create window
 	if( !init() )
 	{
@@ -169,12 +171,13 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 				list<Segmento*>* ruta = minimapa->getRuta();
 				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
 					Segmento* segm = *it;
-					int X1 = (segm->getPosicionInicial()->getX()/10);
-					int Y1 = (segm->getPosicionInicial()->getY()/10);
-					int Y2 = (segm->getPosicionFinal()->getY()/10);
-					int X2 = (segm->getPosicionFinal()->getX()/10);
+					int X1 = (segm->getPosicionInicial()->getX());
+					int Y1 = (segm->getPosicionInicial()->getY());
+					int Y2 = (segm->getPosicionFinal()->getY());
+					int X2 = (segm->getPosicionFinal()->getX());
+
 					///Pinto pista
-					SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
+					SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF,0x00, 0xFF );
 					SDL_RenderDrawLine( gRenderer,X1,Y1,X2,Y2);
 
 				}
@@ -187,10 +190,8 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 				list<Posicion*>* posicionesDeLosObjetos = this->recorredor->getPosicionesDeLosObjetos();
 				for(list<Posicion*>::iterator it = posicionesDeLosObjetos->begin() ; it!= posicionesDeLosObjetos->end(); ++it){
 					Posicion* pos = *it;
-					int x = (pos->getX() / 10);
-					int y = (pos->getY() / 10);
-					cout<<x<<endl;
-					cout<<y<<endl;
+					int x = (pos->getX());
+					int y = (pos->getY());
 					///Pinto objeto
 					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
 					SDL_RenderDrawPoint(gRenderer,x,y);

@@ -22,6 +22,7 @@ private:
 	void girarIzquierda();
 	Posicion* generarPosicionObjeto(string ladoDelObjeto);
 	void siguientePosicion(int distancia);
+	void unificarAngulo();
 
 public:
 	Recorredor();

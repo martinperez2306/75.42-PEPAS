@@ -88,6 +88,15 @@ bool Recorredor::equals(Posicion* posicion){
 	return ((this->posicionActual->getX() == posicion->getX()) && (this->posicionActual->getY() == posicion->getY()));
 }
 
+void Recorredor::unificarAngulo(){
+	if(this->direccionRecorrido < 0){
+		this->direccionRecorrido += 360;
+	}
+	else if (this->direccionRecorrido >= 360){
+		this->direccionRecorrido -= 360;
+	}
+}
+
 void Recorredor::siguientePosicion(int distancia){
 	switch(this->direccionRecorrido){
 
@@ -128,10 +137,12 @@ void Recorredor::avanzar(){
 
 void Recorredor::girarDerecha(){
 	this->direccionRecorrido -= 90;
+	this->unificarAngulo();
 }
 
 void Recorredor::girarIzquierda(){
 	this->direccionRecorrido += 90;
+	this->unificarAngulo();
 }
 
 Posicion* Recorredor::generarPosicionObjeto(string ladoDelObjeto){
@@ -142,12 +153,12 @@ Posicion* Recorredor::generarPosicionObjeto(string ladoDelObjeto){
 	//Giramos y acomodamos segun en lado del objeto. Avanzamos a su posicion y retomamos al direccion original.
 	if(ladoDelObjeto.compare("D")){
 		this->girarDerecha();
-		this->siguientePosicion(20);
+		this->siguientePosicion(5);
 		this->girarIzquierda();
 	}
 	if(ladoDelObjeto.compare("I")){
 		this->girarIzquierda();
-		this->siguientePosicion(20);
+		this->siguientePosicion(5);
 		this->girarDerecha();
 	}
 	//Seteamos la posicion Del objeto

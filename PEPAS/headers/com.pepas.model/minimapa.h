@@ -41,6 +41,8 @@ public:
 	list<Segmento*>* getRuta();
 	list<Objeto*>* getObjetos();
 
+	void mostrarSegmentos();
+	void mostrarObjetos();
 	void getAllPosiciones();
 
 	//Eliminar la memoria pedida por el minimapa

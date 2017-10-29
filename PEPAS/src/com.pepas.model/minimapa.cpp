@@ -20,6 +20,29 @@ void Minimapa::agregarObjetos(Objeto* objeto){
 	this->objetos->push_back(objeto);
 }
 
+void Minimapa::mostrarSegmentos(){
+	for(list<Segmento*>::iterator it = this->ruta->begin(); it != this->ruta->end();++it){
+		Segmento* seg = *it;
+		Posicion* posicionInicial = seg->getPosicionInicial();
+		Posicion* posicionFinal = seg->getPosicionFinal();
+		cout<<"Posicion Incial: "<<" X "<< posicionInicial->getX()<<" Y "<<posicionInicial->getY()<<endl;
+		cout<<"Posicion Final: "<<" X "<< posicionFinal->getX()<<" Y "<<posicionFinal->getY()<<endl;
+	}
+}
+
+void Minimapa::mostrarObjetos(){
+	for(list<Objeto*>::iterator it = this->objetos->begin(); it != this->objetos->end();++it){
+		Objeto* obj = *it;
+		int distancia = obj->getDistancia();
+		int arbol = obj->getArbol();
+		int cartel = obj->getCartel();
+		cout<<"Objeto"<<endl;
+		cout<<"Arbol: "<<arbol<<" Cartel: "<<cartel<<endl;
+		cout<<"Distancia: "<<distancia<<endl;
+		cout<<"Lado: "<<obj->getLado()<<endl;
+	}
+}
+
 
 void Minimapa::getAllPosiciones(){
 	for (map<Segmento*,Objetos*>::iterator it=this->minimapa->begin(); it!=this->minimapa->end(); ++it){
