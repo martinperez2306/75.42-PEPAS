@@ -619,7 +619,7 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	string separador = "/";
 	string longit = to_string(longitud);
 	string curv = to_string(curva);
-	stringACrear = separador + "11" + separador + longit + separador+  curva+   separador;
+	stringACrear = separador + "11" + separador + longit + separador +  curv +  separador;
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
 	loggear(stringProcesado,1);

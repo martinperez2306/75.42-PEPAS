@@ -76,6 +76,14 @@ void PistaParser::girarYAvanzar(string direccion,int distancia){
 	this->mapa->agregarSegmento(segm);
 	this->posicionActual = posicionFinal;
 	}
+	else{
+		if(direccion.compare("derecha") == 0){
+			this->puntero->girarDerecha();
+		}
+		if(direccion.compare("izquierda") == 0){
+			this->puntero->girarIzquierda();
+		}
+	}
 }
 
 void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_node tipoDeObjeto){
