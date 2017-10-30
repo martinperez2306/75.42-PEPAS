@@ -549,17 +549,45 @@ void Servidor::enviarMinimapaACliente(Socket* socket){
     	int tipoCartel = obj->getCartel();
     	int distancia = obj->getDistancia();
     	string ladoDelObjeto = obj->getLado();
-    	string mensajeAEnviar = this->procesarMensajeObjetoMinimapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+    	string mensajeAEnviar = this->procesarMensajeObjeto(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
     	this->enviarMensaje(mensajeAEnviar,socket);
     }
 
-    string mensajeFin= this->procesarMensajeFinMinimapa();
+    string mensajeFin= this->procesarMensajeFin();
     for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
     	this->enviarMensaje(mensajeFin,it->second);
     }
 }
 
-string Servidor::procesarMensajeObjetoMinimapa(int arbol, int cartel, int distancia, string lado){
+void Servidor::enviarMapaACliente(Socket* socketCliente){
+	list<Segmento*>* ruta = this->mapa->getRuta();
+	list<Objeto*>* objetos = this->mapa->getObjetos();
+
+	for(list<Segmento*>::iterator it = ruta->begin(); it != ruta->end();++it){
+	  	Segmento* seg = *it;
+	  	int longitud = seg->getLongitud();
+	  	int curva = seg->getCurva();
+	   	string mensajeAEnviar= this->procesarMensajeRutaMapa(longitud,curva);
+	   	this->enviarMensaje(mensajeAEnviar,socketCliente);
+	}
+
+    for (list<Objeto*>::iterator it = objetos->begin(); it != objetos->end(); ++it){
+    	Objeto* obj = *it;
+    	int tipoArbol = obj->getArbol();
+    	int tipoCartel = obj->getCartel();
+    	int distancia = obj->getDistancia();
+    	string ladoDelObjeto = obj->getLado();
+    	string mensajeAEnviar = this->procesarMensajeObjeto(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+    	this->enviarMensaje(mensajeAEnviar,socketCliente);
+	}
+
+    string mensajeFin= this->procesarMensajeFin();
+    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+    	this->enviarMensaje(mensajeFin,it->second);
+    }
+}
+
+string Servidor::procesarMensajeObjeto(int arbol, int cartel, int distancia, string lado){
 	string stringACrear, stringProcesado;
 	string separador = "/";
 	string arb = to_string(arbol);
@@ -586,7 +614,19 @@ string Servidor::procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2) {
     return stringProcesado;
 }
 
-string Servidor::procesarMensajeFinMinimapa(){
+string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
+	string stringACrear, stringProcesado;
+	string separador = "/";
+	string longit = to_string(longitud);
+	string curv = to_string(curva);
+	stringACrear = separador + "11" + separador + longit + separador+  curva+   separador;
+	unsigned long largoDelMensaje = stringACrear.length();
+	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+	loggear(stringProcesado,1);
+	return stringProcesado;
+}
+
+string Servidor::procesarMensajeFin(){
     string stringACrear,stringProcesado;
     string separador="/";
     stringACrear = separador + "10" + separador;

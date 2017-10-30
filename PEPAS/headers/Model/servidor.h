@@ -91,12 +91,17 @@ public:
 	int obtenerAlive ();
 
 	void setZoomEntreMapaYMinimapa(int zoom);
+
 	string procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2);
-	string procesarMensajeObjetoMinimapa(int arbol,int cartel,int distancia,string lado);
+	string procesarMensajeObjeto(int arbol,int cartel,int distancia,string lado);
+	string procesarMensajeRutaMapa(int longitud, int curva);
+	string procesarMensajeFin();
+
 	void generarMapa();
 	void generarMinimapa();
+	void enviarMapaACliente(Socket* socketCliente);
 	void enviarMinimapaACliente(Socket* socketCliente);
-	string procesarMensajeFinMinimapa();
+
 };
 
 

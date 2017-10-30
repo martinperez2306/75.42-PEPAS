@@ -9,6 +9,10 @@
 #include "Objeto.h"
 #include "Mapa.h"
 
+#define RECTO 0
+#define CURVAI 1
+#define CURVAD -1
+
 class PistaParser{
 
 

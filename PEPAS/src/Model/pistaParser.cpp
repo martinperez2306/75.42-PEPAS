@@ -51,21 +51,31 @@ void PistaParser::girarYAvanzar(string direccion,int distancia){
 	Posicion* posicionAuxiliar = this->posicionActual;
 	Posicion* posicionFinal = this->posicionActual;
 
+	//evitar añadir un segmento de longitud 0 (caso de girar solamente)
+	if(distancia != 0){
+	Segmento* segm = new Segmento();
+
 	if(direccion.compare("derecho") == 0){
 		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+		segm->setCurva(RECTO);
 	}
 	if(direccion.compare("derecha") == 0){
 		this->puntero->girarDerecha();
 		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+		segm->setCurva(CURVAD);
 	}
 	if(direccion.compare("izquierda") == 0){
 		this->puntero->girarIzquierda();
 		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+		segm->setCurva(CURVAI);
 	}
 	//ACA CREAMOS UN SUBSEGMENTO!!(OJO: CLASE SE LLAMA SEGMENTO PERO ES UN SUBSEGMENTO)
-	Segmento* segm = new Segmento(posicionAuxiliar,posicionFinal);
+	segm->setLongitud(distancia);
+	segm->setPosicionInicial(posicionAuxiliar);
+	segm->setPosicionFinal(posicionFinal);
 	this->mapa->agregarSegmento(segm);
 	this->posicionActual = posicionFinal;
+	}
 }
 
 void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_node tipoDeObjeto){

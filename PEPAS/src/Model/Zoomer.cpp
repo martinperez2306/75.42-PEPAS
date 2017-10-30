@@ -89,6 +89,8 @@ Segmento* Zoomer::zoomRuta(Segmento* segmento){
 	posicionFinalZoom->setY(segmento->getPosicionFinal()->getY() / this->tamanioZoom);
 	segmentoZoom->setPosicionInicial(posicionInicialZoom);
 	segmentoZoom->setPosicionFinal(posicionFinalZoom);
+	segmentoZoom->setCurva(segmento->getCurva());
+	segmentoZoom->setLongitud(segmento->getLongitud() / this->tamanioZoom);
 	return segmentoZoom;
 }
 
