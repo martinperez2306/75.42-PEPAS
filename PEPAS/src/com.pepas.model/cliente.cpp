@@ -9,9 +9,10 @@
 #define SERVIDOR 4
 #define ERROR 5
 #define SIGNAL_CONNECT 7
-#define RUTA 8
+#define RUTAMINIMAPA 8
 #define OBJETOS 9
-#define FINMINIMAPA 10
+#define FINMAPAS 10
+#define RUTAMAPA 11
 #define INFINITO 2147483647
 
 Cliente::Cliente() {
@@ -206,7 +207,7 @@ void Cliente::parsearMensaje(std::string datos){
 
 
 	switch(codigo){
-        case RUTA:{
+        case RUTAMINIMAPA:{
             int x1 = stoi(obtenerParametros(datos,&i),nullptr,10);
             int x2 = stoi(obtenerParametros(datos,&i),nullptr,10);
             int y1 = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -221,7 +222,12 @@ void Cliente::parsearMensaje(std::string datos){
         	string lado = obtenerParametros(datos,&i);
         	this->actualizarObjetosMiniMapa(arbol,cartel,distancia,lado);
         }break;
-        case FINMINIMAPA:{
+        case RUTAMAPA:
+        	int longitud = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	int curva = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	this->actualizarRutaMapa(longitud,curva);
+        	break;
+        case FINMAPAS:{
         	this->minimapa->mostrarSegmentos();
         	this->minimapa->mostrarObjetos();
             this->minimapaCompleto=true;
