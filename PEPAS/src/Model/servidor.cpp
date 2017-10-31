@@ -587,6 +587,8 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
     }
 }
 
+/*Este procesador, codifica el mensaje con el codigo 9.
+/<codigo_mensaje>/<arbol>/<cartel>/<distancia>/<lado>/*/
 string Servidor::procesarMensajeObjeto(int arbol, int cartel, int distancia, string lado){
 	string stringACrear, stringProcesado;
 	string separador = "/";
@@ -600,6 +602,8 @@ string Servidor::procesarMensajeObjeto(int arbol, int cartel, int distancia, str
 	return stringProcesado;
 }
 
+/*Este procesador, codifica el mensaje con el codigo 8.
+<código_mensaje>/<X1>/<Y1>/<X2>/<Y2>/*/
 string Servidor::procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2) {
     string stringACrear, stringProcesado;
     string separador = "/";
@@ -614,6 +618,8 @@ string Servidor::procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2) {
     return stringProcesado;
 }
 
+/*Este procesador, codifica el mensaje con el codigo 11.
+<código_mensaje>/<longitud>/<curva>/*/
 string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	string stringACrear, stringProcesado;
 	string separador = "/";
@@ -625,6 +631,9 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	loggear(stringProcesado,1);
 	return stringProcesado;
 }
+
+/*Este procesador, codifica el mensaje con el codigo 10.
+<código_mensaje>/*/
 
 string Servidor::procesarMensajeFin(){
     string stringACrear,stringProcesado;

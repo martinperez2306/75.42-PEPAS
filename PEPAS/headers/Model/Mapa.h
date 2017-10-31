@@ -5,6 +5,8 @@
 #include <list>
 #include "Objeto.h"
 #include "segmento.h"
+#include <map>
+#include "LineaX.h"
 
 using namespace std;
 
@@ -13,6 +15,7 @@ class Mapa {
 private:
 	list<Objeto*>* objetos;
 	list<Segmento*>* ruta;
+
 public:
 	Mapa();
 
@@ -24,6 +27,7 @@ public:
 	list<Segmento*>* getRuta();
 	list<Objeto*>* getObjetos();
 
+	//Eliminar las referencias a las estructuras y su contenido
 	~Mapa();
 };
 

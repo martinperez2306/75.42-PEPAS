@@ -5,7 +5,7 @@
 
 #include "Mapa.h"
 #include "minimapa.h"
-#include "Recta.h"
+#include "World.h"
 
 class Zoomer {
 
@@ -17,7 +17,6 @@ private:
 	Segmento* zoomRuta(Segmento* segmento);
 	Objeto* zoomObjeto(Objeto* objeto);
 	int tamanioZoom;
-	Recta* recta;
 
 public:
 	Zoomer();
@@ -30,6 +29,8 @@ public:
 	void zoomMinimapToMap(Minimapa* minimapa, Mapa* mapa);
 	//Achicar los segmentos del mapa para minimapa
 	void zoomMapToMinimap(Mapa* mapa,Minimapa* minimapa);
+	//Crear el mundo a traves del mapa
+	void zoomMapToWorld(Mapa* mapa, World* world);
 	~Zoomer();
 };
 
