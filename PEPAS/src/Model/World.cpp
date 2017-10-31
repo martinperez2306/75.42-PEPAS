@@ -1,11 +1,11 @@
-#include "World.h"
+#include "../../headers/Model/World.h"
 
 World::World() {
 	this->world = new map<int,LineaX*>();
 }
 
 void World::agregarLinea(int distanciaY, LineaX* lineaX){
-	this->world[distanciaY] = lineaX;
+	(*this->world)[distanciaY] = lineaX;
 }
 
 int World::obtenerElementoEnPosicion(int distanciaY,int corrimientoX){

@@ -46,6 +46,9 @@ Servidor::Servidor(){
     this->mapa = NULL;
     //Minimapa seteado por zoomer
     this->minimapa = new Minimapa();
+    //World seteado por el zoomer
+    this->world = new World();
+    //zoomer
     this->zoomer = new Zoomer();
 }
 
@@ -523,7 +526,10 @@ void Servidor::generarMinimapa(){
 	this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa);
 	this->minimapa->mostrarSegmentos();
 	this->minimapa->mostrarObjetos();
-	delete this->zoomer;
+}
+
+void Servidor::generarWorld(){
+	this->zoomer->zoomMapToWorld(this->mapa,this->world);
 }
 
 

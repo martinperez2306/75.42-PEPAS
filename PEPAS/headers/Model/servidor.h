@@ -9,6 +9,7 @@
 #include <algorithm>
 #include "minimapa.h"
 #include "pistaParser.h"
+#include "World.h"
 #include "Zoomer.h"
 
 
@@ -34,6 +35,7 @@ private:
 	PistaParser* pistaParser;
 	Mapa* mapa;
 	Minimapa* minimapa;
+	World* world;
 	Zoomer* zoomer;
 
 public:
@@ -101,6 +103,7 @@ public:
 	void generarMinimapa();
 	void enviarMapaACliente(Socket* socketCliente);
 	void enviarMinimapaACliente(Socket* socketCliente);
+	void generarWorld();
 
 };
 

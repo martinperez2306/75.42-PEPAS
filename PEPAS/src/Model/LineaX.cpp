@@ -1,4 +1,4 @@
-#include "LineaX.h"
+#include "../../headers/Model/LineaX.h"
 
 LineaX::LineaX() {
 	this->lineaX = new map<int,int>();
@@ -7,12 +7,12 @@ LineaX::LineaX() {
 
 void LineaX::inicializarLinea(){
 	for(int i = 0; i < 7; i++){
-		this->lineaX[i] = 0;
+		(*this->lineaX)[i] = 0;
 	}
 }
 
 void LineaX::agregarElemento(int posicionX,int elemento){
-	this->lineaX[posicionX] = elemento;
+	(*this->lineaX)[posicionX] = elemento;
 }
 
 void LineaX::setCurva(int curva){
@@ -20,7 +20,7 @@ void LineaX::setCurva(int curva){
 }
 
 int LineaX::getCurva(){
-	return this->curva();
+	return this->curva;
 }
 
 int LineaX::obtenerElemento(int posicionX){
