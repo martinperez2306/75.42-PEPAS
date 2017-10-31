@@ -4,10 +4,12 @@
 
 #include <iomanip>
 #include "../../headers/com.pepas.controllers/clienteController.h"
-
 #include <zconf.h>
+#include <vector>
 
-using namespace std;
+#define SCREEN_HEIGHT 768
+#define SCREEN_WIDTH 1024
+
 
 ClienteController::ClienteController(const char* archivo){
     this->socketData = this->clienteParser->parsearXML(archivo);
@@ -17,7 +19,23 @@ ClienteController::ClienteController(const char* archivo){
 	this->reconexion = false;
 	strcpy(this->ipAddress,socketData.ip);
 	strcpy(this->testFile ,socketData.rutafile);
-	this->threadGraficoMinimapa=threadMinimapa(cliente);
+    this->threadGraficoMinimapa=threadMinimapa(cliente);
+
+	SDL_Window* window = NULL;
+    SDL_Renderer* renderer = NULL;
+
+    int velX = Y;
+
+    this->obstaculos = new map<int,Textura*>();
+
+     PressUP = false;
+    offsetBackgroundTree = -1000;
+    offsetBackgroundHills = -1000;
+
+
+
+
+
 }
 
 
@@ -36,7 +54,7 @@ void ClienteController::conectar(){
 		cout<< "Usted ya esta conectado" <<endl;
 		return;
 	}
-
+	
 	//Esto es para cerrar el thread de la conexion anterior.
 	if(reconexion){
 		this->dejarRecibir();
@@ -47,13 +65,15 @@ void ClienteController::conectar(){
 	} else {
         cout<<"Haciendo cambio de puerto"<<endl;
 		this->obtengoPuertoNuevoYHagoConectar();
+        //this->verMinimapa();
+
+
 	}
 }
 
 
 int ClienteController::conectarConElServidor(){
 	return this->cliente->conectarseAlServidor(this->ipAddress, socketData.puerto);
-
 }
 
 
@@ -108,8 +128,13 @@ void ClienteController::logIn() {
         cout << "Usted ya esta logueado" << endl;
         return;
     }
-
+	
 	this->cliente->logIn();
+
+	if (this->cliente->estalogueado()){
+		this->empezarRecibir();
+	}
+
 }
 
 
@@ -125,7 +150,7 @@ void ClienteController::stressTest(){
 
 	try {
 		cin >> milisegundos;
-		mili = stoi(milisegundos,nullptr, 10);
+		mili = stoi(milisegundos, nullptr, 10);
 		mili = mili * 1000;
 		cout << "Ingrese cantidad de milisegundos en total: ";
 		cin >> totalmili;
@@ -137,12 +162,12 @@ void ClienteController::stressTest(){
 			cout<<"Datos ingresados invalidos, deben ser multiplo"<<endl;
 			loggear("Datos ingresados invalidos, deben ser multiplo",1);
 		}
-	}catch (std::invalid_argument) {
+	} catch (std::invalid_argument) {
 		cout << "Ingrese unicamente un numero " << '\n';
 	}
 
 	ifstream myReadFile;
-	myReadFile.open(testFile); //this->clienteParser->obtenerRutaTestFile()
+	myReadFile.open(testFile); //this->clienteParser->obtenerRutaTestFile() 
 	string stressMsg;
 	if (myReadFile.is_open() && valido) {
 		while (!myReadFile.eof()) {
@@ -191,7 +216,7 @@ void ClienteController::enviarMensajePrivado(){
 
 void ClienteController::salirDelPrograma() {
 	cout<<"SALISTE"<<endl;
-
+	
 }
 
 ClienteController::~ClienteController(){
@@ -219,7 +244,6 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
 	cout<<"Conectado satisfactorio con puerto: "<<puerto<<endl;
 	this->cliente->conectarse();
 	this->empezarRecibir();
-	this->verMinimapa();
 	this->reconexion = true;
 
 }
@@ -232,15 +256,8 @@ void ClienteController::empezarRecibir(){
 void ClienteController::dejarRecibir(){
 	this->threadEnviar.join();
 	this->threadRecibir.join();
-
+    
 }
-
-////////////////////////////
-void ClienteController::verMinimapa(){
-   this->threadGraficoMinimapa.start();
-
-}
-/////////////////////////////////
 
 
 
@@ -314,7 +331,381 @@ void ClienteController::enviarBroadcast(string entrada) {
 	Mensaje *mensaje = new Mensaje(Mensaje::BROADCAST_MSG, entrada, this->obtenerCliente()->obtenerUsuario()->getNombre(), destinatario);
 	mensajeProcesado = this->obtenerCliente()->procesarMensaje(mensaje);
 	this->obtenerCliente()->enviarMensaje(mensajeProcesado);
+}
+
+
+void ClienteController::dibujar(){
+
+	if( !init(SCREEN_WIDTH,SCREEN_HEIGHT,&(this->window), &(this->renderer) ))
+	{
+		printf( "Failed to initialize!\n" );
+	}
+	else
+	{
+		//Load media
+		if( !loadMedia() )
+		{
+			printf( "Failed to load media!\n" );
+		}
+		else
+		{	
+			//Main loop flag
+			bool quit = false;
+
+			//Event handler
+			SDL_Event e;
+
+            SDL_Color gris = {0xA3,0xA3,0xA3,0xFF};
+            SDL_Color grisOscuro = {0xA0,0xA0,0xA0,0xFF};
+			SDL_Color verde = {0x00,0xCC,0x00,0xFF};
+            SDL_Color verdeOscuro = {0x00,0x99,0x00,0xFF};
+            SDL_Color blanco = {0xFF,0xFF,0xFF,0xFF};
+            SDL_Color rojo = {0xFF,0x00,0x00,0xFF};
+            SDL_Color transparente = {0x00,0x00,0x00,0x00};
+
+			Figura* pista = new Figura();
+			Figura* fondo = new Figura();
+            Figura* line = new Figura();
+            Figura* clip = new Figura();
+
+            int maxy = SCREEN_HEIGHT;
+
+            roadW = 2000;
+            segL = 200; //segment length
+            camD = 0.84f; //camera depth
+
+             x = 0;
+			 y = 0;
+			 z = 0;
+
+
+            struct Line
+            {
+                    float x,y,z; //3d center of line
+                    float X,Y,W; //screen coord
+                    float scale;
+                    float camD = 0.5;
+                    float roadW= 2000;
+					float curve,spriteX,clip,spriteX2;
+                    Textura* sprite;
+                    Textura* sprite2;
+
+                    Line() {spriteX=spriteX2=curve=x=y=z=0;
+                    		sprite = NULL;
+                    		sprite2 = NULL;}
+
+                    void project(int camX,int camY,int camZ) {
+                        scale = camD/(z-camZ);
+                        X = (1 + scale*(x - camX)) * SCREEN_WIDTH/2;
+                        Y = ((1 - scale*(y - camY)) * SCREEN_HEIGHT/2);
+                        W = scale * (roadW)* SCREEN_WIDTH/2 ;
+
+                    }
+
+                    void drawSprite(SDL_Renderer* renderer){
+					    if (!sprite)
+					    	return;
+					    
+					    if(spriteX != 0){
+						    int w = sprite->getWidth();
+						    int h = sprite->getHeight();
+
+						    float destX = X + scale * spriteX * SCREEN_WIDTH/2;//* SCREEN_WIDTH/2
+						    float destY = Y + 4;
+						    float destW  = w * W / 266;
+						    float destH  = h * W / 266;
+
+						    destX += destW * spriteX; //offsetX
+						    destY += destH * (-1);    //offsetY
+
+
+
+
+						    SDL_RenderSetScale(renderer,destW/w,destH/h);
+						    sprite->render(destX/ destW*w,destY*h/destH,renderer);
+						    SDL_RenderSetScale(renderer,1,1);
+					    }
+
+					    if(spriteX2 != 0){
+						    int w = sprite2->getWidth();
+						    int h = sprite2->getHeight();
+
+						    float destX = X + scale * spriteX2 * SCREEN_WIDTH/2 ;
+						    float destY = Y + 4;
+						    float destW  = w * W / 266;
+						    float destH  = h * W / 266;
+
+						    destX += destW * spriteX2; //offsetX
+						    destY += destH * (-1);    //offsetY
+
+
+						    SDL_RenderSetScale(renderer,destW/w,destH/h);
+						    sprite2->render(destX/ destW*w,destY*h/destH,renderer);
+						    SDL_RenderSetScale(renderer,1,1);
+					    }
+					    
+
+    				}
+};
+
+            std::vector<Line> lines;
+
+            //list<pair<int, float>> Track; /*distancia , curvatura*/
+
+
+          /*  Track.emplace_back(make_pair(500, -1));
+            Track.emplace_back(make_pair(500,1));
+            Track.emplace_back(make_pair(700,0)); // al ultimo segmento le agrego un offset de la perspectiva*/
+            obstaculos->emplace(50,cartel);
+            obstaculos->emplace(-50,cartel);
+            obstaculos->emplace(-75,cartel2);
+            obstaculos->emplace(75,cartel2);
+            obstaculos->emplace(300,arbol);
+            obstaculos->emplace(-100,arbol);
+            obstaculos->emplace(100,arbol);
+
+
+            std::map<int,Textura*>::iterator it_obst;
+
+            list<pair<int, float>> Track  = this->cliente->obtenerTrack(); //TODO anda igual
+
+
+            /*Armo la pista*/
+            int iter_anterior = 0;
+            for (auto it=Track.begin(); it !=Track.end(); it++) {
+                int iteraciones = it->first;
+                cout<<iteraciones<<endl;
+                for (int i = iter_anterior; i < iteraciones + iter_anterior; i++) {
+                    Line line;
+                    line.z = i * segL;
+                    line.curve = it->second;
+                    it_obst = obstaculos->find(i);
+                    if(it_obst != obstaculos->end()){
+                    	line.sprite = it_obst->second;
+                    	line.spriteX = -0.375 + (float)SCREEN_WIDTH/(5*(float)line.sprite->getWidth()) ;
+                    	
+                    }
+
+                    it_obst = obstaculos->find(-i);
+                    if(it_obst != obstaculos->end()){
+                    	line.sprite2 = it_obst->second;
+                    	line.spriteX2 = -0.5 - 17*(float)SCREEN_WIDTH/(80*(float)line.sprite->getWidth()) ;
+                    	
+                    }
+
+                    lines.push_back(line);
+                }
+                cout<<it->second<<endl;
+                iter_anterior += iteraciones;
+            }
+
+            int N = lines.size();
+
+            pos = 1;
+
+
+			//While application is running
+			while( !quit ) {
+
+
+				while( SDL_PollEvent( &e ) != 0 ) {
+					//User requests quit
+					if( e.type == SDL_QUIT )
+					{
+						quit = true;
+					}
+                    this->keyEvent( e );
+				}
+
+                SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
+                SDL_RenderClear(this->renderer);
+
+                int startPos = pos/segL;
+				x=0;
+				dx=0;
+
+                backgroundMove();
+
+
+
+                for(int n = startPos; n<startPos+101; n++) {
+                    pos = autito.getPosition();
+                    Line &l = lines[n];
+                    l.project(x, 1300, pos);
+
+                    x+=dx;
+                    dx+=l.curve;
+
+
+                    l.clip = maxy;
+                    if (l.Y < 0 || l.Y>SCREEN_HEIGHT )
+                        continue;
+                    maxy = l.Y;
+
+
+                    SDL_Color pasto = (n / 5) % 2 ? verde : verdeOscuro;
+                    SDL_Color borde = (n / 2) % 2 ? rojo : blanco;
+                    SDL_Color linea = (n / 3) % 2 ? gris : blanco;
+
+                    Line p = lines[(n - 1)];
+
+
+                    fondo->setearFigura(SCREEN_WIDTH/2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH/2, l.Y, SCREEN_WIDTH, this->renderer, pasto);
+                    clip->setearFigura(p.X, p.Y, p.W*1.2, l.X, l.Y, l.W*1.2,this->renderer,borde);
+                    pista->setearFigura(p.X, p.Y,p.W, l.X, l.Y, l.W,this->renderer,gris);
+                    line->setearFigura(p.X, p.Y, p.W*0.05,p.X, l.Y, l.W*0.05, this->renderer, linea);
+
+                }
+
+
+                 for(int n=startPos+101; n>startPos; n--)
+      				 lines[n].drawSprite(this->renderer);
+      				
+                int curve =  lines[(pos/200)].curve;
+
+                checkCurveAndSetCentrifuga(curve);
+                autito.calculateMove(PressUP, curveR, curveL);
+                car.render(autito.getX(), autito.getY(), this->renderer);
+
+                SDL_RenderPresent(this->renderer);
+
+			}
+
+		}
+
+	}
+
+	//Free resources and close SDL
+	close( &(this->renderer),&(this->window));
+}
+
+void ClienteController::keyEvent(SDL_Event e) {
+
+
+    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
+    {
+        //Adjust the velocity
+        switch( e.key.keysym.sym )
+        {
+            case SDLK_UP:        autito.moveUP_KD(pos); PressUP = true; break;
+            case SDLK_DOWN:      autito.moveDown_KD(pos); break;
+            case SDLK_LEFT:      autito.moveLeft_KD();break;
+            case SDLK_RIGHT:     autito.moveRight_KD(); break;
+        }
+    }
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 ) {
+        switch( e.key.keysym.sym ) {
+			case SDLK_UP:       autito.moveUP_KU(pos); PressUP = false; break;
+            case SDLK_DOWN:     autito.moveDown_KU(pos);  break;
+            case SDLK_LEFT:     autito.moveLeft_KU(); break;
+            case SDLK_RIGHT:    autito.moveRight_KU();  break;
+        }
+    }
 
 }
+
+bool ClienteController::loadMedia() {
+    //Loading success flag
+    bool success = true;
+
+    //Load sprite sheet textura
+    if( !sky.loadFromFile("img/sky.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+    if( !trees.loadFromFile("img/trees.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+    if( !hills.loadFromFile("img/hills.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+    if( !car.loadFromFile("img/ferrari_straight1.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+    arbol = new Textura();
+        if( !arbol->loadFromFile("img/palmera.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+
+    cartel = new Textura();
+        if( !cartel->loadFromFile("img/cartel1.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+    cartel2 = new Textura();
+        if( !cartel2->loadFromFile("img/cartel2.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+
+
+
+    
+
+
+
+
+    return success;
+}
+
+void ClienteController::checkCurveAndSetCentrifuga(int curve) {
+    if (curve < 0){ //curva a la derecha
+        curveR = true;
+        curveL = false;
+    }
+    if (curve > 0) { //curva a la izquierda
+        curveL = true;
+        curveR = false;
+    }
+    if(curve == 0){
+        curveR = false;
+        curveL = false;
+    }
+}
+
+void ClienteController::backgroundMove() {
+    if (curveR && autito.isMoving()) {
+        sky.render(0, 0, this->renderer);
+        hills.render(offsetBackgroundHills, 20, this->renderer);
+        trees.render(offsetBackgroundTree, 20, this->renderer);
+        offsetBackgroundHills -= 0.05;
+        offsetBackgroundTree -= 0.1;
+    }
+    if (curveL && autito.isMoving()) {
+        sky.render(0, 0, this->renderer);
+        hills.render(offsetBackgroundHills, 20, this->renderer);
+        trees.render(offsetBackgroundTree, 20, this->renderer);
+        offsetBackgroundHills += 0.05;
+        offsetBackgroundTree += 0.1;
+    }
+    else{
+        sky.render(0, 0, this->renderer);
+        hills.render(offsetBackgroundHills, 20, this->renderer);
+        trees.render(offsetBackgroundTree, 20, this->renderer);
+    }
+}
+
+void ClienteController::verMinimapa(){
+    this->threadGraficoMinimapa.start();
+
+}
+
+
 
 

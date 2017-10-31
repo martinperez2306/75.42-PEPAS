@@ -167,6 +167,8 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 					}
 				}
 
+				SDL_SetRenderDrawColor(this->gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_RenderClear(this->gRenderer);
 				///////////////////
 				list<Segmento*>* ruta = minimapa->getRuta();
 				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
@@ -193,7 +195,7 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 					int x = (pos->getX());
 					int y = (pos->getY());
 					///Pinto objeto
-					SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF );
+					SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0x00, 0xFF );
 					SDL_RenderDrawPoint(gRenderer,x,y);
 				}
 

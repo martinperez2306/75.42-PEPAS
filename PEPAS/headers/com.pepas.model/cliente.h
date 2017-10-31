@@ -34,6 +34,7 @@ private:
     bool minimapaCompleto;
     list<string> colaBuzon;
     list<string> colaChat;
+    list<pair<int, float>>Track;
     Minimapa* minimapa;
     Vista* vista;
 
@@ -82,6 +83,7 @@ public:
     list<string> obtenerColaChat();
 
     list<string> obtenerColaBuzon();
+    list<pair<int, float>> obtenerTrack();
     void desloguearse();
     void desencolarColaChat();
     void desencolarColaBuzon();

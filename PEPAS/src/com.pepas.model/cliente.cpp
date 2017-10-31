@@ -222,11 +222,11 @@ void Cliente::parsearMensaje(std::string datos){
         	string lado = obtenerParametros(datos,&i);
         	this->actualizarObjetosMiniMapa(arbol,cartel,distancia,lado);
         }break;
-        case RUTAMAPA:
-        	int longitud = stoi(obtenerParametros(datos,&i),nullptr,10);
-        	int curva = stoi(obtenerParametros(datos,&i),nullptr,10);
-        	this->actualizarRutaMapa(longitud,curva);
-        	break;
+        case RUTAMAPA: {
+            int longitud = stoi(obtenerParametros(datos, &i), nullptr, 10);
+            float curva = stoi(obtenerParametros(datos, &i), nullptr, 10);
+            Track.emplace_back(make_pair(longitud,curva));
+        }break;
         case FINMAPAS:{
         	this->minimapa->mostrarSegmentos();
         	this->minimapa->mostrarObjetos();
@@ -238,9 +238,7 @@ void Cliente::parsearMensaje(std::string datos){
                if(mensaje.compare("Bienvenido\n") == 0){
                    this->logueado = true;
                }
-
 		}
-
 			break;
 		case BROADCAST:{
             std::string usuario = obtenerParametros(datos,&i);
@@ -363,4 +361,8 @@ void Cliente::vaciarColaBuzon(){
 
 int Cliente::obtenerAliveCounter() {
     return this->aliveCounter;
+}
+
+list<pair<int, float>> Cliente::obtenerTrack() {
+    return this->Track;
 }

@@ -9,17 +9,17 @@
 #define COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_
 
 
-
-//
-// Created by florencia on 03/09/17.
-//
 #include "../com.pepas.model/recvThread.h"
 #include "../com.pepas.model/aliveSignalThread.h"
-#include "../com.pepas.model/threadMinimapa.h"
 #include "../com.pepas.model/cliente.h"
 #include "../com.pepas.model/Mensaje.h"
 #include "../com.pepas.parser/ClienteParser.h"
-
+#include "../com.pepas.model/sdllib.h"
+#include "../com.pepas.model/Figura.h"
+#include "../com.pepas.model/Textura.h"
+#include "../com.pepas.model/Auto.h"
+#include "../com.pepas.model/threadMinimapa.h"
+#include <map>
 
 class ClienteController{
 
@@ -32,13 +32,55 @@ private:
     Cliente* cliente;
     recvThread threadRecibir;
     aliveSignalThread threadEnviar;
-    threadMinimapa threadGraficoMinimapa;
-    bool reconexion;
+	threadMinimapa threadGraficoMinimapa;
+
+
+    bool reconexion; 
     char ipAddress[20];
     char testFile [100];
 
+    SDL_Window* window;
+    SDL_Renderer* renderer;
+    SDL_Surface* superficieVentana;
+    Textura sky;
+    Textura trees;
+    Textura hills;
+    Textura car;
+    Textura* arbol;
+    Textura* cartel;
+	Textura* cartel2;
+
+    Auto autito;
+
+    int carPosX;
+    std::map<int,Textura*>* obstaculos;
+
+
+
+	int x;
+	int y;
+	int z;
+    int W;
+    int X;
+    int Y;
+    int Z;
+    int pos;
+    int velY;
+    float scale,dx;
+    int roadW;
+    int segL; //segment length
+    float camD; //camera depth
+
+    bool PressUP;
+    bool curveR, curveL;
+
+    float offsetBackgroundTree;
+    float offsetBackgroundHills;
+
+
 
 public:
+
 
     ClienteController(const char* archivo);
 
@@ -70,9 +112,16 @@ public:
     void verBuzon();
 
     void enviarBroadcast(string entradita);
-    void conectar();
-    void verMinimapa();
+	void conectar();
+	void dibujar();
 
+    void keyEvent(SDL_Event event);
+    bool loadMedia();
+
+    void checkCurveAndSetCentrifuga(int curve);
+
+    void backgroundMove();
+	void verMinimapa();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

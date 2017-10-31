@@ -73,6 +73,7 @@ void Consola::cargarMenuPrincipal() {
 				terminado = true;	
 			break;
 			default:
+				this->clienteController->dibujar();
 				cout << "Opcion incorrecta" << endl;
 		};
 	}

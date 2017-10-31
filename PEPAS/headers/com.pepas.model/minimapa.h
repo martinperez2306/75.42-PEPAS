@@ -21,6 +21,7 @@ private:
 	list<Segmento*>* ruta;
 	list<Objeto*>* objetos;
 
+
 public:
 
 	//EL MINIMAPA ESTA COMPUESTO POR SEGMENTOS QUE SON INTERPERTADOS POR UNA O MAS RECTAS (PUEDEN DEFINIR CURVAS)
