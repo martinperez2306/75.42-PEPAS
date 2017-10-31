@@ -69,17 +69,12 @@ std::string obtenerParametros(std::string mensaje, int* i){
 
 }
 
-void Cliente::logIn(){
+void Cliente::logIn(string usuario,string clave){
     if(this->logueado){
         cout << "Usted ya esta logueado" << endl;
         return;
     }
-    string usuario;
-    string clave;
-    cout<<"Ingrese su nombre de usuario"<<endl;
-    cin>> usuario;
-    cout<<"Ingrese su clave"<<endl;
-    cin>> clave;
+
     this->obtenerUsuario()->setearNombre(usuario);
     this->obtenerUsuario()->setearContrasenia(clave);
     this->validarUsuario(obtenerUsuario());

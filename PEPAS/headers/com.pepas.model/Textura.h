@@ -8,6 +8,7 @@
 
 #include <SDL2/SDL_render.h>
 #include <string>
+#include <SDL2/SDL_ttf.h>
 
 class Textura {
 private:
@@ -28,6 +29,7 @@ private:
 void render( int x, int y,int w,int h, SDL_Renderer* renderer );
 
     bool loadFromFile(std::string path, SDL_Renderer* renderer);
+bool loadFromRenderedText( std::string textureText, SDL_Color textColor,TTF_Font *font,SDL_Renderer* renderer);
 
     int getWidth();
     int getHeight();

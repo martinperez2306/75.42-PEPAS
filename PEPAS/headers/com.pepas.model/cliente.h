@@ -42,7 +42,7 @@ private:
 public:
     Cliente();
     bool minimapaEstaCompleto();
-    void logIn();
+    void logIn(string usuario, string clave);
 
     //metodo para loquearse?
     int conectarseAlServidor(const char *ip, int puerto);

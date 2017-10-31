@@ -27,6 +27,8 @@ ClienteController::ClienteController(const char* archivo){
     int velX = Y;
 
     this->obstaculos = new map<int,Textura*>();
+    this->ingreso = new Textura();
+    this->opcion = new Textura();
 
      PressUP = false;
     offsetBackgroundTree = -1000;
@@ -118,7 +120,7 @@ void ClienteController::logOut() {
 
 }
 
-void ClienteController::logIn() {
+void ClienteController::logIn(string usuario, string clave) {
 	if(!this->cliente->estaConectado()){
 		cout<< "Debe conectarse para loguearse" <<endl;
 		return;
@@ -129,7 +131,7 @@ void ClienteController::logIn() {
         return;
     }
 	
-	this->cliente->logIn();
+	this->cliente->logIn(usuario, clave);
 
 	if (this->cliente->estalogueado()){
 		this->empezarRecibir();
@@ -354,6 +356,32 @@ void ClienteController::dibujar(){
 
 			//Event handler
 			SDL_Event e;
+
+			
+			string usuario;
+			string password;
+
+			
+
+			//Enable text input
+			SDL_StartTextInput();
+			this->conectar();
+			do{
+				quit = getString(&usuario,"Usuario :");
+
+				if(!quit)
+					quit = getString(&password,"Clave :");
+
+				if (!quit)
+					this->logIn(usuario,password);
+
+			
+			}while(!this->cliente->estalogueado() && !quit);
+
+			
+			//Disable text input
+			SDL_StopTextInput();
+
 
             SDL_Color gris = {0xA3,0xA3,0xA3,0xFF};
             SDL_Color grisOscuro = {0xA0,0xA0,0xA0,0xFF};
@@ -654,7 +682,13 @@ bool ClienteController::loadMedia() {
     }
 
 
-
+    //Open the font
+	font = TTF_OpenFont( "fonts/box.otf", 28 );
+	if( font == NULL )
+	{
+		printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+		success = false;
+	}
 
     
 
@@ -705,6 +739,97 @@ void ClienteController::verMinimapa(){
     this->threadGraficoMinimapa.start();
 
 }
+
+
+
+bool ClienteController::getString(string* str,string optText){
+	
+		//Set text color as black
+		SDL_Color textColor = { 0, 0, 0, 0xFF };
+		SDL_Event e;
+
+		//The current input text.
+		std::string inputText = "";
+
+		ingreso->loadFromRenderedText( inputText.c_str(), textColor,font,renderer );
+
+
+		opcion->loadFromRenderedText( optText.c_str(), textColor,font,renderer );
+
+	//The rerender text flag
+	bool renderText = false;
+	bool quit = false;
+	bool termino = false;
+
+	while(!quit && !termino){
+		//Handle events on queue
+		while( SDL_PollEvent( &e ) != 0 )
+		{
+			//User requests quit
+			if( e.type == SDL_QUIT )
+			{
+				quit = true;
+			}
+			//Special key input
+			else if( e.type == SDL_KEYDOWN && e.key.repeat == 1 )
+			{
+				//Handle backspace
+				if( e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0 )
+				{
+					//lop off character
+					inputText.pop_back();
+					renderText = true;
+				}
+
+				if (e.key.keysym.sym == SDLK_RETURN){
+					termino = true;
+					*str = inputText;
+				}
+			}
+			//Special text input event
+			else if( e.type == SDL_TEXTINPUT )
+			{
+
+					//Append character
+					inputText += e.text.text;
+					renderText = true;
+			}
+		}
+
+		//Rerender text if needed
+		if( renderText )
+		{
+			//Text is not empty
+			if( inputText != "" )
+			{
+				//Render new text
+				ingreso->loadFromRenderedText( inputText.c_str(), textColor,font, renderer );
+			}
+			//Text is empty
+			else
+			{
+				//Render space texture
+				ingreso->loadFromRenderedText( " ", textColor,font,renderer );
+			}
+		}
+
+		//Clear screen
+		SDL_SetRenderDrawColor( renderer, 0xFF, 0xFF, 0xFF, 0xFF );
+		SDL_RenderClear( renderer );
+
+		//Render text textures
+		opcion->render( ( SCREEN_WIDTH - opcion->getWidth() ) / 2, 0,renderer );
+		ingreso->render( ( SCREEN_WIDTH - ingreso->getWidth() ) / 2, opcion->getHeight(),renderer );
+
+		//Update screen
+		SDL_RenderPresent( renderer );
+	}
+
+	SDL_FlushEvents(SDL_KEYDOWN,SDL_TEXTINPUT);
+	return quit;
+}
+
+
 
 
 

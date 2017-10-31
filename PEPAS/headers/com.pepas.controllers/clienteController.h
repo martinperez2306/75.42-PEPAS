@@ -19,6 +19,7 @@
 #include "../com.pepas.model/Textura.h"
 #include "../com.pepas.model/Auto.h"
 #include "../com.pepas.model/threadMinimapa.h"
+#include <SDL2/SDL_ttf.h>
 #include <map>
 
 class ClienteController{
@@ -48,7 +49,10 @@ private:
     Textura car;
     Textura* arbol;
     Textura* cartel;
-	Textura* cartel2;
+    Textura* cartel2;
+    TTF_Font *font;
+    Textura* opcion;
+    Textura* ingreso;
 
     Auto autito;
 
@@ -107,7 +111,7 @@ public:
     Cliente *obtenerCliente();
 
     void obtengoPuertoNuevoYHagoConectar();;
-    void logIn();
+    void logIn(string usuario, string clave);
     void entrarAlChat();
     void verBuzon();
 
@@ -122,6 +126,7 @@ public:
 
     void backgroundMove();
 	void verMinimapa();
+bool getString(string* str,string optText);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */
