@@ -8,6 +8,8 @@
 #define USER_DISCONNECT 6
 #define SIGNAL_CONNECT 7
 
+#define COMANDO 10
+
 using namespace std;
 
 typedef pair<int, Socket*> socketConect;
@@ -50,6 +52,9 @@ Servidor::Servidor(){
     this->world = new World();
     //zoomer
     this->zoomer = new Zoomer();
+
+    this->logicaJuego = new Logica*(5000); //largo de la pista
+    this->mapAutitos = new map<int,Autito>();
 }
 
 
@@ -282,6 +287,13 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
     string mensajeAEnviar;
 
 	switch(codigo){
+
+		case COMANDO: {
+				this->logicaJuego->setRuta(this->mapa->ruta);
+				//this->logicaJuego->actualizar();
+			}
+			break;
+
 		case LOGIN:{
             loggear("Codigo de login",2);
 			std::string password = obtenerParametros(datos,&i);

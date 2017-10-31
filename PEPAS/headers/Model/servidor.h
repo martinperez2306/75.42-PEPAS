@@ -11,6 +11,8 @@
 #include "pistaParser.h"
 #include "World.h"
 #include "Zoomer.h"
+#include "Logica.h"
+#include "Autito.h"
 
 
 class Servidor{
@@ -37,6 +39,9 @@ private:
 	Minimapa* minimapa;
 	World* world;
 	Zoomer* zoomer;
+
+	Logica* logicaJuego;
+	map<int, Autito>* mapAutitos;
 
 public:
 	int aliveCounter;
