@@ -293,6 +293,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             ////////////////////
             if(mensaje.compare("Bienvenido")){
                 enviarMinimapaACliente(socketDelemisor);
+                enviarMapaACliente(socketDelemisor);
             }
 		}
 			break;
@@ -634,6 +635,7 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	stringACrear = separador + "11" + separador + longit + separador +  curv +  separador;
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    loggear ("------------->",1);
 	loggear(stringProcesado,1);
 	return stringProcesado;
 }
