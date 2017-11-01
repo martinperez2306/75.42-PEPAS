@@ -5,7 +5,7 @@
  *      Author: bigfatpancha
  */
 
-#include "../../../headers/Model/Logica.h"
+#include "../../headers/Model/Logica.h"
 
 Logica::Logica(int largoPista) {
 	this->largoPista = largoPista;

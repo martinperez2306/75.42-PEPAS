@@ -53,7 +53,7 @@ Servidor::Servidor(){
     //zoomer
     this->zoomer = new Zoomer();
 
-    this->logicaJuego = new Logica*(5000); //largo de la pista
+    this->logicaJuego = new Logica(5000); //largo de la pista
     this->mapAutitos = new map<int,Autito>();
 }
 
@@ -289,7 +289,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 	switch(codigo){
 
 		case COMANDO: {
-				this->logicaJuego->setRuta(this->mapa->ruta);
+				this->logicaJuego->setRuta(this->mapa->getRuta());
 				//this->logicaJuego->actualizar();
 			}
 			break;

@@ -5,7 +5,7 @@
  *      Author: bigfatpancha
  */
 
-#include "../../../headers/Model/Autito.h"
+#include "../../headers/Model/Autito.h"
 
 Autito::Autito(Posicion *posInicial, int id) {
 	this->pos = posInicial;
@@ -52,7 +52,7 @@ int Autito::getDesplazamientoEnX() {
 }
 
 int Autito::getDistanciaRecorrida() {
-	return this->distanciaRecorrida
+	return this->distanciaRecorrida;
 }
 
 Autito::~Autito() {

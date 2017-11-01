@@ -16,6 +16,8 @@
 #include <list>
 #include "segmento.h"
 
+using namespace std;
+
 class Logica {
 
 private:
