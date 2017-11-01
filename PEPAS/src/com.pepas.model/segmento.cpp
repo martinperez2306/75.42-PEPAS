@@ -20,6 +20,22 @@ Posicion* Segmento::getPosicionInicial(){
 	return this->posicionInicial;
 }
 
+int Segmento::getCurva(){
+	return this->curva;
+}
+
+int Segmento::getLongitud(){
+	return this->longitud;
+}
+
+void Segmento::setCurva(int curva){
+	this->curva = curva;
+}
+
+void Segmento::setLongitud(int longitud){
+	this->longitud = longitud;
+}
+
 Segmento::~Segmento(){
 	delete this->posicionFinal;
 	delete this->posicionInicial;

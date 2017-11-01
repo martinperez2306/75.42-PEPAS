@@ -25,8 +25,10 @@ list<Objeto*>* Mapa::obtenerObjetos(){
 void Mapa::mostrarSegmentos(){
 	for(list<Segmento*>::iterator it = this->ruta->begin(); it != this->ruta->end();++it){
 		Segmento* seg = *it;
-		cout<<"Longitud: "<<seg->getLongitud()<<endl;
-		cout<<"Curva: "<<seg->getCurva()<<endl;
+		int longitud = seg->getLongitud();
+		int curva = seg->getCurva();
+		cout<<"Longitud: "<<longitud<<endl;
+		cout<<"Curva: "<<curva<<endl;
 	}
 }
 

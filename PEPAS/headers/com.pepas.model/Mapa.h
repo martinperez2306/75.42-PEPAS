@@ -4,6 +4,7 @@
 #include <list>
 #include "Objeto.h"
 #include "segmento.h"
+#include <iostream>
 
 using namespace std;
 class Mapa {
