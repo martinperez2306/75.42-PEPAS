@@ -10,9 +10,10 @@
 #define ERROR 5
 #define SIGNAL_CONNECT 7
 #define RUTAMINIMAPA 8
-#define OBJETOS 9
+#define OBJETOSMINIMAPA 9
 #define FINMAPAS 10
 #define RUTAMAPA 11
+#define OBJETOSMAPA 12
 #define INFINITO 2147483647
 
 Cliente::Cliente() {
@@ -24,6 +25,7 @@ Cliente::Cliente() {
     this->minimapaCompleto=false;
     this->conectado = false;
     this->minimapa=new Minimapa();
+    this->mapa = new Mapa();
     this->vista=new Vista();
 
 }
@@ -210,7 +212,7 @@ void Cliente::parsearMensaje(std::string datos){
             this->actualizarRutaMiniMapa(x1,x2,y1,y2);
 
         }break;
-        case OBJETOS:{
+        case OBJETOSMINIMAPA:{
         	int arbol = stoi(obtenerParametros(datos,&i),nullptr,10);
         	int cartel = stoi(obtenerParametros(datos,&i),nullptr,10);
         	int distancia = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -220,11 +222,19 @@ void Cliente::parsearMensaje(std::string datos){
         case RUTAMAPA: {
             int longitud = stoi(obtenerParametros(datos, &i), nullptr, 10);
             float curva = stoi(obtenerParametros(datos, &i), nullptr, 10);
-            Track.emplace_back(make_pair(longitud,curva));
+            this->actualizarRutaMapa(longitud,curva);
         }break;
+        case OBJETOSMAPA:{
+        	int arbol = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	int cartel = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	int distancia = stoi(obtenerParametros(datos,&i),nullptr,10);
+        	string lado = obtenerParametros(datos,&i);
+        	this->actualizarObjetosMapa(arbol,cartel,distancia,lado);
+        	break;
+        }
         case FINMAPAS:{
-        	this->minimapa->mostrarSegmentos();
-        	this->minimapa->mostrarObjetos();
+        	this->mapa->mostrarSegmentos();
+        	this->mapa->mostrarObjetos();
             this->minimapaCompleto=true;
         }break;
 		case LOGIN:{
@@ -360,4 +370,19 @@ int Cliente::obtenerAliveCounter() {
 
 list<pair<int, float>> Cliente::obtenerTrack() {
     return this->Track;
+}
+
+void Cliente::actualizarRutaMapa(int longitud, int curva){
+	Segmento* segmentoMapa = new Segmento();
+	segmentoMapa->setCurva(curva);
+	segmentoMapa->setLongitud(longitud);
+	this->mapa->agregarSegmento(segmentoMapa);
+}
+
+void Cliente::actualizarObjetosMapa(int arbol, int cartel, int distancia, string lado){
+	Objeto* objetoMapa = new Objeto();
+	objetoMapa->setArbol(arbol);
+	objetoMapa->setCartel(cartel);
+	objetoMapa->setDistancia(distancia);
+	objetoMapa->setLado(lado);
 }

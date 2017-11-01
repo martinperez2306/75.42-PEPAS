@@ -11,7 +11,8 @@ class Segmento{
 private:
 	Posicion* posicionInicial;
 	Posicion* posicionFinal;
-
+	int longitud;
+	int curva;
 
 public:
 
@@ -22,6 +23,12 @@ public:
 
 	Posicion* getPosicionInicial();
 	Posicion* getPosicionFinal();
+
+	void setCurva(int curva);
+	void setLongitud(int longitud);
+
+	void getCurva();
+	void getLongitud();
 
 	//Eliminar memoria pedida para la posicion Inicia y pos final (el delete verifica si alguna de las dos ya fue
 	//eliminada por otro segmento, ya que segmentos pueden compartir una misma pos)

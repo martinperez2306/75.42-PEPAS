@@ -3,6 +3,8 @@
 Segmento::Segmento(){
 	this->posicionFinal= NULL;
 	this->posicionInicial= NULL;
+	this->curva = 0;
+	this->longitud = 0;
 }
 
 Segmento::Segmento(Posicion* posInicial,Posicion* posFinal){

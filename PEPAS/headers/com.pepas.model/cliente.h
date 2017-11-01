@@ -14,6 +14,7 @@
 #include "socket.h"
 #include "Mensaje.h"
 #include "minimapa.h"
+#include "Mapa.h"
 #include "../com.pepas.view/vista.h"
 #include <iostream>
 #include <cstring>
@@ -36,6 +37,7 @@ private:
     list<string> colaChat;
     list<pair<int, float>>Track;
     Minimapa* minimapa;
+    Mapa* mapa;
     Vista* vista;
 
 
@@ -98,7 +100,8 @@ public:
     void graficarMinimapa();
     void actualizarRutaMiniMapa(int x1, int y1, int x2,int y2);
     void actualizarObjetosMiniMapa(int arbol, int cartel, int distancia, string lado);
-
+    void actualizarRutaMapa(int longitud, int curva);
+    void actualizarObjetosMapa(int arbol, int cartel, int distancia, string lado);
 };
 
 
