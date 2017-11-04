@@ -87,6 +87,7 @@ void Cliente::logIn(string usuario,string clave){
 int Cliente::conectarseAlServidor(const char *ip, int puerto) {
     this->socketFD = this->socketCliente->Crear();
     cout<<"Socket creado... Conectando..."<<endl;
+    cout<<"puerto "<<puerto<<"ip "<<ip<<endl;
     return this->obtenerSocket()->Conectar(this->socketFD,puerto, ip);
 
 }
@@ -222,6 +223,7 @@ void Cliente::parsearMensaje(std::string datos){
         case RUTAMAPA: {
             int longitud = stoi(obtenerParametros(datos, &i), nullptr, 10);
             float curva = stoi(obtenerParametros(datos, &i), nullptr, 10);
+            Track.emplace_back(make_pair(longitud,curva));
             this->actualizarRutaMapa(longitud,curva);
         }break;
         case OBJETOSMAPA:{

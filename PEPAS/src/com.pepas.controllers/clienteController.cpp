@@ -18,6 +18,8 @@ ClienteController::ClienteController(const char* archivo){
 	this->threadEnviar = aliveSignalThread(cliente);
 	this->reconexion = false;
 	strcpy(this->ipAddress,socketData.ip);
+	cout<<"asdasdsa"<<ipAddress<<endl;
+	cout<<"qweqwewq"<<socketData.ip<<endl;
 	strcpy(this->testFile ,socketData.rutafile);
     this->threadGraficoMinimapa=threadMinimapa(cliente);
 
@@ -375,7 +377,7 @@ void ClienteController::dibujar(){
 				if (!quit)
 					this->logIn(usuario,password);
 
-			
+			sleep(1);
 			}while(!this->cliente->estalogueado() && !quit);
 
 			
@@ -771,7 +773,7 @@ bool ClienteController::getString(string* str,string optText){
 				quit = true;
 			}
 			//Special key input
-			else if( e.type == SDL_KEYDOWN && e.key.repeat == 1 )
+			else if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
 			{
 				//Handle backspace
 				if( e.key.keysym.sym == SDLK_BACKSPACE && inputText.length() > 0 )

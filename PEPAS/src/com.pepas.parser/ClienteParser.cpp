@@ -19,7 +19,8 @@ ClienteParser::SocketData ClienteParser::parsearXML(const char* xmlPath) {
 	if(result.status == 0) {
 		//PARSING XML (EL COMPILADOR PODRIA DECIR QUE NO ANDA PERO SI ANDA WACHOS)
 		pugi::xml_node nodeIp = documento.child("cliente").child("conexion").child("IP");
-		const char *ip = nodeIp.text().as_string();
+		char ip[30];
+		strcpy(ip,nodeIp.text().as_string());
 		if(!validarIp(ip)) {
 			//return ClienteParser::parsearXML("clienteDefault.xml");
             return ClienteParser::parsearXML("clienteDefault.xml");
@@ -36,7 +37,7 @@ ClienteParser::SocketData ClienteParser::parsearXML(const char* xmlPath) {
 			//return ClienteParser::parsearXML("clienteDefault.xml");
             return ClienteParser::parsearXML("clienteDefault.xml");
 		}
-		sd.ip = ip;
+		strcpy(sd.ip,ip);
 		sd.puerto = atoi(puerto);
 		sd.rutafile = testFile;
 	
@@ -47,7 +48,7 @@ ClienteParser::SocketData ClienteParser::parsearXML(const char* xmlPath) {
 	}
 }
 
-bool ClienteParser::validarIp(const char *ip){
+bool ClienteParser::validarIp(char *ip){
 	unsigned char buf[sizeof(struct in6_addr)];
 	int ipValida = inet_pton(AF_INET, ip, buf);
 	if (ipValida == 0){

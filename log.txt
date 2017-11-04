@@ -19422,3 +19422,2890 @@ Hora: Tue Oct 31 18:49:03 2017
 
  
 **********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:28:37 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:30:10 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 22:30:58 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:32:21 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:40:34 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 22:40:38 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:54:38 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 22:54:55 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:57:07 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 22:59:05 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 22:59:32 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 22:59:50 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:01:08 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:01:39 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:26:43 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+
+Ultima cantidad recibida -1
+Error al recibir mensaje Success
+
+Ultima cantidad recibida -1
+Error al recibir mensaje Success
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:29:15 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:29:43 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:30:40 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:30:53 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0017
+Ultima cantidad recibida 4
+/8/20/20/20/120//
+Ultima cantidad recibida 17
+entro al parsear mensaje
+/8/20/20/20/120//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/20/120/60/160//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/20/120/60/160//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/60/160/160/160//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/60/160/160/160//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/160/160/200/120//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/160/160/200/120//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/200/120/200/80//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/200/120/200/80//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/200/80/250/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/200/80/250/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/250/30/350/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/250/30/350/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/350/30/400/80//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/350/30/400/80//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/400/80/400/280//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/400/80/400/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/400/280/440/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/400/280/440/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/440/320/540/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/440/320/540/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/540/320/580/280//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/540/320/580/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/580/280/580/180//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/580/280/580/180//
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/20/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/20/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/40/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/40/D
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/60/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/60/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/80/D
+Ultima cantidad recibida 11
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:31:51 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0017
+Ultima cantidad recibida 4
+/8/20/20/20/120//
+Ultima cantidad recibida 17
+entro al parsear mensaje
+/8/20/20/20/120//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/20/120/60/160//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/20/120/60/160//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/60/160/160/160//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/60/160/160/160//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/160/160/200/120//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/160/160/200/120//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/200/120/200/80//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/200/120/200/80//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/200/80/250/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/200/80/250/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/250/30/350/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/250/30/350/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/350/30/400/80//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/350/30/400/80//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/400/80/400/280//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/400/80/400/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/400/280/440/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/400/280/440/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/440/320/540/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/440/320/540/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/540/320/580/280//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/540/320/580/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/580/280/580/180//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/580/280/580/180//
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/20/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/20/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/40/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/40/D
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/60/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/60/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/80/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/80/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/120/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/120/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/220/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/220/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/240/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/240/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/260/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/260/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/280/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/280/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/320/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/320/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/600/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/600/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/602/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/602/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/604/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/604/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/606/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/606/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/608/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/608/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/610/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/610/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/612/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/612/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/614/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/614/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/616/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/616/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/618/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/618/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/800/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/800/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/820/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/820/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/840/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/840/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/860/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/860/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/880/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/880/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/120/20/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/120/20/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/900/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/900/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/1000/0/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/1000/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/400/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/400/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/500/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/500/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1100/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1200/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1200/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1300/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1300/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1400/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1400/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1500/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1500/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3010/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3010/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3020/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3020/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3030/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3030/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3040/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3040/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3050/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3050/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3060/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3060/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3070/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3070/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3080/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3080/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3090/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3090/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/4000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/4000/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4100/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4100/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4200/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4200/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4300/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4300/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4400/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4400/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/100/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/100/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4500/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4500/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:34:43 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:34:54 2017
+
+ 
+**********************************************************************************************************************************
+8001
+Ultima cantidad recibida 4
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0017
+Ultima cantidad recibida 4
+/8/20/20/20/120//
+Ultima cantidad recibida 17
+entro al parsear mensaje
+/8/20/20/20/120//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/20/120/60/160//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/20/120/60/160//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/60/160/160/160//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/60/160/160/160//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/160/160/200/120//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/160/160/200/120//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/200/120/200/80//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/200/120/200/80//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/200/80/250/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/200/80/250/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/250/30/350/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/250/30/350/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/350/30/400/80//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/350/30/400/80//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/400/80/400/280//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/400/80/400/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/400/280/440/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/400/280/440/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/440/320/540/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/440/320/540/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/540/320/580/280//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/540/320/580/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/580/280/580/180//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/580/280/580/180//
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/20/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/20/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/40/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/40/D
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/60/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/60/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/80/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/80/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/120/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/120/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/220/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/220/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/240/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/240/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/260/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/260/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/280/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/280/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/320/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/320/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/600/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/600/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/602/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/602/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/604/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/604/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/606/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/606/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/608/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/608/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/610/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/610/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/612/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/612/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/614/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/614/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/616/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/616/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/618/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/618/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/800/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/800/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/820/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/820/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/840/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/840/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/860/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/860/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/880/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/880/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/120/20/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/120/20/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/900/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/900/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/1000/0/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/1000/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/400/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/400/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/500/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/500/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1100/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1200/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1200/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1300/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1300/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1400/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1400/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1500/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1500/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3010/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3010/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3020/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3020/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3030/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3030/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3040/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3040/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3050/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3050/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3060/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3060/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3070/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3070/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3080/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3080/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3090/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3090/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/4000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/4000/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4100/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4100/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4200/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4200/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4300/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4300/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4400/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4400/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/100/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/100/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4500/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4500/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+
+Ultima cantidad recibida 0
+
+Ultima cantidad recibida 0
+entro al parsear mensaje
+0005
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:35:06 2017
+
+ 
+**********************************************************************************************************************************
+**********************************************************************************************************************************
+ 
+Inicio del logueo:
+Hora: Fri Nov  3 23:35:43 2017
+
+ 
+**********************************************************************************************************************************
+8000
+Ultima cantidad recibida 4
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/4/Bienvenido
+
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/4/Bienvenido
+
+paso el stoi tragico
+0017
+Ultima cantidad recibida 4
+/8/20/20/20/120//
+Ultima cantidad recibida 17
+entro al parsear mensaje
+/8/20/20/20/120//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/20/120/60/160//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/20/120/60/160//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/60/160/160/160//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/60/160/160/160//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/160/160/200/120//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/160/160/200/120//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/200/120/200/80//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/200/120/200/80//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/200/80/250/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/200/80/250/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/250/30/350/30//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/250/30/350/30//
+paso el stoi tragico
+0018
+Ultima cantidad recibida 4
+/8/350/30/400/80//
+Ultima cantidad recibida 18
+entro al parsear mensaje
+/8/350/30/400/80//
+paso el stoi tragico
+0019
+Ultima cantidad recibida 4
+/8/400/80/400/280//
+Ultima cantidad recibida 19
+entro al parsear mensaje
+/8/400/80/400/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/400/280/440/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/400/280/440/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/440/320/540/320//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/440/320/540/320//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/540/320/580/280//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/540/320/580/280//
+paso el stoi tragico
+0020
+Ultima cantidad recibida 4
+/8/580/280/580/180//
+Ultima cantidad recibida 20
+entro al parsear mensaje
+/8/580/280/580/180//
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/20/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/20/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/40/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/40/D
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/60/I
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/60/I
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/9/2/0/80/D
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/9/2/0/80/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/120/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/120/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/220/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/220/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/240/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/240/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/260/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/260/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/280/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/280/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/320/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/320/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/600/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/600/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/602/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/602/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/604/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/604/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/606/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/606/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/608/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/608/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/610/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/610/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/612/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/612/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/614/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/614/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/616/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/616/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/618/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/618/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/800/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/800/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/820/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/820/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/840/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/840/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/860/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/860/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/880/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/880/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/120/20/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/120/20/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/900/D
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/900/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/250/-1/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/250/-1/
+paso el stoi tragico
+0011
+Ultima cantidad recibida 4
+/11/1000/0/
+Ultima cantidad recibida 11
+entro al parsear mensaje
+/11/1000/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/200/1/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/200/1/
+paso el stoi tragico
+0010
+Ultima cantidad recibida 4
+/11/500/0/
+Ultima cantidad recibida 10
+entro al parsear mensaje
+/11/500/0/
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/100/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/100/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/200/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/200/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/300/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/300/I
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/400/D
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/400/D
+paso el stoi tragico
+0012
+Ultima cantidad recibida 4
+/9/2/0/500/I
+Ultima cantidad recibida 12
+entro al parsear mensaje
+/9/2/0/500/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/0/80/600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/0/80/600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1100/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1100/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1200/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1200/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1300/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1300/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1400/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1400/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1500/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1500/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/1600/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/1600/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3000/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3000/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3010/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3010/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3020/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3020/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3030/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3030/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3040/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3040/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3050/D
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3050/D
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3060/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3060/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3070/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3070/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3080/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3080/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/3090/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/3090/I
+paso el stoi tragico
+0013
+Ultima cantidad recibida 4
+/9/2/0/4000/I
+Ultima cantidad recibida 13
+entro al parsear mensaje
+/9/2/0/4000/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4100/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4100/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4200/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4200/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4300/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4300/D
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/80/4400/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/80/4400/I
+paso el stoi tragico
+0014
+Ultima cantidad recibida 4
+/9/0/120/100/I
+Ultima cantidad recibida 14
+entro al parsear mensaje
+/9/0/120/100/I
+paso el stoi tragico
+0015
+Ultima cantidad recibida 4
+/9/0/120/4500/D
+Ultima cantidad recibida 15
+entro al parsear mensaje
+/9/0/120/4500/D
+paso el stoi tragico
+0004
+Ultima cantidad recibida 4
+/10/
+Ultima cantidad recibida 4
+entro al parsear mensaje
+/10/
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+0009
+Ultima cantidad recibida 4
+/7/signal
+Ultima cantidad recibida 9
+entro al parsear mensaje
+/7/signal
+paso el stoi tragico
+**********************************************************************************************************************************
+ 
+Fin del logueo:
+Hora: Fri Nov  3 23:38:44 2017
+
+ 
+**********************************************************************************************************************************
