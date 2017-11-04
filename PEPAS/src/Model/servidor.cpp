@@ -568,7 +568,7 @@ void Servidor::enviarMinimapaACliente(Socket* socket){
     	int tipoCartel = obj->getCartel();
     	int distancia = obj->getDistancia();
     	string ladoDelObjeto = obj->getLado();
-    	string mensajeAEnviar = this->procesarMensajeObjeto(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+    	string mensajeAEnviar = this->procesarMensajeObjetoMinimapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
     	this->enviarMensaje(mensajeAEnviar,socket);
     }
 
@@ -596,7 +596,7 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
     	int tipoCartel = obj->getCartel();
     	int distancia = obj->getDistancia();
     	string ladoDelObjeto = obj->getLado();
-    	string mensajeAEnviar = this->procesarMensajeObjeto(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+    	string mensajeAEnviar = this->procesarMensajeObjetoMapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
     	this->enviarMensaje(mensajeAEnviar,socketCliente);
 	}
 
@@ -608,7 +608,7 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
 
 /*Este procesador, codifica el mensaje con el codigo 9.
 /<codigo_mensaje>/<arbol>/<cartel>/<distancia>/<lado>/*/
-string Servidor::procesarMensajeObjeto(int arbol, int cartel, int distancia, string lado){
+string Servidor::procesarMensajeObjetoMinimapa(int arbol, int cartel, int distancia, string lado){
 	string stringACrear, stringProcesado;
 	string separador = "/";
 	string arb = to_string(arbol);
@@ -648,6 +648,21 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear ("------------->",1);
+	loggear(stringProcesado,1);
+	return stringProcesado;
+}
+
+/*Este procesador, codifica el mensaje con el codigo 12.
+/<codigo_mensaje>/<arbol>/<cartel>/<distancia>/<lado>/*/
+string Servidor::procesarMensajeObjetoMapa(int arbol, int cartel, int distancia, string lado){
+	string stringACrear, stringProcesado;
+	string separador = "/";
+	string arb = to_string(arbol);
+	string cart = to_string(cartel);
+	string dist = to_string(distancia);
+	stringACrear = separador + "12" + separador + arb + separador + cart + separador + dist + separador +lado;
+	unsigned long largoDelMensaje = stringACrear.length();
+	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
 	loggear(stringProcesado,1);
 	return stringProcesado;
 }

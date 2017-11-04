@@ -100,8 +100,9 @@ public:
 	void setZoomEntreMapaYMinimapa(int zoom);
 
 	string procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2);
-	string procesarMensajeObjeto(int arbol,int cartel,int distancia,string lado);
+	string procesarMensajeObjetoMinimapa(int arbol,int cartel,int distancia,string lado);
 	string procesarMensajeRutaMapa(int longitud, int curva);
+	string procesarMensajeObjetoMapa(int arbol,int cartel,int distancia,string lado);
 	string procesarMensajeFin();
 
 	void generarMapa();
