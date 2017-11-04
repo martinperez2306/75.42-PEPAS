@@ -199,11 +199,6 @@ void Vista::graficarMinimapa(Minimapa* minimapa){
 					SDL_RenderDrawPoint(gRenderer,x,y);
 				}
 
-//				//Draw vertical line of yellow dots
-//				SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF );
-//                SDL_RenderDrawPoint( gRenderer, 200, 200 );
-//
-//
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 			}

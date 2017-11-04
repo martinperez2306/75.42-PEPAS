@@ -387,4 +387,9 @@ void Cliente::actualizarObjetosMapa(int arbol, int cartel, int distancia, string
 	objetoMapa->setCartel(cartel);
 	objetoMapa->setDistancia(distancia);
 	objetoMapa->setLado(lado);
+    this->mapa->agregarObjeto(objetoMapa);
+}
+
+Mapa *Cliente::obtenerMapa() {
+    return this->mapa;
 }

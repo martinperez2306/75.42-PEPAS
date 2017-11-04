@@ -433,8 +433,7 @@ void ClienteController::dibujar(){
                     }
 
                     void drawSprite(SDL_Renderer* renderer){
-					    if (!sprite)
-					    	return;
+
 					    
 					    if(spriteX != 0){
 						    int w = sprite->getWidth();
@@ -483,28 +482,39 @@ void ClienteController::dibujar(){
             //list<pair<int, float>> Track; /*distancia , curvatura*/
 
 
-          /*  Track.emplace_back(make_pair(500, -1));
-            Track.emplace_back(make_pair(500,1));
-            Track.emplace_back(make_pair(700,0)); // al ultimo segmento le agrego un offset de la perspectiva*/
-            obstaculos->emplace(50,cartel);
-            obstaculos->emplace(-50,cartel);
-            obstaculos->emplace(-75,cartel2);
-            obstaculos->emplace(75,cartel2);
-            obstaculos->emplace(300,arbol);
-            obstaculos->emplace(-100,arbol);
-            obstaculos->emplace(100,arbol);
+
+
+            for(auto it = this->cliente->obtenerMapa()->obtenerObjetos()->begin(); it != this->cliente->obtenerMapa()->obtenerObjetos()->end();++it) {
+                Objeto *obj = *it;
+                int distancia = obj->getDistancia();
+                int arbol = obj->getArbol();
+                int cartel = obj->getCartel();
+                string lado = obj->getLado();
+                if (arbol != 0 && lado == "D")
+                    obstaculos->emplace(distancia, this->arbol);
+                if (arbol != 0 && lado == "I")
+                    obstaculos->emplace(-distancia, this->arbol);
+                if (cartel == 80 && lado == "D")
+                    obstaculos->emplace(distancia, this->cartel);
+                if (cartel == 80 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel);
+                if (cartel == 120 && lado == "D")
+                    obstaculos->emplace(distancia, this->cartel2);
+                if (cartel == 120 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel2);
+
+            }
 
 
             std::map<int,Textura*>::iterator it_obst;
 
             list<pair<int, float>> Track  = this->cliente->obtenerTrack(); //TODO anda igual
 
-
             /*Armo la pista*/
             int iter_anterior = 0;
             for (auto it=Track.begin(); it !=Track.end(); it++) {
                 int iteraciones = it->first;
-                cout<<iteraciones<<endl;
+                //cout<<"Tramo:"<<iteraciones<<endl;
                 for (int i = iter_anterior; i < iteraciones + iter_anterior; i++) {
                     Line line;
                     line.z = i * segL;
@@ -512,17 +522,14 @@ void ClienteController::dibujar(){
                     it_obst = obstaculos->find(i);
                     if(it_obst != obstaculos->end()){
                     	line.sprite = it_obst->second;
-                    	line.spriteX = -0.375 + (float)SCREEN_WIDTH/(5*(float)line.sprite->getWidth()) ;
+                    	line.spriteX = -0.375 + (float)SCREEN_WIDTH/(5*(float)line.sprite->getWidth());
                     	
                     }
-
                     it_obst = obstaculos->find(-i);
                     if(it_obst != obstaculos->end()){
                     	line.sprite2 = it_obst->second;
-                    	line.spriteX2 = -0.5 - 17*(float)SCREEN_WIDTH/(80*(float)line.sprite->getWidth()) ;
-                    	
+                    	line.spriteX2 = -0.5 - 17*(float)SCREEN_WIDTH/(80*(float)line.sprite2->getWidth());
                     }
-
                     lines.push_back(line);
                 }
                 cout<<it->second<<endl;
@@ -592,6 +599,8 @@ void ClienteController::dibujar(){
       				 lines[n].drawSprite(this->renderer);
       				
                 int curve =  lines[(pos/200)].curve;
+
+                //cout<<pos/200<<endl;
 
                 checkCurveAndSetCentrifuga(curve);
                 autito.calculateMove(PressUP, curveR, curveL);

@@ -86,6 +86,7 @@ public:
 
     list<string> obtenerColaBuzon();
     list<pair<int, float>> obtenerTrack();
+    Mapa* obtenerMapa();
     void desloguearse();
     void desencolarColaChat();
     void desencolarColaBuzon();
