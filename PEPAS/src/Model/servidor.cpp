@@ -309,7 +309,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             enviarMensaje(mensajeAEnviar, socketDelemisor);
 
             if(mensajeAEnviar.compare("Bienvenido")){
-                //enviarMinimapaACliente(socketDelemisor);
+                enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
                 //TODO crear el Auto y poner al jugador en espera.
                 Auto* autito = new Auto;
