@@ -18,23 +18,6 @@ Auto::Auto()
 
 }
 
-
-
-
-Textura Auto::getTextura() {
-    return car;
-}
-
-void Auto::render(int x, int y, SDL_Renderer *renderer) {
-    car.render(x,y,renderer);
-
-}
-
-void Auto::setTextura(Textura tex) {
-    this->car = tex;
-
-}
-
 int Auto::getX() {
     return PosX;
 }
@@ -44,6 +27,9 @@ int Auto::getY() {
     return PosY;
 }
 
+int Auto::getPosition() {
+    return posicion;
+}
 
 void Auto::moveLeft_KD() {
     VelX -= CAR_VEL_X;
@@ -66,14 +52,10 @@ void Auto::calculateMove(bool PressUP, bool curveR, bool curveL) {
 
     //cout <<"posY "<<posicion<<endl;
     //cout <<"velY "<<VelY<<endl;
-
-   // cout <<"posx "<<PosX<<endl;
-
+    // cout <<"posx "<<PosX<<endl;
     //cout <<"velX "<<VelX<<endl;
 
     PosX += VelX;
-
-
 
     if (VelY >= VEL_MAX/2 && curveL && PosX < SCREEN_WIDTH - CAR_WIDTH){
         PosX += DESVIO;
@@ -110,6 +92,7 @@ void Auto::calculateMove(bool PressUP, bool curveR, bool curveL) {
 
     posicion += VelY;
 
+
 }
 
 void Auto::moveUP_KD(int pos) {
@@ -142,9 +125,7 @@ void Auto::moveDown_KU(int pos) {
 
 }
 
-int Auto::getPosition() {
-    return posicion;
-}
+
 
 bool Auto::isMoving() {
     bool move;

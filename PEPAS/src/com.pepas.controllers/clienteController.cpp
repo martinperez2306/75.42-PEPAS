@@ -18,8 +18,8 @@ ClienteController::ClienteController(const char* archivo){
 	this->threadEnviar = aliveSignalThread(cliente);
 	this->reconexion = false;
 	strcpy(this->ipAddress,socketData.ip);
-	cout<<"asdasdsa"<<ipAddress<<endl;
-	cout<<"qweqwewq"<<socketData.ip<<endl;
+	cout<<ipAddress<<endl;
+	cout<<socketData.ip<<endl;
 	strcpy(this->testFile ,socketData.rutafile);
     this->threadGraficoMinimapa=threadMinimapa(cliente);
 
@@ -27,10 +27,12 @@ ClienteController::ClienteController(const char* archivo){
     SDL_Renderer* renderer = NULL;
 
     int velX = Y;
+    curveSet = 0;
 
     this->obstaculos = new map<int,Textura*>();
     this->ingreso = new Textura();
     this->opcion = new Textura();
+    this->autito = new Auto();
 
      PressUP = false;
     offsetBackgroundTree = -1000;
@@ -367,8 +369,10 @@ void ClienteController::dibujar(){
 
 			//Enable text input
 			SDL_StartTextInput();
-			this->conectar();
+
 			do{
+				if (!this->cliente->estaConectado())
+					this->conectar();
 				quit = getString(&usuario,"Usuario :");
 
 				if(!quit)
@@ -376,8 +380,8 @@ void ClienteController::dibujar(){
 
 				if (!quit)
 					this->logIn(usuario,password);
+				sleep(1);
 
-			sleep(1);
 			}while(!this->cliente->estalogueado() && !quit);
 
 			
@@ -416,13 +420,16 @@ void ClienteController::dibujar(){
                     float scale;
                     float camD = 0.5;
                     float roadW= 2000;
-					float curve,spriteX,clip,spriteX2;
+					float curve,spriteX,clip,spriteX2,spriteXP2;
                     Textura* sprite;
                     Textura* sprite2;
+                    Textura* spriteP2;
 
-                    Line() {spriteX=spriteX2=curve=x=y=z=0;
-                    		sprite = NULL;
-                    		sprite2 = NULL;}
+
+                Line() {spriteX=spriteX2=spriteXP2=x=y=z=0;
+                        sprite = NULL;
+                        sprite2 = NULL;
+                        spriteP2 = NULL;}
 
                     void project(int camX,int camY,int camZ) {
                         scale = camD/(z-camZ);
@@ -433,8 +440,6 @@ void ClienteController::dibujar(){
                     }
 
                     void drawSprite(SDL_Renderer* renderer){
-
-					    
 					    if(spriteX != 0){
 						    int w = sprite->getWidth();
 						    int h = sprite->getHeight();
@@ -472,6 +477,22 @@ void ClienteController::dibujar(){
 						    sprite2->render(destX/ destW*w,destY*h/destH,renderer);
 						    SDL_RenderSetScale(renderer,1,1);
 					    }
+                        if(spriteXP2 != 0){
+                            int w = spriteP2->getWidth();
+                            int h = spriteP2->getHeight();
+
+                            float destX = X + scale * spriteXP2 * SCREEN_WIDTH/2 ;
+                            float destY = Y + 4;
+                            float destW  = w * W / 220;
+                            float destH  = h * W / 220;
+
+                            destX += destW * spriteXP2; //offsetX
+                            destY += destH * (-1);    //offsetY
+
+                            SDL_RenderSetScale(renderer,destW/w,destH/h);
+                            spriteP2->render(destX/destW*w,destY*h/destH,renderer);
+                            SDL_RenderSetScale(renderer,1,1);
+                        }
 					    
 
     				}
@@ -480,9 +501,6 @@ void ClienteController::dibujar(){
             std::vector<Line> lines;
 
             //list<pair<int, float>> Track; /*distancia , curvatura*/
-
-
-
 
             for(auto it = this->cliente->obtenerMapa()->obtenerObjetos()->begin(); it != this->cliente->obtenerMapa()->obtenerObjetos()->end();++it) {
                 Objeto *obj = *it;
@@ -504,12 +522,20 @@ void ClienteController::dibujar(){
                     obstaculos->emplace(-distancia, this->cartel2);
 
             }
-
-
             std::map<int,Textura*>::iterator it_obst;
 
             list<pair<int, float>> Track  = this->cliente->obtenerTrack(); //TODO anda igual
+/*
+            obstaculos->emplace(50,cartel);
+            obstaculos->emplace(-50,cartel);
+            obstaculos->emplace(50,cartel);
+            obstaculos->emplace(-75,cartel2);
+            obstaculos->emplace(75,cartel2);
+            obstaculos->emplace(300,arbol);
+            obstaculos->emplace(-100,arbol);
+            obstaculos->emplace(100,arbol);*/
 
+           // Track.emplace_back(5000,0);
             /*Armo la pista*/
             int iter_anterior = 0;
             for (auto it=Track.begin(); it !=Track.end(); it++) {
@@ -532,14 +558,14 @@ void ClienteController::dibujar(){
                     }
                     lines.push_back(line);
                 }
-                cout<<it->second<<endl;
+
                 iter_anterior += iteraciones;
             }
 
             int N = lines.size();
 
             pos = 1;
-
+            int contador = 0;
 
 			//While application is running
 			while( !quit ) {
@@ -563,22 +589,19 @@ void ClienteController::dibujar(){
 
                 backgroundMove();
 
-
+                //TODO aca tiene que recibir la tecla que toco;
 
                 for(int n = startPos; n<startPos+101; n++) {
-                    pos = autito.getPosition();
+                    pos = cliente->getPosition();
                     Line &l = lines[n];
                     l.project(x, 1300, pos);
-
                     x+=dx;
                     dx+=l.curve;
-
 
                     l.clip = maxy;
                     if (l.Y < 0 || l.Y>SCREEN_HEIGHT )
                         continue;
                     maxy = l.Y;
-
 
                     SDL_Color pasto = (n / 5) % 2 ? verde : verdeOscuro;
                     SDL_Color borde = (n / 2) % 2 ? rojo : blanco;
@@ -586,25 +609,30 @@ void ClienteController::dibujar(){
 
                     Line p = lines[(n - 1)];
 
-
                     fondo->setearFigura(SCREEN_WIDTH/2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH/2, l.Y, SCREEN_WIDTH, this->renderer, pasto);
                     clip->setearFigura(p.X, p.Y, p.W*1.2, l.X, l.Y, l.W*1.2,this->renderer,borde);
                     pista->setearFigura(p.X, p.Y,p.W, l.X, l.Y, l.W,this->renderer,gris);
                     line->setearFigura(p.X, p.Y, p.W*0.05,p.X, l.Y, l.W*0.05, this->renderer, linea);
 
                 }
-
-
                  for(int n=startPos+101; n>startPos; n--)
       				 lines[n].drawSprite(this->renderer);
+
+                int posP2y = 90;
+                int posP2x = 700;
+                lines[startPos+posP2y].spriteP2 = player3;
+                lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
+                lines[startPos+posP2y].drawSprite(this->renderer);
       				
-                int curve =  lines[(pos/200)].curve;
+                curveSet =  lines[(pos/200)].curve;
 
                 //cout<<pos/200<<endl;
 
-                checkCurveAndSetCentrifuga(curve);
-                autito.calculateMove(PressUP, curveR, curveL);
-                car.render(autito.getX(), autito.getY(), this->renderer);
+                //checkCurveAndSetCentrifuga(curveSet);
+                //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
+
+                car.render(cliente->getX(), autito->getY(), this->renderer);
+
 
                 SDL_RenderPresent(this->renderer);
 
@@ -616,32 +644,10 @@ void ClienteController::dibujar(){
 
 	//Free resources and close SDL
 	close( &(this->renderer),&(this->window));
+	//this->desconectarseDelServidor();
 }
 
-void ClienteController::keyEvent(SDL_Event e) {
 
-
-    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 )
-    {
-        //Adjust the velocity
-        switch( e.key.keysym.sym )
-        {
-            case SDLK_UP:        autito.moveUP_KD(pos); PressUP = true; break;
-            case SDLK_DOWN:      autito.moveDown_KD(pos); break;
-            case SDLK_LEFT:      autito.moveLeft_KD();break;
-            case SDLK_RIGHT:     autito.moveRight_KD(); break;
-        }
-    }
-    else if( e.type == SDL_KEYUP && e.key.repeat == 0 ) {
-        switch( e.key.keysym.sym ) {
-			case SDLK_UP:       autito.moveUP_KU(pos); PressUP = false; break;
-            case SDLK_DOWN:     autito.moveDown_KU(pos);  break;
-            case SDLK_LEFT:     autito.moveLeft_KU(); break;
-            case SDLK_RIGHT:    autito.moveRight_KU();  break;
-        }
-    }
-
-}
 
 bool ClienteController::loadMedia() {
     //Loading success flag
@@ -691,6 +697,20 @@ bool ClienteController::loadMedia() {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
     }
+    player2 = new Textura();
+    if( !player2->loadFromFile("img/ferrari2.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
+    player3 = new Textura();
+    if( !player3->loadFromFile("img/tesla.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+
 
 
     //Open the font
@@ -725,14 +745,14 @@ void ClienteController::checkCurveAndSetCentrifuga(int curve) {
 }
 
 void ClienteController::backgroundMove() {
-    if (curveR && autito.isMoving()) {
+    if (curveR && autito->isMoving()) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
         offsetBackgroundHills -= 0.05;
         offsetBackgroundTree -= 0.1;
     }
-    if (curveL && autito.isMoving()) {
+    if (curveL && autito->isMoving()) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
@@ -842,6 +862,158 @@ bool ClienteController::getString(string* str,string optText){
 
 
 
+/*length/13/posy/posx*/
+void ClienteController::procesarMensajePosicion(int pos, int x){
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string posy= to_string(pos);
+    string posx = to_string(x);
+    string id = this->cliente->obtenerUsuario()->getNombre();
+    stringACrear = separador + "13" + separador + id + separador+ posy + separador +  posx;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
 
+string ClienteController::agregarPadding(int lenght) {
+    string mensajeProcesado;
+    string largo = to_string(lenght);
+    if (lenght < 10)
+        mensajeProcesado = "000" + largo;
+    else if (lenght < 100)
+        mensajeProcesado = "00" + largo;
+    else if (lenght < 1000)
+        mensajeProcesado = "0" + largo;
+    else mensajeProcesado = largo;
+    return mensajeProcesado;
+}
+
+void ClienteController::keyEvent(SDL_Event e) {
+
+
+    if( e.type == SDL_KEYDOWN && e.key.repeat == 0 ) {
+        //Adjust the velocity
+        switch( e.key.keysym.sym ) {
+             /*case SDLK_UP:        autito->moveUP_KD(pos); PressUP = true; break;
+             case SDLK_DOWN:      autito->moveDown_KD(pos); break;
+             case SDLK_LEFT:      autito->moveLeft_KD();break;
+             case SDLK_RIGHT:     autito->moveRight_KD(); break;*/
+            case SDLK_UP:        enviarMoveUp(); break;
+            case SDLK_DOWN:      enviarMoveDown(); break;
+            case SDLK_LEFT:      enviarMoveLeft();break;
+            case SDLK_RIGHT:     enviarMoveRight(); break;
+        }
+    }
+    else if( e.type == SDL_KEYUP && e.key.repeat == 0 ) {
+        switch( e.key.keysym.sym ) {
+            /*case SDLK_UP:     autito->moveUP_KU(pos); PressUP = false; break;
+            case SDLK_DOWN:     autito->moveDown_KU(pos);  break;
+            case SDLK_LEFT:     autito->moveLeft_KU(); break;
+            case SDLK_RIGHT:    autito->moveRight_KU();  break;*/
+            case SDLK_RIGHT:    enviarNotMoveRight();  break;
+            case SDLK_UP:       enviarNotMoveUp(); break;
+            case SDLK_DOWN:     enviarNotMoveDown();  break;
+            case SDLK_LEFT:     enviarNotMoveLeft(); break;
+
+        }
+    }
+
+}
+
+/*   padding/cod/ID/posY/tecla     */
+void ClienteController::enviarMoveUp() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string posy= to_string(pos);
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "20" + separador + nombreUsuario + separador+ posy + separador+ curva ;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+
+void ClienteController::enviarMoveLeft() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "21" + separador + nombreUsuario + separador+ curva ;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+
+void ClienteController::enviarMoveRight() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "22" + separador + nombreUsuario + separador+ curva ;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+void ClienteController::enviarMoveDown() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string posy= to_string(pos);
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "23" + separador + nombreUsuario + separador+ posy + separador+ curva;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+
+void ClienteController::enviarNotMoveUp() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string posy= to_string(pos);
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "24" + separador + nombreUsuario + separador+ posy + separador+ curva;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+
+void ClienteController::enviarNotMoveLeft() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "25" + separador + nombreUsuario + separador+ curva;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear ;
+    this->cliente->enviarMensaje(stringProcesado);
+
+}
+
+void ClienteController::enviarNotMoveRight() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "26" + separador + nombreUsuario + separador+ curva;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear ;
+    this->cliente->enviarMensaje(stringProcesado);
+
+}
+
+
+
+void ClienteController::enviarNotMoveDown() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    string posy= to_string(pos);
+    string nombreUsuario = this->cliente->obtenerUsuario()->getNombre();
+    string curva = to_string(curveSet);
+    stringACrear = separador + "27" + separador + nombreUsuario + separador+ posy + separador+ curva;
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
 
 

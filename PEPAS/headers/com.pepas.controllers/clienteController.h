@@ -53,10 +53,12 @@ private:
     TTF_Font *font;
     Textura* opcion;
     Textura* ingreso;
+    Textura* player2;
+    Textura* player3;
 
-    Auto autito;
+    Auto* autito;
 
-    int carPosX;
+    int carPosX, curveSet;
     std::map<int,Textura*>* obstaculos;
 
 
@@ -93,40 +95,46 @@ public:
     int conectarConElServidor();
 
     void desconectarseDelServidor();
-
     void logOut();
-
     void stressTest();
-
-
     void enviarMensajePrivado();
     void empezarRecibir();
     void dejarRecibir();
-
-
     void salirDelPrograma();
 
     ~ClienteController();
-
     Cliente *obtenerCliente();
 
     void obtengoPuertoNuevoYHagoConectar();;
     void logIn(string usuario, string clave);
     void entrarAlChat();
     void verBuzon();
-
     void enviarBroadcast(string entradita);
 	void conectar();
 	void dibujar();
-
     void keyEvent(SDL_Event event);
     bool loadMedia();
-
     void checkCurveAndSetCentrifuga(int curve);
-
     void backgroundMove();
 	void verMinimapa();
-bool getString(string* str,string optText);
+    void procesarMensajePosicion(int pos, int x);
+    bool getString(string* str,string optText);
+    string agregarPadding(int i);
+    void enviarMoveUp();
+
+    void enviarMoveDown();
+
+    void enviarMoveLeft();
+
+    void enviarMoveRight();
+
+    void enviarNotMoveUp();
+
+    void enviarNotMoveDown();
+
+    void enviarNotMoveLeft();
+
+    void enviarNotMoveRight();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

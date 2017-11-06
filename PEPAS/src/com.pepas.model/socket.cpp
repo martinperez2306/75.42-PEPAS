@@ -96,26 +96,20 @@ std::string chartoString (char* buffer){
 void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
         ssize_t ultimaCantidadEnviada = 0;
+        const char* msg = (const char*)mensaje;
+        cout<<msg<<endl;
         while (totalEnviado < (int)mensajeLength){
             ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
             if (ultimaCantidadEnviada < 0) {
-                    string error = strerror(errno);
-                    //LOGGER INFo
-		    loggear(error,1);
-                    cout << "Error al enviar mensaje " << error << endl;
-
+                string error = strerror(errno);
+                //LOGGER INFo
+		        loggear(error,1);
+                cout << "Error al enviar mensaje " << error << endl;
+                break;
             } else {
                 totalEnviado += ultimaCantidadEnviada;
-
             }
 	}
-        if(ultimaCantidadEnviada < 0){
-        	string error = strerror(errno);
-        	//LOGGER INFo
-        	cout << "Error al enviar mensaje " << error << endl;
-
-        }
-
 }
 
 

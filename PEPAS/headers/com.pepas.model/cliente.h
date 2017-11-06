@@ -28,7 +28,7 @@ class Cliente{
 private:
     Usuario* usuario;
     Socket* socketCliente;
-    int socketFD;
+    int socketFD, posY, posX;
     int aliveCounter;
     bool logueado;
     bool conectado;
@@ -39,6 +39,7 @@ private:
     Minimapa* minimapa;
     Mapa* mapa;
     Vista* vista;
+
 
 
 public:
@@ -103,6 +104,14 @@ public:
     void actualizarObjetosMiniMapa(int arbol, int cartel, int distancia, string lado);
     void actualizarRutaMapa(int longitud, int curva);
     void actualizarObjetosMapa(int arbol, int cartel, int distancia, string lado);
+
+    void setPosY(int i);
+
+    void setPosX(int i);
+
+    int getPosition();
+
+    int getX();
 };
 
 

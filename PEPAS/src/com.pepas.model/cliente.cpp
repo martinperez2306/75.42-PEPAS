@@ -15,6 +15,7 @@
 #define RUTAMAPA 11
 #define OBJETOSMAPA 12
 #define INFINITO 2147483647
+#define AUTO_MOVE 20
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -27,6 +28,7 @@ Cliente::Cliente() {
     this->minimapa=new Minimapa();
     this->mapa = new Mapa();
     this->vista=new Vista();
+    posX =  1024/2 -100;
 
 }
 bool Cliente::minimapaEstaCompleto(){
@@ -121,7 +123,6 @@ Usuario *Cliente::obtenerUsuario() {
 }
 
 void Cliente::validarUsuario(Usuario* usuario) {
-
     //Codigo de mensaje 01
     string mensaje = this->procesarMensaje(usuario->getNombre(), usuario->getContrasenia());
     this->enviarMensaje(mensaje);
@@ -224,7 +225,7 @@ void Cliente::parsearMensaje(std::string datos){
             int longitud = stoi(obtenerParametros(datos, &i), nullptr, 10);
             float curva = stoi(obtenerParametros(datos, &i), nullptr, 10);
             Track.emplace_back(make_pair(longitud,curva));
-            this->actualizarRutaMapa(longitud,curva);
+            //this->actualizarRutaMapa(longitud,curva);
         }break;
         case OBJETOSMAPA:{
         	int arbol = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -232,8 +233,7 @@ void Cliente::parsearMensaje(std::string datos){
         	int distancia = stoi(obtenerParametros(datos,&i),nullptr,10);
         	string lado = obtenerParametros(datos,&i);
         	this->actualizarObjetosMapa(arbol,cartel,distancia,lado);
-        	break;
-        }
+        }break;
         case FINMAPAS:{
         	this->mapa->mostrarSegmentos();
         	this->mapa->mostrarObjetos();
@@ -277,6 +277,14 @@ void Cliente::parsearMensaje(std::string datos){
             string msgLog = "El contador es: " + to_string(aliveCounter);
             loggear(msgLog,3);
             loggear ("Cliente se encuentra conectado por red", 2);
+
+        }
+            break;
+        case AUTO_MOVE:{
+            int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
+            this->setPosY(posY);
+            this->setPosX(posX);
 
         }
             break;
@@ -392,4 +400,22 @@ void Cliente::actualizarObjetosMapa(int arbol, int cartel, int distancia, string
 
 Mapa *Cliente::obtenerMapa() {
     return this->mapa;
+}
+
+void Cliente::setPosY(int posy) {
+    this->posY = posy;
+
+}
+
+void Cliente::setPosX(int posx) {
+    this->posX = posx;
+
+}
+
+int Cliente::getPosition() {
+    return posY;
+}
+
+int Cliente::getX() {
+    return posX;
 }

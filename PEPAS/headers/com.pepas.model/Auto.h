@@ -15,11 +15,7 @@ class Auto {
 private:
 
     float PosX, PosY, posicion;
-
-
     float VelX, VelY;
-
-    Textura car;
 
 
 public:
@@ -39,12 +35,6 @@ public:
 
     Auto();
 
-    void render(int x, int y, SDL_Renderer* renderer);
-
-    void setTextura(Textura tex);
-
-    Textura getTextura();
-
     int getX();
 
     int getY();
@@ -57,8 +47,6 @@ public:
 
     void moveRight_KU();
 
-    void calculateMove(bool PressUP, bool curveR, bool curveL);
-
     void moveUP_KD(int pos);
 
     void moveDown_KD(int pos);
@@ -70,6 +58,8 @@ public:
     int getPosition();
 
     bool isMoving();
+
+    void calculateMove(bool PressUP, bool curveR, bool curveL);
 };
 
 
