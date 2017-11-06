@@ -419,3 +419,7 @@ int Cliente::getPosition() {
 int Cliente::getX() {
     return posX;
 }
+
+Minimapa* Cliente::getMinimapa(){
+    return this->minimapa;
+}

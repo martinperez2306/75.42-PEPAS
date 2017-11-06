@@ -19,6 +19,12 @@
 #include "../com.pepas.model/Textura.h"
 #include "../com.pepas.model/Auto.h"
 #include "../com.pepas.model/threadMinimapa.h"
+#include "../com.pepas.model/minimapa.h"
+#include "../com.pepas.model/posicion.h"
+#include "../com.pepas.model/objetos.h"
+#include "../com.pepas.model/segmento.h"
+#include "../com.pepas.model/Recta.h"
+#include "../com.pepas.model/Recorredor.h"
 #include <SDL2/SDL_ttf.h>
 #include <map>
 
@@ -135,6 +141,7 @@ public:
     void enviarNotMoveLeft();
 
     void enviarNotMoveRight();
+void actualizarMinimapa(Minimapa* minimapa);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

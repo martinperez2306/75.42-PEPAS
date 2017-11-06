@@ -632,6 +632,7 @@ void ClienteController::dibujar(){
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
                 car.render(cliente->getX(), autito->getY(), this->renderer);
+                this->actualizarMinimapa(this->cliente->getMinimapa());
 
 
                 SDL_RenderPresent(this->renderer);
@@ -1017,3 +1018,39 @@ void ClienteController::enviarNotMoveDown() {
 }
 
 
+void ClienteController::actualizarMinimapa(Minimapa* minimapa){
+
+				Recorredor* recorredor = new Recorredor();
+				///////////////////
+				list<Segmento*>* ruta = minimapa->getRuta();
+				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
+					Segmento* segm = *it;
+					int X1 = (segm->getPosicionInicial()->getX());
+					int Y1 = (segm->getPosicionInicial()->getY());
+					int Y2 = (segm->getPosicionFinal()->getY());
+					int X2 = (segm->getPosicionFinal()->getX());
+
+					///Pinto pista
+					SDL_SetRenderDrawColor( renderer, 0x00, 0x00,0x00, 0xFF );
+					SDL_RenderDrawLine( renderer,X1,Y1,X2,Y2);
+
+				}
+				list<Objeto*>* objetos = minimapa->getObjetos();
+				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
+					Segmento* segm = *it;
+					recorredor->recorrer(segm,objetos);
+
+				}
+				list<Posicion*>* posicionesDeLosObjetos = recorredor->getPosicionesDeLosObjetos();
+				for(list<Posicion*>::iterator it = posicionesDeLosObjetos->begin() ; it!= posicionesDeLosObjetos->end(); ++it){
+					Posicion* pos = *it;
+					int x = (pos->getX());
+					int y = (pos->getY());
+					///Pinto objeto
+					SDL_SetRenderDrawColor( renderer, 0x00, 0x00, 0x00, 0xFF );
+					SDL_RenderDrawPoint(renderer,x,y);
+				}
+
+				delete recorredor;
+
+}

@@ -112,6 +112,7 @@ public:
     int getPosition();
 
     int getX();
+Minimapa* getMinimapa();
 };
 
 
