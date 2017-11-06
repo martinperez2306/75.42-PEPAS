@@ -109,6 +109,7 @@ public:
 	void generarMinimapa();
 	void enviarMapaACliente(Socket* socketCliente);
 	void enviarMinimapaACliente(Socket* socketCliente);
+	void enviarFinMapas(Socket* socketCliente);
 	void generarWorld();
 
 };

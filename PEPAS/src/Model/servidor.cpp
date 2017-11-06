@@ -311,6 +311,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(mensajeAEnviar.compare("Bienvenido")){
                 enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
+                this->enviarFinMapas(socketDelemisor);
                 //TODO crear el Auto y poner al jugador en espera.
                 Auto* autito = new Auto;
                 this->mapAutitos->insert(usuarioAuto(usuario,autito));
@@ -653,12 +654,6 @@ void Servidor::enviarMinimapaACliente(Socket* socket){
         usleep(20);
     	this->enviarMensaje(mensajeAEnviar,socket);
     }
-
-    string mensajeFin= this->procesarMensajeFin();
-    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
-        usleep(5);
-    	this->enviarMensaje(mensajeFin,it->second);
-    }
 }
 
 void Servidor::enviarMapaACliente(Socket* socketCliente){
@@ -685,11 +680,15 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
     	this->enviarMensaje(mensajeAEnviar,socketCliente);
 	}
 
-    string mensajeFin= this->procesarMensajeFin();
-    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
-        usleep(200);
-    	this->enviarMensaje(mensajeFin,it->second);
-    }
+
+}
+
+void Servidor::enviarFinMapas(Socket* socketCliente){
+	string mensajeFin= this->procesarMensajeFin();
+	    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+	        usleep(5);
+	    	this->enviarMensaje(mensajeFin,it->second);
+	    }
 }
 
 /*Este procesador, codifica el mensaje con el codigo 9.
