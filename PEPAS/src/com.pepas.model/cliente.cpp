@@ -237,6 +237,8 @@ void Cliente::parsearMensaje(std::string datos){
         case FINMAPAS:{
         	this->mapa->mostrarSegmentos();
         	this->mapa->mostrarObjetos();
+        	this->minimapa->mostrarSegmentos();
+        	this->minimapa->mostrarObjetos();
             this->minimapaCompleto=true;
         }break;
 		case LOGIN:{

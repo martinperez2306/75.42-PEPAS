@@ -151,12 +151,12 @@ Posicion* Recorredor::generarPosicionObjeto(string ladoDelObjeto){
 	int xAux = this->posicionActual->getX();
 	int yAux = this->posicionActual->getY();
 	//Giramos y acomodamos segun en lado del objeto. Avanzamos a su posicion y retomamos al direccion original.
-	if(ladoDelObjeto.compare("D")){
+	if(ladoDelObjeto.compare("D") == 0){
 		this->girarDerecha();
 		this->siguientePosicion(5);
 		this->girarIzquierda();
 	}
-	if(ladoDelObjeto.compare("I")){
+	if(ladoDelObjeto.compare("I") == 0){
 		this->girarIzquierda();
 		this->siguientePosicion(5);
 		this->girarDerecha();
