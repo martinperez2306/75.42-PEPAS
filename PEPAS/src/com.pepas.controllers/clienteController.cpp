@@ -509,31 +509,31 @@ void ClienteController::dibujar(){
                 int cartel = obj->getCartel();
                 string lado = obj->getLado();
                 if (arbol != 0 && lado == "D")
-                    obstaculos->emplace(distancia, this->arbol);
-                if (arbol != 0 && lado == "I")
                     obstaculos->emplace(-distancia, this->arbol);
+                if (arbol != 0 && lado == "I")
+                    obstaculos->emplace(distancia, this->arbol);
                 if (cartel == 80 && lado == "D")
-                    obstaculos->emplace(distancia, this->cartel);
-                if (cartel == 80 && lado == "I")
                     obstaculos->emplace(-distancia, this->cartel);
+                if (cartel == 80 && lado == "I")
+                    obstaculos->emplace(distancia, this->cartel);
                 if (cartel == 120 && lado == "D")
-                    obstaculos->emplace(distancia, this->cartel2);
-                if (cartel == 120 && lado == "I")
                     obstaculos->emplace(-distancia, this->cartel2);
+                if (cartel == 120 && lado == "I")
+                    obstaculos->emplace(distancia, this->cartel2);
 
             }
             std::map<int,Textura*>::iterator it_obst;
 
             list<pair<int, float>> Track  = this->cliente->obtenerTrack(); //TODO anda igual
-/*
-            obstaculos->emplace(50,cartel);
-            obstaculos->emplace(-50,cartel);
-            obstaculos->emplace(50,cartel);
-            obstaculos->emplace(-75,cartel2);
-            obstaculos->emplace(75,cartel2);
-            obstaculos->emplace(300,arbol);
-            obstaculos->emplace(-100,arbol);
-            obstaculos->emplace(100,arbol);*/
+
+            //obstaculos->emplace(50,cartel);
+            // obstaculos->emplace(-50,cartel);
+            // obstaculos->emplace(50,cartel);
+            // obstaculos->emplace(-75,cartel2);
+            // obstaculos->emplace(75,cartel2);
+            // obstaculos->emplace(300,arbol);
+            // obstaculos->emplace(-100,arbol);
+            // obstaculos->emplace(100,arbol);
 
            // Track.emplace_back(5000,0);
             /*Armo la pista*/
