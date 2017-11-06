@@ -29,8 +29,11 @@ void loggear(std::string mensaje, int prioridad){
 
 	ofstream logger("log.txt",ios::app);
 
-	logger << mensaje << endl;
-	logger.close();
+/*   std::time_t timeT = std::time(nullptr);
+   std::string timeString = std::asctime(std::localtime(&timeT));
+   logger << "["<<timeString<<"]: ";*/
+   logger << mensaje << endl;
+   logger.close();
 }
 
 void setNivelLogger(int nivel){

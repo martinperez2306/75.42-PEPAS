@@ -41,7 +41,8 @@ float Logica::limitarVelocidad(float velocidad, float minimo, float maximo) {
 	return (std::max)(minimo, (std::min)(velocidad, maximo));
 }
 
-int Logica::actualizar(Autito *autito, char comando, float deltaTiempo) {
+/*
+int Logica::actualizar(Auto *autito, char comando, float deltaTiempo) {
 
 	float porcentajeVelocidad = autito->getVelocidad() / VELOCIDAD_MAXIMA;
 	float desplazamientoX = deltaTiempo * 2 * porcentajeVelocidad;
@@ -83,6 +84,7 @@ int Logica::actualizar(Autito *autito, char comando, float deltaTiempo) {
 	return ACTUALIZADO;
 
 }
+*/
 
 void Logica::setRuta(list<Segmento*>* ruta) {
 	this->ruta = ruta;

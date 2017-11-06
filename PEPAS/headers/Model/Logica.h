@@ -11,7 +11,7 @@
 
 
 #include "posicion.h"
-#include "Autito.h"
+#include "Auto.h"
 #include <algorithm>
 #include <list>
 #include "segmento.h"
@@ -51,7 +51,7 @@ public:
 
 	void setRuta(list<Segmento*>* ruta);
 
-	int actualizar(Autito *autito, char comando, float deltaTiempo);
+	int actualizar(Auto *autito, char comando, float deltaTiempo);
 
 	virtual ~Logica();
 };

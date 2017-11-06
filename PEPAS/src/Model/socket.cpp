@@ -134,6 +134,7 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
         if (ultimaCantidadRecibida < 0) {
             socketShutDown = true;
             string error = strerror(errno);
+            cadenaAdevolver = "0006/"+to_string(fd);
             //cout << "Error al recibir mensaje " << error << endl;
             loggear("Error al recibir mensaje: " + error,1);
         } else if (ultimaCantidadRecibida == 0) {
@@ -154,8 +155,9 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
 
     if (ultimaCantidadRecibida > 0) {
         cadenaAdevolver = chartoString(buffer);
-;
+
     }
+    cout<<cadenaAdevolver<<endl;
     return cadenaAdevolver;
 
 }

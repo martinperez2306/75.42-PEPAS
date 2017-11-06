@@ -12,7 +12,7 @@
 #include "World.h"
 #include "Zoomer.h"
 #include "Logica.h"
-#include "Autito.h"
+#include "Auto.h"
 
 
 class Servidor{
@@ -41,7 +41,7 @@ private:
 	Zoomer* zoomer;
 
 	Logica* logicaJuego;
-	map<int, Autito>* mapAutitos;
+	map<string, Auto*>* mapAutitos;
 
 public:
 	int aliveCounter;

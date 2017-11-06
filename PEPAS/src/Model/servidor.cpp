@@ -1,3 +1,4 @@
+#include <zconf.h>
 #include "../../headers/Model/servidor.h"
 #include "../../headers/Model/logger.h"
 
@@ -7,14 +8,23 @@
 #define LOGOUT 5
 #define USER_DISCONNECT 6
 #define SIGNAL_CONNECT 7
-
 #define COMANDO 10
+
+#define CASE_UP_KD 20
+#define CASE_LEFT_KD 21
+#define CASE_RIGHT_KD 22
+#define CASE_DOWN_KD 23
+#define CASE_UP_KU 24
+#define CASE_LEFT_KU 25
+#define CASE_RIGHT_KU 26
+#define CASE_DOWN_KU 27
 
 using namespace std;
 
 typedef pair<int, Socket*> socketConect;
 typedef pair<int,int> mapPortFd;
 typedef pair<int, string> usuarioConect;
+typedef pair<string, Auto*> usuarioAuto;
 
 
 std::list<int> crearPuertos(){
@@ -22,9 +32,7 @@ std::list<int> crearPuertos(){
 	std::list<int> puertos;
 	for(int i = 8000; i <= 8007; i++)
 		puertos.push_back(i);
-
 	return puertos;
-
 }
 
 Servidor::Servidor(){
@@ -41,6 +49,7 @@ Servidor::Servidor(){
 	this->terminado = false;
 	this->mapaSocket = new map<int,Socket*>();
     this->mapUsuario = new map<int,string>();
+    this->mapAutitos = new map<string,Auto*>();
     loggear ("Salio del constructor del Servidor",2);
     loggear (" ",2);
     this->pistaParser= new PistaParser();
@@ -54,7 +63,7 @@ Servidor::Servidor(){
     this->zoomer = new Zoomer();
 
     this->logicaJuego = new Logica(5000); //largo de la pista
-    this->mapAutitos = new map<int,Autito>();
+
 }
 
 
@@ -293,19 +302,18 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 				//this->logicaJuego->actualizar();
 			}
 			break;
-
 		case LOGIN:{
             loggear("Codigo de login",2);
 			std::string password = obtenerParametros(datos,&i);
             mensajeAEnviar = validarCliente(usuario, password, socketDelemisor);
             enviarMensaje(mensajeAEnviar, socketDelemisor);
-            ////////////////
-            int cod = stoi(obtenerParametros(mensajeAEnviar,&j),nullptr,10);
-            std::string mensaje = obtenerParametros(datos,&j);
-            ////////////////////
-            if(mensaje.compare("Bienvenido")){
-                enviarMinimapaACliente(socketDelemisor);
+
+            if(mensajeAEnviar.compare("Bienvenido")){
+                //enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
+                //TODO crear el Auto y poner al jugador en espera.
+                Auto* autito = new Auto;
+                this->mapAutitos->insert(usuarioAuto(usuario,autito));
             }
 		}
 			break;
@@ -350,7 +358,6 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             msg = procesarMensaje(msg);
             this->enviarMensaje(msg,socketDelemisor);
             this->desloguearse(usuario,socketDelemisor);
-
         }
 			break;
         case USER_DISCONNECT:{
@@ -387,7 +394,6 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             msg = "Conexiones actuales: " + to_string(this->conexiones);
             loggear(msg,3);
             mensajeAEnviar = "CerrarCliente";
-
         }
             break;
         case SIGNAL_CONNECT:{
@@ -397,8 +403,83 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             loggear ("Cliente se encuentra conectado por red", 2);
             string msg = "0009" + datos;
             this->enviarMensaje(msg, socketDelemisor);
-    }
+        }
         break;
+        case CASE_UP_KD:{
+            //Obtengo datos del mensaje
+            int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveUP_KD(pos, curve);
+            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+
+
+        }break;
+        case CASE_LEFT_KD:{
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveLeft_KD(curve);
+            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+
+        }break;
+        case CASE_RIGHT_KD:{
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveRight_KD(curve);
+            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
+        case CASE_DOWN_KD:{
+            //Obtengo datos del mensaje
+            int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveDown_KD(pos,curve);
+            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
+        case CASE_UP_KU:{
+            //Obtengo datos del mensaje
+            int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveUP_KU(pos,curve);
+            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
+        case CASE_LEFT_KU:{
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveLeft_KU(curve);
+            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
+        case CASE_RIGHT_KU:{
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveRight_KU(curve);
+            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
+        case CASE_DOWN_KU:{
+            //Obtengo datos del mensaje
+            int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //Busco auto en map
+            map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
+            it->second->moveDown_KU(pos,curve);
+            string msg =it->second->calculateMove();
+            this->enviarMensaje(msg, socketDelemisor);
+        }break;
 		default:
 			break;
 	}
@@ -409,7 +490,6 @@ return mensajeAEnviar;
 
 
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
-
 
     loggear("Saco al usuario de la base de datos",2);
     Usuario * usuarioLogOut = this->obtenerBaseDeDatos()->getUsuario(usuario);
@@ -453,7 +533,7 @@ string Servidor::validarCliente(string usuario, string contrasenia, Socket* sock
                 int puerto = this->mapFD.find(socketDelEmisor->obtenerFD())->second;
                 this->mapUsuario->insert(usuarioConect(puerto,usuario));
 
-                /////////////////7
+                /////////////////
             }
 
     msgAdevolver = msgOK;
@@ -558,6 +638,7 @@ void Servidor::enviarMinimapaACliente(Socket* socket){
     	int X2= seg->getPosicionFinal()->getX();
     	int Y2= seg->getPosicionFinal()->getY();
     	string mensajeAEnviar= this->procesarMensajeRutaMinimapa(X1,Y1,X2,Y2);
+        usleep(20);
     	this->enviarMensaje(mensajeAEnviar,socket);
     	}
 
@@ -569,11 +650,13 @@ void Servidor::enviarMinimapaACliente(Socket* socket){
     	int distancia = obj->getDistancia();
     	string ladoDelObjeto = obj->getLado();
     	string mensajeAEnviar = this->procesarMensajeObjetoMinimapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+        usleep(20);
     	this->enviarMensaje(mensajeAEnviar,socket);
     }
 
     string mensajeFin= this->procesarMensajeFin();
     for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+        usleep(5);
     	this->enviarMensaje(mensajeFin,it->second);
     }
 }
@@ -587,6 +670,7 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
 	  	int longitud = seg->getLongitud();
 	  	int curva = seg->getCurva();
 	   	string mensajeAEnviar= this->procesarMensajeRutaMapa(longitud,curva);
+        usleep(200);
 	   	this->enviarMensaje(mensajeAEnviar,socketCliente);
 	}
 
@@ -597,11 +681,13 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
     	int distancia = obj->getDistancia();
     	string ladoDelObjeto = obj->getLado();
     	string mensajeAEnviar = this->procesarMensajeObjetoMapa(tipoArbol,tipoCartel,distancia,ladoDelObjeto);
+        usleep(200);
     	this->enviarMensaje(mensajeAEnviar,socketCliente);
 	}
 
     string mensajeFin= this->procesarMensajeFin();
     for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
+        usleep(200);
     	this->enviarMensaje(mensajeFin,it->second);
     }
 }
@@ -630,7 +716,7 @@ string Servidor::procesarMensajeRutaMinimapa(int x1, int y1, int x2, int y2) {
     string X2=to_string(x2);
     string Y1=to_string(y1);
     string Y2=to_string(y2);
-    stringACrear = separador + "8" + separador + X1 + separador + Y1 + separador + X2 + separador + Y2 + separador +  separador;
+    stringACrear = separador + "8" + separador + X1 + separador + Y1 + separador + X2 + separador + Y2;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
@@ -644,11 +730,10 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	string separador = "/";
 	string longit = to_string(longitud);
 	string curv = to_string(curva);
-	stringACrear = separador + "11" + separador + longit + separador +  curv +  separador;
+	stringACrear = separador + "11" + separador + longit + separador +  curv;
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    loggear ("------------->",1);
-	loggear(stringProcesado,1);
+	//loggear(stringProcesado,1);
 	return stringProcesado;
 }
 
@@ -663,7 +748,7 @@ string Servidor::procesarMensajeObjetoMapa(int arbol, int cartel, int distancia,
 	stringACrear = separador + "12" + separador + arb + separador + cart + separador + dist + separador +lado;
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-	loggear(stringProcesado,1);
+	//loggear(stringProcesado,1);
 	return stringProcesado;
 }
 
@@ -673,7 +758,7 @@ string Servidor::procesarMensajeObjetoMapa(int arbol, int cartel, int distancia,
 string Servidor::procesarMensajeFin(){
     string stringACrear,stringProcesado;
     string separador="/";
-    stringACrear = separador + "10" + separador;
+    stringACrear = separador + "10";
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
