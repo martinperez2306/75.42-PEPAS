@@ -30,19 +30,19 @@ Auto::Auto(int player)
 	switch (jugador){
 		case 1:{
 			PosX = 230;
-			posicion = 430;
+			posicion = 400;
 		}break;
 		case 2:{
-			/*PosX =550;
-			posicion = 430;*/
-            PosX = 230;
-            posicion = 430;
+			PosX =550;
+			posicion = 400;
 		}break;
 		case 3:{
-			PosX =230;
+			PosX = 230;
+
 		}
+            break;
 		case 4:{
-			PosX =550;
+			PosX = 550;
 		}
 			break;
 

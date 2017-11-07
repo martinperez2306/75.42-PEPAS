@@ -19,7 +19,7 @@
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
 
-#define MAX 2
+#define MAX 3
 
 using namespace std;
 
@@ -823,10 +823,13 @@ string Servidor::actualizarJuego(Auto *pAuto) {
                            + separador + to_string(diferencia);
         }
         stringArmado = stringArmado + stringConcat;
+        cout<<"Armado del for sospechoso"<<stringArmado<<endl;
     }
-    stringArmado = to_string(i) + separador + stringArmado;
+    stringArmado = to_string(i) + separador + stringArmado ;
+    cout<<"armado final"<<stringArmado<<endl;
     if (i==0)
         stringArmado = to_string(0);
+
     return stringArmado;
 }
 
