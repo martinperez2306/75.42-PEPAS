@@ -19,7 +19,7 @@ Auto::Auto(int player)
 {
 	//Initialize the offsets
 	//PosX =SCREEN_WIDTH/2 -100;
-	PosY =SCREEN_HEIGHT - 180 ;
+	PosY = SCREEN_HEIGHT - 180 ;
 	//Initialize the velocity
 	VelX = 0;
 	VelY = 0;
@@ -33,8 +33,10 @@ Auto::Auto(int player)
 			posicion = 430;
 		}break;
 		case 2:{
-			PosX =550;
-			posicion = 430;
+			/*PosX =550;
+			posicion = 430;*/
+            PosX = 230;
+            posicion = 430;
 		}break;
 		case 3:{
 			PosX =230;

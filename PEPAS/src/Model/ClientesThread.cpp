@@ -8,6 +8,7 @@
 ClientesThread::ClientesThread( Socket* socket, Servidor* server, bool CerrarServidor) : socket(socket), srv(server), estaCerrado(CerrarServidor) {
     borrable = false;
     inGame = false;
+    lanzeCalculoThread = false;
 }
 
 
@@ -27,13 +28,16 @@ void ClientesThread::run() {
         }
         if (srv->getEmpezoJuego() && !inGame){
             calculoThread.start();
+            lanzeCalculoThread = true;
             inGame = true;
         }
     }
     inGame=false;
     calculoThread.terminar();
     aliveThread.join();
-    calculoThread.join();
+    if (lanzeCalculoThread)
+        calculoThread.join();
+    loggear("Cerre ClienteThread",3);
 }
 
 bool ClientesThread::esBorrable() {

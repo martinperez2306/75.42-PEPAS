@@ -159,7 +159,6 @@ Socket* Servidor::iniciarConexion(int puerto) {
     string msg = "El puerto del cliente es: " + to_string(puerto);
     loggear (msg, 1);
     newSocket->Crear();
-
         while(!newSocket->Enlazar(puerto)){
             puerto++;
         }
@@ -309,10 +308,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
     string mensajeAEnviar;
 
 	switch(codigo){
-
 		case COMANDO: {
 				this->logicaJuego->setRuta(this->mapa->getRuta());
-
 			}
 			break;
 		case LOGIN:{
@@ -321,22 +318,23 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             mensajeAEnviar = validarCliente(usuario, password, socketDelemisor);
             enviarMensaje(mensajeAEnviar, socketDelemisor);
 
-            if(mensajeAEnviar.compare("Bienvenido")){
+            if(mensajeAEnviar == "0014/4/Bienvenido\n"){
                 enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
                 //TODO crear el Auto y poner al jugador en espera.
+                cout<<"cree un auto"<<endl;
                 Auto* autito = new Auto(player);
                 this->mapAutitos->insert(usuarioAuto(usuario,autito));
                 player++;
             }
-            if (this->conexiones==MAX){
+            if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==MAX){
                 empezarJuego = true;
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
                     string mensajeFin= this->procesarMensajeFin();
                     this->enviarMensaje(mensajeFin,iterador->second);
                 }
-                player = 0;
+                player = 1;
             }
 		}
 			break;
@@ -397,6 +395,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(this->mapUsuario->count(puerto) > 0){
                 loggear("Estaba logueado",3);
                 this->desloguearse(this->mapUsuario->find(puerto)->second,socketDelemisor);
+                mapAutitos->erase(usuario);
+                player--;
             }
             /*Cierro el socket*/
             loggear("Cierro conexion con el socket",2);
@@ -407,11 +407,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             mapaSocket->erase(it);
            /*Saco el puerto de uso*/
             auto iter = std::find (puertosEnUso.begin(), puertosEnUso.end(), puerto);
-
             /* Lo saco de la pila*/
             puertosEnUso.erase(iter);
-            /*Lo pongo al principio de puertosDisponibles*/
-            //puertosDisponibles.push_front(puerto);
             loggear("Disminuyo las conexiones actuales",2);
             this->conexiones -= 1;
             msg = "Conexiones actuales: " + to_string(this->conexiones);
@@ -755,6 +752,7 @@ string Servidor::procesarMensajeRutaMapa(int longitud, int curva){
 	unsigned long largoDelMensaje = stringACrear.length();
 	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
 	//loggear(stringProcesado,1);
+
 	return stringProcesado;
 }
 

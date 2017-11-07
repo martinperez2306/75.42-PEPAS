@@ -18,6 +18,7 @@ private:
     bool estaCerrado;
     bool borrable; // para saber si se puede borrar el thread.
     bool inGame;
+    bool lanzeCalculoThread;
     AliveThread aliveThread = AliveThread(srv, estaCerrado);
     CalculateThread calculoThread = CalculateThread(srv, estaCerrado, socket);
 public:

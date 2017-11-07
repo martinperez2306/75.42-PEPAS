@@ -157,7 +157,6 @@ std::string Socket::Recibir( size_t mensajeAleerLength) {
         cadenaAdevolver = chartoString(buffer);
 
     }
-    cout<<cadenaAdevolver<<endl;
     return cadenaAdevolver;
 
 }
