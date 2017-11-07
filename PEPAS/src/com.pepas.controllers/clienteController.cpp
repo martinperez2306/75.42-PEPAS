@@ -385,7 +385,7 @@ void ClienteController::dibujar(){
 
 			}while(!this->cliente->estalogueado() && !quit);
 
-			while (!this->cliente->recibioFinDeMapa()) {
+			while (!this->cliente->recibioFinDeMapa() &&!quit) {
                 cout << "Esperando jugadores" << endl;
                 sleep(5);
             }
@@ -490,8 +490,8 @@ void ClienteController::dibujar(){
 
                             float destX = X + scale * spriteXP2 * SCREEN_WIDTH/2 ;
                             float destY = Y + 4;
-                            float destW  = w * W / 600;
-                            float destH  = h * W / 600;
+                            float destW  = w * W / 730;
+                            float destH  = h * W / 730;
 
                             destX += destW * spriteXP2; //offsetX
                             destY += destH * (-1);    //offsetY
@@ -624,8 +624,25 @@ void ClienteController::dibujar(){
                     line->setearFigura(p.X, p.Y, p.W*0.05,p.X, l.Y, l.W*0.05, this->renderer, linea);
 
                 }
-                 for(int n=startPos+101; n>startPos; n--)
-      				 lines[n].drawSprite(this->renderer);
+
+                if (!this->cliente->obtenerRivalList().empty()) {
+                    for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
+                        Rival *rival = *it;
+                        if (rival->getDibujar()) {
+                            lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
+                            rival->notDibujar();
+                        }
+                        break;
+                    }
+                }
+
+
+                 for(int n=startPos+100; n>startPos; n--) {
+                     lines[n].drawSprite(this->renderer);
+                     lines[n].spriteXP2 = 0;
+                 }
+
 
 
               /*  int posP2x = 230;
@@ -633,19 +650,7 @@ void ClienteController::dibujar(){
                 lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
                 lines[startPos+posP2y].drawSprite(this->renderer);*/
 
-                if (!this->cliente->obtenerRivalList().empty()) {
-                    for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
-                        Rival *rival = *it;
-                        if (rival->getDibujar()) {
-                            lines[startPos + rival->getHorizonte()].spriteP2 = this->getTextura(rival->getPlayer());
-                            lines[rival->getHorizonte()].spriteXP2 = 0.0059 * rival->getPosX() - 3;
-                            lines[startPos + rival->getHorizonte()].drawSprite(this->renderer);
-                            lines[startPos + rival->getHorizonte()].spriteXP2 = 0;
-                            rival->notDibujar();
-                        }
-                        break;
-                    }
-                }
+
 
                 curveSet =  lines[(pos/200)].curve;
 
@@ -656,7 +661,6 @@ void ClienteController::dibujar(){
 
                 car->render(cliente->getX(), autito->getY(), this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
-
 
                 SDL_RenderPresent(this->renderer);
 

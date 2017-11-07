@@ -498,6 +498,7 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 void Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+    //cout<<"p:"<<playerNum<<endl;
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     int playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
     for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
