@@ -427,16 +427,24 @@ void ClienteController::dibujar(){
                     float scale;
                     float camD = 0.5;
                     float roadW= 2000;
-					float curve,spriteX,clip,spriteX2,spriteXP2;
+					float curve,spriteX,clip,spriteX2,spriteXR1, spriteXR2, spriteXR3;
                     Textura* sprite;
                     Textura* sprite2;
-                    Textura* spriteP2;
+                    Textura* spriteR1;
+                    Textura* spriteR2;
+                    Textura* spriteR3;
 
 
-                Line() {spriteX=spriteX2=spriteXP2=x=y=z=0;
+                Line() {spriteX=spriteX2=x=y=z=0;
                         sprite = NULL;
                         sprite2 = NULL;
-                        spriteP2 = NULL;}
+                        spriteR1 = NULL;
+                        spriteR2 = NULL;
+                        spriteR3 = NULL;
+                        spriteXR1 = 0;
+                        spriteXR2 = 0;
+                        spriteXR3 = 0;
+                }
 
                     void project(int camX,int camY,int camZ) {
                         scale = camD/(z-camZ);
@@ -484,20 +492,52 @@ void ClienteController::dibujar(){
 						    sprite2->render(destX/ destW*w,destY*h/destH,renderer);
 						    SDL_RenderSetScale(renderer,1,1);
 					    }
-                        if(spriteXP2 != 0){
-                            int w = spriteP2->getWidth();
-                            int h = spriteP2->getHeight();
+                        if(spriteXR1 != 0){
+                            int w = spriteR1->getWidth();
+                            int h = spriteR1->getHeight();
 
-                            float destX = X + scale * spriteXP2 * SCREEN_WIDTH/2 ;
+                            float destX = X + scale * spriteXR1 * SCREEN_WIDTH/2 ;
                             float destY = Y + 4;
                             float destW  = w * W / 730;
                             float destH  = h * W / 730;
 
-                            destX += destW * spriteXP2; //offsetX
+                            destX += destW * spriteXR1; //offsetX
                             destY += destH * (-1);    //offsetY
 
                             SDL_RenderSetScale(renderer,destW/w,destH/h);
-                            spriteP2->render(destX/destW*w,destY*h/destH,renderer);
+                            spriteR1->render(destX/destW*w,destY*h/destH,renderer);
+                            SDL_RenderSetScale(renderer,1,1);
+                        }
+                        if(spriteXR2 != 0){
+                            int w = spriteR2->getWidth();
+                            int h = spriteR2->getHeight();
+
+                            float destX = X + scale * spriteXR2 * SCREEN_WIDTH/2 ;
+                            float destY = Y + 4;
+                            float destW  = w * W / 730;
+                            float destH  = h * W / 730;
+
+                            destX += destW * spriteXR2; //offsetX
+                            destY += destH * (-1);    //offsetY
+
+                            SDL_RenderSetScale(renderer,destW/w,destH/h);
+                            spriteR2->render(destX/destW*w,destY*h/destH,renderer);
+                            SDL_RenderSetScale(renderer,1,1);
+                        }
+                        if(spriteXR3 != 0){
+                            int w = spriteR3->getWidth();
+                            int h = spriteR3->getHeight();
+
+                            float destX = X + scale * spriteXR3 * SCREEN_WIDTH/2 ;
+                            float destY = Y + 4;
+                            float destW  = w * W / 730;
+                            float destH  = h * W / 730;
+
+                            destX += destW * spriteXR3; //offsetX
+                            destY += destH * (-1);    //offsetY
+
+                            SDL_RenderSetScale(renderer,destW/w,destH/h);
+                            spriteR3->render(destX/destW*w,destY*h/destH,renderer);
                             SDL_RenderSetScale(renderer,1,1);
                         }
 					    
@@ -574,41 +614,39 @@ void ClienteController::dibujar(){
             pos = 1;
             int contador = 0;
 
-            int posP2y = 20;
 
 			//While application is running
 			while( !quit ) {
 
 
-				while( SDL_PollEvent( &e ) != 0 ) {
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-                    this->keyEvent( e );
-				}
+                while (SDL_PollEvent(&e) != 0) {
+                    //User requests quit
+                    if (e.type == SDL_QUIT) {
+                        quit = true;
+                    }
+                    this->keyEvent(e);
+                }
 
                 SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
                 SDL_RenderClear(this->renderer);
 
-                int startPos = pos/segL;
-				x=0;
-				dx=0;
+                int startPos = pos / segL;
+                x = 0;
+                dx = 0;
 
                 backgroundMove();
 
                 //TODO aca tiene que recibir la tecla que toco;
 
-                for(int n = startPos; n<startPos+101; n++) {
+                for (int n = startPos; n < startPos + 101; n++) {
                     pos = cliente->getPosition();
                     Line &l = lines[n];
                     l.project(x, 1300, pos);
-                    x+=dx;
-                    dx+=l.curve;
+                    x += dx;
+                    dx += l.curve;
 
                     l.clip = maxy;
-                    if (l.Y < 0 || l.Y>SCREEN_HEIGHT )
+                    if (l.Y < 0 || l.Y > SCREEN_HEIGHT)
                         continue;
                     maxy = l.Y;
 
@@ -618,29 +656,68 @@ void ClienteController::dibujar(){
 
                     Line p = lines[(n - 1)];
 
-                    fondo->setearFigura(SCREEN_WIDTH/2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH/2, l.Y, SCREEN_WIDTH, this->renderer, pasto);
-                    clip->setearFigura(p.X, p.Y, p.W*1.2, l.X, l.Y, l.W*1.2,this->renderer,borde);
-                    pista->setearFigura(p.X, p.Y,p.W, l.X, l.Y, l.W,this->renderer,gris);
-                    line->setearFigura(p.X, p.Y, p.W*0.05,p.X, l.Y, l.W*0.05, this->renderer, linea);
+                    fondo->setearFigura(SCREEN_WIDTH / 2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH / 2, l.Y, SCREEN_WIDTH,
+                                        this->renderer, pasto);
+                    clip->setearFigura(p.X, p.Y, p.W * 1.2, l.X, l.Y, l.W * 1.2, this->renderer, borde);
+                    pista->setearFigura(p.X, p.Y, p.W, l.X, l.Y, l.W, this->renderer, gris);
+                    line->setearFigura(p.X, p.Y, p.W * 0.05, p.X, l.Y, l.W * 0.05, this->renderer, linea);
 
                 }
 
-                if (!this->cliente->obtenerRivalList().empty()) {
-                    for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
-                        Rival *rival = *it;
-                        if (rival->getDibujar()) {
-                            lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
-                            lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
-                            rival->notDibujar();
+                /*  if (!this->cliente->obtenerRivalList().empty()) {
+                      for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
+                          Rival *rival = *it;
+                          if (rival->getDibujar()) {
+                              lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
+                              lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
+                              rival->notDibujar();
+                          }
+                          break;
+                      }
+                  }*/
+                switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
+                    case 1: {
+                        if (!this->cliente->obtenerRivalList().empty()) {
+                            list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                            Rival *rival = *it;
+                            if (rival->getDibujar()) {
+                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
+                                        rival->getPlayer());
+                                lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                rival->notDibujar();
+                            }
                         }
-                        break;
-                    }
+                    }break;
+
+                    case 2: {
+                        cout<<"obtengo la lista y el tamaño es: "<<this->cliente->obtenerRivalList().size()<<endl;
+                        if (!this->cliente->obtenerRivalList().empty()) {
+                            list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                            Rival *rival = *it;
+                            if (rival->getDibujar()) {
+                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
+                                        rival->getPlayer());
+                                lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                rival->notDibujar();
+                            }
+                            std::list<Rival*>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
+                            Rival* rival2 = *it2;
+                            if (rival2->getDibujar()) {
+                                lines[startPos + rival2->getHorizonte() + 4].spriteR2 = this->getTextura(rival2->getPlayer());
+                                lines[startPos + rival2->getHorizonte() + 4].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
+                                rival2->notDibujar();
+                            }
+                        }
+                    }break;
                 }
+
+
 
 
                  for(int n=startPos+100; n>startPos; n--) {
                      lines[n].drawSprite(this->renderer);
-                     lines[n].spriteXP2 = 0;
+                     lines[n].spriteXR1 = 0;
+                     lines[n].spriteXR2 = 0;
                  }
 
 

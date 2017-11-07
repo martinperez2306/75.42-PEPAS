@@ -440,6 +440,7 @@ int Cliente::obtenerCantidadJugadores() {
 }
 
 void Cliente::parsearCalculos(string datos, int i) {
+    cout<<"el mensaje es:"<<datos<<endl;
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
     this->setPosY(posY);
@@ -507,6 +508,7 @@ void Cliente::setRival(string datos, int i) {
             rival->actualizar(playerNum,playerPosX,playerPosY);
         }
     }
+    cout<<"el tamaño de la rivalList es:"<<this->rivalList.size()<<endl;
 }
 
 int Cliente::obtenerCantidadDePlayersADibujar() {
