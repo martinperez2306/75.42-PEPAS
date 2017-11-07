@@ -52,15 +52,17 @@ private:
     Textura sky;
     Textura trees;
     Textura hills;
-    Textura car;
+    Textura* car;
     Textura* arbol;
     Textura* cartel;
     Textura* cartel2;
     TTF_Font *font;
     Textura* opcion;
     Textura* ingreso;
+	Textura* player1;
     Textura* player2;
     Textura* player3;
+	Textura* player4;
 
     Auto* autito;
 
@@ -141,7 +143,12 @@ public:
     void enviarNotMoveLeft();
 
     void enviarNotMoveRight();
-void actualizarMinimapa(Minimapa* minimapa);
+
+	void actualizarMinimapa(Minimapa* minimapa);
+
+	void carAsign();
+
+    Textura *getTextura(int i);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

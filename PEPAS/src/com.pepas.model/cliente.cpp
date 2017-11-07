@@ -1,6 +1,6 @@
 #include "../../headers/com.pepas.model/cliente.h"
 #include "../../headers/com.pepas.logger/Logger.h"
-#include "../../headers/com.pepas.view/vista.h"
+
 
 
 #define LOGIN 4
@@ -29,6 +29,7 @@ Cliente::Cliente() {
     this->mapa = new Mapa();
     this->vista=new Vista();
     posX =  1024/2 -100;
+    finDeMapa = false;
 
 }
 bool Cliente::minimapaEstaCompleto(){
@@ -235,11 +236,15 @@ void Cliente::parsearMensaje(std::string datos){
         	this->actualizarObjetosMapa(arbol,cartel,distancia,lado);
         }break;
         case FINMAPAS:{
+            this->modelCar = stoi(obtenerParametros(datos,&i),nullptr,10);
+            this->cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
+            this->crearRivales(cantidadJugadores, modelCar);
         	this->mapa->mostrarSegmentos();
         	this->mapa->mostrarObjetos();
         	this->minimapa->mostrarSegmentos();
         	this->minimapa->mostrarObjetos();
             this->minimapaCompleto=true;
+            this->finDeMapa = true;
         }break;
 		case LOGIN:{
             string mensaje = obtenerParametros(datos,&i);
@@ -283,11 +288,7 @@ void Cliente::parsearMensaje(std::string datos){
         }
             break;
         case AUTO_MOVE:{
-            int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
-            int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
-            this->setPosY(posY);
-            this->setPosX(posX);
-
+            parsearCalculos(datos, i);
         }
             break;
 		default:
@@ -425,3 +426,93 @@ int Cliente::getX() {
 Minimapa* Cliente::getMinimapa(){
     return this->minimapa;
 }
+
+bool Cliente::recibioFinDeMapa() {
+    return finDeMapa;
+}
+
+int Cliente::obtenerModel() {
+    return modelCar;
+}
+
+int Cliente::obtenerCantidadJugadores() {
+    return cantidadJugadores;
+}
+
+void Cliente::parsearCalculos(string datos, int i) {
+    int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
+    int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
+    this->setPosY(posY);
+    this->setPosX(posX);
+    cantidadADibujar = stoi(obtenerParametros(datos,&i),nullptr,10);
+    switch (cantidadADibujar){
+        case 1:{
+            this->setRival(datos,i);
+        }
+            break;
+        case 2:{
+            this->setRival(datos,i);
+            this->setRival(datos,i);
+        }
+            break;
+        case 3:{
+            this->setRival(datos,i);
+            this->setRival(datos,i);
+            this->setRival(datos,i);
+        }break;
+    }
+
+
+}
+
+int Cliente::cantidadAdibujar() {
+    return cantidadADibujar;
+}
+
+void Cliente::crearRivales(int cantRivales, int miAuto) {
+    switch (cantRivales){
+        case 2:{
+            Rival* rival = new Rival();
+            rivalList.emplace_back(rival);
+        }
+        break;
+        case 3:{
+            Rival* rival1 = new Rival();
+            Rival* rival2 = new Rival();
+            rivalList.emplace_back(rival1);
+            rivalList.emplace_back(rival2);
+        }
+        break;
+        case 4:{
+            Rival* rival1 = new Rival();
+            Rival* rival2= new Rival();
+            Rival* rival3 = new Rival();
+            rivalList.emplace_back(rival1);
+            rivalList.emplace_back(rival2);
+            rivalList.emplace_back(rival3);
+        }break;
+    }
+
+
+}
+
+void Cliente::setRival(string datos, int i) {
+    int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+    int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
+    int playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
+    for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
+        Rival* rival = *it;
+        if (!rival->getDibujar()){
+            rival->actualizar(playerNum,playerPosX,playerPosY);
+        }
+    }
+}
+
+int Cliente::obtenerCantidadDePlayersADibujar() {
+    return cantidadADibujar;
+}
+
+list<Rival *> Cliente::obtenerRivalList() {
+    return rivalList;
+}
+

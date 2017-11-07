@@ -21,7 +21,7 @@ ClienteController::ClienteController(const char* archivo){
 	cout<<ipAddress<<endl;
 	cout<<socketData.ip<<endl;
 	strcpy(this->testFile ,socketData.rutafile);
-    this->threadGraficoMinimapa=threadMinimapa(cliente);
+    //this->threadGraficoMinimapa=threadMinimapa(cliente);
 
 	SDL_Window* window = NULL;
     SDL_Renderer* renderer = NULL;
@@ -33,6 +33,7 @@ ClienteController::ClienteController(const char* archivo){
     this->ingreso = new Textura();
     this->opcion = new Textura();
     this->autito = new Auto();
+    this->car = new Textura();
 
      PressUP = false;
     offsetBackgroundTree = -1000;
@@ -384,7 +385,13 @@ void ClienteController::dibujar(){
 
 			}while(!this->cliente->estalogueado() && !quit);
 
-			
+			while (!this->cliente->recibioFinDeMapa()) {
+                cout << "Esperando jugadores" << endl;
+                sleep(5);
+            }
+
+            this->carAsign();
+
 			//Disable text input
 			SDL_StopTextInput();
 
@@ -483,8 +490,8 @@ void ClienteController::dibujar(){
 
                             float destX = X + scale * spriteXP2 * SCREEN_WIDTH/2 ;
                             float destY = Y + 4;
-                            float destW  = w * W / 220;
-                            float destH  = h * W / 220;
+                            float destW  = w * W / 600;
+                            float destH  = h * W / 600;
 
                             destX += destW * spriteXP2; //offsetX
                             destY += destH * (-1);    //offsetY
@@ -567,6 +574,8 @@ void ClienteController::dibujar(){
             pos = 1;
             int contador = 0;
 
+            int posP2y = 20;
+
 			//While application is running
 			while( !quit ) {
 
@@ -618,12 +627,26 @@ void ClienteController::dibujar(){
                  for(int n=startPos+101; n>startPos; n--)
       				 lines[n].drawSprite(this->renderer);
 
-                int posP2y = 90;
-                int posP2x = 700;
+
+              /*  int posP2x = 230;
                 lines[startPos+posP2y].spriteP2 = player3;
                 lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
-                lines[startPos+posP2y].drawSprite(this->renderer);
-      				
+                lines[startPos+posP2y].drawSprite(this->renderer);*/
+
+                if (!this->cliente->obtenerRivalList().empty()) {
+                    for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
+                        Rival *rival = *it;
+                        if (rival->getDibujar()) {
+                            lines[startPos + rival->getHorizonte()].spriteP2 = this->getTextura(rival->getPlayer());
+                            lines[rival->getHorizonte()].spriteXP2 = 0.0059 * rival->getPosX() - 3;
+                            lines[startPos + rival->getHorizonte()].drawSprite(this->renderer);
+                            lines[startPos + rival->getHorizonte()].spriteXP2 = 0;
+                            rival->notDibujar();
+                        }
+                        break;
+                    }
+                }
+
                 curveSet =  lines[(pos/200)].curve;
 
                 //cout<<pos/200<<endl;
@@ -631,7 +654,7 @@ void ClienteController::dibujar(){
                 //checkCurveAndSetCentrifuga(curveSet);
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
-                car.render(cliente->getX(), autito->getY(), this->renderer);
+                car->render(cliente->getX(), autito->getY(), this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
 
 
@@ -671,12 +694,6 @@ bool ClienteController::loadMedia() {
         success = false;
     }
 
-    if( !car.loadFromFile("img/ferrari_straight1.png", this->renderer) )
-    {
-        printf( "Failed to load sprite sheet texture!\n" );
-        success = false;
-    }
-
     arbol = new Textura();
         if( !arbol->loadFromFile("img/palmera.png", this->renderer) )
     {
@@ -698,6 +715,12 @@ bool ClienteController::loadMedia() {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
     }
+    player1 = new Textura();
+    if( !player1->loadFromFile("img/ferrari1.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
     player2 = new Textura();
     if( !player2->loadFromFile("img/ferrari2.png", this->renderer) )
     {
@@ -706,7 +729,13 @@ bool ClienteController::loadMedia() {
     }
 
     player3 = new Textura();
-    if( !player3->loadFromFile("img/tesla.png", this->renderer) )
+    if( !player3->loadFromFile("img/ferrari3.png", this->renderer) )
+    {
+        printf( "Failed to load sprite sheet texture!\n" );
+        success = false;
+    }
+    player4 = new Textura();
+    if( !player4->loadFromFile("img/ferrari4.png", this->renderer) )
     {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
@@ -895,10 +924,6 @@ void ClienteController::keyEvent(SDL_Event e) {
     if( e.type == SDL_KEYDOWN && e.key.repeat == 0 ) {
         //Adjust the velocity
         switch( e.key.keysym.sym ) {
-             /*case SDLK_UP:        autito->moveUP_KD(pos); PressUP = true; break;
-             case SDLK_DOWN:      autito->moveDown_KD(pos); break;
-             case SDLK_LEFT:      autito->moveLeft_KD();break;
-             case SDLK_RIGHT:     autito->moveRight_KD(); break;*/
             case SDLK_UP:        enviarMoveUp(); break;
             case SDLK_DOWN:      enviarMoveDown(); break;
             case SDLK_LEFT:      enviarMoveLeft();break;
@@ -907,10 +932,6 @@ void ClienteController::keyEvent(SDL_Event e) {
     }
     else if( e.type == SDL_KEYUP && e.key.repeat == 0 ) {
         switch( e.key.keysym.sym ) {
-            /*case SDLK_UP:     autito->moveUP_KU(pos); PressUP = false; break;
-            case SDLK_DOWN:     autito->moveDown_KU(pos);  break;
-            case SDLK_LEFT:     autito->moveLeft_KU(); break;
-            case SDLK_RIGHT:    autito->moveRight_KU();  break;*/
             case SDLK_RIGHT:    enviarNotMoveRight();  break;
             case SDLK_UP:       enviarNotMoveUp(); break;
             case SDLK_DOWN:     enviarNotMoveDown();  break;
@@ -1033,7 +1054,6 @@ void ClienteController::actualizarMinimapa(Minimapa* minimapa){
 					///Pinto pista
 					SDL_SetRenderDrawColor( renderer, 0x00, 0x00,0x00, 0xFF );
 					SDL_RenderDrawLine( renderer,X1,Y1,X2,Y2);
-
 				}
 				list<Objeto*>* objetos = minimapa->getObjetos();
 				for(list<Segmento*>::iterator it=ruta->begin(); it!=ruta->end();++it){
@@ -1053,4 +1073,38 @@ void ClienteController::actualizarMinimapa(Minimapa* minimapa){
 
 				delete recorredor;
 
+}
+
+void ClienteController::carAsign() {
+
+    switch (this->cliente->obtenerModel()){
+        case 1:{
+            car = player1;
+        }break;
+        case 2:{
+            car = player2;
+        }break;
+        case 3:{
+            car = player3;
+        }break;
+        case 4:{
+            car = player4;
+        }break;
+    }
+
+}
+
+Textura *ClienteController::getTextura(int player) {
+    if (player == 1){
+        return  player1;
+    }
+    if (player == 2){
+        return  player2;
+    }
+    if (player == 3){
+        return  player3;
+    }
+    if (player == 4){
+        return  player4;
+    }
 }

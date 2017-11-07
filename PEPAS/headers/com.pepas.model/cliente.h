@@ -16,6 +16,7 @@
 #include "minimapa.h"
 #include "Mapa.h"
 #include "../com.pepas.view/vista.h"
+#include "Rival.h"
 #include <iostream>
 #include <cstring>
 #include <list>
@@ -29,20 +30,25 @@ private:
     Usuario* usuario;
     Socket* socketCliente;
     int socketFD, posY, posX;
-    int aliveCounter;
+    int aliveCounter, modelCar, cantidadJugadores, cantidadADibujar;
     bool logueado;
     bool conectado;
     bool minimapaCompleto;
+    bool finDeMapa;
     list<string> colaBuzon;
     list<string> colaChat;
     list<pair<int, float>>Track;
+
     Minimapa* minimapa;
     Mapa* mapa;
     Vista* vista;
 
 
 
+
 public:
+
+    list<Rival*> rivalList;
     Cliente();
     bool minimapaEstaCompleto();
     void logIn(string usuario, string clave);
@@ -112,7 +118,25 @@ public:
     int getPosition();
 
     int getX();
+    int obtenerCantidadJugadores();
 Minimapa* getMinimapa();
+
+    bool recibioFinDeMapa();
+
+    int obtenerModel();
+
+    void parsearCalculos(string datos, int i);
+
+    int cantidadAdibujar();
+
+
+    void crearRivales(int i, int MiPos);
+
+    void setRival(string basic_string, int i);
+
+    int obtenerCantidadDePlayersADibujar();
+
+    list<Rival*> obtenerRivalList();
 };
 
 
