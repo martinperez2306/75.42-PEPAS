@@ -8,6 +8,7 @@
 #include "thread.h"
 #include "servidor.h"
 #include "AliveThread.h"
+#include "CalculateThread.h"
 
 
 class ClientesThread : public Thread {
@@ -16,7 +17,9 @@ private:
     Servidor* srv;
     bool estaCerrado;
     bool borrable; // para saber si se puede borrar el thread.
+    bool inGame;
     AliveThread aliveThread = AliveThread(srv, estaCerrado);
+    CalculateThread calculoThread = CalculateThread(srv, estaCerrado, socket);
 public:
 
     ClientesThread(Socket* socket, Servidor* sv, bool CerrarServidor);

@@ -36,5 +36,4 @@ void AliveThread::asignarContador(int i) {
 
 void AliveThread::cerrarContador() {
     this->estaCerrado=true;
-
 }

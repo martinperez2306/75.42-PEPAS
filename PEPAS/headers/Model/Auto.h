@@ -18,6 +18,7 @@ private:
 	float PosX, PosY, posicion;
 	float VelX, VelY;
 	bool PressUP, curveR, curveL;
+	int jugador;
 
 public:
 
@@ -32,7 +33,7 @@ public:
 	int VEL_MIN = 0;
 
 
-	Auto();
+	Auto(int jugador);
 
 	int getX();
 
@@ -65,6 +66,8 @@ public:
 	string procesarMovimiento();
 
 	string agregarPadding(int lenght);
+
+	int obtenerPlayer();
 };
 
 

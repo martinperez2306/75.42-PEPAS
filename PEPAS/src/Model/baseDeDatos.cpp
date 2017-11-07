@@ -26,6 +26,7 @@ Usuario* BaseDeDatos::getUsuario(string username){
 void BaseDeDatos::agregarUsuarioABaseDeDatos(Usuario* usuario){
 
 	this->usuarios->insert(user(usuario->getUsuario(),usuario));
+
 }
 
 void BaseDeDatos::mostrarTodosLosUsuarios(){

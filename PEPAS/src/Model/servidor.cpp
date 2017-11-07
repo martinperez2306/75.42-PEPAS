@@ -19,6 +19,8 @@
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
 
+#define MAX 2
+
 using namespace std;
 
 typedef pair<int, Socket*> socketConect;
@@ -35,6 +37,14 @@ std::list<int> crearPuertos(){
 	return puertos;
 }
 
+list<int> Servidor::cargarLista() {
+    std::list<int> modelos;
+    for(int i = 1; i <= 4; i++)
+        modelos.push_back(i);
+    return modelos;
+}
+
+
 Servidor::Servidor(){
     loggear ("Entro al constructor del Servidor",2);
     this->cantidadMaximaDeConexiones = 0;
@@ -46,6 +56,7 @@ Servidor::Servidor(){
 	this->socketFD = 0;
     this->aliveCounter = 0;
 	this->puertosDisponibles = crearPuertos();
+    this->modeloDeAuto = cargarLista();
 	this->terminado = false;
 	this->mapaSocket = new map<int,Socket*>();
     this->mapUsuario = new map<int,string>();
@@ -63,6 +74,9 @@ Servidor::Servidor(){
     this->zoomer = new Zoomer();
 
     this->logicaJuego = new Logica(5000); //largo de la pista
+
+    empezarJuego = false;
+    player = 1;
 
 }
 
@@ -206,7 +220,6 @@ Socket*  Servidor::aceptarConexiones() {
         }
         string msg = "Conexion nueva en puerto: " + to_string(puerto);
         loggear(msg,3);
-        cout<<msg<<endl;
         loggear("Le aviso al cliente el puerto al cual reconectarse",2);
         this->enviarMensaje(to_string(puerto), this->obtenerSocket());
 
@@ -299,7 +312,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
 		case COMANDO: {
 				this->logicaJuego->setRuta(this->mapa->getRuta());
-				//this->logicaJuego->actualizar();
+
 			}
 			break;
 		case LOGIN:{
@@ -311,10 +324,19 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(mensajeAEnviar.compare("Bienvenido")){
                 enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
-                this->enviarFinMapas(socketDelemisor);
                 //TODO crear el Auto y poner al jugador en espera.
-                Auto* autito = new Auto;
+                Auto* autito = new Auto(player);
                 this->mapAutitos->insert(usuarioAuto(usuario,autito));
+                player++;
+            }
+            if (this->conexiones==MAX){
+                empezarJuego = true;
+                map<int,Socket*>::iterator iterador;
+                for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+                    string mensajeFin= this->procesarMensajeFin();
+                    this->enviarMensaje(mensajeFin,iterador->second);
+                }
+                player = 0;
             }
 		}
 			break;
@@ -413,8 +435,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveUP_KD(pos, curve);
-            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
 
 
         }break;
@@ -423,8 +445,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveLeft_KD(curve);
-            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
 
         }break;
         case CASE_RIGHT_KD:{
@@ -432,8 +454,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveRight_KD(curve);
-            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_DOWN_KD:{
             //Obtengo datos del mensaje
@@ -442,8 +464,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveDown_KD(pos,curve);
-            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_UP_KU:{
             //Obtengo datos del mensaje
@@ -452,24 +474,24 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveUP_KU(pos,curve);
-            string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+           // string msg =it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_LEFT_KU:{
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveLeft_KU(curve);
-            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_RIGHT_KU:{
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveRight_KU(curve);
-            string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg = it->second->calculateMove(); //Calcula el movimiento del propio auto, NO de los demas.
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_DOWN_KU:{
             //Obtengo datos del mensaje
@@ -478,8 +500,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
             it->second->moveDown_KU(pos,curve);
-            string msg =it->second->calculateMove();
-            this->enviarMensaje(msg, socketDelemisor);
+            //string msg =it->second->calculateMove();
+            //this->enviarMensaje(msg, socketDelemisor);
         }break;
 		default:
 			break;
@@ -757,7 +779,10 @@ string Servidor::procesarMensajeObjetoMapa(int arbol, int cartel, int distancia,
 string Servidor::procesarMensajeFin(){
     string stringACrear,stringProcesado;
     string separador="/";
-    stringACrear = separador + "10";
+    string model = to_string(modeloDeAuto.front());
+    modeloDeAuto.pop_front();
+    string cantJugadores = to_string(MAX);
+    stringACrear = separador + "10" + separador + model +separador+ cantJugadores;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
@@ -767,5 +792,45 @@ string Servidor::procesarMensajeFin(){
 int Servidor::obtenerAlive() {
     return aliveCounter;
 }
+
+bool Servidor::getEmpezoJuego() {
+    return empezarJuego;
+}
+
+void Servidor::setEmpezoJuego(bool entrada) {
+    empezarJuego = entrada;
+}
+
+string Servidor::obtenerUsuarioConFd(int fd) {
+    return mapUsuario->find(fd)->second;
+}
+
+Auto *Servidor::obtenerAutoConId(string id) {
+    return this->mapAutitos->find(id)->second;
+}
+
+/*cantidadDeRivalesAGraficar/PosX/Horizonte ... eso para cara jugador*/
+string Servidor::actualizarJuego(Auto *pAuto) {
+    int i=0;
+    string stringArmado = "";
+    string stringConcat;
+    string separador = "/";
+    int horizonte = 100;
+    for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
+        stringConcat= "";
+        int diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
+        if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0) {
+            i++;
+            stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX())
+                           + separador + to_string(diferencia);
+        }
+        stringArmado = stringArmado + stringConcat;
+    }
+    stringArmado = to_string(i) + separador + stringArmado;
+    if (i==0)
+        stringArmado = to_string(0);
+    return stringArmado;
+}
+
 
 

@@ -23,13 +23,15 @@ private:
 	int conexiones;
 	int socketFD;
 	int socketEscucha;
-
+	int player;
 	bool terminado;
+    bool empezarJuego;
 	BaseDeDatos* baseDeDatos;
 	Socket* iniciarConexion(int puerto);
 	Socket* serverSocket;
 	std::list<int> puertosDisponibles;
 	std::list<int> puertosEnUso;
+    std::list<int> modeloDeAuto;
 	unordered_map<int, int> mapFD; // <socketFD, puerto>
 	map<int,Socket*>* mapaSocket; // <puerto, Socket>
 	map<int, string>* mapUsuario;
@@ -112,6 +114,17 @@ public:
 	void enviarFinMapas(Socket* socketCliente);
 	void generarWorld();
 
+    list<int> cargarLista();
+
+    bool getEmpezoJuego();
+
+    void setEmpezoJuego(bool i);
+
+	string obtenerUsuarioConFd(int fd);
+
+	Auto* obtenerAutoConId(string id);
+
+	string actualizarJuego(Auto *pAuto);
 };
 
 

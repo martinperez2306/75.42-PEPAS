@@ -15,16 +15,36 @@
 
 
 
-Auto::Auto()
+Auto::Auto(int player)
 {
 	//Initialize the offsets
-	PosX =SCREEN_WIDTH/2 -100;
+	//PosX =SCREEN_WIDTH/2 -100;
 	PosY =SCREEN_HEIGHT - 180 ;
 	//Initialize the velocity
 	VelX = 0;
 	VelY = 0;
 	posicion = 0;
 	PressUP = false;
+	this->jugador = player;
+
+	switch (jugador){
+		case 1:{
+			PosX = 230;
+			posicion = 430;
+		}break;
+		case 2:{
+			PosX =550;
+			posicion = 430;
+		}break;
+		case 3:{
+			PosX =230;
+		}
+		case 4:{
+			PosX =550;
+		}
+			break;
+
+	}
 
 }
 
@@ -192,10 +212,12 @@ string Auto::procesarMovimiento() {
     string separador = "/";
     string posY = to_string(posicion);
     string posX = to_string(PosX);
-    stringACrear = separador + "20" + separador + posY + separador + posX;
-    unsigned long largoDelMensaje = stringACrear.length();
-    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
-    return stringProcesado;
+    stringACrear = separador + "20" + separador + posY + separador + posX + separador;
+    return stringACrear;
+}
+
+int Auto::obtenerPlayer() {
+	return jugador;
 }
 
 
