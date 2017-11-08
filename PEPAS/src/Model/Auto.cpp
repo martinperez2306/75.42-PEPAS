@@ -25,6 +25,7 @@ Auto::Auto(int player)
 	VelY = 0;
 	posicion = 0;
 	PressUP = false;
+	conectado = true;
 	this->jugador = player;
 
 	switch (jugador){
@@ -222,6 +223,12 @@ int Auto::obtenerPlayer() {
 	return jugador;
 }
 
+bool Auto::isConectado() {
+	return conectado;
+}
 
+void Auto::desconectar() {
+	conectado = false;
+}
 
 

@@ -18,6 +18,9 @@
 #define CASE_LEFT_KU 25
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
+//
+//#define COLOR C
+//#define GRIS G
 
 #define MAX 3
 
@@ -384,7 +387,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
         case USER_DISCONNECT:{
             loggear("Codigo de desconexion",2);
             loggear("Se desconecto el usuario con el FD: " + usuario,3);
-
+            loggear("*******",2);
             int fileD = stoi (usuario, nullptr,10);
             /*Obtengo el puerto a partir del FD*/
             //int puerto = mapFD.find(fileD)->first;
@@ -395,7 +398,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(this->mapUsuario->count(puerto) > 0){
                 loggear("Estaba logueado",3);
                 this->desloguearse(this->mapUsuario->find(puerto)->second,socketDelemisor);
-                mapAutitos->erase(usuario);
+                mapAutitos->find(usuario)->second->desconectar();
+//                mapAutitos->erase(usuario);
                 player--;
             }
             /*Cierro el socket*/
@@ -819,8 +823,12 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         int diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
         if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0) {
             i++;
+            string gris = "COLOR";
+            if(!it->second->isConectado()) {
+            	gris = "GRIS";
+            }
             stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX())
-                           + separador + to_string(diferencia);
+                           + separador + to_string(diferencia) + separador + gris + separador;
         }
         stringArmado = stringArmado + stringConcat;
         cout<<"Armado del for sospechoso"<<stringArmado<<endl;
