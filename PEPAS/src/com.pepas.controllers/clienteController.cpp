@@ -36,8 +36,8 @@ ClienteController::ClienteController(const char* archivo){
     this->car = new Textura();
 
      PressUP = false;
-    offsetBackgroundTree = -1000;
-    offsetBackgroundHills = -1000;
+    offsetBackgroundTree = -2000;
+    offsetBackgroundHills = -2000;
 
 
 
@@ -412,7 +412,7 @@ void ClienteController::dibujar(){
             int maxy = SCREEN_HEIGHT;
 
             roadW = 2000;
-            segL = 100; //segment length
+            segL = 200; //segment length
             camD = 0.84f; //camera depth
 
              x = 0;
@@ -549,17 +549,17 @@ void ClienteController::dibujar(){
                 int cartel = obj->getCartel();
                 string lado = obj->getLado();
                 if (arbol != 0 && lado == "D")
-                    obstaculos->emplace(-distancia, this->arbol);
-                if (arbol != 0 && lado == "I")
                     obstaculos->emplace(distancia, this->arbol);
+                if (arbol != 0 && lado == "I")
+                    obstaculos->emplace(-distancia, this->arbol);
                 if (cartel == 80 && lado == "D")
-                    obstaculos->emplace(-distancia, this->cartel);
-                if (cartel == 80 && lado == "I")
                     obstaculos->emplace(distancia, this->cartel);
+                if (cartel == 80 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel);
                 if (cartel == 120 && lado == "D")
-                    obstaculos->emplace(-distancia, this->cartel2);
-                if (cartel == 120 && lado == "I")
                     obstaculos->emplace(distancia, this->cartel2);
+                if (cartel == 120 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel2);
 
             }
             std::map<int,Textura*>::iterator it_obst;
@@ -719,13 +719,18 @@ void ClienteController::dibujar(){
 
                 //cout<<pos/200<<endl;
 
-                //checkCurveAndSetCentrifuga(curveSet);
+                checkCurveAndSetCentrifuga(curveSet);
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
                 car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
 
                 SDL_RenderPresent(this->renderer);
+
+                posMoving = cliente->getPosition();
+                if (posMoving != pos){
+                    moving = true;
+                } else moving = false;
 
 			}
 
@@ -840,19 +845,19 @@ void ClienteController::checkCurveAndSetCentrifuga(int curve) {
 }
 
 void ClienteController::backgroundMove() {
-    if (curveR && autito->isMoving()) {
+    if (curveR && moving) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
-        offsetBackgroundHills -= 0.05;
-        offsetBackgroundTree -= 0.1;
+        offsetBackgroundHills -= 0.5;
+        offsetBackgroundTree -= 1;
     }
-    if (curveL && autito->isMoving()) {
+    if (curveL && moving) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
-        offsetBackgroundHills += 0.05;
-        offsetBackgroundTree += 0.1;
+        offsetBackgroundHills += 0.5;
+        offsetBackgroundTree += 1;
     }
     else{
         sky.render(0, 0, this->renderer);

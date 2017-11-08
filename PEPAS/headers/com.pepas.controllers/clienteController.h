@@ -42,9 +42,10 @@ private:
 	threadMinimapa threadGraficoMinimapa;
 
 
-    bool reconexion; 
+    bool reconexion, moving;
     char ipAddress[20];
     char testFile [100];
+	int posMoving;
 
     SDL_Window* window;
     SDL_Renderer* renderer;
