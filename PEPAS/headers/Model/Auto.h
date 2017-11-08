@@ -8,11 +8,11 @@
 #ifndef PEPAS_SRC_MODEL_JUEGO_AUTITO_H_
 #define PEPAS_SRC_MODEL_JUEGO_AUTITO_H_
 
-
 #include <iostream>
 using namespace std;
 
 class Auto {
+
 private:
 
 	float PosX, PosY, posicion;
@@ -55,9 +55,9 @@ public:
 
 	void moveDown_KU(int pos,int curve);
 
-	string calculateMove();
+	string calculateMove(int curve);
 
-	int getPosition();
+	float getPosition();
 
 	bool isMoving();
 

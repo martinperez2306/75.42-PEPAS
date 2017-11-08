@@ -12,9 +12,8 @@ private:
 
 public:
 	World();
-	void agregarLinea(int distanciaY,LineaX*);
-	int obtenerElementoEnPosicion(int distanciaY, int corrimientoX);
-	void agregarElementoALinea(int distanciaY,int corrimientoX, int elemento);
+	void agregarLinea(int distanciaY,LineaX* lineaX);
+	int obtenerCurvaEnKilometraje(int distanciaY);
 	~World();
 };
 

@@ -49,6 +49,7 @@ Servidor* ServidorBuilder::build(){
 	this->servidor->setZoomEntreMapaYMinimapa(10);
 	this->servidor->generarMapa();
 	this->servidor->generarMinimapa();
+	this->servidor->generarWorld();
 	return this->getServidor();
 }
 

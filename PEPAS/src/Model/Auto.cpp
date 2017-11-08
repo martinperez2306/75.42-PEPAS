@@ -48,10 +48,7 @@ Auto::Auto(int player)
 			break;
 
 	}
-
 }
-
-
 
 int Auto::getX() {
 	return PosX;
@@ -84,13 +81,14 @@ void Auto::moveRight_KU(int curve) {
     checkCurve(curve);
 }
 
-string Auto::calculateMove() {
+string Auto::calculateMove(int curve) {
 
 	//cout <<"posY "<<posicion<<endl;
 	//cout <<"velY "<<VelY<<endl;
 	// cout <<"posx "<<PosX<<endl;
 	//cout <<"velX "<<VelX<<endl;
-
+    //checkCurve(posicion);
+	checkCurve(curve);
 	PosX += VelX;
 
 	if (VelY >= VEL_MAX/2 && curveL && PosX < SCREEN_WIDTH - CAR_WIDTH){
@@ -142,7 +140,7 @@ void Auto::moveUP_KD(int pos,int curve) {
 		VelY = VEL_MAX;
 	}
 	posicion = pos;
-    checkCurve(curve);
+//    checkCurve(curve);
 }
 
 void Auto::moveDown_KD(int pos,int curve) {
@@ -150,25 +148,25 @@ void Auto::moveDown_KD(int pos,int curve) {
 	if (VelY < VEL_MIN)
 		VelY = VEL_MIN;
 	posicion = pos;
-    checkCurve(curve);
+//    checkCurve(curve);
 }
 
 void Auto::moveUP_KU(int pos,int curve) {
 	PressUP = false;
 	VelY -= CAR_VEL;
 	posicion = pos;
-    checkCurve(curve);
+//    checkCurve(curve);
 
 }
 
 void Auto::moveDown_KU(int pos,int curve) {
 	VelY -= CAR_VEL;
 	posicion = pos;
-    checkCurve(curve);
+//    checkCurve(curve);
 
 }
 
-int Auto::getPosition() {
+float Auto::getPosition() {
 	return posicion;
 }
 
@@ -181,6 +179,7 @@ bool Auto::isMoving() {
 }
 
 void Auto::checkCurve(int curve) {
+
     if (curve < 0){ //curva a la derecha
         curveR = true;
         curveL = false;
@@ -208,7 +207,6 @@ string Auto::agregarPadding(int lenght) {
     else mensajeProcesado = largo;
     return mensajeProcesado;
 }
-
 
 string Auto::procesarMovimiento() {
     string stringACrear, stringProcesado;

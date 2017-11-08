@@ -124,6 +124,8 @@ public:
 
 	Auto* obtenerAutoConId(string id);
 
+	int curvaEnKilometraje(int posicionY);
+
 	string actualizarJuego(Auto *pAuto);
 };
 

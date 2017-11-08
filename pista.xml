@@ -14,17 +14,23 @@
         <ruta>
             <derecho>500</derecho>
             <izquierda>200</izquierda>
-            <izquierda>500</izquierda>
+            <izquierda>0</izquierda>
+            <derecho>500</derecho>
             <izquierda>200</izquierda>
-            <izquierda>200</izquierda>
+            <izquierda>0</izquierda>
+            <derecho>200</derecho>
             <derecha>250</derecha>
-            <derecha>500</derecha>
+            <derecha>0</derecha>
+            <derecho>500</derecho>
             <derecha>250</derecha>
-            <derecha>1000</derecha>
+            <derecha>0</derecha>
+            <derecho>1000</derecho>
             <izquierda>200</izquierda>
-            <izquierda>500</izquierda>
+            <izquierda>0</izquierda>
+            <derecho>500</derecho>
             <izquierda>200</izquierda>
-            <izquierda>500</izquierda>
+            <izquierda>0</izquierda>
+            <derecho>500</derecho>
         </ruta>
         
         <objetos>
@@ -128,7 +134,7 @@
             </objeto>
             <objeto>
                 <distancia>3000</distancia>
-                <posicion>dereha</posicion>
+                <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
