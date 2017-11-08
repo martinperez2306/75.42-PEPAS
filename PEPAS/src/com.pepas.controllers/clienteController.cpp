@@ -682,7 +682,7 @@ void ClienteController::dibujar(){
                             Rival *rival = *it;
                             if (rival->getDibujar()) {
                                 lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
-                                        rival->getPlayer());
+                                        rival);
                                 lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
                                 rival->notDibujar();
                             }
@@ -696,14 +696,14 @@ void ClienteController::dibujar(){
                             Rival *rival = *it;
                             if (rival->getDibujar()) {
                                 lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
-                                        rival->getPlayer());
+                                        rival);
                                 lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
                                 rival->notDibujar();
                             }
                             std::list<Rival*>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
                             Rival* rival2 = *it2;
                             if (rival2->getDibujar()) {
-                                lines[startPos + rival2->getHorizonte() + 4].spriteR2 = this->getTextura(rival2->getPlayer());
+                                lines[startPos + rival2->getHorizonte() + 4].spriteR2 = this->getTextura(rival2);
                                 lines[startPos + rival2->getHorizonte() + 4].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
                                 rival2->notDibujar();
                             }
@@ -821,6 +821,12 @@ bool ClienteController::loadMedia() {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
     }
+    playerGris = new Textura();
+	if( !playerGris->loadFromFile("img/palmera.png", this->renderer) )
+	{
+		printf( "Failed to load sprite sheet texture!\n" );
+		success = false;
+	}
 
 
 
@@ -1175,17 +1181,22 @@ void ClienteController::carAsign() {
 
 }
 
-Textura *ClienteController::getTextura(int player) {
-    if (player == 1){
-        return  player1;
-    }
-    if (player == 2){
-        return  player2;
-    }
-    if (player == 3){
-        return  player3;
-    }
-    if (player == 4){
-        return  player4;
-    }
+Textura *ClienteController::getTextura(Rival *rival) {
+	if(rival->isConectado()) {
+		if (rival->getPlayer() == 1){
+			return  player1;
+		}
+		if (rival->getPlayer() == 2){
+			return  player2;
+		}
+		if (rival->getPlayer() == 3){
+			return  player3;
+		}
+		if (rival->getPlayer() == 4){
+			return  player4;
+		}
+	} else {
+		cout << "el player " << rival->getPlayer() << " esta desconectao" << endl;
+		return playerGris;
+	}
 }

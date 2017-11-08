@@ -502,10 +502,16 @@ void Cliente::setRival(string datos, int i) {
     //cout<<"p:"<<playerNum<<endl;
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     int playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
+    string color = obtenerParametros(datos,&i);
+    bool conectado = true;
+    if("GRIS" == color)
+    	conectado = false;
+    cout << "El auto va de color: " << color << endl;
     for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
         Rival* rival = *it;
         if (!rival->getDibujar()){
             rival->actualizar(playerNum,playerPosX,playerPosY);
+            rival->setConectado(conectado);
         }
     }
     cout<<"el tamaño de la rivalList es:"<<this->rivalList.size()<<endl;

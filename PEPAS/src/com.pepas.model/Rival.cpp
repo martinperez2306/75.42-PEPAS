@@ -21,6 +21,14 @@ void Rival::actualizar(int pNum, int x, int y) {
     dibujar = true;
 }
 
+bool Rival::isConectado() {
+	return conectado;
+}
+
+void Rival::setConectado(bool conectado) {
+	conectado = conectado;
+}
+
 int Rival::getHorizonte() {
     return horizonte;
 }

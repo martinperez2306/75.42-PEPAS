@@ -11,11 +11,15 @@ private:
     int player;
     int PosX;
     int horizonte;
-    bool dibujar;
+    bool dibujar, conectado;
 public:
     Rival ();
 
     bool getDibujar();
+
+    bool isConectado();
+
+    void setConectado(bool conectado);
 
     void actualizar(int i, int i1, int i2);
 
