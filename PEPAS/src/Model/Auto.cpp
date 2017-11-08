@@ -25,6 +25,7 @@ Auto::Auto(int player)
 	VelY = 0;
 	posicion = 0;
 	PressUP = false;
+    PressDown = false;
 	this->jugador = player;
 
 	switch (jugador){
@@ -123,6 +124,10 @@ string Auto::calculateMove(int curve) {
 		VelY += CAR_VEL;
 	}
 
+    if (PressDown && VelY < VEL_MAX && VelY > 0){
+        VelY -= DESACELERAR;
+    }
+
 	posicion += VelY;
 
     string datos = procesarMovimiento();
@@ -143,6 +148,7 @@ void Auto::moveUP_KD(int pos,int curve) {
 }
 
 void Auto::moveDown_KD(int pos,int curve) {
+    PressDown = true;
 	VelY -= CAR_VEL;
 	if (VelY < VEL_MIN)
 		VelY = VEL_MIN;
@@ -159,6 +165,7 @@ void Auto::moveUP_KU(int pos,int curve) {
 }
 
 void Auto::moveDown_KU(int pos,int curve) {
+    PressDown = false;
 	VelY -= CAR_VEL;
 	posicion = pos;
 //    checkCurve(curve);
@@ -218,4 +225,9 @@ string Auto::procesarMovimiento() {
 
 int Auto::obtenerPlayer() {
 	return jugador;
+}
+
+void Auto::setJugador(int i) {
+	this->jugador = i;
+
 }

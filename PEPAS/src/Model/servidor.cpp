@@ -393,6 +393,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(this->mapUsuario->count(puerto) > 0){
                 loggear("Estaba logueado",3);
                 this->desloguearse(this->mapUsuario->find(puerto)->second,socketDelemisor);
+                mapAutitos->find(usuario)->second->setJugador(5);
                 mapAutitos->erase(usuario);
                 player--;
             }
