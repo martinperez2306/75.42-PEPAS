@@ -830,5 +830,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     return stringArmado;
 }
 
-
-
+//Devuelve que tipo de curva es en cierto kilometraje
+int Servidor::curvaEnKilometraje(int posicionY){
+	return this->world->obtenerCurvaEnKilometraje(posicionY);
+}

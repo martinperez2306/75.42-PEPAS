@@ -18,7 +18,8 @@ void CalculateThread::run() {
     this->user = this->srv->obtenerUsuarioConFd(this->socket->obtenerPuerto());
     this->Automovil = this->srv->obtenerAutoConId(user);
     while (!estaCerrado){
-        string msg = Automovil->calculateMove();
+    	int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
+    	string msg = Automovil->calculateMove(curve);
         string playersInformation = srv->actualizarJuego(Automovil);
         stringACrear = msg + playersInformation;
         unsigned long largoDelMensaje = stringACrear.length();
