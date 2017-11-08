@@ -97,6 +97,7 @@ void Socket::Enviar(int socket, const void *mensaje, size_t mensajeLength) {
         ssize_t totalEnviado= 0;
         ssize_t ultimaCantidadEnviada = 0;
         const char* msg = (const char*)mensaje;
+        cout<<msg<<endl;
         while (totalEnviado < (int)mensajeLength){
             ultimaCantidadEnviada = send(socket, mensaje + totalEnviado, mensajeLength-totalEnviado, MSG_NOSIGNAL);
             if (ultimaCantidadEnviada < 0) {

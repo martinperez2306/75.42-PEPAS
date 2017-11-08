@@ -10,14 +10,14 @@ class Rival {
 private:
     int player;
     int PosX;
-    int horizonte;
+    float horizonte;
     bool dibujar;
 public:
     Rival ();
 
     bool getDibujar();
 
-    void actualizar(int i, int i1, int i2);
+    void actualizar(int i, int i1, float i2);
 
     int getHorizonte();
 

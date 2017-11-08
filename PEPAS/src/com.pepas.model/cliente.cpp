@@ -29,6 +29,7 @@ Cliente::Cliente() {
     this->mapa = new Mapa();
     this->vista=new Vista();
     posX =  1024/2 -100;
+    posY = 768 - 1;
     finDeMapa = false;
 
 }
@@ -440,7 +441,6 @@ int Cliente::obtenerCantidadJugadores() {
 }
 
 void Cliente::parsearCalculos(string datos, int i) {
-    cout<<"el mensaje es:"<<datos<<endl;
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
     this->setPosY(posY);
@@ -452,14 +452,14 @@ void Cliente::parsearCalculos(string datos, int i) {
         }
             break;
         case 2:{
-            this->setRival(datos,i);
-            this->setRival(datos,i);
+            int j =this->setRival(datos,i);
+            this->setRival(datos,j);
         }
             break;
         case 3:{
-            this->setRival(datos,i);
-            this->setRival(datos,i);
-            this->setRival(datos,i);
+            int j = this->setRival(datos,i);
+            j = this->setRival(datos,j);
+            this->setRival(datos,j);
         }break;
     }
 
@@ -497,18 +497,18 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 }
 
-void Cliente::setRival(string datos, int i) {
+int Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
-    //cout<<"p:"<<playerNum<<endl;
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
-    int playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
+    float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
     for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
         Rival* rival = *it;
         if (!rival->getDibujar()){
             rival->actualizar(playerNum,playerPosX,playerPosY);
         }
     }
-    cout<<"el tamaño de la rivalList es:"<<this->rivalList.size()<<endl;
+    return i;
+
 }
 
 int Cliente::obtenerCantidadDePlayersADibujar() {
@@ -517,5 +517,9 @@ int Cliente::obtenerCantidadDePlayersADibujar() {
 
 list<Rival *> Cliente::obtenerRivalList() {
     return rivalList;
+}
+
+int Cliente::getY() {
+    return posY;
 }
 

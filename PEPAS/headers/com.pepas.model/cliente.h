@@ -132,11 +132,13 @@ Minimapa* getMinimapa();
 
     void crearRivales(int i, int MiPos);
 
-    void setRival(string basic_string, int i);
+    int setRival(string basic_string, int i);
 
     int obtenerCantidadDePlayersADibujar();
 
     list<Rival*> obtenerRivalList();
+
+    int getY();
 };
 
 
