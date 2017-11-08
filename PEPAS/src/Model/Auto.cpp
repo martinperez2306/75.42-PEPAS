@@ -89,7 +89,7 @@ string Auto::calculateMove() {
 	//cout <<"velY "<<VelY<<endl;
 	// cout <<"posx "<<PosX<<endl;
 	//cout <<"velX "<<VelX<<endl;
-
+    //checkCurve(posicion);
 	PosX += VelX;
 
 	if (VelY >= VEL_MAX/2 && curveL && PosX < SCREEN_WIDTH - CAR_WIDTH){
@@ -167,7 +167,7 @@ void Auto::moveDown_KU(int pos,int curve) {
 
 }
 
-int Auto::getPosition() {
+float Auto::getPosition() {
 	return posicion;
 }
 
@@ -179,8 +179,9 @@ bool Auto::isMoving() {
 	return move ;
 }
 
-void Auto::checkCurve(int curve) {
-    if (curve < 0){ //curva a la derecha
+void Auto::checkCurve(int posicion) {
+
+   /* if (curve < 0){ //curva a la derecha
         curveR = true;
         curveL = false;
     }
@@ -191,7 +192,7 @@ void Auto::checkCurve(int curve) {
     if(curve == 0){
         curveR = false;
         curveL = false;
-    }
+    }*/
 
 }
 

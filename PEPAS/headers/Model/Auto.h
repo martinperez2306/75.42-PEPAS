@@ -57,7 +57,7 @@ public:
 
 	string calculateMove();
 
-	int getPosition();
+	float getPosition();
 
 	bool isMoving();
 

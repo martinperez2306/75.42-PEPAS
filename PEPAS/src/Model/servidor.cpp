@@ -19,7 +19,7 @@
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
 
-#define MAX 3
+
 
 using namespace std;
 
@@ -198,7 +198,6 @@ Socket*  Servidor::aceptarConexiones() {
         this->obtenerSocket()->asignarFD(this->obtenerSocketEscucha());
         loggear ("Salgo del aceptarConexiones",2);
         loggear (" ",2);
-
         return NULL;
     }else{
         loggear ("El servidor tiene conexiones disponibles",2);
@@ -321,13 +320,12 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(mensajeAEnviar == "0014/4/Bienvenido\n"){
                 enviarMinimapaACliente(socketDelemisor);
                 enviarMapaACliente(socketDelemisor);
-                //TODO crear el Auto y poner al jugador en espera.
                 cout<<"cree un auto"<<endl;
                 Auto* autito = new Auto(player);
                 this->mapAutitos->insert(usuarioAuto(usuario,autito));
                 player++;
             }
-            if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==MAX){
+            if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
@@ -779,7 +777,7 @@ string Servidor::procesarMensajeFin(){
     string separador="/";
     string model = to_string(modeloDeAuto.front());
     modeloDeAuto.pop_front();
-    string cantJugadores = to_string(MAX);
+    string cantJugadores = to_string(this->cantidadMaximaDeConexiones);
     stringACrear = separador + "10" + separador + model +separador+ cantJugadores;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
@@ -811,25 +809,24 @@ Auto *Servidor::obtenerAutoConId(string id) {
 string Servidor::actualizarJuego(Auto *pAuto) {
     int i=0;
     string stringArmado = "";
-    string stringConcat;
+    string stringConcat, stringAnterior;
     string separador = "/";
     int horizonte = 100;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         stringConcat= "";
-        int diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
-        if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0) {
+        float diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
+        if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0 ) {
             i++;
-            stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX())
-                           + separador + to_string(diferencia);
+            if (i>=1)
+                stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia) + separador;
+            else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia);
+
         }
-        stringArmado = stringArmado + stringConcat;
-        cout<<"Armado del for sospechoso"<<stringArmado<<endl;
+        stringArmado= stringArmado + stringConcat;
     }
-    stringArmado = to_string(i) + separador + stringArmado ;
-    cout<<"armado final"<<stringArmado<<endl;
+    stringArmado = to_string(i) + separador + stringArmado;
     if (i==0)
         stringArmado = to_string(0);
-
     return stringArmado;
 }
 
