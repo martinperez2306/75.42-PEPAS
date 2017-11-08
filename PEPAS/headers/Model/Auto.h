@@ -17,7 +17,7 @@ private:
 
 	float PosX, PosY, posicion;
 	float VelX, VelY;
-	bool PressUP, curveR, curveL, conectado;
+	bool PressUP, PressDown, curveR, curveL, conectado;
 	int jugador;
 
 public:
@@ -68,6 +68,8 @@ public:
 	string agregarPadding(int lenght);
 
 	int obtenerPlayer();
+
+	void setJugador(int i);
 
 	bool isConectado();
 
