@@ -36,8 +36,8 @@ ClienteController::ClienteController(const char* archivo){
     this->car = new Textura();
 
      PressUP = false;
-    offsetBackgroundTree = -1000;
-    offsetBackgroundHills = -1000;
+    offsetBackgroundTree = -2000;
+    offsetBackgroundHills = -2000;
 
 
 
@@ -419,7 +419,6 @@ void ClienteController::dibujar(){
 			 y = 0;
 			 z = 0;
 
-
             struct Line
             {
                     float x,y,z; //3d center of line
@@ -433,7 +432,6 @@ void ClienteController::dibujar(){
                     Textura* spriteR1;
                     Textura* spriteR2;
                     Textura* spriteR3;
-
 
                 Line() {spriteX=spriteX2=x=y=z=0;
                         sprite = NULL;
@@ -467,9 +465,6 @@ void ClienteController::dibujar(){
 						    destX += destW * spriteX; //offsetX
 						    destY += destH * (-1);    //offsetY
 
-
-
-
 						    SDL_RenderSetScale(renderer,destW/w,destH/h);
 						    sprite->render(destX/ destW*w,destY*h/destH,renderer);
 						    SDL_RenderSetScale(renderer,1,1);
@@ -498,11 +493,11 @@ void ClienteController::dibujar(){
 
                             float destX = X + scale * spriteXR1 * SCREEN_WIDTH/2 ;
                             float destY = Y + 4;
-                            float destW  = w * W / 730;
-                            float destH  = h * W / 730;
+                            float destW  = w * W / 700;
+                            float destH  = h * W / 700;
 
-                            destX += destW * spriteXR1; //offsetX
-                            destY += destH * (-1);    //offsetY
+                            destX += destW * spriteXR1;
+                            destY += destH * (-1);
 
                             SDL_RenderSetScale(renderer,destW/w,destH/h);
                             spriteR1->render(destX/destW*w,destY*h/destH,renderer);
@@ -514,8 +509,8 @@ void ClienteController::dibujar(){
 
                             float destX = X + scale * spriteXR2 * SCREEN_WIDTH/2 ;
                             float destY = Y + 4;
-                            float destW  = w * W / 730;
-                            float destH  = h * W / 730;
+                            float destW  = w * W / 700;
+                            float destH  = h * W / 700;
 
                             destX += destW * spriteXR2; //offsetX
                             destY += destH * (-1);    //offsetY
@@ -533,15 +528,13 @@ void ClienteController::dibujar(){
                             float destW  = w * W / 730;
                             float destH  = h * W / 730;
 
-                            destX += destW * spriteXR3; //offsetX
-                            destY += destH * (-1);    //offsetY
+                            destX += destW * spriteXR3;
+                            destY += destH * (-1);
 
                             SDL_RenderSetScale(renderer,destW/w,destH/h);
                             spriteR3->render(destX/destW*w,destY*h/destH,renderer);
                             SDL_RenderSetScale(renderer,1,1);
                         }
-					    
-
     				}
 };
 
@@ -556,17 +549,17 @@ void ClienteController::dibujar(){
                 int cartel = obj->getCartel();
                 string lado = obj->getLado();
                 if (arbol != 0 && lado == "D")
-                    obstaculos->emplace(-distancia, this->arbol);
-                if (arbol != 0 && lado == "I")
                     obstaculos->emplace(distancia, this->arbol);
+                if (arbol != 0 && lado == "I")
+                    obstaculos->emplace(-distancia, this->arbol);
                 if (cartel == 80 && lado == "D")
-                    obstaculos->emplace(-distancia, this->cartel);
-                if (cartel == 80 && lado == "I")
                     obstaculos->emplace(distancia, this->cartel);
+                if (cartel == 80 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel);
                 if (cartel == 120 && lado == "D")
-                    obstaculos->emplace(-distancia, this->cartel2);
-                if (cartel == 120 && lado == "I")
                     obstaculos->emplace(distancia, this->cartel2);
+                if (cartel == 120 && lado == "I")
+                    obstaculos->emplace(-distancia, this->cartel2);
 
             }
             std::map<int,Textura*>::iterator it_obst;
@@ -610,9 +603,9 @@ void ClienteController::dibujar(){
             }
 
             int N = lines.size();
-
             pos = 1;
             int contador = 0;
+            float noDraw = 0;
 
 
 			//While application is running
@@ -664,6 +657,7 @@ void ClienteController::dibujar(){
 
                 }
 
+
                 /*  if (!this->cliente->obtenerRivalList().empty()) {
                       for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
                           Rival *rival = *it;
@@ -684,13 +678,12 @@ void ClienteController::dibujar(){
                                 lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
                                         rival);
                                 lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                noDraw = startPos + rival->getHorizonte() + 4;
                                 rival->notDibujar();
                             }
                         }
                     }break;
-
                     case 2: {
-                        cout<<"obtengo la lista y el tamaño es: "<<this->cliente->obtenerRivalList().size()<<endl;
                         if (!this->cliente->obtenerRivalList().empty()) {
                             list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                             Rival *rival = *it;
@@ -710,36 +703,36 @@ void ClienteController::dibujar(){
                         }
                     }break;
                 }
-
-
-
-
-                 for(int n=startPos+100; n>startPos; n--) {
-                     lines[n].drawSprite(this->renderer);
-                     lines[n].spriteXR1 = 0;
-                     lines[n].spriteXR2 = 0;
-                 }
-
-
+                for(int n=startPos+100; n>startPos; n--) {
+                    lines[n].drawSprite(this->renderer);
+                    //if (n != noDraw) {
+                        //lines[n].drawSprite(this->renderer);
+                        lines[n].spriteXR1 = 0;
+                        //lines[n].spriteXR2 = 0;
+                    //if (n>)
+                }
 
               /*  int posP2x = 230;
                 lines[startPos+posP2y].spriteP2 = player3;
                 lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
                 lines[startPos+posP2y].drawSprite(this->renderer);*/
 
-
-
                 curveSet =  lines[(pos/200)].curve;
 
                 //cout<<pos/200<<endl;
 
-                //checkCurveAndSetCentrifuga(curveSet);
+                checkCurveAndSetCentrifuga(curveSet);
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
-                car->render(cliente->getX(), autito->getY(), this->renderer);
+                car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
 
                 SDL_RenderPresent(this->renderer);
+
+                posMoving = cliente->getPosition();
+                if (posMoving != pos){
+                    moving = true;
+                } else moving = false;
 
 			}
 
@@ -828,8 +821,6 @@ bool ClienteController::loadMedia() {
 		success = false;
 	}
 
-
-
     //Open the font
 	font = TTF_OpenFont( "fonts/box.otf", 28 );
 	if( font == NULL )
@@ -862,19 +853,19 @@ void ClienteController::checkCurveAndSetCentrifuga(int curve) {
 }
 
 void ClienteController::backgroundMove() {
-    if (curveR && autito->isMoving()) {
+    if (curveR && moving) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
-        offsetBackgroundHills -= 0.05;
-        offsetBackgroundTree -= 0.1;
+        offsetBackgroundHills -= 0.5;
+        offsetBackgroundTree -= 1;
     }
-    if (curveL && autito->isMoving()) {
+    if (curveL && moving) {
         sky.render(0, 0, this->renderer);
         hills.render(offsetBackgroundHills, 20, this->renderer);
         trees.render(offsetBackgroundTree, 20, this->renderer);
-        offsetBackgroundHills += 0.05;
-        offsetBackgroundTree += 0.1;
+        offsetBackgroundHills += 0.5;
+        offsetBackgroundTree += 1;
     }
     else{
         sky.render(0, 0, this->renderer);

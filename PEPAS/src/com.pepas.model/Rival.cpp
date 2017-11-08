@@ -2,6 +2,7 @@
 // Created by arturi on 06/11/17.
 //
 
+#include <iostream>
 #include "../../headers/com.pepas.model/Rival.h"
 
 Rival::Rival() {
@@ -14,7 +15,8 @@ bool Rival::getDibujar() {
     return dibujar;
 }
 
-void Rival::actualizar(int pNum, int x, int y) {
+void Rival::actualizar(int pNum, int x, float y) {
+
     player = pNum;
     PosX = x;
     horizonte = y;
