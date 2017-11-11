@@ -374,6 +374,9 @@ void ClienteController::dibujar(){
 			do{
 				if (!this->cliente->estaConectado())
 					this->conectar();
+
+
+
 				quit = getString(&usuario,"Usuario :");
 
 				if(!quit)
@@ -387,7 +390,7 @@ void ClienteController::dibujar(){
 
 			while (!this->cliente->recibioFinDeMapa() &&!quit) {
                 cout << "Esperando jugadores" << endl;
-                sleep(5);
+                sleep(3);
             }
 
             this->carAsign();
@@ -669,17 +672,34 @@ void ClienteController::dibujar(){
                           break;
                       }
                   }*/
+
+                  for(int n=startPos+100; n>startPos; n--) {
+                    lines[n].drawSprite(this->renderer);
+                    //if (n != noDraw) {
+                        //lines[n].drawSprite(this->renderer);
+                        //lines[n].spriteXR1 = 0;
+                        //lines[n].spriteXR2 = 0;
+                        //if (n>)
+
+
+                }
                 switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
                     case 1: {
                         if (!this->cliente->obtenerRivalList().empty()) {
                             list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                             Rival *rival = *it;
                             if (rival->getDibujar()) {
-                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
-                                        rival);
+                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(rival->getPlayer());
                                 lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                                noDraw = startPos + rival->getHorizonte() + 4;
+                                if(noDraw != startPos + rival->getHorizonte() + 4){
+                               	  		lines[noDraw].spriteXR1 = 0;
+                               	  		lines[startPos + rival->getHorizonte() + 4].drawSprite(renderer);                            	    
+                               	  		noDraw = startPos + rival->getHorizonte() + 4;
+                               	  }
+
                                 rival->notDibujar();
+
+
                             }
                         }
                     }break;
@@ -688,29 +708,28 @@ void ClienteController::dibujar(){
                             list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                             Rival *rival = *it;
                             if (rival->getDibujar()) {
-                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(
-                                        rival);
+                                lines[startPos + rival->getHorizonte() + 4].spriteR1 = this->getTextura(rival->getPlayer());
                                 lines[startPos + rival->getHorizonte() + 4].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                noDraw = startPos + rival->getHorizonte() + 4;
                                 rival->notDibujar();
                             }
                             std::list<Rival*>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
                             Rival* rival2 = *it2;
                             if (rival2->getDibujar()) {
-                                lines[startPos + rival2->getHorizonte() + 4].spriteR2 = this->getTextura(rival2);
+                                lines[startPos + rival2->getHorizonte() + 4].spriteR2 = this->getTextura(rival2->getPlayer());
                                 lines[startPos + rival2->getHorizonte() + 4].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
+                                noDraw = startPos + rival->getHorizonte() + 4;
                                 rival2->notDibujar();
                             }
                         }
                     }break;
                 }
-                for(int n=startPos+100; n>startPos; n--) {
-                    lines[n].drawSprite(this->renderer);
-                    //if (n != noDraw) {
-                        //lines[n].drawSprite(this->renderer);
-                        lines[n].spriteXR1 = 0;
-                        //lines[n].spriteXR2 = 0;
-                    //if (n>)
-                }
+                
+                //arregla el problema del noDraw
+                               	  	for(int j = startPos + 99; j< startPos + 105;j++){
+                               	  		lines[j].spriteXR1 = 0;
+                               	  		//lines[j].spriteXR2 = 0;
+                               	  	}
 
               /*  int posP2x = 230;
                 lines[startPos+posP2y].spriteP2 = player3;
@@ -814,8 +833,8 @@ bool ClienteController::loadMedia() {
         printf( "Failed to load sprite sheet texture!\n" );
         success = false;
     }
-    playerGris = new Textura();
-	if( !playerGris->loadFromFile("img/palmera.png", this->renderer) )
+	player5 = new Textura();
+	if( !player5->loadFromFile("img/ferrariGris.png", this->renderer) )
 	{
 		printf( "Failed to load sprite sheet texture!\n" );
 		success = false;
@@ -890,10 +909,9 @@ bool ClienteController::getString(string* str,string optText){
 		//The current input text.
 		std::string inputText = "";
 
+
 		ingreso->loadFromRenderedText( inputText.c_str(), textColor,font,renderer );
-
-
-		opcion->loadFromRenderedText( optText.c_str(), textColor,font,renderer );
+        opcion->loadFromRenderedText( optText.c_str(), textColor,font,renderer );
 
 	//The rerender text flag
 	bool renderText = false;
@@ -1172,22 +1190,20 @@ void ClienteController::carAsign() {
 
 }
 
-Textura *ClienteController::getTextura(Rival *rival) {
-	if(rival->isConectado()) {
-		if (rival->getPlayer() == 1){
-			return  player1;
-		}
-		if (rival->getPlayer() == 2){
-			return  player2;
-		}
-		if (rival->getPlayer() == 3){
-			return  player3;
-		}
-		if (rival->getPlayer() == 4){
-			return  player4;
-		}
-	} else {
-		cout << "el player " << rival->getPlayer() << " esta desconectao" << endl;
-		return playerGris;
+Textura *ClienteController::getTextura(int player) {
+    if (player == 1){
+        return  player1;
+    }
+    if (player == 2){
+        return  player2;
+    }
+    if (player == 3){
+        return  player3;
+    }
+    if (player == 4){
+        return  player4;
+    }
+	if (player == 5){
+		return player5;
 	}
 }

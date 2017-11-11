@@ -64,7 +64,7 @@ private:
     Textura* player2;
     Textura* player3;
 	Textura* player4;
-	Textura* playerGris;
+	Textura* player5;
 
     Auto* autito;
 
@@ -150,7 +150,7 @@ public:
 
 	void carAsign();
 
-    Textura *getTextura(Rival *rival);
+    Textura *getTextura(int i);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

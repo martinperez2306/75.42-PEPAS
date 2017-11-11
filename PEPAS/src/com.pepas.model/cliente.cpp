@@ -499,18 +499,13 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 int Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+    cout<<"p num:"<<playerNum<<endl;
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
-    string color = obtenerParametros(datos,&i);
-    bool conectado = true;
-    if("GRIS" == color)
-    	conectado = false;
-    cout << "El auto va de color: " << color << endl;
     for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
         Rival* rival = *it;
         if (!rival->getDibujar()){
             rival->actualizar(playerNum,playerPosX,playerPosY);
-            rival->setConectado(conectado);
         }
     }
     return i;
