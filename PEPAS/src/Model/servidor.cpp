@@ -18,9 +18,6 @@
 #define CASE_LEFT_KU 25
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
-//
-//#define COLOR C
-//#define GRIS G
 
 
 
@@ -385,7 +382,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
         case USER_DISCONNECT:{
             loggear("Codigo de desconexion",2);
             loggear("Se desconecto el usuario con el FD: " + usuario,3);
-            loggear("*******",2);
+
             int fileD = stoi (usuario, nullptr,10);
             /*Obtengo el puerto a partir del FD*/
             //int puerto = mapFD.find(fileD)->first;
@@ -396,8 +393,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if(this->mapUsuario->count(puerto) > 0){
                 loggear("Estaba logueado",3);
                 this->desloguearse(this->mapUsuario->find(puerto)->second,socketDelemisor);
-                mapAutitos->find(usuario)->second->desconectar();
-//                mapAutitos->erase(usuario);
+                cout<<usuario<<endl;
+                grisados.push_front(mapUsuario->find(puerto)->second);
+                mapAutitos->erase(usuario); // mapUsuario->find(puerto)->second
                 player--;
             }
             /*Cierro el socket*/
@@ -817,17 +815,14 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     string separador = "/";
     int horizonte = 100;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
+        //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
         float diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
         if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0 ) {
-        	string gris = "COLOR";
-			if(!it->second->isConectado()) {
-				gris = "GRIS";
-			}
-        	i++;
+            i++;
             if (i>=1)
-                stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia) + separador + gris + separador;
-            else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia) + gris;
+                stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia) + separador;
+            else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia);
 
         }
         stringArmado= stringArmado + stringConcat;
@@ -841,4 +836,8 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 //Devuelve que tipo de curva es en cierto kilometraje
 int Servidor::curvaEnKilometraje(int posicionY){
 	return this->world->obtenerCurvaEnKilometraje(posicionY);
+}
+
+list<string> Servidor::obtenerGrisados() {
+    return grisados;
 }

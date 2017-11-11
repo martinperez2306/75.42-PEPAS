@@ -33,3 +33,10 @@ void CalculateThread::run() {
 void CalculateThread::terminar() {
     estaCerrado = true;
 }
+
+void CalculateThread::agregarGrisado() {
+    string player = (this->srv->obtenerGrisados().front());
+    cout<<this->srv->obtenerGrisados().size()<<endl;
+    cout<<"jugador grisado "<<player<<endl;
+    this->srv->obtenerAutoConId(player)->setJugador(5);
+}

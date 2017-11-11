@@ -32,6 +32,7 @@ private:
 	std::list<int> puertosDisponibles;
 	std::list<int> puertosEnUso;
     std::list<int> modeloDeAuto;
+	std::list<string> grisados;
 	unordered_map<int, int> mapFD; // <socketFD, puerto>
 	map<int,Socket*>* mapaSocket; // <puerto, Socket>
 	map<int, string>* mapUsuario;
@@ -127,6 +128,8 @@ public:
 	int curvaEnKilometraje(int posicionY);
 
 	string actualizarJuego(Auto *pAuto);
+
+	list<string> obtenerGrisados();
 };
 
 

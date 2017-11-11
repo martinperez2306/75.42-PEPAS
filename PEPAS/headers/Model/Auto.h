@@ -17,7 +17,7 @@ private:
 
 	float PosX, PosY, posicion;
 	float VelX, VelY;
-	bool PressUP, PressDown, curveR, curveL, conectado;
+	bool PressUP, PressDown, curveR, curveL;
 	int jugador;
 
 public:
@@ -70,10 +70,6 @@ public:
 	int obtenerPlayer();
 
 	void setJugador(int i);
-
-	bool isConectado();
-
-	void desconectar();
 };
 
 

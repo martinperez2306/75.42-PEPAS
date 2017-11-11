@@ -24,6 +24,7 @@ void ClientesThread::run() {
         if (msg == "CerrarCliente"){
             borrable=true;
             aliveThread.cerrarContador();
+            calculoThread.agregarGrisado();
             break;
         }
         if (srv->getEmpezoJuego() && !inGame){
@@ -31,6 +32,7 @@ void ClientesThread::run() {
             lanzeCalculoThread = true;
             inGame = true;
         }
+
     }
     inGame=false;
     calculoThread.terminar();

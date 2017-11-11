@@ -27,6 +27,8 @@ public:
     //bool esBorrable();
 
     void terminar();
+
+    void agregarGrisado();
 };
 
 
