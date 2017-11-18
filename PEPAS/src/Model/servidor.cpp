@@ -19,6 +19,8 @@
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
 
+#define SEGL 50
+#define HORIZONTE 400
 
 
 using namespace std;
@@ -813,11 +815,11 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     string stringArmado = "";
     string stringConcat, stringAnterior;
     string separador = "/";
-    int horizonte = 100;
+    int horizonte = HORIZONTE;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
-        float diferencia = (it->second->getPosition()/200) - (pAuto->getPosition()/200);
+        float diferencia = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
         if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0 ) {
             i++;
             if (i>=1)
