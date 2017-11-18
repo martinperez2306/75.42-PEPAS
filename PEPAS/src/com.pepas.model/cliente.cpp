@@ -226,7 +226,7 @@ void Cliente::parsearMensaje(std::string datos){
         case RUTAMAPA: {
             int longitud = stoi(obtenerParametros(datos, &i), nullptr, 10);
             float curva = stoi(obtenerParametros(datos, &i), nullptr, 10);
-            Track.emplace_back(make_pair(longitud,curva));
+            Track.emplace_back(make_pair(longitud*4,curva/4));
             //this->actualizarRutaMapa(longitud,curva);
         }break;
         case OBJETOSMAPA:{
