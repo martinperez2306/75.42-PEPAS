@@ -1,0 +1,9 @@
+<cliente>
+	<conexion>
+		<IP>10.0.2.15</IP>
+		<puerto>27015</puerto>
+	</conexion>
+	<testfile>
+		<path>cliente_test_file</path>
+	</testfile>
+</cliente>
