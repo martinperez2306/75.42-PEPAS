@@ -13,6 +13,9 @@
 #define SCREEN_HEIGHT 768
 #define SCREEN_WIDTH 1024
 
+#define LEFT_MARGIN 115
+#define RIGHT_MARGIN 700
+
 
 
 Auto::Auto(int player)
@@ -26,7 +29,13 @@ Auto::Auto(int player)
 	posicion = 0;
 	PressUP = false;
     PressDown = false;
+    Colision = false;
+    frontColision = false,
+    PressLeft_lock = false;
+    PressRight_lock = false;
+    PressUp_lock = false;
 	this->jugador = player;
+
 
 	switch (jugador){
 		case 1:{
@@ -48,6 +57,8 @@ Auto::Auto(int player)
 			break;
 
 	}
+    RIGHT_BORDER = PosX + CAR_WIDTH;
+    LEFT_BORDER = PosX;
 }
 
 int Auto::getX() {
@@ -61,9 +72,11 @@ int Auto::getY() {
 
 
 void Auto::moveLeft_KD(int curve) {
-	VelX -= CAR_VEL_X;
-    checkCurve(curve);
-
+	if (!PressLeft_lock) {
+        VelX -= CAR_VEL_X;
+        checkCurve(curve);
+        lastMove = "left";
+    }
 }
 
 void Auto::moveLeft_KU(int curve) {
@@ -72,8 +85,11 @@ void Auto::moveLeft_KU(int curve) {
 }
 
 void Auto::moveRight_KD(int curve) {
-	VelX += CAR_VEL_X ;
-    checkCurve(curve);
+    if (!PressRight_lock) {
+        VelX += CAR_VEL_X;
+        checkCurve(curve);
+        lastMove = "right";
+    }
 }
 
 void Auto::moveRight_KU(int curve) {
@@ -90,6 +106,11 @@ string Auto::calculateMove(int curve) {
     //checkCurve(posicion);
 	checkCurve(curve);
 	PosX += VelX;
+
+    /*Si me voy de la pista*/
+    if (PosX<= LEFT_MARGIN || PosX >= RIGHT_MARGIN)
+        VEL_MAX = 25;
+    else VEL_MAX = 50;
 
 	if (VelY >= VEL_MAX/2 && curveL && PosX < SCREEN_WIDTH - CAR_WIDTH){
 		PosX += DESVIO;
@@ -120,7 +141,7 @@ string Auto::calculateMove(int curve) {
 		posicion -= VelY;
 	}
 
-	if (PressUP && VelY < VEL_MAX) {
+	if (PressUP && VelY < VEL_MAX && !frontColision) { //&& !Colision
 		VelY += CAR_VEL;
 	}
 
@@ -130,6 +151,9 @@ string Auto::calculateMove(int curve) {
 
 	posicion += VelY;
 
+    RIGHT_BORDER = PosX + CAR_WIDTH;
+    LEFT_BORDER = PosX;
+
     string datos = procesarMovimiento();
 
     return datos;
@@ -138,13 +162,16 @@ string Auto::calculateMove(int curve) {
 }
 
 void Auto::moveUP_KD(int pos,int curve) {
-	PressUP = true;
-	VelY += CAR_VEL;
-	if (VelY>VEL_MAX){
-		VelY = VEL_MAX;
-	}
-	posicion = pos;
-//    checkCurve(curve);
+    if (!PressUp_lock){
+        PressUP = true;
+        VelY += CAR_VEL;
+        if (VelY>VEL_MAX)
+            VelY = VEL_MAX;
+
+        posicion = pos;
+        lastMove = "up";
+    }
+
 }
 
 void Auto::moveDown_KD(int pos,int curve) {
@@ -219,7 +246,8 @@ string Auto::procesarMovimiento() {
     string separador = "/";
     string posY = to_string(posicion);
     string posX = to_string(PosX);
-    stringACrear = separador + "20" + separador + posY + separador + posX + separador;
+    string velY = to_string(VelY);
+    stringACrear = separador + "20" + separador + posY + separador + posX + separador + velY + separador ;
     return stringACrear;
 }
 
@@ -230,4 +258,53 @@ int Auto::obtenerPlayer() {
 void Auto::setJugador(int i) {
 	this->jugador = i;
 
+}
+
+float Auto::getRightBorder() {
+    return this->RIGHT_BORDER;
+}
+
+float Auto::getLeftBorder() {
+    return this->LEFT_BORDER;
+}
+
+void Auto::estaEnColision(string lastMove, float velY) {
+        cout<<"recibi el lastmove: "<<lastMove<<endl;
+        if (lastMove == "up"  || velY > VEL_MIN) {
+            VelY = VEL_MIN;
+            PressUp_lock = true;
+            frontColision = true;
+            PressRight_lock = false;
+            PressLeft_lock = false;
+            cout<<"11111111111"<<endl;
+        } /*else if (velY == VEL_MIN && lastMove == "left")
+            PressLeft_lock = true;
+        else if (velY == VEL_MIN && lastMove == "right")
+            PressRight_lock = true;
+*/
+        if (lastMove == "left" && !frontColision) {
+            PosX -= VelX;
+            PressLeft_lock = true;
+            cout<<"2222222222"<<endl;
+        }
+        if (lastMove == "right" && !frontColision) {
+            PosX -= VelX;
+            PressRight_lock = true;
+            cout<<"33333333333"<<endl;
+    }
+}
+
+string Auto::getLastMove() {
+    return lastMove;
+}
+
+float Auto::getVelY() {
+    return VelY;
+}
+
+void Auto::noEstaEnColision() {
+    PressLeft_lock = false;
+    PressRight_lock = false;
+    PressUp_lock = false;
+    frontColision = false;
 }

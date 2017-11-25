@@ -15,10 +15,11 @@ class Auto {
 
 private:
 
-	float PosX, PosY, posicion;
+	float PosX, PosY, posicion, RIGHT_BORDER, LEFT_BORDER;
 	float VelX, VelY;
-	bool PressUP, PressDown, curveR, curveL;
+	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision;
 	int jugador;
+	string lastMove;
 
 public:
 
@@ -31,6 +32,8 @@ public:
 	float DESVIO = 0.3; // desvio en curvas
 	int VEL_MAX = 50;
 	int VEL_MIN = 0;
+
+
 
 
 	Auto(int jugador);
@@ -59,6 +62,10 @@ public:
 
 	float getPosition();
 
+	float getRightBorder();
+
+	float getLeftBorder();
+
 	bool isMoving();
 
 	void checkCurve(int curve);
@@ -67,9 +74,17 @@ public:
 
 	string agregarPadding(int lenght);
 
+	string getLastMove();
+
 	int obtenerPlayer();
 
 	void setJugador(int i);
+
+	void estaEnColision(string move, float velY);
+
+    float getVelY();
+
+    void noEstaEnColision();
 };
 
 

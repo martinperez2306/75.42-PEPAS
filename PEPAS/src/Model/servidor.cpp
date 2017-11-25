@@ -816,15 +816,27 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     string stringConcat, stringAnterior;
     string separador = "/";
     int horizonte = HORIZONTE;
+
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
-        float diferencia = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
-        if (diferencia <= horizonte &&  it->second != pAuto && diferencia >= 0 ) {
+        float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
+        float diferenciaX = abs(pAuto->getX() - it->second->getX());
+        if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
+            if ( diferenciaX <= 185 && diferenciaY <= 4){
+                //cout<<"Colision "<<diferenciaX<<"-"<<diferenciaY<<endl;
+                //cout<<pAuto->getLastMove()<<endl;
+                pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
+            } else {
+               // cout<<pAuto->getLastMove()<<endl;
+                pAuto->noEstaEnColision();
+            }
             i++;
-            if (i>=1)
-                stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia) + separador;
-            else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferencia);
+            if (i>=1) {
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador +
+                        to_string(diferenciaY) + separador;
+            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
+
 
         }
         stringArmado= stringArmado + stringConcat;
@@ -842,4 +854,8 @@ int Servidor::curvaEnKilometraje(int posicionY){
 
 list<string> Servidor::obtenerGrisados() {
     return grisados;
+}
+
+bool Servidor::hayColision() {
+    return colision;
 }

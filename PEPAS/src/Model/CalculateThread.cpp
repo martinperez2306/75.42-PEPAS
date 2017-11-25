@@ -9,8 +9,6 @@ CalculateThread::CalculateThread(Servidor *sv, bool CerrarServidor, Socket* sock
     this->srv = sv;
     this->estaCerrado = false;
     this->socket = socket;
-
-
 }
 
 void CalculateThread::run() {
@@ -21,12 +19,14 @@ void CalculateThread::run() {
     	int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
     	string msg = Automovil->calculateMove(curve);
         string playersInformation = srv->actualizarJuego(Automovil);
-        stringACrear = msg + playersInformation;
+        if (srv->hayColision())
+            stringACrear = Automovil->procesarMovimiento() + playersInformation;
+        else stringACrear = msg + playersInformation;
         unsigned long largoDelMensaje = stringACrear.length();
         stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
         usleep (4000);
         this->srv->enviarMensaje(stringProcesado,socket);
-        cout<<stringProcesado<<endl;
+
     }
 }
 

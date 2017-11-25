@@ -26,6 +26,7 @@ private:
 	int player;
 	bool terminado;
     bool empezarJuego;
+	bool colision;
 	BaseDeDatos* baseDeDatos;
 	Socket* iniciarConexion(int puerto);
 	Socket* serverSocket;
@@ -118,6 +119,8 @@ public:
     list<int> cargarLista();
 
     bool getEmpezoJuego();
+
+	bool hayColision();
 
     void setEmpezoJuego(bool i);
 
