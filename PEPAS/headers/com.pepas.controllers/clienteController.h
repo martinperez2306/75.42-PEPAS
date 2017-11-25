@@ -68,7 +68,8 @@ private:
 
     Auto* autito;
 
-    int carPosX, curveSet;
+    int carPosX;
+    double curveSet;
     std::map<int,Textura*>* obstaculos;
 
 
@@ -124,7 +125,7 @@ public:
 	void dibujar();
     void keyEvent(SDL_Event event);
     bool loadMedia();
-    void checkCurveAndSetCentrifuga(int curve);
+    void checkCurveAndSetCentrifuga(double curve);
     void backgroundMove();
 	void verMinimapa();
     void procesarMensajePosicion(int pos, int x);
@@ -149,6 +150,8 @@ public:
 	void actualizarMinimapa(Minimapa* minimapa);
 
 	void carAsign();
+
+	void dibujarRival(double X,double Y,double W, double scale, double spriteX, Textura* sprite);
 
     Textura *getTextura(int i);
 };

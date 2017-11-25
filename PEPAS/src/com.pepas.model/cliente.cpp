@@ -446,23 +446,20 @@ void Cliente::parsearCalculos(string datos, int i) {
     this->setPosY(posY);
     this->setPosX(posX);
     cantidadADibujar = stoi(obtenerParametros(datos,&i),nullptr,10);
-    switch (cantidadADibujar){
-        case 1:{
-            this->setRival(datos,i);
-        }
-            break;
-        case 2:{
-            int j =this->setRival(datos,i);
-            this->setRival(datos,j);
-        }
-            break;
-        case 3:{
-            int j = this->setRival(datos,i);
-            j = this->setRival(datos,j);
-            this->setRival(datos,j);
-        }break;
-    }
+    int j=0;
 
+    for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
+        Rival* rival = *it;
+        if (j< cantidadADibujar){
+            int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
+            float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
+            //if (!rival->getDibujar()){
+                rival->actualizar(playerNum,playerPosX,playerPosY);
+            //}
+        } else rival->notDibujar();
+        j++;
+    }
 
 }
 
@@ -499,7 +496,6 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 int Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
-    cout<<"p num:"<<playerNum<<endl;
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
     for(list<Rival*>::iterator it = this->rivalList.begin(); it != this->rivalList.end();++it){
