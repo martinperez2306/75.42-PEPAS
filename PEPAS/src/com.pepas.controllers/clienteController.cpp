@@ -341,6 +341,7 @@ void ClienteController::dibujar() {
         } else {
             //Main loop flag
             bool quit = false;
+            clock_t startTime;
 
             //Event handler
             SDL_Event e;
@@ -601,7 +602,8 @@ void ClienteController::dibujar() {
             double noDraw3 = 0;
 
 
-
+            //Start timer
+			startTime = clock();
             //While application is running
             while (!quit) {
 
@@ -611,6 +613,7 @@ void ClienteController::dibujar() {
                     if (e.type == SDL_QUIT) {
                         quit = true;
                     }
+
                     this->keyEvent(e);
                 }
 
@@ -788,14 +791,25 @@ void ClienteController::dibujar() {
                 car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
                 this->renderVelocidad();
+                this->renderTiempo(startTime);
+
+
+
+                posMoving = cliente->getPosition();
+
+                //////
+
+                this->renderDistancia(posMoving);
 
                 SDL_RenderPresent(this->renderer);
 
-                posMoving = cliente->getPosition();
+
+                //////////
                 if (posMoving != pos) {
                     moving = true;
                     //Mix_PlayChannel(-1,gUp,0);
-                } else moving = false;
+                } else
+                	moving = false;
                    // Mix_HaltChannel(-1);
             }
 
@@ -980,7 +994,7 @@ void ClienteController::verMinimapa() {
 }
 
 void ClienteController::renderVelocidad(){
-    string vel = to_string(this->cliente->getVelocidad());
+    string vel = "Velocidad: " + to_string(this->cliente->getVelocidad());
 
     SDL_Color textColor = {0, 0, 0, 0xFF};
 
@@ -988,6 +1002,39 @@ void ClienteController::renderVelocidad(){
     opcion->render((SCREEN_WIDTH - opcion->getWidth())*3 / 4, 0, renderer);
 
 }
+
+void ClienteController::renderTiempo(clock_t startTime) {
+	int secondsPassed;
+	int minutesPassed;
+	secondsPassed =  (clock() - startTime) / CLOCKS_PER_SEC;
+    minutesPassed = secondsPassed / 60;
+
+    secondsPassed = secondsPassed - (minutesPassed * 60);
+
+	string tiempo = "Tiempo: " + to_string((int)minutesPassed) + ":" + to_string((int)secondsPassed);
+	int copiaMinutos=minutesPassed;
+
+	SDL_Color textColor = {0, 0, 0, 0xFF};
+
+
+	opcion->loadFromRenderedText(tiempo.c_str(),textColor,speed,renderer);
+	opcion->render(((SCREEN_WIDTH - opcion->getWidth()) * 3 / 4 ), 30, renderer);
+}
+
+
+
+void ClienteController::renderDistancia(int distancia) {
+    int dist=distancia/200;
+
+    string distance = "Distancia: " + to_string(dist) + " m.";
+    SDL_Color textColor = {0, 0, 0, 0xFF};
+
+    opcion->loadFromRenderedText(distance.c_str(),textColor,speed,renderer);
+    opcion->render(((SCREEN_WIDTH - opcion->getWidth()) * 3 / 4 ), 60, renderer);
+
+}
+
+
 
 bool ClienteController::getString(string *str, string optText) {
 

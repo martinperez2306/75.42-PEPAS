@@ -27,7 +27,10 @@
 #include "../com.pepas.model/Recorredor.h"
 #include <SDL2/SDL_ttf.h>
 #include <map>
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer.h>
+
+#include <ctime>
+#include <cstdlib>
 
 class ClienteController{
 
@@ -166,7 +169,9 @@ public:
 	void dibujarRival(double X,double Y,double W, double scale, double spriteX, Textura* sprite);
 
     Textura *getTextura(int i);
-void renderVelocidad();
+    void renderVelocidad();
+    void renderTiempo(clock_t);
+    void renderDistancia(int posMoving);
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */
