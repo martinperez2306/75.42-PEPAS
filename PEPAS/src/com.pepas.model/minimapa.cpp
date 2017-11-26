@@ -6,6 +6,7 @@ Minimapa::Minimapa(){
 	this->minimapa = new map<Segmento*,Objetos*>();
 	this->ruta = new list<Segmento*>();
 	this->objetos = new list<Objeto*>();
+	this->radar = new map<int,Posicion*>();
 }
 
 void Minimapa::setObjetos(Segmento* seg,Objetos* objetos){
@@ -79,3 +80,14 @@ Minimapa::~Minimapa(){
 	delete this->minimapa;
 }
 
+void Minimapa::setAutoEnRadar(int player,Posicion* posicion){
+	(*this->radar)[player] = posicion;
+}
+
+/*Posicion* Minimapa::getPosicionDelAutoEnRadar(int player){
+	return this->radar->find(player)->second;
+}*/
+
+map<int,Posicion*>* Minimapa::getRadar(){
+	return this->radar;
+}
