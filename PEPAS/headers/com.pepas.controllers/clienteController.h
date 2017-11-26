@@ -154,6 +154,7 @@ public:
 	void dibujarRival(double X,double Y,double W, double scale, double spriteX, Textura* sprite);
 
     Textura *getTextura(int i);
+void renderVelocidad();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

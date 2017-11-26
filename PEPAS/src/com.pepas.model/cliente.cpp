@@ -28,6 +28,7 @@ Cliente::Cliente() {
     this->minimapa=new Minimapa();
     this->mapa = new Mapa();
     this->vista=new Vista();
+    this->velocidad = 0;
     posX =  1024/2 -100;
     posY = 768 - 1;
     finDeMapa = false;
@@ -443,8 +444,10 @@ int Cliente::obtenerCantidadJugadores() {
 void Cliente::parsearCalculos(string datos, int i) {
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
+    int velocidad = stoi(obtenerParametros(datos,&i),nullptr,10);
     this->setPosY(posY);
     this->setPosX(posX);
+    this->setVelocidad(velocidad);
     cantidadADibujar = stoi(obtenerParametros(datos,&i),nullptr,10);
     int j=0;
 
@@ -520,3 +523,10 @@ int Cliente::getY() {
     return posY;
 }
 
+void Cliente::setVelocidad(int vel){
+    this->velocidad = vel;
+}
+
+int Cliente::getVelocidad(){
+   return this->velocidad;
+}

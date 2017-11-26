@@ -784,6 +784,7 @@ void ClienteController::dibujar() {
 
                 car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
+                this->renderVelocidad();
 
                 SDL_RenderPresent(this->renderer);
 
@@ -919,6 +920,15 @@ void ClienteController::verMinimapa() {
 
 }
 
+void ClienteController::renderVelocidad(){
+    string vel = to_string(this->cliente->getVelocidad());
+
+    SDL_Color textColor = {0, 0, 0, 0xFF};
+
+    opcion->loadFromRenderedText(vel.c_str(),textColor,font,renderer);
+    opcion->render((SCREEN_WIDTH - opcion->getWidth())*3 / 4, 0, renderer);
+
+}
 
 bool ClienteController::getString(string *str, string optText) {
 
