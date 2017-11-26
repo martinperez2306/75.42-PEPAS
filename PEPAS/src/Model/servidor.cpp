@@ -820,13 +820,18 @@ Auto *Servidor::obtenerAutoConId(string id) {
 string Servidor::actualizarJuego(Auto *pAuto) {
     int i=0;
     string stringArmado = "";
-    string stringConcat, stringAnterior;
+    string stringConcat, stringAnterior, stringMinimapa;
     string separador = "/";
     int horizonte = HORIZONTE;
-
+    stringMinimapa = to_string(mapAutitos->size());
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
+        Posicion* posicionDelAuto = NULL;
+
+        posicionDelAuto = this->recorredor->getPosicionEnDistancia((int)it->second->getPosition()/2000);
+        stringMinimapa = stringMinimapa + separador + to_string(it->second->obtenerPlayer()) + separador + to_string(posicionDelAuto->getX()) + separador + to_string(posicionDelAuto->getY());
+
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
         float diferenciaX = abs(pAuto->getX() - it->second->getX());
         if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
@@ -844,13 +849,12 @@ string Servidor::actualizarJuego(Auto *pAuto) {
                         to_string(diferenciaY) + separador;
             } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
-
         }
         stringArmado= stringArmado + stringConcat;
     }
-    stringArmado = to_string(i) + separador + stringArmado;
+    stringArmado = stringMinimapa +  to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado = to_string(0);
+        stringArmado = stringMinimapa + to_string(0);
     return stringArmado;
 }
 

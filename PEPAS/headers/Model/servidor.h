@@ -13,6 +13,8 @@
 #include "Zoomer.h"
 #include "Logica.h"
 #include "Auto.h"
+#include "Recorredor.h"
+
 
 
 class Servidor{
@@ -43,6 +45,7 @@ private:
 	Minimapa* minimapa;
 	World* world;
 	Zoomer* zoomer;
+    Recorredor* recorredor;
 
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;

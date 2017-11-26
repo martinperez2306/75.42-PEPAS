@@ -62,6 +62,32 @@ void Zoomer::zoomMapToWorld(Mapa* mapa, World* world){
 	}
 
 }
+//Modifica el metodo zoomPamToMinimap del zoomer.h y el codigo del .cpp reemplazalo por esto (el cout fue de debug)
+void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorredor){
+	cout<<"entre al zoomer"<<endl;
+	for(list<Segmento*>::iterator it = mapa->getRuta()->begin(); it!= mapa->getRuta()->end(); ++it){
+		Segmento* segmento = *it;
+		Segmento* segmentoMinimapa = this->zoomRuta(segmento);
+		minimapa->agregarSegmento(segmentoMinimapa);
+		recorredor->recorrer(segmentoMinimapa);
+	}
+	for(list<Objeto*>::iterator it = mapa->getObjetos()->begin(); it!=mapa->getObjetos()->end();++it){
+		Objeto* objeto = *it;
+		minimapa->agregarObjeto(this->zoomObjeto(objeto));
+	}
+}
+
+void Zoomer::agregarPaddingToWorld(World* world, int metrosFinales){
+
+	for(int i = 1; i <= PADDING ; i++){
+		metrosFinales++;
+		LineaX* lineaX = new LineaX();
+		//RECTA
+		lineaX->setCurva(0);
+		world->agregarLinea(metrosFinales,lineaX);
+	}
+}
+
 
 Zoomer::~Zoomer() {
 }

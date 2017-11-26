@@ -6,6 +6,9 @@
 #include "Mapa.h"
 #include "minimapa.h"
 #include "World.h"
+#include "Recorredor.h"
+
+#define PADDING 100
 
 class Zoomer {
 
@@ -31,6 +34,8 @@ public:
 	void zoomMapToMinimap(Mapa* mapa,Minimapa* minimapa);
 	//Crear el mundo a traves del mapa
 	void zoomMapToWorld(Mapa* mapa, World* world);
+	void zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorredor);
+	void agregarPaddingToWorld(World* world, int metrosFinales);
 	~Zoomer();
 };
 
