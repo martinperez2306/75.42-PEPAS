@@ -1,3 +1,4 @@
+#include <SDL_mixer.h>
 #include "../../headers/com.pepas.model/sdllib.h"
 
 
@@ -55,6 +56,11 @@ bool init(int screen_width, int screen_height, SDL_Window** window , SDL_Rendere
 				if( TTF_Init() == -1 )
 				{
 					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+					success = false;
+				}
+				if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+				{
+					printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
 					success = false;
 				}
 			}

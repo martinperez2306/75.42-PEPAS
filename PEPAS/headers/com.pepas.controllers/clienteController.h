@@ -27,6 +27,7 @@
 #include "../com.pepas.model/Recorredor.h"
 #include <SDL2/SDL_ttf.h>
 #include <map>
+#include <SDL_mixer.h>
 
 class ClienteController{
 
@@ -70,6 +71,14 @@ private:
 	Textura* player5;
 
     Auto* autito;
+
+    Mix_Music *soundTrack = NULL;
+
+    Mix_Chunk *gUp = NULL;
+    Mix_Chunk *gLeft = NULL;
+    Mix_Chunk *gRight = NULL;
+    Mix_Chunk *gBreak = NULL;
+    Mix_Chunk *gLeave = NULL;
 
     int carPosX;
     double curveSet;

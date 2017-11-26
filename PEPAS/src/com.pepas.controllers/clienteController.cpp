@@ -376,6 +376,9 @@ void ClienteController::dibujar() {
             }
 
             this->carAsign();
+            Mix_PlayMusic( soundTrack, -1 );
+            Mix_VolumeMusic(10);
+            Mix_Volume(-1, 10);
 
             //Disable text input
             SDL_StopTextInput();
@@ -791,8 +794,9 @@ void ClienteController::dibujar() {
                 posMoving = cliente->getPosition();
                 if (posMoving != pos) {
                     moving = true;
+                    //Mix_PlayChannel(-1,gUp,0);
                 } else moving = false;
-
+                   // Mix_HaltChannel(-1);
             }
 
         }
@@ -892,6 +896,43 @@ bool ClienteController::loadMedia() {
         printf("Failed to load score font! SDL_ttf Error: %s\n", TTF_GetError());
         success = false;
     }
+    gUp = Mix_LoadWAV( "audios/up.wav" );
+    if( gUp == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gLeft = Mix_LoadWAV( "audios/left.wav" );
+    if( gLeft == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gRight = Mix_LoadWAV( "audios/right.wav" );
+    if( gRight == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gLeave = Mix_LoadWAV( "audios/soltar.wav" );
+    if( gLeave == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gBreak = Mix_LoadWAV( "audios/freno.wav" );
+    if( gBreak == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    soundTrack = Mix_LoadMUS( "audios/musicafondo.mp3" );
+    if( soundTrack == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+
 
 
     return success;
@@ -1060,33 +1101,40 @@ void ClienteController::keyEvent(SDL_Event e) {
         //Adjust the velocity
         switch (e.key.keysym.sym) {
             case SDLK_UP:
+                Mix_PlayChannel( 0, gUp, -1 );
                 enviarMoveUp();
                 break;
             case SDLK_DOWN:
+                Mix_PlayChannel( 3, gBreak, -1 );
                 enviarMoveDown();
                 break;
             case SDLK_LEFT:
+                Mix_PlayChannel( 1, gRight, -1);
                 enviarMoveLeft();
                 break;
             case SDLK_RIGHT:
+                Mix_PlayChannel( 2, gRight, -1 );
                 enviarMoveRight();
                 break;
         }
     } else if (e.type == SDL_KEYUP && e.key.repeat == 0) {
         switch (e.key.keysym.sym) {
             case SDLK_RIGHT:
+                Mix_HaltChannel(2);
                 enviarNotMoveRight();
                 break;
             case SDLK_UP:
+                Mix_HaltChannel(0);
                 enviarNotMoveUp();
                 break;
             case SDLK_DOWN:
+                Mix_HaltChannel(3);
                 enviarNotMoveDown();
                 break;
             case SDLK_LEFT:
+                Mix_HaltChannel(1);
                 enviarNotMoveLeft();
                 break;
-
         }
     }
 
