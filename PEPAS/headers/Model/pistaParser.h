@@ -5,28 +5,26 @@
 #include "minimapa.h"
 #include "pugixml.hpp"
 #include "segmento.h"
-#include "objetos.h"
 #include "Objeto.h"
 #include "Mapa.h"
 
 #define RECTO 0
 #define CURVAI 1
 #define CURVAD -1
+#define ARBOL 1
 
 class PistaParser{
 
 
-	//CUIDADO AL ENTENDER COMO ESTA DIVIDIDA LA PISTA (SEGMENTOS, SUBSEGMENTOS Y OBJETOS)
+//CUIDADO AL ENTENDER COMO ESTA DIVIDIDA LA PISTA (SEGMENTOS, SUBSEGMENTOS Y OBJETOS)
 
 private:
 
-	Mapa* mapa;
-	Minimapa* minimapa;
 	Puntero* puntero;
 	Posicion* posicionActual;
 	int generarDireccion(string direccion);
-	void girarYAvanzar(string direccion, int distancia);
-	void generarObjeto(int distancia,string ladoDelObjeto,pugi::xml_node tipoDeObjeto);
+	void girarYAvanzar(string direccion, int distancia,Mapa* mapa);
+	void generarObjeto(int distancia,string ladoDelObjeto,pugi::xml_node tipoDeObjeto,Mapa* mapa);
 
 
 public:
@@ -36,13 +34,11 @@ public:
 	void setPosicionActual(Posicion* posActual);
 	Posicion* getPosicionActual();
 
-	void parsearMapa();
+	Mapa* parsearMapa(const char*);
 	Minimapa* getMinimapa();
 	Mapa* getMapa();
 
-	void prueba();
-
-	//Eliminar referencia a puntero solamente (lo demas es usado por el servidor)
+//Eliminar referencia a puntero solamente (lo demas es usado por el servidor)
 	~PistaParser();
 
 };

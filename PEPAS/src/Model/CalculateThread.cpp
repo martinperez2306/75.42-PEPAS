@@ -24,7 +24,7 @@ void CalculateThread::run() {
         else stringACrear = msg + playersInformation;
         unsigned long largoDelMensaje = stringACrear.length();
         stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
-        usleep (4000);
+        usleep (1000);
         this->srv->enviarMensaje(stringProcesado,socket);
 
     }

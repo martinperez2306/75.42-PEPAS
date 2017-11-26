@@ -63,6 +63,8 @@ Servidor::Servidor(){
 	this->mapaSocket = new map<int,Socket*>();
     this->mapUsuario = new map<int,string>();
     this->mapAutitos = new map<string,Auto*>();
+    //Mapas generado por pista parser
+    this->mapas = new map<int,Mapa*>();
     loggear ("Salio del constructor del Servidor",2);
     loggear (" ",2);
     this->pistaParser= new PistaParser();
@@ -631,11 +633,16 @@ void Servidor::setZoomEntreMapaYMinimapa(int zoom){
 }
 
 void Servidor::generarMapa(){
-	this->pistaParser->parsearMapa();
-	this->mapa = this->pistaParser->getMapa();
-	this->mapa->mostrarSegmentos();
-	this->mapa->mostrarObjetos();
-	delete this->pistaParser;
+    loggear("Creando pistas desde archivos de configuracion",1);
+    (*this->mapas)[1] = this->pistaParser->parsearMapa("pista1.xml");
+    (*this->mapas)[2] = this->pistaParser->parsearMapa("pista2.xml");
+    (*this->mapas)[3] = this->pistaParser->parsearMapa("pista3.xml");
+    loggear("Pistas cargadas",1);
+    delete this->pistaParser;
+    loggear("Eliminando pista parser",1);
+    this->setMapa(2);
+    this->generarMinimapa();
+    this->generarWorld();
 }
 void Servidor::generarMinimapa(){
 	this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa);
@@ -858,4 +865,8 @@ list<string> Servidor::obtenerGrisados() {
 
 bool Servidor::hayColision() {
     return colision;
+}
+
+void Servidor::setMapa(int numeroMapa){
+    this->mapa = this->mapas->find(numeroMapa)->second;
 }

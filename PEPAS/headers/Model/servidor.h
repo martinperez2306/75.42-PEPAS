@@ -37,7 +37,7 @@ private:
 	unordered_map<int, int> mapFD; // <socketFD, puerto>
 	map<int,Socket*>* mapaSocket; // <puerto, Socket>
 	map<int, string>* mapUsuario;
-
+    map<int,Mapa*>* mapas;
 	PistaParser* pistaParser;
 	Mapa* mapa;
 	Minimapa* minimapa;
@@ -133,6 +133,8 @@ public:
 	string actualizarJuego(Auto *pAuto);
 
 	list<string> obtenerGrisados();
+
+    void setMapa(int i);
 };
 
 

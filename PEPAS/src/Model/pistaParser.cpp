@@ -1,10 +1,8 @@
 #include "../../headers/Model/pistaParser.h"
 
 PistaParser::PistaParser(){
-	this->minimapa = new Minimapa();
 	this->puntero = new Puntero();
 	this->posicionActual = NULL;
-	this->mapa = new Mapa();
 }
 
 void PistaParser::setPosicionActual(Posicion* posActual){
@@ -46,35 +44,35 @@ int PistaParser::generarDireccion(string direccion){
 	return angulo;
 }
 
-void PistaParser::girarYAvanzar(string direccion,int distancia){
+void PistaParser::girarYAvanzar(string direccion,int distancia,Mapa* mapa){
 
 	Posicion* posicionAuxiliar = this->posicionActual;
 	Posicion* posicionFinal = this->posicionActual;
 
 	//evitar añadir un segmento de longitud 0 (caso de girar solamente)
 	if(distancia != 0){
-	Segmento* segm = new Segmento();
+		Segmento* segm = new Segmento();
 
-	if(direccion.compare("derecho") == 0){
-		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
-		segm->setCurva(RECTO);
-	}
-	if(direccion.compare("derecha") == 0){
-		this->puntero->girarDerecha();
-		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
-		segm->setCurva(CURVAD);
-	}
-	if(direccion.compare("izquierda") == 0){
-		this->puntero->girarIzquierda();
-		posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
-		segm->setCurva(CURVAI);
-	}
-	//ACA CREAMOS UN SUBSEGMENTO!!(OJO: CLASE SE LLAMA SEGMENTO PERO ES UN SUBSEGMENTO)
-	segm->setLongitud(distancia);
-	segm->setPosicionInicial(posicionAuxiliar);
-	segm->setPosicionFinal(posicionFinal);
-	this->mapa->agregarSegmento(segm);
-	this->posicionActual = posicionFinal;
+		if(direccion.compare("derecho") == 0){
+			posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+			segm->setCurva(RECTO);
+		}
+		if(direccion.compare("derecha") == 0){
+			this->puntero->girarDerecha();
+			posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+			segm->setCurva(CURVAD);
+		}
+		if(direccion.compare("izquierda") == 0){
+			this->puntero->girarIzquierda();
+			posicionFinal = this->puntero->avanzar(this->posicionActual,distancia);
+			segm->setCurva(CURVAI);
+		}
+		//ACA CREAMOS UN SUBSEGMENTO!!(OJO: CLASE SE LLAMA SEGMENTO PERO ES UN SUBSEGMENTO)
+		segm->setLongitud(distancia);
+		segm->setPosicionInicial(posicionAuxiliar);
+		segm->setPosicionFinal(posicionFinal);
+		mapa->agregarSegmento(segm);
+		this->posicionActual = posicionFinal;
 	}
 	else{
 		if(direccion.compare("derecha") == 0){
@@ -86,7 +84,7 @@ void PistaParser::girarYAvanzar(string direccion,int distancia){
 	}
 }
 
-void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_node tipoDeObjeto){
+void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_node tipoDeObjeto,Mapa* mapa){
 
 	Objeto* objeto = new Objeto();
 
@@ -127,63 +125,49 @@ void PistaParser::generarObjeto(int distancia,string ladoDeLosObjetos,pugi::xml_
 	//DISTANCIA DEL OBJETO
 	objeto->setDistancia(distancia);
 
-	this->mapa->agregarObjeto(objeto);
+	mapa->agregarObjeto(objeto);
 }
 
 
-void PistaParser::parsearMapa(){
+Mapa* PistaParser::parsearMapa(const char* archivo){
+	Mapa* mapa = new Mapa();
 	pugi::xml_document documento;
-		pugi::xml_parse_result result = documento.load_file("pista.xml");
-		cout << "Load Result: " << result.description() <<endl;
-		if (result.status ==0){
-			//Si no hubo error parseamos el xml
-			pugi::xml_node nodeInicio = documento.child("minimapa").child("inicio");
-			pugi::xml_node inicioX = nodeInicio.child("x");
-			pugi::xml_node inicioY = nodeInicio.child("y");
+	pugi::xml_parse_result result = documento.load_file(archivo);
+	cout << "Load Result: " << result.description() <<endl;
+	if (result.status ==0){
+		//Si no hubo error parseamos el xml
+		pugi::xml_node nodeInicio = documento.child("minimapa").child("inicio");
+		pugi::xml_node inicioX = nodeInicio.child("x");
+		pugi::xml_node inicioY = nodeInicio.child("y");
 
-			this->posicionActual = new Posicion(inicioX.text().as_int(),inicioY.text().as_int());
+		this->posicionActual = new Posicion(inicioX.text().as_int(),inicioY.text().as_int());
 
-			pugi::xml_node nodeInitialDir = documento.child("minimapa").child("direccionInicial");
-			int direccionInicial = this->generarDireccion(nodeInitialDir.text().as_string());
-			cout<<"direccionInicial "<<direccionInicial<<endl;
-			this->puntero->setAngulo(direccionInicial);
+		pugi::xml_node nodeInitialDir = documento.child("minimapa").child("direccionInicial");
+		int direccionInicial = this->generarDireccion(nodeInitialDir.text().as_string());
+		cout<<"direccionInicial "<<direccionInicial<<endl;
+		this->puntero->setAngulo(direccionInicial);
 
-			//Buscamos en todos los segmentos del xml
-			pugi::xml_node nodeSegments = documento.child("minimapa").child("segmentos");
-			//Detectamos la ruta y creamos los segmentos de ruta con sus correspondientes objetos
-			pugi::xml_node nodeRoute = nodeSegments.child("ruta");
-			for(pugi::xml_node nodeDirection = nodeRoute.first_child(); nodeDirection; nodeDirection = nodeDirection.next_sibling()){
-				this->girarYAvanzar(nodeDirection.name(),nodeDirection.text().as_int());
-			}
-			//Detectamos los objetos que contendra el segmento (arboles, carteles, etc)
-			pugi::xml_node nodeObjects = nodeSegments.child("objetos");
-			for(pugi::xml_node nodeObject = nodeObjects.first_child(); nodeObject;nodeObject = nodeObject.next_sibling()){
-				pugi::xml_node nodeObjectDist = nodeObject.child("distancia");
-				pugi::xml_node nodeObjectPos = nodeObject.child("posicion");
-				pugi::xml_node nodeObjectType = nodeObject.child("tipo");
-				this->generarObjeto(nodeObjectDist.text().as_int(),nodeObjectPos.text().as_string(),nodeObjectType);
-			}
+		//Buscamos en todos los segmentos del xml
+		pugi::xml_node nodeSegments = documento.child("minimapa").child("segmentos");
+		//Detectamos la ruta y creamos los segmentos de ruta con sus correspondientes objetos
+		pugi::xml_node nodeRoute = nodeSegments.child("ruta");
+		for(pugi::xml_node nodeDirection = nodeRoute.first_child(); nodeDirection; nodeDirection = nodeDirection.next_sibling()){
+			this->girarYAvanzar(nodeDirection.name(),nodeDirection.text().as_int(),mapa);
 		}
+		//Detectamos los objetos que contendra el segmento (arboles, carteles, etc)
+		pugi::xml_node nodeObjects = nodeSegments.child("objetos");
+		for(pugi::xml_node nodeObject = nodeObjects.first_child(); nodeObject;nodeObject = nodeObject.next_sibling()){
+			pugi::xml_node nodeObjectDist = nodeObject.child("distancia");
+			pugi::xml_node nodeObjectPos = nodeObject.child("posicion");
+			pugi::xml_node nodeObjectType = nodeObject.child("tipo");
+			this->generarObjeto(nodeObjectDist.text().as_int(),nodeObjectPos.text().as_string(),nodeObjectType,mapa);
+		}
+	}
+	return mapa;
 }
 
-
-Minimapa* PistaParser::getMinimapa(){
-	return this->minimapa;
-}
-
-Mapa* PistaParser::getMapa(){
-	return this->mapa;
-}
-
-void PistaParser::prueba(){
-	this->minimapa->mostrarSegmentos();
-	this->minimapa->mostrarObjetos();
-}
-
-//Eliminamos el puntero (el mapa y las posiciones deben mantenerse vivas)
+//Eliminamos el puntero
 
 PistaParser::~PistaParser(){
 	delete this->puntero;
 }
-
-
