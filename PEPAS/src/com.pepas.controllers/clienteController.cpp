@@ -869,9 +869,27 @@ bool ClienteController::loadMedia() {
     }
 
     //Open the font
-    font = TTF_OpenFont("fonts/box.otf", 28);
-    if (font == NULL) {
-        printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+    login = TTF_OpenFont("fonts/box.otf", 28);
+    if (login == NULL) {
+        printf("Failed to load login font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    speed = TTF_OpenFont("fonts/velocidad.ttf", 28);
+    if (speed == NULL) {
+        printf("Failed to load speed font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    tiempo = TTF_OpenFont("fonts/time.TTF", 28);
+    if (tiempo == NULL) {
+        printf("Failed to load time font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    score = TTF_OpenFont("fonts/score.ttf", 28);
+    if (score == NULL) {
+        printf("Failed to load score font! SDL_ttf Error: %s\n", TTF_GetError());
         success = false;
     }
 
@@ -925,7 +943,7 @@ void ClienteController::renderVelocidad(){
 
     SDL_Color textColor = {0, 0, 0, 0xFF};
 
-    opcion->loadFromRenderedText(vel.c_str(),textColor,font,renderer);
+    opcion->loadFromRenderedText(vel.c_str(),textColor,speed,renderer);
     opcion->render((SCREEN_WIDTH - opcion->getWidth())*3 / 4, 0, renderer);
 
 }
@@ -940,8 +958,8 @@ bool ClienteController::getString(string *str, string optText) {
     std::string inputText = "";
 
 
-    ingreso->loadFromRenderedText(inputText.c_str(), textColor, font, renderer);
-    opcion->loadFromRenderedText(optText.c_str(), textColor, font, renderer);
+    ingreso->loadFromRenderedText(inputText.c_str(), textColor, login, renderer);
+    opcion->loadFromRenderedText(optText.c_str(), textColor, login, renderer);
 
     //The rerender text flag
     bool renderText = false;
@@ -983,12 +1001,12 @@ bool ClienteController::getString(string *str, string optText) {
             //Text is not empty
             if (inputText != "") {
                 //Render new text
-                ingreso->loadFromRenderedText(inputText.c_str(), textColor, font, renderer);
+                ingreso->loadFromRenderedText(inputText.c_str(), textColor, login, renderer);
             }
                 //Text is empty
             else {
                 //Render space texture
-                ingreso->loadFromRenderedText(" ", textColor, font, renderer);
+                ingreso->loadFromRenderedText(" ", textColor, login, renderer);
             }
         }
 

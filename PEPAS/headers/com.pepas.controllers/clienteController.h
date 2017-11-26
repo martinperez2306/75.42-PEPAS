@@ -57,7 +57,10 @@ private:
     Textura* arbol;
     Textura* cartel;
     Textura* cartel2;
-    TTF_Font *font;
+    TTF_Font *login;
+    TTF_Font *speed;
+    TTF_Font *tiempo;
+    TTF_Font *score;
     Textura* opcion;
     Textura* ingreso;
 	Textura* player1;
