@@ -448,6 +448,14 @@ void Cliente::parsearCalculos(string datos, int i) {
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);
+    cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
+    for(int k = 0; k < cantidadJugadores; k++){
+        int player = stoi(obtenerParametros(datos,&i),nullptr,10);
+        int x = stoi(obtenerParametros(datos,&i),nullptr,10);
+        int y = stoi(obtenerParametros(datos,&i),nullptr,10);
+        Posicion* pos = new Posicion(x,y);
+        this->minimapa->setAutoEnRadar(player,pos);
+    }
     cantidadADibujar = stoi(obtenerParametros(datos,&i),nullptr,10);
     int j=0;
 

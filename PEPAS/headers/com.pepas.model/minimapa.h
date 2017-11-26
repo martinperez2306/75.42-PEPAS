@@ -20,6 +20,7 @@ private:
 	map<Segmento*,Objetos*>* minimapa;
 	list<Segmento*>* ruta;
 	list<Objeto*>* objetos;
+	map<int,Posicion*>* radar;
 
 
 public:
@@ -45,10 +46,13 @@ public:
 	void mostrarSegmentos();
 	void mostrarObjetos();
 	void getAllPosiciones();
+	map<int,Posicion*>* getRadar();
 
 	//Eliminar la memoria pedida por el minimapa
 	//Eliminar toda la memoria pedida para los segmentos y los objetos
 	~Minimapa();
+
+    void setAutoEnRadar(int i, Posicion *pPosicion);
 };
 
 

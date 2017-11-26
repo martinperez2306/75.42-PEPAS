@@ -557,15 +557,15 @@ void ClienteController::dibujar() {
 
             list<pair<int, float>> Track = this->cliente->obtenerTrack(); //TODO anda igual
 
-            //obstaculos->emplace(50,cartel);
-            // obstaculos->emplace(-50,cartel);
-            // obstaculos->emplace(50,cartel);
-            // obstaculos->emplace(-75,cartel2);
-            // obstaculos->emplace(75,cartel2);
-            // obstaculos->emplace(300,arbol);
-            // obstaculos->emplace(-100,arbol);
-            // obstaculos->emplace(100,arbol);
-
+    /*         obstaculos->emplace(50,cartel);
+             obstaculos->emplace(-50,cartel);
+             obstaculos->emplace(50,cartel);
+             obstaculos->emplace(-75,cartel2);
+             obstaculos->emplace(75,cartel2);
+             obstaculos->emplace(300,arbol);
+             obstaculos->emplace(-100,arbol);
+             obstaculos->emplace(100,arbol);
+*/
             // Track.emplace_back(5000,0);
             /*Armo la pista*/
             int iter_anterior = 0;
@@ -780,6 +780,8 @@ void ClienteController::dibujar() {
                   lines[startPos+posP2y].drawSprite(this->renderer);*/
 
                 curveSet = lines[(pos / segL)].curve;
+
+                cout<<pos/200<<endl;
 
 
                 checkCurveAndSetCentrifuga(curveSet);
@@ -1267,6 +1269,15 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
         ///Pinto objeto
         SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderDrawPoint(renderer, x, y);
+    }
+    map<int,Posicion*>* radar = minimapa->getRadar();
+    for(map<int,Posicion*>::iterator it = radar->begin(); it!=radar->end();++it){
+        Posicion* pos = it->second;
+        int x = (pos->getX());
+        int y = (pos->getY());
+        ///Pinto auto en minimapa
+        SDL_SetRenderDrawColor( renderer, 0xEE, 0x31, 0x37, 0xFF );
+        SDL_RenderDrawPoint(renderer,x,y);
     }
 
     delete recorredor;
