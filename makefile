@@ -5,7 +5,7 @@
  COMPILER := g++
  LINKING_FLAGS := -std=c++11 -Wall -I PEPAS/headers/ -o
  COMPILING_FLAGS := -g -std=c++11 -Wall -I PEPAS/headers/ -c -o
- LIBRARIES := -pthread -lSDL2 -lSDL2_image -lSDL2_ttf
+ LIBRARIES := -pthread -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 # Target
  all: directories main

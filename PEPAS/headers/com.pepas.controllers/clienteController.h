@@ -27,6 +27,7 @@
 #include "../com.pepas.model/Recorredor.h"
 #include <SDL2/SDL_ttf.h>
 #include <map>
+#include <SDL2/SDL_mixer.h>
 #include "../../headers/com.pepas.view/VistaLogin.h"
 
 class ClienteController{
@@ -58,7 +59,10 @@ private:
     Textura* arbol;
     Textura* cartel;
     Textura* cartel2;
-    TTF_Font *font;
+    TTF_Font *login;
+    TTF_Font *speed;
+    TTF_Font *tiempo;
+    TTF_Font *score;
     Textura* opcion;
     Textura* ingreso;
 	Textura* player1;
@@ -69,7 +73,16 @@ private:
 
     Auto* autito;
 
-    int carPosX, curveSet;
+    Mix_Music *soundTrack = NULL;
+
+    Mix_Chunk *gUp = NULL;
+    Mix_Chunk *gLeft = NULL;
+    Mix_Chunk *gRight = NULL;
+    Mix_Chunk *gBreak = NULL;
+    Mix_Chunk *gLeave = NULL;
+
+    int carPosX;
+    double curveSet;
     std::map<int,Textura*>* obstaculos;
 
 
@@ -126,7 +139,7 @@ public:
 	void dibujar();
     void keyEvent(SDL_Event event);
     bool loadMedia();
-    void checkCurveAndSetCentrifuga(int curve);
+    void checkCurveAndSetCentrifuga(double curve);
     void backgroundMove();
 	void verMinimapa();
     void procesarMensajePosicion(int pos, int x);
@@ -152,7 +165,10 @@ public:
 
 	void carAsign();
 
+	void dibujarRival(double X,double Y,double W, double scale, double spriteX, Textura* sprite);
+
     Textura *getTextura(int i);
+void renderVelocidad();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

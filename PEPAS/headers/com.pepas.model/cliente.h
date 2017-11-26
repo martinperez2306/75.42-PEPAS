@@ -29,7 +29,7 @@ class Cliente{
 private:
     Usuario* usuario;
     Socket* socketCliente;
-    int socketFD, posY, posX;
+    int socketFD, posY, posX,velocidad;
     int aliveCounter, modelCar, cantidadJugadores, cantidadADibujar;
     bool logueado;
     bool conectado;
@@ -139,6 +139,11 @@ Minimapa* getMinimapa();
     list<Rival*> obtenerRivalList();
 
     int getY();
+
+void setVelocidad(int vel);
+
+int getVelocidad();
+
 };
 
 

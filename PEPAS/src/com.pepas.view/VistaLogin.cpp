@@ -5,7 +5,8 @@
 
 VistaLogin::VistaLogin()
 {
-    window = NULL;  //se usa a del controller
+    this->window = NULL;  //se usa la del controller
+    this->renderer = NULL; //se usa el del controller
     quit = false;
     termino = false;
     background = NULL;  //ok!
@@ -21,27 +22,16 @@ VistaLogin::VistaLogin()
 
 VistaLogin::~VistaLogin()
 {
-    this->close();
 }
 
-bool VistaLogin::initialize() {
-    if(SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-        return false;
-    }
-    //Creates a SDL Window
-    if((window = SDL_CreateWindow("Bienvenido a Outrun ", 100, 100, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE | SDL_RENDERER_PRESENTVSYNC)) == NULL) {
-        return false;
-    }
-    //SDL Renderer
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED );
-    if (renderer == NULL){
-        std::cout << SDL_GetError() << std::endl;
-        return 1;
-    }
+bool VistaLogin::initialize(SDL_Window* window, SDL_Renderer* renderer) {  //el init se hara en el controller
 
+	this->window = window;  //se usa la del controller
+	this->renderer = renderer; //se usa el del controller
     if( TTF_Init() == -1 )
     {
-        return false;
+        cout << "Fallo al initialize TTF" << endl;
+    	return false;
     }
 
     return true;
@@ -128,12 +118,6 @@ void VistaLogin::clean_up()
 
 }
 
-void VistaLogin::close(){
-    this->clean_up();
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-}
 
 bool VistaLogin::get_string(const char* opcion){
 

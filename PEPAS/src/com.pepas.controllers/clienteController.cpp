@@ -44,7 +44,6 @@ ClienteController::ClienteController(const char *archivo) {
 
     vistaLogin = new VistaLogin();
 
-
 }
 
 
@@ -334,47 +333,6 @@ void ClienteController::enviarBroadcast(string entrada) {
 
 void ClienteController::dibujar() {
 
-	//Main loop flag
-	bool quit = false;
-
-	string usuario;
-	string password;
-
-	//Enable text input
-	SDL_StartTextInput();
-
-
-
-	this->vistaLogin->initialize();
-
-	do {
-		if (!this->cliente->estaConectado())
-			this->conectar();
-
-		quit = vistaLogin->get_string("Ingrese su usuario: ");
-
-	    if (!quit){
-	    	usuario = vistaLogin->get_last_input();
-	    	quit = vistaLogin->get_string("Ingrese su clave: ");
-	    }
-
-	    if (!quit){
-	    	password = vistaLogin->get_last_input();
-	    	this->logIn(usuario, password);
-
-	    	if (!this->cliente->estalogueado()){
-	    		vistaLogin->get_result("Usuario/Clave incorrectos");
-	    	}else{
-	    		vistaLogin->get_result("Login exitoso");
-	    		sleep(1);
-	    	}
-	    }
-	} while (!this->cliente->estalogueado() && !quit);
-	delete (vistaLogin);
-
-	//Disable text input
-	SDL_StopTextInput();
-
 	if (!init(SCREEN_WIDTH, SCREEN_HEIGHT, &(this->window), &(this->renderer))) {
         printf("Failed to initialize!\n");
     } else {
@@ -382,9 +340,48 @@ void ClienteController::dibujar() {
         if (!loadMedia()) {
             printf("Failed to load media!\n");
         } else {
+            //Main loop flag
+            bool quit = false;
 
-        	//Event handler
-        	SDL_Event e;
+            //Event handler
+            SDL_Event e;
+
+            string usuario;
+            string password;
+
+            this->vistaLogin->initialize(this->window, this->renderer);
+
+            //Enable text input
+            SDL_StartTextInput();
+
+            do{
+            	if (!this->cliente->estaConectado()){
+            		vistaLogin->get_result("No esta conectado al servidor");
+            		this->conectar();
+            	}else{
+            		quit = vistaLogin->get_string("Ingrese su usuario: ");
+
+            		if (!quit){
+            			usuario = vistaLogin->get_last_input();
+            			quit = vistaLogin->get_string("Ingrese su clave: ");
+            		}
+
+            		if (!quit){
+            			password = vistaLogin->get_last_input();
+            			this->logIn(usuario, password);
+
+            			if (!this->cliente->estalogueado()){
+            				vistaLogin->get_result("Usuario/Clave incorrectos");
+            			}else{
+            				vistaLogin->get_result("Login exitoso, esperando jugadores");
+            				sleep(1);
+            	    	}
+            	    }
+            	}
+            } while (!this->cliente->estalogueado() && !quit);
+
+            //Disable text input
+            SDL_StopTextInput();
 
             while (!this->cliente->recibioFinDeMapa() && !quit) {
                 cout << "Esperando jugadores" << endl;
@@ -392,6 +389,12 @@ void ClienteController::dibujar() {
             }
 
             this->carAsign();
+            Mix_PlayMusic( soundTrack, -1 );
+            Mix_VolumeMusic(10);
+            Mix_Volume(-1, 10);
+
+            //Disable text input
+            SDL_StopTextInput();
 
 
             SDL_Color gris = {0xA3, 0xA3, 0xA3, 0xFF};
@@ -497,6 +500,7 @@ void ClienteController::dibujar() {
                         destX += destW * spriteXR1;
                         destY += destH * (-1);
 
+
                         SDL_RenderSetScale(renderer, destW / w, destH / h);
                         spriteR1->render(destX / destW * w, destY * h / destH, renderer);
                         SDL_RenderSetScale(renderer, 1, 1);
@@ -512,6 +516,7 @@ void ClienteController::dibujar() {
 
                         destX += destW * spriteXR2; //offsetX
                         destY += destH * (-1);    //offsetY
+
 
                         SDL_RenderSetScale(renderer, destW / w, destH / h);
                         spriteR2->render(destX / destW * w, destY * h / destH, renderer);
@@ -673,9 +678,69 @@ void ClienteController::dibujar() {
                   }*/
 
 
-                switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
-                    case 1: {
+                int i = 0;
+                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                while (i < this->cliente->obtenerRivalList().size()){
 
+                    i++;
+                    Rival *rival = *it;
+         /*           if (rival->getDibujar()) {
+                        dibujarRival(lines[startPos + rival->getHorizonte() + OFFSET].X,
+                                     lines[startPos + rival->getHorizonte() + OFFSET].Y,
+                                     lines[startPos + rival->getHorizonte() + OFFSET].W,
+                                     lines[startPos + rival->getHorizonte() + OFFSET].scale,
+                                     0.0056 * rival->getPosX() - 2.8,
+                                     this->getTextura(rival->getPlayer()));
+                    }
+                    rival->notDibujar();*/
+
+                    if(rival->getDibujar()){
+
+                        if (i==1){
+
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
+                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                            if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
+                                lines[noDraw].spriteXR1 = 0;
+                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                noDraw = startPos + rival->getHorizonte() + OFFSET;
+
+                            }
+                        }else if(i==2){
+
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(
+                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival->getPosX() - 2.8;
+                            if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
+                                lines[noDraw2].spriteXR2 = 0;
+                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                noDraw2 = startPos + rival->getHorizonte() + OFFSET;
+                            }
+                        }else{
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(
+                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 = 0.0056 * rival->getPosX() - 2.8;
+                            if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
+                                lines[noDraw3].spriteXR3 = 0;
+                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                noDraw3 = startPos + rival->getHorizonte() + OFFSET;
+                            }
+                            //puts("entre3");
+                        }
+                        rival->notDibujar();
+                    }
+
+                    std::list<Rival *>::iterator it2 = std::next(it, 1);
+                   // printf("ciclo\n");
+                }
+               // printf("sali\n");
+
+
+
+
+            /*    switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
+                    case 1: {
                         list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                         Rival *rival = *it;
                         if (rival->getDibujar()) {
@@ -695,34 +760,31 @@ void ClienteController::dibujar() {
                         list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                         Rival *rival = *it;
                         if (rival->getDibujar()) {
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
-                                    rival->getPlayer());
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 =
-                                    0.0056 * rival->getPosX() - 2.8;
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
                             noDraw = startPos + rival->getHorizonte() + OFFSET;
                             rival->notDibujar();
                         }
                         std::list<Rival *>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
                         Rival *rival2 = *it2;
                         if (rival2->getDibujar()) {
-                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteR2 = this->getTextura(
-                                    rival2->getPlayer());
-                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteXR2 =
-                                    0.0056 * rival2->getPosX() - 2.8;
+                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival2->getPlayer());
+                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
                             noDraw2 = startPos + rival->getHorizonte() + OFFSET;
                             rival2->notDibujar();
                         }
 
                     }
                         break;
-                }
+                }*/
                 for (int n = startPos + LINEAS; n > startPos; n--) {
                     lines[n].drawSprite(this->renderer);
                 }
                 //arregla el problema del noDraw
                 for (int j = startPos + LINEAS - 1; j < startPos + LINEAS + 5; j++) {
                     lines[j].spriteXR1 = 0;
-                    //lines[j].spriteXR2 = 0;
+                    lines[j].spriteXR2 = 0;
+                    lines[j].spriteXR3 = 0;
                 }
 
                 /*  int posP2x = 230;
@@ -732,21 +794,22 @@ void ClienteController::dibujar() {
 
                 curveSet = lines[(pos / segL)].curve;
 
-                //cout<<pos/200<<endl;
 
                 checkCurveAndSetCentrifuga(curveSet);
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
                 car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
+                this->renderVelocidad();
 
                 SDL_RenderPresent(this->renderer);
 
                 posMoving = cliente->getPosition();
                 if (posMoving != pos) {
                     moving = true;
+                    //Mix_PlayChannel(-1,gUp,0);
                 } else moving = false;
-
+                   // Mix_HaltChannel(-1);
             }
 
         }
@@ -823,17 +886,72 @@ bool ClienteController::loadMedia() {
     }
 
     //Open the font
-    font = TTF_OpenFont("fonts/box.otf", 28);
-    if (font == NULL) {
-        printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+    login = TTF_OpenFont("fonts/box.otf", 28);
+    if (login == NULL) {
+        printf("Failed to load login font! SDL_ttf Error: %s\n", TTF_GetError());
         success = false;
     }
+
+    speed = TTF_OpenFont("fonts/velocidad.ttf", 28);
+    if (speed == NULL) {
+        printf("Failed to load speed font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    tiempo = TTF_OpenFont("fonts/time.TTF", 28);
+    if (tiempo == NULL) {
+        printf("Failed to load time font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+
+    score = TTF_OpenFont("fonts/score.ttf", 28);
+    if (score == NULL) {
+        printf("Failed to load score font! SDL_ttf Error: %s\n", TTF_GetError());
+        success = false;
+    }
+    gUp = Mix_LoadWAV( "audios/up.wav" );
+    if( gUp == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gLeft = Mix_LoadWAV( "audios/left.wav" );
+    if( gLeft == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gRight = Mix_LoadWAV( "audios/right.wav" );
+    if( gRight == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gLeave = Mix_LoadWAV( "audios/soltar.wav" );
+    if( gLeave == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    gBreak = Mix_LoadWAV( "audios/freno.wav" );
+    if( gBreak == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+    soundTrack = Mix_LoadMUS( "audios/musicafondo.mp3" );
+    if( soundTrack == NULL )
+    {
+        printf( "Failed to load low sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+        success = false;
+    }
+
 
 
     return success;
 }
 
-void ClienteController::checkCurveAndSetCentrifuga(int curve) {
+void ClienteController::checkCurveAndSetCentrifuga(double curve) {
     if (curve < 0) { //curva a la derecha
         curveR = true;
         curveL = false;
@@ -874,6 +992,15 @@ void ClienteController::verMinimapa() {
 
 }
 
+void ClienteController::renderVelocidad(){
+    string vel = to_string(this->cliente->getVelocidad());
+
+    SDL_Color textColor = {0, 0, 0, 0xFF};
+
+    opcion->loadFromRenderedText(vel.c_str(),textColor,speed,renderer);
+    opcion->render((SCREEN_WIDTH - opcion->getWidth())*3 / 4, 0, renderer);
+
+}
 
 bool ClienteController::getString(string *str, string optText) {
 
@@ -885,8 +1012,8 @@ bool ClienteController::getString(string *str, string optText) {
     std::string inputText = "";
 
 
-    ingreso->loadFromRenderedText(inputText.c_str(), textColor, font, renderer);
-    opcion->loadFromRenderedText(optText.c_str(), textColor, font, renderer);
+    ingreso->loadFromRenderedText(inputText.c_str(), textColor, login, renderer);
+    opcion->loadFromRenderedText(optText.c_str(), textColor, login, renderer);
 
     //The rerender text flag
     bool renderText = false;
@@ -928,12 +1055,12 @@ bool ClienteController::getString(string *str, string optText) {
             //Text is not empty
             if (inputText != "") {
                 //Render new text
-                ingreso->loadFromRenderedText(inputText.c_str(), textColor, font, renderer);
+                ingreso->loadFromRenderedText(inputText.c_str(), textColor, login, renderer);
             }
                 //Text is empty
             else {
                 //Render space texture
-                ingreso->loadFromRenderedText(" ", textColor, font, renderer);
+                ingreso->loadFromRenderedText(" ", textColor, login, renderer);
             }
         }
 
@@ -987,33 +1114,40 @@ void ClienteController::keyEvent(SDL_Event e) {
         //Adjust the velocity
         switch (e.key.keysym.sym) {
             case SDLK_UP:
+                Mix_PlayChannel( 0, gUp, -1 );
                 enviarMoveUp();
                 break;
             case SDLK_DOWN:
+                Mix_PlayChannel( 3, gBreak, -1 );
                 enviarMoveDown();
                 break;
             case SDLK_LEFT:
+                Mix_PlayChannel( 1, gRight, -1);
                 enviarMoveLeft();
                 break;
             case SDLK_RIGHT:
+                Mix_PlayChannel( 2, gRight, -1 );
                 enviarMoveRight();
                 break;
         }
     } else if (e.type == SDL_KEYUP && e.key.repeat == 0) {
         switch (e.key.keysym.sym) {
             case SDLK_RIGHT:
+                Mix_HaltChannel(2);
                 enviarNotMoveRight();
                 break;
             case SDLK_UP:
+                Mix_HaltChannel(0);
                 enviarNotMoveUp();
                 break;
             case SDLK_DOWN:
+                Mix_HaltChannel(3);
                 enviarNotMoveDown();
                 break;
             case SDLK_LEFT:
+                Mix_HaltChannel(1);
                 enviarNotMoveLeft();
                 break;
-
         }
     }
 
@@ -1192,3 +1326,23 @@ Textura *ClienteController::getTextura(int player) {
         return player5;
     }
 }
+
+void ClienteController::dibujarRival(double X, double Y, double W, double scale, double spriteX, Textura *sprite) {
+
+    int w = sprite->getWidth();
+    int h = sprite->getHeight();
+
+    double destX = X + scale * spriteX * SCREEN_WIDTH / 2;
+    double destY = Y + 4;
+    double destW = w * W / 700;
+    double destH = h * W / 700;
+
+    destX += destW * spriteX; //offsetX
+    destY += destH * (-1);    //offsetY
+
+
+    SDL_RenderSetScale(renderer, destW / w, destH / h);
+    sprite->render(destX / destW * w, destY * h / destH, renderer);
+    SDL_RenderSetScale(renderer, 1, 1);
+}
+
