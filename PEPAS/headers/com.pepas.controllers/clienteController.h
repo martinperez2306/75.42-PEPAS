@@ -28,6 +28,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <map>
 #include <SDL2/SDL_mixer.h>
+#include "../com.pepas.view/VistaLogin.h"
 
 #include <ctime>
 #include <cstdlib>
@@ -108,6 +109,8 @@ private:
 
     float offsetBackgroundTree;
     float offsetBackgroundHills;
+
+    VistaLogin* vistaLogin;
 
 
 

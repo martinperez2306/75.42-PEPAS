@@ -42,6 +42,7 @@ ClienteController::ClienteController(const char *archivo) {
     offsetBackgroundTree = -2000;
     offsetBackgroundHills = -2000;
 
+    vistaLogin = new VistaLogin();
 
 }
 
@@ -352,24 +353,38 @@ void ClienteController::dibujar() {
 
 
 
+            this->vistaLogin->initialize(this->window, this->renderer);
+
             //Enable text input
             SDL_StartTextInput();
 
-            do {
-                if (!this->cliente->estaConectado())
-                    this->conectar();
+            do{
+            	if (!this->cliente->estaConectado()){
+            		vistaLogin->get_result("No esta conectado al servidor");
+            		this->conectar();
+            	}else{
+            		quit = vistaLogin->get_string("Ingrese su usuario: ");
 
+            		if (!quit){
+            			usuario = vistaLogin->get_last_input();
+            			quit = vistaLogin->get_string("Ingrese su clave: ");
+            		}
 
-                quit = getString(&usuario, "Usuario :");
-
-                if (!quit)
-                    quit = getString(&password, "Clave :");
-
-                if (!quit)
-                    this->logIn(usuario, password);
-                sleep(1);
-
+            		if (!quit){
+            			password = vistaLogin->get_last_input();
+            			this->logIn(usuario, password);
+				sleep(1);
+            			if (!this->cliente->estalogueado()){
+            				vistaLogin->get_result("Usuario/Clave incorrectos");
+            			}else{
+            				vistaLogin->get_result("Login exitoso, esperando jugadores");    				
+            	    		}
+            	    	}
+            	}
             } while (!this->cliente->estalogueado() && !quit);
+
+            //Disable text input
+            SDL_StopTextInput();
 
             while (!this->cliente->recibioFinDeMapa() && !quit) {
                 cout << "Esperando jugadores" << endl;
