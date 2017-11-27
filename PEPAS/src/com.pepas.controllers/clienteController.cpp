@@ -1337,9 +1337,28 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
         Posicion* pos = it->second;
         int x = (pos->getX());
         int y = (pos->getY());
-        ///Pinto auto en minimapa
-        SDL_SetRenderDrawColor( renderer, 0xEE, 0x31, 0x37, 0xFF );
-        //SDL_RenderDrawPoint(renderer,x,y);
+        ///Pinto auto en minimapa segun el color del jugador
+        switch(it->first){
+        case 1:
+        	//ROJO
+        	SDL_SetRenderDrawColor( renderer, 0xEE, 0x31, 0x37, 0xFF );
+        	//SDL_RenderDrawPoint(renderer,x,y);
+        	break;
+        case 2:
+        	//AZUL
+        	SDL_SetRenderDrawColor( renderer, 0x39, 0x07, 0xDE, 0xFF );
+        	break;
+        case 3:
+        	//VERDE
+        	SDL_SetRenderDrawColor( renderer, 0x06, 0xA9, 0x11, 0xFF );
+        	break;
+        case 4:
+        	//AMARILLO
+        	SDL_SetRenderDrawColor( renderer, 0xF3, 0xF3, 0x10, 0xFF );
+        	break;
+        default:
+        	break;
+        }
         rect= {x-5,y-5,10,10};
         SDL_RenderFillRect(renderer,&rect);
     }
