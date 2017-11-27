@@ -14,6 +14,7 @@
 #include "Logica.h"
 #include "Auto.h"
 #include "Recorredor.h"
+#include "TimerThread.h"
 #include <ctime>
 
 
@@ -50,6 +51,7 @@ private:
     string time;
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
+    TimerThread timerThread = TimerThread (false);
 
 public:
 	int aliveCounter;

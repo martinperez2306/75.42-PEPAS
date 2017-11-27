@@ -7,21 +7,24 @@
 
 
 #include "thread.h"
-#include "servidor.h"
+
 
 class TimerThread : public Thread {
 private:
-    Servidor* srv;
+
     bool estaCerrado;
     clock_t startTime;
+    string time;
 
 public:
 
-    TimerThread(Servidor* sv, bool CerrarServidor);
+    TimerThread(bool CerrarServidor);
 
     virtual void run();
 
     string renderTiempo(clock_t sTime);
+
+    string getTiempo();
 
 
 };

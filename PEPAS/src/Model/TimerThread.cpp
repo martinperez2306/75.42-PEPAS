@@ -4,18 +4,18 @@
 
 #include "../../headers/Model/TimerThread.h"
 
-TimerThread::TimerThread(Servidor *sv, bool CerrarServidor) {
-    this->srv = sv;
+TimerThread::TimerThread(bool CerrarServidor) {
+
     this->estaCerrado = false;
 
 }
 
 void TimerThread::run() {
     startTime = clock();
-    string timeString;
+    //string timeString;
     while (!estaCerrado){
-        timeString = this->renderTiempo(startTime);
-        srv->setTime(timeString);
+        time = this->renderTiempo(startTime);
+        //srv->setTime(timeString);
     }
 }
 
@@ -32,4 +32,8 @@ string TimerThread::renderTiempo(clock_t sTime) {
     string tiempo = to_string((int)minutesPassed) + ":" + to_string((int)secondsPassed);
 
     return tiempo;
+}
+
+string TimerThread::getTiempo() {
+    return time;
 }

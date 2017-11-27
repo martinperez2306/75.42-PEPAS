@@ -22,7 +22,7 @@ private:
     bool lanzeCalculoThread;
     AliveThread aliveThread = AliveThread(srv, estaCerrado);
     CalculateThread calculoThread = CalculateThread(srv, estaCerrado, socket);
-    TimerThread timerThread = TimerThread (srv, estaCerrado);
+
 public:
 
     ClientesThread(Socket* socket, Servidor* sv, bool CerrarServidor);

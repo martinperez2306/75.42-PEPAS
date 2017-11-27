@@ -334,6 +334,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
+                timerThread.start();
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
                     string mensajeFin= this->procesarMensajeFin();
@@ -827,7 +828,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     string separador = "/";
     int horizonte = HORIZONTE;
     stringMinimapa = to_string(mapAutitos->size());
-    stringTime = time;
+    stringTime = timerThread.getTiempo();
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";

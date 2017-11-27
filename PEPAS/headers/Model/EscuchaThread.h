@@ -16,6 +16,7 @@ private:
     Socket* socket;
     Servidor* servidor;
     list<ClientesThread> clientThreads;
+
 public:
     EscuchaThread(Servidor* servidor1);
     virtual void run ();
