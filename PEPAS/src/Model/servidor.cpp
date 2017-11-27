@@ -1,4 +1,6 @@
 #include <zconf.h>
+#include <ctime>
+
 #include "../../headers/Model/servidor.h"
 #include "../../headers/Model/logger.h"
 
@@ -79,7 +81,7 @@ Servidor::Servidor(){
     this->recorredor = new Recorredor();
 
     this->logicaJuego = new Logica(5000); //largo de la pista
-
+    this->time = "0:0";
     empezarJuego = false;
     player = 1;
 
@@ -821,10 +823,11 @@ Auto *Servidor::obtenerAutoConId(string id) {
 string Servidor::actualizarJuego(Auto *pAuto) {
     int i=0;
     string stringArmado = "";
-    string stringConcat, stringAnterior, stringMinimapa;
+    string stringConcat, stringAnterior, stringMinimapa,stringTime;
     string separador = "/";
     int horizonte = HORIZONTE;
     stringMinimapa = to_string(mapAutitos->size());
+    stringTime = time;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
@@ -852,9 +855,9 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         }
         stringArmado = stringArmado + stringConcat;
     }
-    stringArmado = stringMinimapa + separador+ to_string(i) + separador + stringArmado;
+    stringArmado = stringTime + separador + stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado = stringMinimapa + separador +  to_string(0);
+        stringArmado =  stringTime + separador + stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
 
@@ -874,3 +877,27 @@ bool Servidor::hayColision() {
 void Servidor::setMapa(int numeroMapa){
     this->mapa = this->mapas->find(numeroMapa)->second;
 }
+
+
+
+string Servidor::renderTiempo(clock_t sTime) {
+    int secondsPassed;
+    int minutesPassed;
+    secondsPassed =  ((clock() - sTime ) / (CLOCKS_PER_SEC));
+    cout<<"seconds : "<< secondsPassed<<endl;
+    minutesPassed = secondsPassed / 60;
+
+    secondsPassed = secondsPassed - (minutesPassed * 60) ;
+
+    string tiempo = to_string((int)minutesPassed) + ":" + to_string((int)secondsPassed);
+
+    return tiempo;
+}
+
+void Servidor::setTime(string timeString) {
+    this->time =timeString;
+
+}
+
+
+

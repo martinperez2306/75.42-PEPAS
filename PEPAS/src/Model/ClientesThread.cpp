@@ -29,6 +29,7 @@ void ClientesThread::run() {
         }
         if (srv->getEmpezoJuego() && !inGame){
             calculoThread.start();
+            timerThread.start();
             lanzeCalculoThread = true;
             inGame = true;
         }
@@ -37,8 +38,11 @@ void ClientesThread::run() {
     inGame=false;
     calculoThread.terminar();
     aliveThread.join();
-    if (lanzeCalculoThread)
+
+    if (lanzeCalculoThread) {
         calculoThread.join();
+        timerThread.join();
+    }
     loggear("Cerre ClienteThread",3);
 }
 

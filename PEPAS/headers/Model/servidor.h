@@ -14,6 +14,7 @@
 #include "Logica.h"
 #include "Auto.h"
 #include "Recorredor.h"
+#include <ctime>
 
 
 
@@ -46,7 +47,7 @@ private:
 	World* world;
 	Zoomer* zoomer;
     Recorredor* recorredor;
-
+    string time;
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
 
@@ -138,6 +139,14 @@ public:
 	list<string> obtenerGrisados();
 
     void setMapa(int i);
+
+    clock_t obtenerTime();
+
+    string renderTiempo(clock_t sTime);
+
+    void setTime(string basic_string);
+
+    string getTime ();
 };
 
 

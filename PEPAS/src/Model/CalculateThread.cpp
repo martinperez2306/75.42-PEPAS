@@ -15,6 +15,7 @@ void CalculateThread::run() {
     string stringACrear, stringProcesado;
     this->user = this->srv->obtenerUsuarioConFd(this->socket->obtenerPuerto());
     this->Automovil = this->srv->obtenerAutoConId(user);
+
     while (!estaCerrado){
     	int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
     	string msg = Automovil->calculateMove(curve);
