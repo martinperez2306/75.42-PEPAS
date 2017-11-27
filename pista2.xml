@@ -7,108 +7,49 @@
         <y>100</y>    
     </inicio>
 
-    <direccionInicial>sur</direccionInicial>
+    <direccionInicial>este</direccionInicial>
 
     <segmentos>
         
         <ruta>
             <derecho>1000</derecho>
-            <izquierda>250</izquierda>
-            <izquierda>0</izquierda>
-            <derecho>250</derecho>
-            <izquierda>250</izquierda>
-            <izquierda>0</izquierda>
-            <derecho>500</derecho>
-            <derecha>250</derecha>
-            <derecha>0</derecha>
-            <derecho>250</derecho>
-            <derecha>250</derecha>
-            <derecha>0</derecha>
-            <derecho>500</derecho>
-            <izquierda>250</izquierda>
-            <izquierda>0</izquierda>
-            <derecho>250</derecho>
-            <izquierda>250</izquierda>
-            <izquierda>0</izquierda>
-            <derecho>750</derecho>
+			<derecha>200</derecha>
+			<derecha>0</derecha>
+			<derecho>500</derecho>
+			<derecha>200</derecha>
+			<derecha>0</derecha>
+			<derecho>500</derecho>
+			<izquierda>200</izquierda>
+			<izquierda>0</izquierda>
+			<derecho>500</derecho>
+			<izquierda>200</izquierda>
+			<izquierda>0</izquierda>
+			<derecho>1000</derecho>
+			<izquierda>200</izquierda>
+			<izquierda>0</izquierda>
+			<derecho>500</derecho>
         </ruta>
         
         <objetos>
             <objeto>
-                <distancia>100</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>200</distancia>
-                <posicion>derecha</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
                 <distancia>300</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>400</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
-                     <arbol></arbol>
+					<cartel>80</cartel>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>500</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>600</distancia>
+                <distancia>700</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
-                     <cartel>80</cartel>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>1000</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>1000</distancia>
-                <posicion>derecha</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>1100</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>1200</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
+					<cartel>80</cartel>
                 </tipo>
             </objeto>
             <objeto>
                 <distancia>1300</distancia>
                 <posicion>izquierda</posicion>
                 <tipo>            
-                     <arbol></arbol>
+					<cartel>80</cartel>
                 </tipo>
             </objeto>
             <objeto>
@@ -129,126 +70,147 @@
                 <distancia>1600</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
+                     <cartel>80</cartel>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2000</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
                      <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2100</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2200</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2300</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2700</distancia>
+                <posicion>derecha</posicion>
+                <tipo>            
+					<cartel>80</cartel>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2800</distancia>
+                <posicion>derecha</posicion>
+                <tipo>            
+					<cartel>80</cartel>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>2900</distancia>
+                <posicion>derecha</posicion>
+                <tipo>            
+					<cartel>80</cartel>
                 </tipo>
             </objeto>
             <objeto>
                 <distancia>3000</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
-                     <arbol></arbol>
+					<cartel>8</cartel>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3010</distancia>
+                <distancia>3600</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3020</distancia>
+                <distancia>3610</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3030</distancia>
+                <distancia>3620</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3040</distancia>
+                <distancia>3630</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3050</distancia>
+                <distancia>3640</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
                      <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>3060</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>3070</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>3080</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>3090</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>4000</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <arbol></arbol>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>4100</distancia>
+                <distancia>3650</distancia>
                 <posicion>derecha</posicion>
                 <tipo>            
-                     <cartel>120</cartel>
+                     <arbol></arbol>
                 </tipo>
             </objeto>
             <objeto>
-                <distancia>4200</distancia>
+                <distancia>3660</distancia>
                 <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>3670</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>3680</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>3690</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>4600</distancia>
+                <posicion>izquierda</posicion>
+                <tipo>            
+                     <arbol></arbol>
+                </tipo>
+            </objeto>
+            <objeto>
+                <distancia>4900</distancia>
+                <posicion>derecha</posicion>
                 <tipo>            
                      <cartel>80</cartel>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>4300</distancia>
-                <posicion>derecha</posicion>
-                <tipo>            
-                     <cartel>120</cartel>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>4400</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <cartel>80</cartel>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>100</distancia>
-                <posicion>izquierda</posicion>
-                <tipo>            
-                     <cartel>120</cartel>
-                </tipo>
-            </objeto>
-            <objeto>
-                <distancia>4500</distancia>
-                <posicion>derecha</posicion>
-                <tipo>            
-                     <cartel>120</cartel>
                 </tipo>
             </objeto>
         </objetos>            
