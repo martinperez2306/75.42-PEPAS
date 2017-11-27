@@ -808,8 +808,7 @@ void ClienteController::dibujar() {
                 car->render(cliente->getX(), 618, this->renderer);
                 this->actualizarMinimapa(this->cliente->getMinimapa());
                 this->renderVelocidad();
-                this->renderTiempo(startTime);
-
+                this->renderTiempo(this->cliente->getTiempo());
 
 
                 posMoving = cliente->getPosition();
@@ -1020,8 +1019,8 @@ void ClienteController::renderVelocidad(){
 
 }
 
-void ClienteController::renderTiempo(clock_t startTime) {
-	int secondsPassed;
+void ClienteController::renderTiempo(string tiempo) {
+	/*int secondsPassed;
 	int minutesPassed;
 	secondsPassed =  (clock() - startTime) / CLOCKS_PER_SEC;
     minutesPassed = secondsPassed / 60;
@@ -1029,11 +1028,11 @@ void ClienteController::renderTiempo(clock_t startTime) {
     secondsPassed = secondsPassed - (minutesPassed * 60);
 
 	string tiempo = to_string((int)minutesPassed) + ":" + to_string((int)secondsPassed);
-	int copiaMinutos=minutesPassed;
-
-	SDL_Color textColor = {0, 0, 0, 0xFF};
 
 
+
+*/
+    SDL_Color textColor = {0, 0, 0, 0xFF};
 	opcion->loadFromRenderedText(tiempo.c_str(),textColor,this->tiempo,renderer);
 	opcion->render(((SCREEN_WIDTH - opcion->getWidth()) / 2 ), 30, renderer);
 }

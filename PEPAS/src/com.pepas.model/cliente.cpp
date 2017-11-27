@@ -446,7 +446,8 @@ void Cliente::parsearCalculos(string datos, int i) {
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
     int velocidad = stoi(obtenerParametros(datos,&i),nullptr,10);
-    //this->tiempo = obtenerParametros(datos,&i);
+    this->tiempo = obtenerParametros(datos,&i);
+    cout<<"tiempo"<<tiempo<<endl;
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);

@@ -174,7 +174,7 @@ public:
 
     Textura *getTextura(int i);
     void renderVelocidad();
-    void renderTiempo(clock_t);
+    void renderTiempo(string tiempo);
     void renderDistancia(int posMoving);
 };
 
