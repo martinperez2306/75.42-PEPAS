@@ -1240,7 +1240,7 @@ void ClienteController::enviarNotMoveDown() {
 
 
 void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
-
+    SDL_Rect rect;
     Recorredor *recorredor = new Recorredor();
     ///////////////////
     list<Segmento *> *ruta = minimapa->getRuta();
@@ -1277,7 +1277,9 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
         int y = (pos->getY());
         ///Pinto auto en minimapa
         SDL_SetRenderDrawColor( renderer, 0xEE, 0x31, 0x37, 0xFF );
-        SDL_RenderDrawPoint(renderer,x,y);
+        //SDL_RenderDrawPoint(renderer,x,y);
+        rect= {x-5,y-5,10,10};
+        SDL_RenderFillRect(renderer,&rect);
     }
 
     delete recorredor;
