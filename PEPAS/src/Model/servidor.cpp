@@ -76,6 +76,7 @@ Servidor::Servidor(){
     this->world = new World();
     //zoomer
     this->zoomer = new Zoomer();
+    this->recorredor = new Recorredor();
 
     this->logicaJuego = new Logica(5000); //largo de la pista
 
@@ -640,12 +641,12 @@ void Servidor::generarMapa(){
     loggear("Pistas cargadas",1);
     delete this->pistaParser;
     loggear("Eliminando pista parser",1);
-    this->setMapa(2);
+    this->setMapa(1);
     this->generarMinimapa();
     this->generarWorld();
 }
 void Servidor::generarMinimapa(){
-	this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa);
+    this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa,this->recorredor);
 	this->minimapa->mostrarSegmentos();
 	this->minimapa->mostrarObjetos();
 }
@@ -845,16 +846,15 @@ string Servidor::actualizarJuego(Auto *pAuto) {
             }
             i++;
             if (i>=1) {
-                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador +
-                        to_string(diferenciaY) + separador;
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
             } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
         }
-        stringArmado= stringArmado + stringConcat;
+        stringArmado = stringArmado + stringConcat;
     }
-    stringArmado = stringMinimapa +  to_string(i) + separador + stringArmado;
+    stringArmado = stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado = stringMinimapa + to_string(0);
+        stringArmado = stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
 

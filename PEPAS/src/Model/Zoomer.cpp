@@ -29,7 +29,7 @@ Objeto* Zoomer::zoomObjeto(Objeto* objeto){
 	return objetoMinimapa;
 }
 
-void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa){
+/*void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa){
 	for(list<Segmento*>::iterator it = mapa->getRuta()->begin(); it!= mapa->getRuta()->end(); ++it){
 		Segmento* segmento = *it;
 		Segmento* segmentoMinimapa = this->zoomRuta(segmento);
@@ -39,7 +39,7 @@ void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa){
 		Objeto* objeto = *it;
 		minimapa->agregarObjeto(this->zoomObjeto(objeto));
 	}
-}
+}*/
 
 void Zoomer::setTamanioZoom(int tamanioZoom){
 	this->tamanioZoom = tamanioZoom;
