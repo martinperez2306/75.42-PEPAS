@@ -42,6 +42,7 @@ private:
     Minimapa* minimapa;
     Mapa* mapa;
     Vista* vista;
+    string tiempo;
 
 
 
@@ -143,6 +144,7 @@ Minimapa* getMinimapa();
 void setVelocidad(int vel);
 
 int getVelocidad();
+string getTiempo();
 
 };
 

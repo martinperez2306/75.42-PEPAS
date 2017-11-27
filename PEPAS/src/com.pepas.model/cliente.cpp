@@ -29,10 +29,11 @@ Cliente::Cliente() {
     this->mapa = new Mapa();
     this->vista=new Vista();
     this->velocidad = 0;
+    this->tiempo = " ";
     posX =  1024/2 -100;
     posY = 768 - 1;
     finDeMapa = false;
-
+  
 }
 bool Cliente::minimapaEstaCompleto(){
     return (this->minimapaCompleto);
@@ -445,6 +446,8 @@ void Cliente::parsearCalculos(string datos, int i) {
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
     int velocidad = stoi(obtenerParametros(datos,&i),nullptr,10);
+    this->tiempo = obtenerParametros(datos,&i);
+    cout<<"tiempo"<<tiempo<<endl;
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);
@@ -537,4 +540,8 @@ void Cliente::setVelocidad(int vel){
 
 int Cliente::getVelocidad(){
    return this->velocidad;
+}
+
+string Cliente::getTiempo(){
+   return this->tiempo;
 }
