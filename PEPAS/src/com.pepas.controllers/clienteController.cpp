@@ -388,7 +388,7 @@ void ClienteController::dibujar() {
 
             while (!this->cliente->recibioFinDeMapa() && !quit) {
                 cout << "Esperando jugadores" << endl;
-                sleep(3);
+                sleep(1);
             }
 
             this->carAsign();
@@ -616,7 +616,7 @@ void ClienteController::dibujar() {
             double noDraw2 = 0;
             double noDraw3 = 0;
 
-
+		cliente->enviarMensaje("0003/51");
             //Start timer
 			startTime = clock();
             //While application is running
@@ -628,8 +628,8 @@ void ClienteController::dibujar() {
                     if (e.type == SDL_QUIT) {
                         quit = true;
                     }
-
-                    this->keyEvent(e);
+		    if (cliente->sePuedeMover())
+                    	this->keyEvent(e);
                 }
 
                 SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
@@ -799,7 +799,6 @@ void ClienteController::dibujar() {
 
                 curveSet = lines[(pos / segL)].curve;
 
-                cout<<pos/200<<endl;
 
 
                 checkCurveAndSetCentrifuga(curveSet);
@@ -1033,6 +1032,7 @@ void ClienteController::renderTiempo(string tiempo) {
 
 */
     SDL_Color textColor = {0, 0, 0, 0xFF};
+	cout<<tiempo<<endl;
 	opcion->loadFromRenderedText(tiempo.c_str(),textColor,this->tiempo,renderer);
 	opcion->render(((SCREEN_WIDTH - opcion->getWidth()) / 2 ), 30, renderer);
 }

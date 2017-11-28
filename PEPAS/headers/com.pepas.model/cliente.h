@@ -43,7 +43,7 @@ private:
     Mapa* mapa;
     Vista* vista;
     string tiempo;
-
+    bool mover;
 
 
 
@@ -145,6 +145,7 @@ void setVelocidad(int vel);
 
 int getVelocidad();
 string getTiempo();
+bool sePuedeMover();
 
 };
 
