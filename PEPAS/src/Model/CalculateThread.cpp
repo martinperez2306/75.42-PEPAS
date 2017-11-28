@@ -26,8 +26,8 @@ void CalculateThread::run() {
         unsigned long largoDelMensaje = stringACrear.length();
         stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
         usleep (4000);
+        cout<<stringProcesado<<endl;
         this->srv->enviarMensaje(stringProcesado,socket);
-
     }
 }
 

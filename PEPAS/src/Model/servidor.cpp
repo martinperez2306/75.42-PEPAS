@@ -863,6 +863,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     int horizonte = HORIZONTE;
     stringMinimapa = to_string(mapAutitos->size());
     stringTime = timerThread.getTiempo();
+    bool salioDeColision;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
@@ -875,24 +876,27 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         float diferenciaX = abs(pAuto->getX() - it->second->getX());
         if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
             if ( diferenciaX <= 185 && diferenciaY <= 4){
-                //cout<<"Colision "<<diferenciaX<<"-"<<diferenciaY<<endl;
-                //cout<<pAuto->getLastMove()<<endl;
                 pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
+                if (salioDeColision){
+                    pAuto->agregarDestrozo();
+                    salioDeColision= false;
+                }
             } else {
                // cout<<pAuto->getLastMove()<<endl;
                 pAuto->noEstaEnColision();
+                salioDeColision = true;
             }
             i++;
             if (i>=1) {
-                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador +to_string(it->second->obtenerDestrozo()) + separador+ to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
         }
         stringArmado = stringArmado + stringConcat;
     }
-    stringArmado = stringTime + separador + stringMinimapa + separador+ to_string(i) + separador + stringArmado;
+    stringArmado = stringTime + separador + to_string(pAuto->obtenerDestrozo())+ separador+ stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado =  stringTime + separador + stringMinimapa + separador +  to_string(0);
+        stringArmado =  stringTime + separador +  to_string(pAuto->obtenerDestrozo()) + separador + stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
 
