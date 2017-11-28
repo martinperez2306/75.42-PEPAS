@@ -874,11 +874,12 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
         float diferenciaX = abs(pAuto->getX() - it->second->getX());
-        if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
-            if ( diferenciaX <= 185 && diferenciaY <= 4){
+        if (diferenciaY <= horizonte && it->second != pAuto && abs(diferenciaY) >= 0) {
+            if ( diferenciaX <= 185 && abs(diferenciaY) <= 4){
                 pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
                 if (salioDeColision){
                     pAuto->agregarDestrozo();
+                    it->second->agregarDestrozo();
                     salioDeColision= false;
                 }
             } else {
