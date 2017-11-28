@@ -2,7 +2,7 @@
 
 <servidor>
 
-	<cantidadMaximaClientes>1</cantidadMaximaClientes>
+	<cantidadMaximaClientes>2</cantidadMaximaClientes>
 	<puerto>27015</puerto>
 	
 	<usuarios>

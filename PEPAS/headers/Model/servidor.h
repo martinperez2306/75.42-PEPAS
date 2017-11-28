@@ -52,6 +52,8 @@ private:
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
     TimerThread timerThread = TimerThread (false);
+	int jugadoresListos;
+	bool listos;
 
 public:
 	int aliveCounter;
@@ -149,6 +151,7 @@ public:
     void setTime(string basic_string);
 
     string getTime ();
+	bool estaListo();
 };
 
 

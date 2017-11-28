@@ -20,6 +20,7 @@
 #define CASE_LEFT_KU 25
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
+#define LISTO 51
 
 #define SEGL 50
 #define HORIZONTE 400
@@ -84,6 +85,8 @@ Servidor::Servidor(){
     this->time = "0:0";
     empezarJuego = false;
     player = 1;
+	jugadoresListos=0;
+	listos = false;
 
 }
 
@@ -334,7 +337,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
-                timerThread.start();
+                
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
                     string mensajeFin= this->procesarMensajeFin();
@@ -378,6 +381,35 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             break;
 		}
+	case LISTO:{
+		this->jugadoresListos++;
+		cout<<"hola"<<endl;
+		map<int,Socket*>::iterator iterador;
+		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
+			int i =5;
+			while (i>=0){
+				cout<< i << endl;
+				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0005/50/" + to_string(i);
+				    cout<< mensaje << endl;
+				    this->enviarMensaje(mensaje,iterador->second);
+				}
+				i--;
+				sleep(1);
+			}
+		for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0003/40";
+				    this->enviarMensaje(mensaje,iterador->second);
+		}
+		
+		timerThread.start();
+		}
+		
+		
+		
+			//listos = true;
+	}break;
+		
         case LOGOUT:{
             loggear("Codigo de logout",2);
             string msg = "El usuario se ha deslogueado correctamente";
@@ -516,7 +548,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 return mensajeAEnviar;
 }
 
-
+bool Servidor::estaListo(){
+	return this->listos;
+}
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
 
     loggear("Saco al usuario de la base de datos",2);
