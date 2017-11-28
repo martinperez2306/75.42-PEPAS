@@ -458,6 +458,8 @@ void Cliente::parsearCalculos(string datos, int i) {
     string tiempo_aux= obtenerParametros(datos,&i);
     if (tiempo_aux != "" && tiempo_aux != " " && tiempo_aux != "\0")
     	this->tiempo = tiempo_aux;
+    this->destrozo = stoi(obtenerParametros(datos,&i),nullptr,10);
+    cout<<"Nivel de destrozo:"<<this->destrozo<<endl;
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);
@@ -476,10 +478,11 @@ void Cliente::parsearCalculos(string datos, int i) {
         Rival* rival = *it;
         if (j< cantidadADibujar){
             int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int playerDestroy = stoi(obtenerParametros(datos,&i),nullptr,10);
             int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
             float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
             //if (!rival->getDibujar()){
-                rival->actualizar(playerNum,playerPosX,playerPosY);
+                rival->actualizar(playerNum,playerDestroy,playerPosX,playerPosY);
             //}
         } else rival->notDibujar();
         j++;
@@ -518,7 +521,7 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 }
 
-int Cliente::setRival(string datos, int i) {
+/*int Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -530,7 +533,7 @@ int Cliente::setRival(string datos, int i) {
     }
     return i;
 
-}
+}*/
 
 int Cliente::obtenerCantidadDePlayersADibujar() {
     return cantidadADibujar;
@@ -558,4 +561,8 @@ string Cliente::getTiempo(){
 
 bool Cliente::sePuedeMover(){
 	return this->mover;
+}
+
+int Cliente::getDestrozo() {
+    return this->destrozo;
 }

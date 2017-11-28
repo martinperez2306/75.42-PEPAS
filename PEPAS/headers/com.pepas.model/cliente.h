@@ -44,6 +44,7 @@ private:
     Vista* vista;
     string tiempo;
     bool mover;
+    int destrozo;
 
 
 
@@ -147,6 +148,7 @@ int getVelocidad();
 string getTiempo();
 bool sePuedeMover();
 
+    int getDestrozo();
 };
 
 
