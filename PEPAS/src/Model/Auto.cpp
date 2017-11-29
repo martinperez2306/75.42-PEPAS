@@ -27,6 +27,7 @@ Auto::Auto(int player)
 	VelX = 0;
 	VelY = 0;
 	posicion = 0;
+    ultPosY = 0 ;
 	PressUP = false;
     PressDown = false;
     Colision = false;
@@ -322,4 +323,36 @@ void Auto::agregarDestrozo() {
 
 int Auto::obtenerDestrozo(){
     return destrozo;
+}
+
+void Auto::setScoreEtapa1(int score) {
+    this->scoreEtapa1 += score;
+}
+
+void Auto::setScoreEtapa2(int score) {
+    this->scoreEtapa2 += score;
+}
+
+void Auto::setScoreEtapa3(int score) {
+    this->scoreEtapa3 += score;
+}
+
+int Auto::getEtapa() {
+    return this->etapa;
+}
+
+void Auto::incrementarEtapa() {
+    this->etapa += 1;
+}
+
+int Auto::getUltPosY() {
+    return ultPosY;
+}
+
+int Auto::getScoreEtapa1() {
+    return this->scoreEtapa1;
+}
+
+void Auto::setUltPosY(int posY) {
+    this->ultPosY = posY;
 }
