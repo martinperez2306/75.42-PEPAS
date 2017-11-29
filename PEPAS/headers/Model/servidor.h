@@ -149,6 +149,10 @@ public:
     void setTime(string basic_string);
 
     string getTime ();
+
+    void calcularPuntaje(Auto * autito, Auto * primero);
+
+    void obtengoElPrimero(Auto * primero);
 };
 
 

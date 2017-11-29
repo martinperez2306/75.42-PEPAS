@@ -23,6 +23,7 @@ Auto::Auto(int player)
 	//Initialize the offsets
 	//PosX =SCREEN_WIDTH/2 -100;
 	PosY = SCREEN_HEIGHT - 180 ;
+	ultPosY = 0 ;
 	//Initialize the velocity
 	VelX = 0;
 	VelY = 0;
@@ -35,6 +36,9 @@ Auto::Auto(int player)
     PressRight_lock = false;
     PressUp_lock = false;
 	this->jugador = player;
+	this->scoreEtapa1 = 0;
+	this->scoreEtapa2 = 0;
+	this->scoreEtapa3 = 0;
 
 
 	switch (jugador){
@@ -70,6 +74,13 @@ int Auto::getY() {
 	return PosY;
 }
 
+int Auto::getUltPosY() {
+	return ultPosY;
+}
+
+void Auto::setUltPosY(int posY) {
+	this->ultPosY = posY;
+}
 
 void Auto::moveLeft_KD(int curve) {
 	if (!PressLeft_lock) {
@@ -307,4 +318,28 @@ void Auto::noEstaEnColision() {
     PressRight_lock = false;
     PressUp_lock = false;
     frontColision = false;
+}
+
+int Auto::getScoreEtapa1() {
+	return this->scoreEtapa1;
+}
+
+int Auto::getScoreEtapa2() {
+	return this->scoreEtapa2;
+}
+
+int Auto::getScoreEtapa3() {
+	return this->scoreEtapa3;
+}
+
+void Auto::setScoreEtapa1(int score) {
+	this->scoreEtapa1 += score;
+}
+
+void Auto::setScoreEtapa2(int score) {
+	this->scoreEtapa2 += score;
+}
+
+void Auto::setScoreEtapa3(int score) {
+	this->scoreEtapa3 += score;
 }
