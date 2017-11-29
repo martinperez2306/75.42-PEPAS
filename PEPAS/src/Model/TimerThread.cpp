@@ -1,3 +1,4 @@
+#include <zconf.h>
 #include "../../headers/Model/TimerThread.h"
 
 TimerThread::TimerThread(bool CerrarServidor) {
@@ -10,6 +11,7 @@ void TimerThread::run() {
     startTime = clock();
     //string timeString;
     while (!estaCerrado){
+        sleep(1);
         time = this->renderTiempo(startTime);
         //srv->setTime(timeString);
     }

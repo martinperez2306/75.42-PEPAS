@@ -339,9 +339,11 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
                 map<int,Socket*>::iterator iterador;
+                int i=0;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
-                    string mensajeFin= this->procesarMensajeFin();
+                    string mensajeFin= this->procesarMensajeFin(i);
                     this->enviarMensaje(mensajeFin,iterador->second);
+                    i++;
                 }
                 player = 1;
             }
@@ -755,8 +757,8 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
 
 }
 
-void Servidor::enviarFinMapas(Socket* socketCliente){
-	string mensajeFin= this->procesarMensajeFin();
+void Servidor::enviarFinMapas(Socket* socketCliente, int i ){
+	string mensajeFin= this->procesarMensajeFin(i);
    	this->enviarMensaje(mensajeFin,socketCliente);
 }
 
@@ -824,13 +826,17 @@ string Servidor::procesarMensajeObjetoMapa(int arbol, int cartel, int distancia,
 /*Este procesador, codifica el mensaje con el codigo 10.
 <código_mensaje>/*/
 
-string Servidor::procesarMensajeFin(){
+string Servidor::procesarMensajeFin(int i){
     string stringACrear,stringProcesado;
     string separador="/";
-    string model = to_string(modeloDeAuto.front());
-    modeloDeAuto.pop_front();
+
+    auto model = modeloDeAuto.begin();
+    advance(model, i);
+    string modelCar = to_string(*model);
+
+    cout<<"Model car: "<<modelCar<<endl;
     string cantJugadores = to_string(this->cantidadMaximaDeConexiones);
-    stringACrear = separador + "10" + separador + model +separador+ cantJugadores;
+    stringACrear = separador + "10" + separador + modelCar +separador+ cantJugadores;
     unsigned long largoDelMensaje = stringACrear.length();
     stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
     loggear(stringProcesado,1);
@@ -971,10 +977,12 @@ void Servidor::cambiarDePista(){
 	}
 	//enviar los nuevos mapas a los clientes
 	cout<<"Enviando nueva info"<<endl;
+    int i = 0;
 	for (std::map<int,Socket*>::iterator it=this->mapaSocket->begin(); it!=this->mapaSocket->end(); ++it){
 		this->enviarMinimapaACliente(it->second);
 		this->enviarMapaACliente(it->second);
-		this->enviarFinMapas(it->second);
+		this->enviarFinMapas(it->second, i);
+        i++;
 	}
 }
 

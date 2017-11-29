@@ -117,14 +117,14 @@ public:
 	string procesarMensajeObjetoMinimapa(int arbol,int cartel,int distancia,string lado);
 	string procesarMensajeRutaMapa(int longitud, int curva);
 	string procesarMensajeObjetoMapa(int arbol,int cartel,int distancia,string lado);
-	string procesarMensajeFin();
+	string procesarMensajeFin(int i);
 	string procesarMensajeCambioDePista();
 
 	void generarMapa();
 	void generarMinimapa();
 	void enviarMapaACliente(Socket* socketCliente);
 	void enviarMinimapaACliente(Socket* socketCliente);
-	void enviarFinMapas(Socket* socketCliente);
+	void enviarFinMapas(Socket* socketCliente, int i);
 	void generarWorld();
 
     list<int> cargarLista();
