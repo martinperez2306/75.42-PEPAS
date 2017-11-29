@@ -20,7 +20,7 @@ void AliveThread::run(){
 
     while (estaCableado && !estaCerrado){
         int valorActual = contador;
-        sleep (10);
+        sleep (20);
         if (valorActual == contador) {
             //estaCableado = false;
             loggear("----->ERROR, Se desconecto el cable", 1);

@@ -49,7 +49,7 @@ void Zoomer::zoomMapToWorld(Mapa* mapa, World* world){
 		}
 	}
 	//seteamos el final de pista
-	world->setFinDePista(100);
+	world->setFinDePista(4900);
 	//agregamos padding al final
 	this->agregarPaddingToWorld(world,metros);
 }

@@ -11,7 +11,7 @@ void TimerThread::run() {
     startTime = clock();
     //string timeString;
     while (!estaCerrado){
-        sleep(1);
+//        sleep(1);
         time = this->renderTiempo(startTime);
         //srv->setTime(timeString);
     }

@@ -342,6 +342,7 @@ int Auto::getScoreEtapa1() {
 
 void Auto::frenarAuto() {
     VelY = VEL_MIN;
+    PressUP = false;
    // cout<<"entro a frenar auto"<<endl;
 }
 
