@@ -23,6 +23,7 @@ Auto::Auto(int player)
 	//Initialize the offsets
 	//PosX =SCREEN_WIDTH/2 -100;
 	PosY = SCREEN_HEIGHT - 180 ;
+	ultPosY = 0 ;
 	//Initialize the velocity
 	VelX = 0;
 	VelY = 0;
@@ -37,6 +38,10 @@ Auto::Auto(int player)
     PressUp_lock = false;
 	this->jugador = player;
     destrozo = 0;
+	this->scoreEtapa1 = 0;
+	this->scoreEtapa2 = 0;
+	this->scoreEtapa3 = 0;
+	this->etapa = 1;
 
 
 	this->setPosInicialDelAuto();
@@ -54,6 +59,13 @@ int Auto::getY() {
 	return PosY;
 }
 
+int Auto::getUltPosY() {
+	return ultPosY;
+}
+
+void Auto::setUltPosY(int posY) {
+	this->ultPosY = posY;
+}
 
 void Auto::moveLeft_KD(int curve) {
 	if (!PressLeft_lock) {
@@ -187,13 +199,7 @@ float Auto::getPosition() {
 	return posicion;
 }
 
-bool Auto::isMoving() {
-	bool move;
-	if (VelY>0)
-		move = true;
-	else move = false;
-	return move ;
-}
+
 
 void Auto::checkCurve(int curve) {
 
@@ -212,18 +218,6 @@ void Auto::checkCurve(int curve) {
 
 }
 
-string Auto::agregarPadding(int lenght) {
-    string mensajeProcesado;
-    string largo = to_string(lenght);
-    if (lenght < 10)
-        mensajeProcesado = "000" + largo;
-    else if (lenght < 100)
-        mensajeProcesado = "00" + largo;
-    else if (lenght < 1000)
-        mensajeProcesado = "0" + largo;
-    else mensajeProcesado = largo;
-    return mensajeProcesado;
-}
 
 string Auto::procesarMovimiento() {
     string stringACrear, stringProcesado;
@@ -244,13 +238,6 @@ void Auto::setJugador(int i) {
 
 }
 
-float Auto::getRightBorder() {
-    return this->RIGHT_BORDER;
-}
-
-float Auto::getLeftBorder() {
-    return this->LEFT_BORDER;
-}
 
 void Auto::estaEnColision(string lastMove, float velY) {
         cout<<"recibi el lastmove: "<<lastMove<<endl;
@@ -325,6 +312,7 @@ int Auto::obtenerDestrozo(){
     return destrozo;
 }
 
+
 void Auto::setScoreEtapa1(int score) {
     this->scoreEtapa1 += score;
 }
@@ -345,14 +333,12 @@ void Auto::incrementarEtapa() {
     this->etapa += 1;
 }
 
-int Auto::getUltPosY() {
-    return ultPosY;
-}
+
 
 int Auto::getScoreEtapa1() {
     return this->scoreEtapa1;
 }
 
-void Auto::setUltPosY(int posY) {
-    this->ultPosY = posY;
-}
+
+
+

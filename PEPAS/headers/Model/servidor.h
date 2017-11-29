@@ -168,7 +168,13 @@ public:
 
 	int getPistaActual();
 
+
 	void calcularPuntaje(Auto * autito, Auto * primero);
+
+
+
+    void obtengoElPrimero(Auto * primero);
+
 };
 
 

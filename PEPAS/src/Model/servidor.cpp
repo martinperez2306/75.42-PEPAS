@@ -877,6 +877,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 //    obtengoElPrimero(primero);
 
     int posYAux = 0;
+
     int posY = 0;
     bool primeraVez = true;
     for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
@@ -891,6 +892,22 @@ string Servidor::actualizarJuego(Auto *pAuto) {
             primero = it->second;
         }
     }
+
+
+
+	for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
+		posY = it->second->getPosition()/SEGL;
+		if(primeraVez) {
+			posYAux = posY;
+			primero = it->second;
+			primeraVez = false;
+		}
+		if(posY > posYAux) {
+			posYAux = posY;
+			primero = it->second;
+		}
+	}
+
 
 
 
@@ -931,6 +948,58 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         stringArmado =  stringTime + separador +  to_string(pAuto->obtenerDestrozo()) + separador + stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
+
+
+void Servidor::obtengoElPrimero(Auto * primero) {
+	int posYAux = 0;
+	int posY = 0;
+	cout << "voy a iterar entre los autos" << endl;
+	bool primeraVez = true;
+	for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
+		posY = it->second->getPosition()/SEGL;
+		if(primeraVez) {
+			posYAux = posY;
+			primero = it->second;
+			primeraVez = false;
+		}
+		if(posY > posYAux) {
+			cout << "entro al if" << endl;
+			posYAux = posY;
+			primero = it->second;
+		}
+		cout << "salgo del if" << endl;
+	}
+	cout << "el primero es: " << primero->obtenerPlayer() << endl;
+}
+
+void Servidor::calcularPuntaje(Auto * autito, Auto * primero) {
+	// si es el primero
+	cout<<"ultposy: " << autito->getUltPosY() << endl;
+	cout<<"posy: " << autito->getPosition()/SEGL << endl;
+	if(autito->getPosition()/SEGL >= autito->getUltPosY() + 1) {
+		if(autito->obtenerPlayer() == primero->obtenerPlayer()) {
+			if(autito->getEtapa() == 1)
+				autito->setScoreEtapa1( autito->getVelY() * 2 );
+			else if(autito->getEtapa() == 2)
+				autito->setScoreEtapa2( autito->getVelY() * 2 );
+			else
+				autito->setScoreEtapa3( autito->getVelY() * 2 );
+		} else {
+			if(autito->getEtapa() == 1)
+				autito->setScoreEtapa1( autito->getVelY() );
+			else if(autito->getEtapa() == 2)
+				autito->setScoreEtapa2( autito->getVelY() );
+			else
+				autito->setScoreEtapa3( autito->getVelY() );
+		}
+		cout<<"la velocidad es: " << autito->getVelY() << endl;
+		cout<<"el puntaje es: " << autito->getScoreEtapa1() << endl;
+		autito->setUltPosY(autito->getPosition()/SEGL);
+	}
+
+}
+
+
 //Devuelve que tipo de curva es en cierto kilometraje
 int Servidor::curvaEnKilometraje(int posicionY){
 	return this->world->obtenerCurvaEnKilometraje(posicionY);
@@ -995,6 +1064,8 @@ void Servidor::cambiarDePista(){
 	for(std::map<string,Auto*>::iterator it= this->mapAutitos->begin(); it!=this->mapAutitos->end();++it){
 		Auto* automovil = it->second;
 		automovil->setPosInicialDelAuto();
+		automovil->incrementarEtapa();
+		automovil->setUltPosY(0);
 	}
 	//enviar los nuevos mapas a los clientes
 	cout<<"Enviando nueva info"<<endl;
@@ -1034,29 +1105,3 @@ void Servidor::enviarMensajeCambioDePista(){
 	}
 }
 
-void Servidor::calcularPuntaje(Auto * autito, Auto * primero) {
-    // si es el primero
-    cout<<"ultposy: " << autito->getUltPosY() << endl;
-    cout<<"posy: " << autito->getPosition()/SEGL << endl;
-    if(autito->getPosition()/SEGL >= autito->getUltPosY() + 1) {
-        if(autito->obtenerPlayer() == primero->obtenerPlayer()) {
-            if(autito->getEtapa() == 1)
-                autito->setScoreEtapa1( autito->getVelY() * 2 );
-            else if(autito->getEtapa() == 2)
-                autito->setScoreEtapa2( autito->getVelY() * 2 );
-            else
-                autito->setScoreEtapa3( autito->getVelY() * 2 );
-        } else {
-            if(autito->getEtapa() == 1)
-                autito->setScoreEtapa1( autito->getVelY() );
-            else if(autito->getEtapa() == 2)
-                autito->setScoreEtapa2( autito->getVelY() );
-            else
-                autito->setScoreEtapa3( autito->getVelY() );
-        }
-        cout<<"la velocidad es: " << autito->getVelY() << endl;
-        cout<<"el puntaje es: " << autito->getScoreEtapa1() << endl;
-        autito->setUltPosY(autito->getPosition()/SEGL);
-    }
-
-}

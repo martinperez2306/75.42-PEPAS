@@ -15,7 +15,10 @@ class Auto {
 
 private:
 
+
 	float PosX, PosY,ultPosY, posicion, RIGHT_BORDER, LEFT_BORDER;
+
+
 	float VelX, VelY;
 	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision;
 	int jugador, destrozo;
@@ -44,6 +47,10 @@ public:
 
 	int getY();
 
+	int getUltPosY();
+
+	void setUltPosY(int posY);
+
 	void moveLeft_KD(int curve);
 
 	void moveRight_KD(int curve);
@@ -64,17 +71,13 @@ public:
 
 	float getPosition();
 
-	float getRightBorder();
 
-	float getLeftBorder();
-
-	bool isMoving();
 
 	void checkCurve(int curve);
 
 	string procesarMovimiento();
 
-	string agregarPadding(int lenght);
+
 
 	string getLastMove();
 
@@ -90,11 +93,12 @@ public:
 
     void setPosInicialDelAuto();
 
-	void setUltPosY(int posY);
+
 
 	void agregarDestrozo();
 
 	int obtenerDestrozo();
+
 
 	void setScoreEtapa1(int score);
 	void setScoreEtapa2(int score);
@@ -105,7 +109,8 @@ public:
 	int getEtapa();
 	int getScoreEtapa1();
 
-	int getUltPosY();
+
+
 };
 
 

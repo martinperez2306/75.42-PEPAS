@@ -5,6 +5,9 @@ CalculateThread::CalculateThread(Servidor *sv, bool CerrarServidor, Socket* sock
     this->srv = sv;
     this->estaCerrado = false;
     this->socket = socket;
+    this->primeroE1 = true;
+    this->primeroE2 = true;
+    this->primeroE3 = true;
 }
 
 void CalculateThread::run() {
@@ -23,7 +26,7 @@ void CalculateThread::run() {
             else stringACrear = msg + playersInformation;
             unsigned long largoDelMensaje = stringACrear.length();
             stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
-            usleep (4000);
+            usleep (5000);
             cout<<stringProcesado<<endl;
             this->srv->enviarMensaje(stringProcesado,socket);
         } else {
@@ -47,11 +50,12 @@ void CalculateThread::run() {
                     this->Automovil->setScoreEtapa3(100000);
                     this->primeroE3 = false;
                 }
-
             }
         }
     }
-}
+
+    }
+
 
 void CalculateThread::terminar() {
     estaCerrado = true;
