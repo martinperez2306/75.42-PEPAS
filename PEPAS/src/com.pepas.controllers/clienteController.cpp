@@ -389,7 +389,7 @@ void ClienteController::dibujar() {
 
             while (!this->cliente->recibioFinDeMapa() && !quit) {
                 cout << "Esperando jugadores" << endl;
-                sleep(3);
+                sleep(1);
             }
 
             this->carAsign();
@@ -620,7 +620,7 @@ void ClienteController::dibujar() {
             double noDraw2 = 0;
             double noDraw3 = 0;
 
-
+		cliente->enviarMensaje("0003/51");
             //Start timer
 			startTime = clock();
             //While application is running
@@ -639,8 +639,8 @@ void ClienteController::dibujar() {
                     if (e.type == SDL_QUIT) {
                         quit = true;
                     }
-
-                    this->keyEvent(e);
+		    if (cliente->sePuedeMover())
+                    	this->keyEvent(e);
                 }
 
                 SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
@@ -693,11 +693,9 @@ void ClienteController::dibujar() {
                       }
                   }*/
 
-
                 int i = 0;
                 list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                 while (i < this->cliente->obtenerRivalList().size()){
-
                     i++;
                     Rival *rival = *it;
          /*           if (rival->getDibujar()) {
@@ -709,24 +707,17 @@ void ClienteController::dibujar() {
                                      this->getTextura(rival->getPlayer()));
                     }
                     rival->notDibujar();*/
-
                     if(rival->getDibujar()){
-
                         if (i==1){
-
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
-                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
                             lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
                             if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
                                 lines[noDraw].spriteXR1 = 0;
                                 //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
                                 noDraw = startPos + rival->getHorizonte() + OFFSET;
-
                             }
                         }else if(i==2){
-
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(
-                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival);
                             lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival->getPosX() - 2.8;
                             if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
                                 lines[noDraw2].spriteXR2 = 0;
@@ -734,8 +725,7 @@ void ClienteController::dibujar() {
                                 noDraw2 = startPos + rival->getHorizonte() + OFFSET;
                             }
                         }else{
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(
-                                    rival->getPlayer());
+                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(rival);
                             lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 = 0.0056 * rival->getPosX() - 2.8;
                             if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
                                 lines[noDraw3].spriteXR3 = 0;
@@ -746,7 +736,6 @@ void ClienteController::dibujar() {
                         }
                         rival->notDibujar();
                     }
-
                     std::list<Rival *>::iterator it2 = std::next(it, 1);
                    // printf("ciclo\n");
                 }
@@ -810,8 +799,7 @@ void ClienteController::dibujar() {
 
                 curveSet = lines[(pos / segL)].curve;
 
-                cout<<pos/200<<endl;
-
+                this->carAsign();
 
                 checkCurveAndSetCentrifuga(curveSet);
                 //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
@@ -841,7 +829,6 @@ void ClienteController::dibujar() {
             }
         	}
         }
-
     }
 
     //Free resources and close SDL
@@ -891,11 +878,44 @@ bool ClienteController::loadMedia() {
         printf("Failed to load sprite sheet texture!\n");
         success = false;
     }
+    player1_1 = new Textura();
+    if (!player1_1->loadFromFile("img/ferrari1_1.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player1_2 = new Textura();
+    if (!player1_2->loadFromFile("img/ferrari1_2.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player1_3 = new Textura();
+    if (!player1_3->loadFromFile("img/ferrari1_3.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+
+
     player2 = new Textura();
     if (!player2->loadFromFile("img/ferrari2.png", this->renderer)) {
         printf("Failed to load sprite sheet texture!\n");
         success = false;
     }
+    player2_1 = new Textura();
+    if (!player2_1->loadFromFile("img/ferrari2_1.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player2_2 = new Textura();
+    if (!player2_2->loadFromFile("img/ferrari2_2.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player2_3 = new Textura();
+    if (!player2_3->loadFromFile("img/ferrari2_3.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+
 
     player3 = new Textura();
     if (!player3->loadFromFile("img/ferrari3.png", this->renderer)) {
@@ -1044,6 +1064,7 @@ void ClienteController::renderTiempo(string tiempo) {
 
 */
     SDL_Color textColor = {0, 0, 0, 0xFF};
+	cout<<tiempo<<endl;
 	opcion->loadFromRenderedText(tiempo.c_str(),textColor,this->tiempo,renderer);
 	opcion->render(((SCREEN_WIDTH - opcion->getWidth()) / 2 ), 30, renderer);
 }
@@ -1372,50 +1393,114 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
         rect= {x-5,y-5,10,10};
         SDL_RenderFillRect(renderer,&rect);
     }
-
     delete recorredor;
-
 }
 
 void ClienteController::carAsign() {
-
+    int destrozo = cliente->getDestrozo();
     switch (this->cliente->obtenerModel()) {
         case 1: {
+            if (destrozo == 0)
             car = player1;
+            else if (destrozo > 0 && destrozo< 3)
+                car = player1_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                car = player1_2;
+             if (destrozo > 6)
+               car = player1_3;
         }
             break;
         case 2: {
-            car = player2;
+            if (destrozo == 0)
+                car = player2;
+            else if (destrozo > 0 && destrozo< 3)
+                car = player2_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                car = player2_2;
+            if (destrozo > 6)
+                car = player2_3;
         }
             break;
         case 3: {
             car = player3;
+            if (destrozo == 0)
+                car = player3;
+            else if (destrozo > 0 && destrozo< 3)
+                car = player3_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                car = player3_2;
+            if (destrozo > 6)
+                car = player3_3;
         }
+
             break;
         case 4: {
-            car = player4;
+            if (destrozo == 0)
+                car = player4;
+            else if (destrozo > 0 && destrozo< 3)
+                car = player4_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                car = player4_2;
+            if (destrozo > 6)
+                car = player4_3;
         }
             break;
     }
 
 }
 
-Textura *ClienteController::getTextura(int player) {
-    if (player == 1) {
-        return player1;
+Textura *ClienteController::getTextura(Rival* rival) {
+    Textura * texture;
+    int destrozo = rival->getDestroy();
+    switch (rival->getPlayer()) {
+        case 1: {
+            if (destrozo == 0)
+                texture = player1;
+            else if (destrozo > 0 && destrozo< 3)
+                texture = player1_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                texture = player1_2;
+            if (destrozo > 6)
+                texture = player1_3;
+        }
+            break;
+        case 2: {
+            if (destrozo == 0)
+                texture = player2;
+            else if (destrozo > 0 && destrozo< 3)
+                texture = player2_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                texture = player2_2;
+            if (destrozo > 6)
+                texture = player2_3;
+        }
+            break;
+        case 3: {
+            car = player3;
+            if (destrozo == 0)
+                texture = player3;
+            else if (destrozo > 0 && destrozo< 3)
+                texture = player3_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                texture = player3_2;
+            if (destrozo > 6)
+                texture = player3_3;
+        }
+
+            break;
+        case 4: {
+            if (destrozo == 0)
+                texture = player4;
+            else if (destrozo > 0 && destrozo< 3)
+                texture = player4_1;
+            else if (destrozo >= 3 && destrozo <=6)
+                texture = player4_2;
+            if (destrozo > 6)
+                texture = player4_3;
+        }
+            break;
     }
-    if (player == 2) {
-        return player2;
-    }
-    if (player == 3) {
-        return player3;
-    }
-    if (player == 4) {
-        return player4;
-    }
-    if (player == 5) {
-        return player5;
-    }
+    return texture;
 }
 
 void ClienteController::dibujarRival(double X, double Y, double W, double scale, double spriteX, Textura *sprite) {

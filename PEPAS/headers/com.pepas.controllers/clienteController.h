@@ -74,7 +74,28 @@ private:
 	Textura* player4;
 	Textura* player5;
 
-    Auto* autito;
+	Textura* player1_1;
+	Textura* player1_2;
+	Textura* player1_3;
+
+	Textura* player2_1;
+	Textura* player2_2;
+	Textura* player2_3;
+
+	Textura* player3_1;
+	Textura* player3_2;
+	Textura* player3_3;
+
+	Textura* player4_1;
+	Textura* player4_2;
+	Textura* player4_3;
+
+
+
+
+
+
+	Auto* autito;
 
     Mix_Music *soundTrack = NULL;
 
@@ -292,7 +313,7 @@ public:
 
 	void dibujarRival(double X,double Y,double W, double scale, double spriteX, Textura* sprite);
 
-    Textura *getTextura(int i);
+    Textura *getTextura(Rival* i);
     void renderVelocidad();
     void renderTiempo(string tiempo);
     void renderDistancia(int posMoving);

@@ -8,7 +8,7 @@
 
 class Rival {
 private:
-    int player;
+    int player, playerDestroy;
     int PosX;
     float horizonte;
     bool dibujar;
@@ -17,13 +17,15 @@ public:
 
     bool getDibujar();
 
-    void actualizar(int i, int i1, float i2);
+    void actualizar(int i, int pd, int i1, float i2);
 
     int getHorizonte();
 
     int getPosX();
 
     int getPlayer();
+
+    int getDestroy();
 
     void notDibujar();
 };

@@ -17,6 +17,8 @@
 #define INFINITO 2147483647
 #define AUTO_MOVE 20
 #define CAMBIO_DE_PISTA 30
+#define CONTEO 50
+#define GO 40
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -30,11 +32,13 @@ Cliente::Cliente() {
     this->mapa = new Mapa();
     this->vista=new Vista();
     this->velocidad = 0;
-    this->tiempo = " ";
+    this->tiempo = "";
     posX =  1024/2 -100;
     posY = 768 - 1;
     finDeMapa = false;
     this->mapaCompleto = false;
+    mover =false;
+  
 }
 bool Cliente::minimapaEstaCompleto(){
     return (this->minimapaCompleto);
@@ -284,6 +288,12 @@ void Cliente::parsearMensaje(std::string datos){
                 this->vaciarColaBuzon();
         }
 			break;
+	case GO:{
+		mover=true;
+	}break;
+	case CONTEO:{
+		this->tiempo = "0:" + obtenerParametros(datos,&i);
+	}break;
         case SIGNAL_CONNECT:{
             this->aliveCounter += 1;
             string msgLog = "El contador es: " + to_string(aliveCounter);
@@ -460,8 +470,11 @@ void Cliente::parsearCalculos(string datos, int i) {
     int posY = stoi(obtenerParametros(datos,&i),nullptr,10);
     int posX = stoi(obtenerParametros(datos,&i),nullptr,10);
     int velocidad = stoi(obtenerParametros(datos,&i),nullptr,10);
-    this->tiempo = obtenerParametros(datos,&i);
-    cout<<"tiempo"<<tiempo<<endl;
+    string tiempo_aux= obtenerParametros(datos,&i);
+    if (tiempo_aux != "" && tiempo_aux != " " && tiempo_aux != "\0")
+    	this->tiempo = tiempo_aux;
+    this->destrozo = stoi(obtenerParametros(datos,&i),nullptr,10);
+    cout<<"Nivel de destrozo:"<<this->destrozo<<endl;
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);
@@ -480,10 +493,11 @@ void Cliente::parsearCalculos(string datos, int i) {
         Rival* rival = *it;
         if (j< cantidadADibujar){
             int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
+            int playerDestroy = stoi(obtenerParametros(datos,&i),nullptr,10);
             int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
             float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
             //if (!rival->getDibujar()){
-                rival->actualizar(playerNum,playerPosX,playerPosY);
+                rival->actualizar(playerNum,playerDestroy,playerPosX,playerPosY);
             //}
         } else rival->notDibujar();
         j++;
@@ -522,7 +536,7 @@ void Cliente::crearRivales(int cantRivales, int miAuto) {
 
 }
 
-int Cliente::setRival(string datos, int i) {
+/*int Cliente::setRival(string datos, int i) {
     int playerNum = stoi(obtenerParametros(datos,&i),nullptr,10);
     int playerPosX = stoi(obtenerParametros(datos,&i),nullptr,10);
     float playerPosY = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -534,7 +548,7 @@ int Cliente::setRival(string datos, int i) {
     }
     return i;
 
-}
+}*/
 
 int Cliente::obtenerCantidadDePlayersADibujar() {
     return cantidadADibujar;
@@ -558,4 +572,12 @@ int Cliente::getVelocidad(){
 
 string Cliente::getTiempo(){
    return this->tiempo;
+}
+
+bool Cliente::sePuedeMover(){
+	return this->mover;
+}
+
+int Cliente::getDestrozo() {
+    return this->destrozo;
 }

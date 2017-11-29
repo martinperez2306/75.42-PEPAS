@@ -15,9 +15,10 @@ bool Rival::getDibujar() {
     return dibujar;
 }
 
-void Rival::actualizar(int pNum, int x, float y) {
+void Rival::actualizar(int pNum, int destroy, int x, float y) {
 
     player = pNum;
+    playerDestroy = destroy;
     PosX = x;
     horizonte = y;
     dibujar = true;
@@ -38,4 +39,8 @@ int Rival::getPlayer() {
 void Rival::notDibujar() {
     dibujar = false;
 
+}
+
+int Rival::getDestroy() {
+    return playerDestroy;
 }
