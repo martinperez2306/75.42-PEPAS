@@ -20,9 +20,11 @@
 #define CASE_LEFT_KU 25
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
+#define LISTO 51
 
 #define SEGL 50
 #define HORIZONTE 400
+
 
 using namespace std;
 
@@ -85,6 +87,8 @@ Servidor::Servidor(){
     player = 1;
     this->carreraTerminada = false;
     this->pistaActual = 0;
+    jugadoresListos=0;
+    listos = false;
 }
 
 
@@ -378,6 +382,35 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             break;
 		}
+	case LISTO:{
+		this->jugadoresListos++;
+		cout<<"hola"<<endl;
+		map<int,Socket*>::iterator iterador;
+		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
+			int i =5;
+			while (i>=0){
+				cout<< i << endl;
+				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0005/50/" + to_string(i);
+				    cout<< mensaje << endl;
+				    this->enviarMensaje(mensaje,iterador->second);
+				}
+				i--;
+				sleep(1);
+			}
+		for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0003/40";
+				    this->enviarMensaje(mensaje,iterador->second);
+		}
+		
+		timerThread.start();
+		}
+		
+		
+		
+			//listos = true;
+	}break;
+		
         case LOGOUT:{
             loggear("Codigo de logout",2);
             string msg = "El usuario se ha deslogueado correctamente";
@@ -516,7 +549,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 return mensajeAEnviar;
 }
 
-
+bool Servidor::estaListo(){
+	return this->listos;
+}
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
 
     loggear("Saco al usuario de la base de datos",2);
@@ -832,6 +867,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     int horizonte = HORIZONTE;
     stringMinimapa = to_string(mapAutitos->size());
     stringTime = timerThread.getTiempo();
+    bool salioDeColision;
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
@@ -842,26 +878,30 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
         float diferenciaX = abs(pAuto->getX() - it->second->getX());
-        if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
-            if ( diferenciaX <= 185 && diferenciaY <= 4){
-                //cout<<"Colision "<<diferenciaX<<"-"<<diferenciaY<<endl;
-                //cout<<pAuto->getLastMove()<<endl;
+        if (diferenciaY <= horizonte && it->second != pAuto && abs(diferenciaY) >= 0) {
+            if ( diferenciaX <= 185 && abs(diferenciaY) <= 4){
                 pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
+                if (salioDeColision){
+                    pAuto->agregarDestrozo();
+                    it->second->agregarDestrozo();
+                    salioDeColision= false;
+                }
             } else {
                // cout<<pAuto->getLastMove()<<endl;
                 pAuto->noEstaEnColision();
+                salioDeColision = true;
             }
             i++;
             if (i>=1) {
-                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador +to_string(it->second->obtenerDestrozo()) + separador+ to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
         }
         stringArmado = stringArmado + stringConcat;
     }
-    stringArmado = stringTime + separador + stringMinimapa + separador+ to_string(i) + separador + stringArmado;
+    stringArmado = stringTime + separador + to_string(pAuto->obtenerDestrozo())+ separador+ stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado =  stringTime + separador + stringMinimapa + separador +  to_string(0);
+        stringArmado =  stringTime + separador +  to_string(pAuto->obtenerDestrozo()) + separador + stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
 

@@ -18,7 +18,7 @@ private:
 	float PosX, PosY, posicion, RIGHT_BORDER, LEFT_BORDER;
 	float VelX, VelY;
 	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision;
-	int jugador;
+	int jugador, destrozo;
 	string lastMove;
 
 public:
@@ -87,6 +87,10 @@ public:
     void noEstaEnColision();
 
     void setPosInicialDelAuto();
+
+	void agregarDestrozo();
+
+	int obtenerDestrozo();
 };
 
 

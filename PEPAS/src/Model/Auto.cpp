@@ -35,6 +35,7 @@ Auto::Auto(int player)
     PressRight_lock = false;
     PressUp_lock = false;
 	this->jugador = player;
+    destrozo = 0;
 
 
 	this->setPosInicialDelAuto();
@@ -258,7 +259,7 @@ void Auto::estaEnColision(string lastMove, float velY) {
             frontColision = true;
             PressRight_lock = false;
             PressLeft_lock = false;
-            cout<<"11111111111"<<endl;
+           // cout<<"11111111111"<<endl;
         } /*else if (velY == VEL_MIN && lastMove == "left")
             PressLeft_lock = true;
         else if (velY == VEL_MIN && lastMove == "right")
@@ -267,12 +268,12 @@ void Auto::estaEnColision(string lastMove, float velY) {
         if (lastMove == "left" && !frontColision) {
             PosX -= VelX;
             PressLeft_lock = true;
-            cout<<"2222222222"<<endl;
+           // cout<<"2222222222"<<endl;
         }
         if (lastMove == "right" && !frontColision) {
             PosX -= VelX;
             PressRight_lock = true;
-            cout<<"33333333333"<<endl;
+           // cout<<"33333333333"<<endl;
     }
 }
 
@@ -313,4 +314,12 @@ void Auto::setPosInicialDelAuto(){
 			break;
 
 	}
+}
+
+void Auto::agregarDestrozo() {
+    destrozo++;
+}
+
+int Auto::obtenerDestrozo(){
+    return destrozo;
 }

@@ -54,6 +54,8 @@ private:
     TimerThread timerThread = TimerThread (false);
     bool carreraTerminada;
     int pistaActual;
+    int jugadoresListos;
+    bool listos;
 
 public:
 	int aliveCounter;
@@ -152,18 +154,7 @@ public:
     void setTime(string basic_string);
 
     string getTime ();
-
-    void actualizarEstadoDeCarrera(int posicionDeAuto);
-
-    bool carreraHaTerminado();
-
-    void cambiarDePista();
-
-    void setPistaActual(int pistaActual);
-
-    int getPistaActual();
-
-    void enviarMensajeCambioDePista();
+	bool estaListo();
 };
 
 

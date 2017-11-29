@@ -23,10 +23,13 @@ void CalculateThread::run() {
         else stringACrear = msg + playersInformation;
         unsigned long largoDelMensaje = stringACrear.length();
         stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
-        cout<<stringProcesado<<endl;
         usleep (4000);
+        cout<<stringProcesado<<endl;
         this->srv->enviarMensaje(stringProcesado,socket);
+<<<<<<< HEAD
     	}
+=======
+>>>>>>> ad752e90955bb95b576e30ccce9493c3f460484d
     }
 }
 
