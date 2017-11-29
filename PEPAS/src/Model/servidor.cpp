@@ -952,11 +952,21 @@ void Servidor::calcularPuntaje(Auto * autito, Auto * primero) {
 	// si es el primero
 	cout<<"ultposy: " << autito->getUltPosY() << endl;
 	cout<<"posy: " << autito->getPosition()/SEGL << endl;
-	if(autito->getPosition()/SEGL > autito->getUltPosY()) {
+	if(autito->getPosition()/SEGL >= autito->getUltPosY() + 1) {
 		if(autito->obtenerPlayer() == primero->obtenerPlayer()) {
-			autito->setScoreEtapa1( autito->getVelY() * 2 );
+			if(autito->getEtapa() == 1)
+				autito->setScoreEtapa1( autito->getVelY() * 2 );
+			else if(autito->getEtapa() == 2)
+				autito->setScoreEtapa2( autito->getVelY() * 2 );
+			else
+				autito->setScoreEtapa3( autito->getVelY() * 2 );
 		} else {
-			autito->setScoreEtapa1( autito->getVelY() );
+			if(autito->getEtapa() == 1)
+				autito->setScoreEtapa1( autito->getVelY() );
+			else if(autito->getEtapa() == 2)
+				autito->setScoreEtapa2( autito->getVelY() );
+			else
+				autito->setScoreEtapa3( autito->getVelY() );
 		}
 		cout<<"la velocidad es: " << autito->getVelY() << endl;
 		cout<<"el puntaje es: " << autito->getScoreEtapa1() << endl;
@@ -1029,6 +1039,7 @@ void Servidor::cambiarDePista(){
 	for(std::map<string,Auto*>::iterator it= this->mapAutitos->begin(); it!=this->mapAutitos->end();++it){
 		Auto* automovil = it->second;
 		automovil->setPosInicialDelAuto();
+		automovil->incrementarEtapa();
 	}
 	//enviar los nuevos mapas a los clientes
 	cout<<"Enviando nueva info"<<endl;

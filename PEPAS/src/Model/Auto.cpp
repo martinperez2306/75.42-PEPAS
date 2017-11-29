@@ -40,6 +40,7 @@ Auto::Auto(int player)
 	this->scoreEtapa1 = 0;
 	this->scoreEtapa2 = 0;
 	this->scoreEtapa3 = 0;
+	this->etapa = 1;
 
 
 	this->setPosInicialDelAuto();
@@ -357,4 +358,12 @@ void Auto::setScoreEtapa2(int score) {
 
 void Auto::setScoreEtapa3(int score) {
 	this->scoreEtapa3 += score;
+}
+
+int Auto::getEtapa() {
+	return this->etapa;
+}
+
+void Auto::incrementarEtapa() {
+	this->etapa += 1;
 }

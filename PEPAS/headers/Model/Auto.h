@@ -21,7 +21,7 @@ private:
 	int jugador, destrozo;
 	string lastMove;
 
-	int scoreEtapa1, scoreEtapa2, scoreEtapa3;
+	int scoreEtapa1, scoreEtapa2, scoreEtapa3, etapa;
 
 public:
 
@@ -105,6 +105,9 @@ public:
     int getScoreEtapa1();
     int getScoreEtapa2();
     int getScoreEtapa3();
+
+    void incrementarEtapa();
+    int getEtapa();
 };
 
 
