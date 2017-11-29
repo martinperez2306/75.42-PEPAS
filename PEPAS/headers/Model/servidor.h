@@ -52,6 +52,8 @@ private:
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
     TimerThread timerThread = TimerThread (false);
+    bool carreraTerminada;
+    int pistaActual;
 
 public:
 	int aliveCounter;
@@ -114,6 +116,7 @@ public:
 	string procesarMensajeRutaMapa(int longitud, int curva);
 	string procesarMensajeObjetoMapa(int arbol,int cartel,int distancia,string lado);
 	string procesarMensajeFin();
+	string procesarMensajeCambioDePista();
 
 	void generarMapa();
 	void generarMinimapa();
@@ -149,6 +152,18 @@ public:
     void setTime(string basic_string);
 
     string getTime ();
+
+    void actualizarEstadoDeCarrera(int posicionDeAuto);
+
+    bool carreraHaTerminado();
+
+    void cambiarDePista();
+
+    void setPistaActual(int pistaActual);
+
+    int getPistaActual();
+
+    void enviarMensajeCambioDePista();
 };
 
 

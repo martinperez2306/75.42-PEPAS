@@ -1,7 +1,3 @@
-//
-// Created by arturi on 06/11/17.
-//
-
 #include <zconf.h>
 #include "../../headers/Model/CalculateThread.h"
 
@@ -17,6 +13,8 @@ void CalculateThread::run() {
     this->Automovil = this->srv->obtenerAutoConId(user);
 
     while (!estaCerrado){
+    	this->srv->actualizarEstadoDeCarrera((int)this->Automovil->getPosition() / 200);
+    	if(!this->srv->carreraHaTerminado()){
     	int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
     	string msg = Automovil->calculateMove(curve);
         string playersInformation = srv->actualizarJuego(Automovil);
@@ -28,7 +26,7 @@ void CalculateThread::run() {
         cout<<stringProcesado<<endl;
         usleep (4000);
         this->srv->enviarMensaje(stringProcesado,socket);
-
+    	}
     }
 }
 

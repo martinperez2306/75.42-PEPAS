@@ -1,7 +1,3 @@
-//
-// Created by arturi on 27/11/17.
-//
-
 #ifndef SERVIDOR_TIMERTHREAD_H
 #define SERVIDOR_TIMERTHREAD_H
 

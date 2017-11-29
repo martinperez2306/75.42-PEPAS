@@ -85,6 +85,8 @@ public:
     float getVelY();
 
     void noEstaEnColision();
+
+    void setPosInicialDelAuto();
 };
 
 

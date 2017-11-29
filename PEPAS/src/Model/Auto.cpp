@@ -37,26 +37,8 @@ Auto::Auto(int player)
 	this->jugador = player;
 
 
-	switch (jugador){
-		case 1:{
-			PosX = 230;
-			posicion = 400;
-		}break;
-		case 2:{
-			PosX =550;
-			posicion = 400;
-		}break;
-		case 3:{
-			PosX = 230;
+	this->setPosInicialDelAuto();
 
-		}
-            break;
-		case 4:{
-			PosX = 550;
-		}
-			break;
-
-	}
     RIGHT_BORDER = PosX + CAR_WIDTH;
     LEFT_BORDER = PosX;
 }
@@ -307,4 +289,28 @@ void Auto::noEstaEnColision() {
     PressRight_lock = false;
     PressUp_lock = false;
     frontColision = false;
+}
+
+void Auto::setPosInicialDelAuto(){
+
+	switch (jugador){
+		case 1:{
+			PosX = 230;
+			posicion = 400;
+		}break;
+		case 2:{
+			PosX =550;
+			posicion = 400;
+		}break;
+		case 3:{
+			PosX = 230;
+
+		}
+            break;
+		case 4:{
+			PosX = 550;
+		}
+			break;
+
+	}
 }
