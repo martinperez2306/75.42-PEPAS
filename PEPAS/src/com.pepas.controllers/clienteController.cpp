@@ -44,6 +44,8 @@ ClienteController::ClienteController(const char *archivo) {
 
     vistaLogin = new VistaLogin();
 
+    this->vistaTransicion = new VistaTransicion();
+
     this->mapaCargado = false;
 }
 
@@ -619,7 +621,7 @@ void ClienteController::dibujar() {
 
             this->cargarMapa(&lines);
 
-            this->cliente->setRecibioFinDeMapa();
+            //this->cliente->setRecibioFinDeMapa();
 
             pos = 1;
             int contador = 0;
@@ -632,7 +634,7 @@ void ClienteController::dibujar() {
 			startTime = clock();
             //While application is running
             while (!quit) {
-                if(this->cliente->recibioFinDeMapa()){
+               /* if(this->cliente->recibioFinDeMapa()){
             		lines.clear();
             		this->obstaculos->clear();
             		this->cargarMapa(&lines);
@@ -645,205 +647,232 @@ void ClienteController::dibujar() {
                     noDraw2 = 0;
                     noDraw3 = 0;
                     cliente->enviarMensaje("0003/51");
-            	}
-
-
-                while (SDL_PollEvent(&e) != 0) {
-                    //User requests quit
-                    if (e.type == SDL_QUIT) {
-                        quit = true;
+                    //cliente->noMover();
+            	}*/
+                if(!this->cliente->recibioFinDeMapa()){
+                    cout<<"11111111111111111111111111111111111111111111111111111111111111111111"<<endl;
+                    mapaCargado = false;
+                    lines.clear();
+                    this->obstaculos->clear();
+                    vistaTransicion->initialize(this->window,this->renderer);
+                    list<pair<string,scores>>* puntajes = this->cliente->getScores();
+                    for(list<pair<string,scores>>::iterator it = puntajes->begin(); it!= puntajes->end();++it){
+                        string pistaActual = it->second.pistaActual;
+                        string scoreEtapa = it->second.scoreEtapa;
+                        string scoreTotal = it->second.scoreTotal;
+                        string usuario = it->first;
+                        vistaTransicion->actualizar_scores(pistaActual,usuario,scoreEtapa,scoreTotal);
                     }
-                    if (cliente->sePuedeMover())
-                    	this->keyEvent(e);
+                    vistaTransicion->render_scores();
+                    sleep(10);
                 }
-
-                SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
-                SDL_RenderClear(this->renderer);
-
-                int startPos = pos / segL;
-                x = 0;
-                dx = 0;
-
-                backgroundMove();
-
-                //TODO aca tiene que recibir la tecla que toco;
-
-                for (int n = startPos; n < startPos + LINEAS + 1; n++) {
-
-                    pos = cliente->getPosition();
-                    Line &l = lines[n];
-
-                    l.project(x, 1300, pos);
-
-                    x += dx;
-                    dx += l.curve;
-
-                    l.clip = maxy;
-                    if (l.Y < 0 || l.Y > SCREEN_HEIGHT)
-                        continue;
-                    maxy = l.Y;
-
-                    SDL_Color pasto = (n / 20) % 2 ? verde : verdeOscuro;
-                    SDL_Color borde = (n / 8) % 2 ? rojo : blanco;
-                    SDL_Color linea = (n / 12) % 2 ? gris : blanco;
-
-                    Line p = lines[(n - 1)];
-
-                    fondo->setearFigura(SCREEN_WIDTH / 2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH / 2, l.Y, SCREEN_WIDTH,
-                                        this->renderer, pasto);
-                    clip->setearFigura(p.X, p.Y, p.W * 1.2, l.X, l.Y, l.W * 1.2, this->renderer, borde);
-                    pista->setearFigura(p.X, p.Y, p.W, l.X, l.Y, l.W, this->renderer, gris);
-                    line->setearFigura(p.X, p.Y, p.W * 0.05, p.X, l.Y, l.W * 0.05, this->renderer, linea);
-
+                if(this->cliente->recibioFinDeMapa() && !mapaCargado){
+                    cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
+                    this->cargarMapa(&lines);
+                    this->mapaCargado = true;
                 }
+                if(this->cliente->recibioFinDeMapa() && mapaCargado) {
+                    cout << "333333333333333333333333333333333333333333333333333333333333333333333333333" << endl;
+
+                    while (SDL_PollEvent(&e) != 0) {
+                        //User requests quit
+                        if (e.type == SDL_QUIT) {
+                            quit = true;
+                        }
+                        if (cliente->sePuedeMover())
+                            this->keyEvent(e);
+                    }
+
+                    SDL_SetRenderDrawColor(this->renderer, 0x00, 0x00, 0x00, 0x00);
+                    SDL_RenderClear(this->renderer);
+
+                    int startPos = pos / segL;
+                    x = 0;
+                    dx = 0;
+
+                    backgroundMove();
+
+                    //TODO aca tiene que recibir la tecla que toco;
+
+                    for (int n = startPos; n < startPos + LINEAS + 1; n++) {
+
+                        pos = cliente->getPosition();
+                        Line &l = lines[n];
+
+                        l.project(x, 1300, pos);
+
+                        x += dx;
+                        dx += l.curve;
+
+                        l.clip = maxy;
+                        if (l.Y < 0 || l.Y > SCREEN_HEIGHT)
+                            continue;
+                        maxy = l.Y;
+
+                        SDL_Color pasto = (n / 20) % 2 ? verde : verdeOscuro;
+                        SDL_Color borde = (n / 8) % 2 ? rojo : blanco;
+                        SDL_Color linea = (n / 12) % 2 ? gris : blanco;
+
+                        Line p = lines[(n - 1)];
+
+                        fondo->setearFigura(SCREEN_WIDTH / 2, p.Y, SCREEN_WIDTH, SCREEN_WIDTH / 2, l.Y, SCREEN_WIDTH,
+                                            this->renderer, pasto);
+                        clip->setearFigura(p.X, p.Y, p.W * 1.2, l.X, l.Y, l.W * 1.2, this->renderer, borde);
+                        pista->setearFigura(p.X, p.Y, p.W, l.X, l.Y, l.W, this->renderer, gris);
+                        line->setearFigura(p.X, p.Y, p.W * 0.05, p.X, l.Y, l.W * 0.05, this->renderer, linea);
+
+                    }
 
 
-                /*  if (!this->cliente->obtenerRivalList().empty()) {
-                      for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
-                          Rival *rival = *it;
-                          if (rival->getDibujar()) {
-                              lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
-                              lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
-                              rival->notDibujar();
+                    /*  if (!this->cliente->obtenerRivalList().empty()) {
+                          for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
+                              Rival *rival = *it;
+                              if (rival->getDibujar()) {
+                                  lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
+                                  lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
+                                  rival->notDibujar();
+                              }
+                              break;
                           }
-                          break;
-                      }
-                  }*/
+                      }*/
 
-                int i = 0;
-                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
-                while (i < this->cliente->obtenerRivalList().size()){
-                    i++;
-                    Rival *rival = *it;
-         /*           if (rival->getDibujar()) {
-                        dibujarRival(lines[startPos + rival->getHorizonte() + OFFSET].X,
-                                     lines[startPos + rival->getHorizonte() + OFFSET].Y,
-                                     lines[startPos + rival->getHorizonte() + OFFSET].W,
-                                     lines[startPos + rival->getHorizonte() + OFFSET].scale,
-                                     0.0056 * rival->getPosX() - 2.8,
-                                     this->getTextura(rival->getPlayer()));
-                    }
-                    rival->notDibujar();*/
-                    if(rival->getDibujar()){
-                        if (i==1){
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                            if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
-                                lines[noDraw].spriteXR1 = 0;
-                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                noDraw = startPos + rival->getHorizonte() + OFFSET;
-                            }
-                        }else if(i==2){
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival);
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival->getPosX() - 2.8;
-                            if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
-                                lines[noDraw2].spriteXR2 = 0;
-                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                noDraw2 = startPos + rival->getHorizonte() + OFFSET;
-                            }
-                        }else{
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(rival);
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 = 0.0056 * rival->getPosX() - 2.8;
-                            if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
-                                lines[noDraw3].spriteXR3 = 0;
-                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                noDraw3 = startPos + rival->getHorizonte() + OFFSET;
-                            }
-                            //puts("entre3");
-                        }
-                        rival->notDibujar();
-                    }
-                    std::list<Rival *>::iterator it2 = std::next(it, 1);
-                   // printf("ciclo\n");
-                }
-               // printf("sali\n");
-
-
-
-
-            /*    switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
-                    case 1: {
-                        list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                    int i = 0;
+                    list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                    while (i < this->cliente->obtenerRivalList().size()) {
+                        i++;
                         Rival *rival = *it;
+                        /*           if (rival->getDibujar()) {
+                                       dibujarRival(lines[startPos + rival->getHorizonte() + OFFSET].X,
+                                                    lines[startPos + rival->getHorizonte() + OFFSET].Y,
+                                                    lines[startPos + rival->getHorizonte() + OFFSET].W,
+                                                    lines[startPos + rival->getHorizonte() + OFFSET].scale,
+                                                    0.0056 * rival->getPosX() - 2.8,
+                                                    this->getTextura(rival->getPlayer()));
+                                   }
+                                   rival->notDibujar();*/
                         if (rival->getDibujar()) {
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
-                                    rival->getPlayer());
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                            if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
-                                lines[noDraw].spriteXR1 = 0;
-                                //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                noDraw = startPos + rival->getHorizonte() + OFFSET;
+                            if (i == 1) {
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 =
+                                        0.0056 * rival->getPosX() - 2.8;
+                                if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw].spriteXR1 = 0;
+                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                    noDraw = startPos + rival->getHorizonte() + OFFSET;
+                                }
+                            } else if (i == 2) {
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival);
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 =
+                                        0.0056 * rival->getPosX() - 2.8;
+                                if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw2].spriteXR2 = 0;
+                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                    noDraw2 = startPos + rival->getHorizonte() + OFFSET;
+                                }
+                            } else {
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(rival);
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 =
+                                        0.0056 * rival->getPosX() - 2.8;
+                                if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw3].spriteXR3 = 0;
+                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                    noDraw3 = startPos + rival->getHorizonte() + OFFSET;
+                                }
+                                //puts("entre3");
                             }
                             rival->notDibujar();
                         }
+                        std::list<Rival *>::iterator it2 = std::next(it, 1);
+                        // printf("ciclo\n");
                     }
-                        break;
-                    case 2: {
-                        list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
-                        Rival *rival = *it;
-                        if (rival->getDibujar()) {
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival->getPlayer());
-                            lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                            noDraw = startPos + rival->getHorizonte() + OFFSET;
-                            rival->notDibujar();
-                        }
-                        std::list<Rival *>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
-                        Rival *rival2 = *it2;
-                        if (rival2->getDibujar()) {
-                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival2->getPlayer());
-                            lines[startPos + rival2->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
-                            noDraw2 = startPos + rival->getHorizonte() + OFFSET;
-                            rival2->notDibujar();
-                        }
+                    // printf("sali\n");
 
+
+
+
+                    /*    switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
+                            case 1: {
+                                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                                Rival *rival = *it;
+                                if (rival->getDibujar()) {
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
+                                            rival->getPlayer());
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                    if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
+                                        lines[noDraw].spriteXR1 = 0;
+                                        //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                        noDraw = startPos + rival->getHorizonte() + OFFSET;
+                                    }
+                                    rival->notDibujar();
+                                }
+                            }
+                                break;
+                            case 2: {
+                                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
+                                Rival *rival = *it;
+                                if (rival->getDibujar()) {
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival->getPlayer());
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
+                                    noDraw = startPos + rival->getHorizonte() + OFFSET;
+                                    rival->notDibujar();
+                                }
+                                std::list<Rival *>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
+                                Rival *rival2 = *it2;
+                                if (rival2->getDibujar()) {
+                                    lines[startPos + rival2->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival2->getPlayer());
+                                    lines[startPos + rival2->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
+                                    noDraw2 = startPos + rival->getHorizonte() + OFFSET;
+                                    rival2->notDibujar();
+                                }
+
+                            }
+                                break;
+                        }*/
+                    for (int n = startPos + LINEAS; n > startPos; n--) {
+                        lines[n].drawSprite(this->renderer);
                     }
-                        break;
-                }*/
-                for (int n = startPos + LINEAS; n > startPos; n--) {
-                    lines[n].drawSprite(this->renderer);
+                    //arregla el problema del noDraw
+                    for (int j = startPos + LINEAS - 1; j < startPos + LINEAS + 5; j++) {
+                        lines[j].spriteXR1 = 0;
+                        lines[j].spriteXR2 = 0;
+                        lines[j].spriteXR3 = 0;
+                    }
+
+                    /*  int posP2x = 230;
+                      lines[startPos+posP2y].spriteP2 = player3;
+                      lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
+                      lines[startPos+posP2y].drawSprite(this->renderer);*/
+
+                    curveSet = lines[(pos / segL)].curve;
+
+                    this->carAsign();
+
+                    checkCurveAndSetCentrifuga(curveSet);
+                    //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
+
+                    car->render(cliente->getX(), 618, this->renderer);
+                    this->actualizarMinimapa(this->cliente->getMinimapa());
+                    this->renderVelocidad();
+                    this->renderTiempo(this->cliente->getTiempo());
+
+
+                    posMoving = cliente->getPosition();
+
+                    //////
+
+                    this->renderDistancia(posMoving);
+
+                    SDL_RenderPresent(this->renderer);
+
+
+                    //////////
+                    if (posMoving != pos) {
+                        moving = true;
+                        //Mix_PlayChannel(-1,gUp,0);
+                    } else
+                        moving = false;
+                    // Mix_HaltChannel(-1);
                 }
-                //arregla el problema del noDraw
-                for (int j = startPos + LINEAS - 1; j < startPos + LINEAS + 5; j++) {
-                    lines[j].spriteXR1 = 0;
-                    lines[j].spriteXR2 = 0;
-                    lines[j].spriteXR3 = 0;
-                }
-
-                /*  int posP2x = 230;
-                  lines[startPos+posP2y].spriteP2 = player3;
-                  lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
-                  lines[startPos+posP2y].drawSprite(this->renderer);*/
-
-                curveSet = lines[(pos / segL)].curve;
-
-                this->carAsign();
-
-                checkCurveAndSetCentrifuga(curveSet);
-                //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
-
-                car->render(cliente->getX(), 618, this->renderer);
-              	this->actualizarMinimapa(this->cliente->getMinimapa());
-                this->renderVelocidad();
-                this->renderTiempo(this->cliente->getTiempo());
-
-
-                posMoving = cliente->getPosition();
-
-                //////
-
-                this->renderDistancia(posMoving);
-
-                SDL_RenderPresent(this->renderer);
-
-
-                //////////
-                if (posMoving != pos) {
-                    moving = true;
-                    //Mix_PlayChannel(-1,gUp,0);
-                } else
-                	moving = false;
-                   // Mix_HaltChannel(-1);
-
         	}
         }
     }

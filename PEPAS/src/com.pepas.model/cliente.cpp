@@ -39,6 +39,7 @@ Cliente::Cliente() {
     finDeMapa = false;
     this->mapaCompleto = false;
     mover =false;
+    this->scoresUsuarios = new list<pair<string,scores>>();
   
 }
 bool Cliente::minimapaEstaCompleto(){
@@ -313,6 +314,18 @@ void Cliente::parsearMensaje(std::string datos){
         }
             break;
         case CAMBIO_DE_PISTA:{
+            cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
+            for(int k = 0; k < cantidadJugadores; k++){
+                string pistaActual = obtenerParametros(datos,&i);
+                string usuario = obtenerParametros(datos,&i);
+                string scoreEtapa = obtenerParametros(datos,&i);
+                string scoreTotal = obtenerParametros(datos,&i);
+                scores puntajes;
+                puntajes.pistaActual = pistaActual;
+                puntajes.scoreEtapa = scoreEtapa;
+                puntajes.scoreTotal = scoreTotal;
+                this->scoresUsuarios->push_back(pair<string,scores>(usuario,puntajes));
+            }
         	//setear variables de control para dejar de pintar y limpiar la lista de rivales
         	this->minimapaCompleto = false;
         	this->mapaCompleto = false;
@@ -592,4 +605,13 @@ int Cliente::getDestrozo() {
 void Cliente::setRecibioFinDeMapa() {
     this->finDeMapa = false;
 
+}
+
+
+list<pair<string,scores>>* Cliente::getScores(){
+    return this->scoresUsuarios;
+}
+
+void Cliente::setFinDeMapa(bool finDeMapa){
+    this->finDeMapa = finDeMapa;
 }

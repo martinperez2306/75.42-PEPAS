@@ -24,6 +24,13 @@
 
 using namespace std;
 
+
+struct scores {
+    string scoreEtapa;
+    string scoreTotal;
+    string pistaActual;
+};
+
 class Cliente{
 
 private:
@@ -46,7 +53,7 @@ private:
     string tiempo;
     bool mover;
     int destrozo;
-
+    list<pair<string,scores>>* scoresUsuarios;
 
 
 public:
@@ -153,6 +160,12 @@ bool sePuedeMover();
     int getDestrozo();
 
     void setRecibioFinDeMapa();
+
+    void noMover();
+
+    list<pair<string,scores>>* getScores();
+
+    void setFinDeMapa(bool finDeMapa);
 };
 
 

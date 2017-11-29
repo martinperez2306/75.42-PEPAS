@@ -25,6 +25,7 @@
 #include "../com.pepas.model/segmento.h"
 #include "../com.pepas.model/Recta.h"
 #include "../com.pepas.model/Recorredor.h"
+#include"../com.pepas.view/VistaTransicion.h"
 #include <SDL2/SDL_ttf.h>
 #include <map>
 #include <SDL2/SDL_mixer.h>
@@ -32,6 +33,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+
 
 class ClienteController{
 
@@ -45,6 +47,7 @@ private:
     recvThread threadRecibir;
     aliveSignalThread threadEnviar;
 	threadMinimapa threadGraficoMinimapa;
+    VistaTransicion* vistaTransicion;
 
 
     bool reconexion, moving;
@@ -317,6 +320,8 @@ public:
     void renderVelocidad();
     void renderTiempo(string tiempo);
     void renderDistancia(int posMoving);
+
+
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */
