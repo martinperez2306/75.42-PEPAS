@@ -639,7 +639,7 @@ void ClienteController::dibujar() {
                     if (e.type == SDL_QUIT) {
                         quit = true;
                     }
-		    if (cliente->sePuedeMover())
+                    if (cliente->sePuedeMover())
                     	this->keyEvent(e);
                 }
 

@@ -310,12 +310,13 @@ void Cliente::parsearMensaje(std::string datos){
         	//setear variables de control para dejar de pintar y limpiar la lista de rivales
         	this->minimapaCompleto = false;
         	this->mapaCompleto = false;
-        	this->rivalList.clear();
+//        	this->rivalList.clear();
         	this->finDeMapa = false;
         	//limpiamos las rutas
         	this->Track.clear();
         	this->minimapa->limpiarMinimapa();
         	this->mapa->limpiarMapa();
+        	cout<<"limpie las pistas"<<endl;
         }
         	break;
 		default:
