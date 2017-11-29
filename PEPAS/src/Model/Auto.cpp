@@ -152,6 +152,7 @@ string Auto::calculateMove(int curve) {
 
     string datos = procesarMovimiento();
 
+
     return datos;
 
 
@@ -240,7 +241,7 @@ void Auto::setJugador(int i) {
 
 
 void Auto::estaEnColision(string lastMove, float velY) {
-        cout<<"recibi el lastmove: "<<lastMove<<endl;
+        //cout<<"recibi el lastmove: "<<lastMove<<endl;
         if (lastMove == "up"  || velY > VEL_MIN) {
             VelY = VEL_MIN;
             PressUp_lock = true;
@@ -341,6 +342,7 @@ int Auto::getScoreEtapa1() {
 
 void Auto::frenarAuto() {
     VelY = VEL_MIN;
+   // cout<<"entro a frenar auto"<<endl;
 }
 
 void Auto::lockearTeclas() {
@@ -351,5 +353,11 @@ void Auto::lockearTeclas() {
 }
 
 
+int Auto::getScoreEtapa2(){
+    return this->scoreEtapa2;
+}
 
+int Auto::getScoreEtapa3(){
+    return this->scoreEtapa3;
+}
 

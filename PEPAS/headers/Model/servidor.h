@@ -28,7 +28,7 @@ private:
 	int socketFD;
 	int socketEscucha;
 	int player;
-	bool terminado, contadorCarrera;
+	bool terminado;
     bool empezarJuego;
 	bool colision;
 	BaseDeDatos* baseDeDatos;
@@ -55,6 +55,7 @@ private:
     bool carreraTerminada, carreraGlobalTerminada;
     int pistaActual;
     int jugadoresListos;
+    int contadorCarrera;
     bool listos;
 
 public:
@@ -99,7 +100,7 @@ public:
 
 	~Servidor();
 
-
+    int getContador();
     string validarCliente(string basic_string, string basicString, Socket* emisor);
 
 

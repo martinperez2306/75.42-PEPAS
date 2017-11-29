@@ -113,6 +113,9 @@ public:
     void frenarAuto();
 
     void lockearTeclas();
+
+    int getScoreEtapa2();
+    int getScoreEtapa3();
 };
 
 

@@ -145,7 +145,7 @@ Posicion* Recorredor::generarPosicionRuta(){
 }
 
 void Recorredor::recorrer(Segmento* segmento){
-    cout<<"entre al recorrer"<<endl;
+    //cout<<"entre al recorrer"<<endl;
     this->generarDireccionRecorrido(segmento);
     this->posicionActual->setX(segmento->getPosicionInicial()->getX());
     this->posicionActual->setY(segmento->getPosicionInicial()->getY());

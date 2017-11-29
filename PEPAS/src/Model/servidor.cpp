@@ -1035,18 +1035,21 @@ void Servidor::setTime(string timeString) {
 
 
 bool Servidor::actualizarEstadoDeCarrera(int posicionDeAuto, bool finish){
-    this->carreraTerminada = this->world->carreraHaTerminado(posicionDeAuto);
-    if (carreraTerminada && !finish ){
-        this->contadorCarrera++;
+    if (this->world->carreraHaTerminado(posicionDeAuto) && !finish ){
+        this->contadorCarrera = contadorCarrera + 1;
         finish = true;
-        cout<<"cont. carrera :"<<contadorCarrera<<endl;
     }
     if (contadorCarrera == this->cantidadMaximaDeConexiones) {
         this->carreraGlobalTerminada = true;
-        finish = false;
         cout<<"ARRE"<<endl;
+        //this->contadorCarrera = 0;
     }
+
     return finish;
+}
+
+int Servidor::getContador(){
+    return contadorCarrera;
 }
 
 bool Servidor::carreraHaTerminado(){
@@ -1066,6 +1069,8 @@ void Servidor::cambiarDePista(){
 	this->generarMinimapa();
 	this->generarWorld();
 	this->carreraTerminada = false;
+
+    this->contadorCarrera = 0;
 	//resetear los autos
 	cout<<"Reseteando autos"<<endl;
 	for(std::map<string,Auto*>::iterator it= this->mapAutitos->begin(); it!=this->mapAutitos->end();++it){
@@ -1088,6 +1093,7 @@ void Servidor::cambiarDePista(){
 	}
     timerThread.stop();
     timerThread.join();
+    this->carreraGlobalTerminada = false;
 }
 
 void Servidor::setPistaActual(int pistaActual){
@@ -1099,13 +1105,31 @@ int Servidor::getPistaActual(){
 }
 
 string Servidor::procesarMensajeCambioDePista(){
-	string stringACrear, stringProcesado;
-	string separador = "/";
-	stringACrear = separador + "30" + separador;
-	unsigned long largoDelMensaje = stringACrear.length();
-	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    stringACrear = separador + "30" + separador+ to_string(mapAutitos->size()) + separador + to_string(this->pistaActual);
+    for (std::map<string,Auto*>::iterator it=this->mapAutitos->begin(); it!=this->mapAutitos->end(); ++it){
+        string usuario = it->first;
+        int total = (it->second->getScoreEtapa1()) + (it->second->getScoreEtapa2()) + (it->second->getScoreEtapa3());
+        string totalEtapas = to_string(total);
+        string scoreEtapa;
+        switch (this->pistaActual){
+            case 1:
+                scoreEtapa = to_string(it->second->getScoreEtapa1());
+                break;
+            case 2:
+                scoreEtapa = to_string(it->second->getScoreEtapa2());
+                break;
+            case 3:
+                scoreEtapa = to_string(it->second->getScoreEtapa3());
+                break;
+        }
+        stringACrear = stringACrear + separador + usuario + separador + scoreEtapa + separador+ totalEtapas;
+    }
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
 
-	return stringProcesado;
+    return stringProcesado;
 }
 
 void Servidor::enviarMensajeCambioDePista(){
