@@ -24,6 +24,7 @@ public:
 	void mostrarObjetos();
 	void mostrarSegmentos();
 	~Mapa();
+	void limpiarMapa();
 };
 
 #endif /* COM_PEPAS_MODEL_MAPA_H_ */

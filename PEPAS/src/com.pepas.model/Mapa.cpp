@@ -27,8 +27,8 @@ void Mapa::mostrarSegmentos(){
 		Segmento* seg = *it;
 		int longitud = seg->getLongitud();
 		int curva = seg->getCurva();
-		/*cout<<"Longitud: "<<longitud<<endl;
-		cout<<"Curva: "<<curva<<endl;*/
+		cout<<"Longitud: "<<longitud<<endl;
+		cout<<"Curva: "<<curva<<endl;
 	}
 }
 
@@ -38,15 +38,20 @@ void Mapa::mostrarObjetos(){
 		int distancia = obj->getDistancia();
 		int arbol = obj->getArbol();
 		int cartel = obj->getCartel();
-		/*cout<<"Objeto"<<endl;
+		cout<<"Objeto"<<endl;
 		cout<<"Arbol: "<<arbol<<" Cartel: "<<cartel<<endl;
 		cout<<"Distancia: "<<distancia<<endl;
-		cout<<"Lado: "<<obj->getLado()<<endl;*/
+		cout<<"Lado: "<<obj->getLado()<<endl;
 	}
 }
 
 //ACA MANEJATE VO TURI COMO DESEAS ADMINISTRAR LA MEMORIA
 Mapa::~Mapa() {
 	// TODO Auto-generated destructor stub
+}
+
+void Mapa::limpiarMapa(){
+	this->objetos->clear();
+	this->ruta->clear();
 }
 

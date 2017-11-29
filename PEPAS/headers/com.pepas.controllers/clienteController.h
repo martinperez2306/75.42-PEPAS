@@ -29,7 +29,7 @@
 #include <map>
 #include <SDL2/SDL_mixer.h>
 #include "../com.pepas.view/VistaLogin.h"
-
+#include <vector>
 #include <ctime>
 #include <cstdlib>
 
@@ -88,7 +88,7 @@ private:
     double curveSet;
     std::map<int,Textura*>* obstaculos;
 
-
+    bool mapaCargado;
 
 	int x;
 	int y;
@@ -112,8 +112,126 @@ private:
 
     VistaLogin* vistaLogin;
 
+    struct Line {
+                   double x, y, z; //3d center of line
+                   double X, Y, W; //screen coord
+                   double scale;
+                   double camD = 0.5;
+                   double roadW = 2000;
+                   double curve, spriteX, clip, spriteX2, spriteXR1, spriteXR2, spriteXR3;
+                   Textura *sprite;
+                   Textura *sprite2;
+                   Textura *spriteR1;
+                   Textura *spriteR2;
+                   Textura *spriteR3;
+
+                   Line() {
+                       spriteX = spriteX2 = x = y = z = 0;
+                       sprite = NULL;
+                       sprite2 = NULL;
+                       spriteR1 = NULL;
+                       spriteR2 = NULL;
+                       spriteR3 = NULL;
+                       spriteXR1 = 0;
+                       spriteXR2 = 0;
+                       spriteXR3 = 0;
+                   }
+
+                   void project(int camX, int camY, int camZ) {
+                       scale = camD / (z - camZ);
+                       X = (1 + scale * (x - camX)) * SCREEN_WIDTH / 2;
+                       Y = ((1 - scale * (y - camY)) * SCREEN_HEIGHT / 2);
+                       W = scale * (roadW) * SCREEN_WIDTH / 2;
+
+                   }
+
+                   void drawSprite(SDL_Renderer *renderer) {
+                       if (spriteX != 0) {
+                           int w = sprite->getWidth();
+                           int h = sprite->getHeight();
+
+                           double destX = X + scale * spriteX * SCREEN_WIDTH / 2;//* SCREEN_WIDTH/2
+                           double destY = Y + 4;
+                           double destW = w * W / 266;
+                           double destH = h * W / 266;
+
+                           destX += destW * spriteX; //offsetX
+                           destY += destH * (-1);    //offsetY
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           sprite->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+
+                       if (spriteX2 != 0) {
+                           int w = sprite2->getWidth();
+                           int h = sprite2->getHeight();
+
+                           double destX = X + scale * spriteX2 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 266;
+                           double destH = h * W / 266;
+
+                           destX += destW * spriteX2; //offsetX
+                           destY += destH * (-1);    //offsetY
 
 
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           sprite2->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                       if (spriteXR1 != 0) {
+                           int w = spriteR1->getWidth();
+                           int h = spriteR1->getHeight();
+
+                           double destX = X + scale * spriteXR1 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 700;
+                           double destH = h * W / 700;
+
+                           destX += destW * spriteXR1;
+                           destY += destH * (-1);
+
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           spriteR1->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                       if (spriteXR2 != 0) {
+                           int w = spriteR2->getWidth();
+                           int h = spriteR2->getHeight();
+
+                           double destX = X + scale * spriteXR2 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 700;
+                           double destH = h * W / 700;
+
+                           destX += destW * spriteXR2; //offsetX
+                           destY += destH * (-1);    //offsetY
+
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           spriteR2->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                       if (spriteXR3 != 0) {
+                           int w = spriteR3->getWidth();
+                           int h = spriteR3->getHeight();
+
+                           double destX = X + scale * spriteXR3 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 730;
+                           double destH = h * W / 730;
+
+                           destX += destW * spriteXR3;
+                           destY += destH * (-1);
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           spriteR3->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                   }
+               };
 
 public:
 
@@ -167,6 +285,8 @@ public:
     void enviarNotMoveRight();
 
 	void actualizarMinimapa(Minimapa* minimapa);
+
+	void cargarMapa(std::vector<Line>* lines);
 
 	void carAsign();
 

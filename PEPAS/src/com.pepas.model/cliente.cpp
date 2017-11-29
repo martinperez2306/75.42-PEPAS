@@ -16,6 +16,7 @@
 #define OBJETOSMAPA 12
 #define INFINITO 2147483647
 #define AUTO_MOVE 20
+#define CAMBIO_DE_PISTA 30
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -33,10 +34,13 @@ Cliente::Cliente() {
     posX =  1024/2 -100;
     posY = 768 - 1;
     finDeMapa = false;
-  
+    this->mapaCompleto = false;
 }
 bool Cliente::minimapaEstaCompleto(){
     return (this->minimapaCompleto);
+}
+bool Cliente::mapaEstaCompleto(){
+	return this->mapaCompleto;
 }
 /////////////////MINIMAPA///////////////////////////////////
 void Cliente::actualizarRutaMiniMapa(int x1, int y1, int x2,int y2){
@@ -242,11 +246,9 @@ void Cliente::parsearMensaje(std::string datos){
             this->modelCar = stoi(obtenerParametros(datos,&i),nullptr,10);
             this->cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
             this->crearRivales(cantidadJugadores, modelCar);
-        	this->mapa->mostrarSegmentos();
-        	this->mapa->mostrarObjetos();
-        	this->minimapa->mostrarSegmentos();
-        	this->minimapa->mostrarObjetos();
+            this->minimapa->mostrarSegmentos();
             this->minimapaCompleto=true;
+            this->mapaCompleto = true;
             this->finDeMapa = true;
         }break;
 		case LOGIN:{
@@ -294,6 +296,18 @@ void Cliente::parsearMensaje(std::string datos){
             parsearCalculos(datos, i);
         }
             break;
+        case CAMBIO_DE_PISTA:{
+        	//setear variables de control para dejar de pintar y limpiar la lista de rivales
+        	this->minimapaCompleto = false;
+        	this->mapaCompleto = false;
+        	this->rivalList.clear();
+        	this->finDeMapa = false;
+        	//limpiamos las rutas
+        	this->Track.clear();
+        	this->minimapa->limpiarMinimapa();
+        	this->mapa->limpiarMapa();
+        }
+        	break;
 		default:
 			break;
 	}

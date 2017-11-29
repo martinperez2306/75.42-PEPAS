@@ -53,6 +53,8 @@ public:
 	~Minimapa();
 
     void setAutoEnRadar(int i, Posicion *pPosicion);
+
+    void limpiarMinimapa();
 };
 
 

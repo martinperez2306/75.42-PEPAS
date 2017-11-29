@@ -26,8 +26,8 @@ void Minimapa::mostrarSegmentos(){
 		Segmento* seg = *it;
 		Posicion* posicionInicial = seg->getPosicionInicial();
 		Posicion* posicionFinal = seg->getPosicionFinal();
-		/*cout<<"Posicion Incial: "<<" X "<< posicionInicial->getX()<<" Y "<<posicionInicial->getY()<<endl;
-		cout<<"Posicion Final: "<<" X "<< posicionFinal->getX()<<" Y "<<posicionFinal->getY()<<endl;*/
+		cout<<"Posicion Incial: "<<" X "<< posicionInicial->getX()<<" Y "<<posicionInicial->getY()<<endl;
+		cout<<"Posicion Final: "<<" X "<< posicionFinal->getX()<<" Y "<<posicionFinal->getY()<<endl;
 	}
 }
 
@@ -37,10 +37,10 @@ void Minimapa::mostrarObjetos(){
 		int distancia = obj->getDistancia();
 		int arbol = obj->getArbol();
 		int cartel = obj->getCartel();
-		/*cout<<"Objeto"<<endl;
+		cout<<"Objeto"<<endl;
 		cout<<"Arbol: "<<arbol<<" Cartel: "<<cartel<<endl;
 		cout<<"Distancia: "<<distancia<<endl;
-		cout<<"Lado: "<<obj->getLado()<<endl;*/
+		cout<<"Lado: "<<obj->getLado()<<endl;
 	}
 }
 
@@ -90,4 +90,10 @@ void Minimapa::setAutoEnRadar(int player,Posicion* posicion){
 
 map<int,Posicion*>* Minimapa::getRadar(){
 	return this->radar;
+}
+
+void Minimapa::limpiarMinimapa(){
+	this->objetos->clear();
+	this->ruta->clear();
+	this->radar->clear();
 }

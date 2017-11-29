@@ -34,6 +34,7 @@ private:
     bool logueado;
     bool conectado;
     bool minimapaCompleto;
+    bool mapaCompleto;
     bool finDeMapa;
     list<string> colaBuzon;
     list<string> colaChat;
@@ -52,6 +53,7 @@ public:
     list<Rival*> rivalList;
     Cliente();
     bool minimapaEstaCompleto();
+    bool mapaEstaCompleto();
     void logIn(string usuario, string clave);
 
     //metodo para loquearse?
