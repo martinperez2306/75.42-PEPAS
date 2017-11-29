@@ -19,6 +19,7 @@
 #define CAMBIO_DE_PISTA 30
 #define CONTEO 50
 #define GO 40
+#define STOP 69
 
 Cliente::Cliente() {
     this->socketCliente = new Socket();
@@ -289,9 +290,13 @@ void Cliente::parsearMensaje(std::string datos){
                 this->vaciarColaBuzon();
         }
 			break;
-	case GO:{
-		mover=true;
-	}break;
+            case GO:{
+                mover=true;
+            }break;
+            case STOP:{
+                mover=false;
+                cout<<"NO ME PUEDO MOVER"<<endl;
+            }break;
 	case CONTEO:{
 		this->tiempo = "0:" + obtenerParametros(datos,&i);
 	}break;

@@ -611,33 +611,43 @@ void ClienteController::dibujar() {
 //            }
 
             std::vector<Line> lines;
-            cout<<"Cargo mapa ?"<<endl;
-            this->cargarMapa(&lines);
+           /* cout<<"Cargo mapa ?"<<endl;
+            //this->cargarMapa(&lines);
             this->mapaCargado = true;
-            cout<<"Si, cargo mapa"<<endl;
+            cout<<"Si, cargo mapa"<<endl;*/
             int N = lines.size();
+
+            this->cargarMapa(&lines);
+
+            this->cliente->setRecibioFinDeMapa();
+
             pos = 1;
             int contador = 0;
             double noDraw = 0;
             double noDraw2 = 0;
             double noDraw3 = 0;
-
-		cliente->enviarMensaje("0003/51");
+            cliente->enviarMensaje("0003/51");
+            this->mapaCargado = true;
             //Start timer
 			startTime = clock();
             //While application is running
             while (!quit) {
-
-            	if(this->cliente->recibioFinDeMapa()){
+                if(this->cliente->recibioFinDeMapa()){
             		lines.clear();
             		this->obstaculos->clear();
             		this->cargarMapa(&lines);
             		this->mapaCargado  = true;
                     this->cliente->setRecibioFinDeMapa();
-
+                    cout<<"!!!!!!!!!!!!!!!!"<<endl;
+                    pos = 1;
+                    N = lines.size();
+                    noDraw = 0;
+                    noDraw2 = 0;
+                    noDraw3 = 0;
+                    cliente->enviarMensaje("0003/51");
             	}
 
-            if(mapaCargado){
+
                 while (SDL_PollEvent(&e) != 0) {
                     //User requests quit
                     if (e.type == SDL_QUIT) {
@@ -659,9 +669,12 @@ void ClienteController::dibujar() {
                 //TODO aca tiene que recibir la tecla que toco;
 
                 for (int n = startPos; n < startPos + LINEAS + 1; n++) {
+
                     pos = cliente->getPosition();
                     Line &l = lines[n];
+
                     l.project(x, 1300, pos);
+
                     x += dx;
                     dx += l.curve;
 
@@ -830,7 +843,7 @@ void ClienteController::dibujar() {
                 } else
                 	moving = false;
                    // Mix_HaltChannel(-1);
-            }
+
         	}
         }
     }
@@ -926,8 +939,40 @@ bool ClienteController::loadMedia() {
         printf("Failed to load sprite sheet texture!\n");
         success = false;
     }
+
+    player3_1 = new Textura();
+    if (!player3_1->loadFromFile("img/ferrari3_1.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player3_2 = new Textura();
+    if (!player3_2->loadFromFile("img/ferrari3_2.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player3_3 = new Textura();
+    if (!player3_3->loadFromFile("img/ferrari3_3.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+
     player4 = new Textura();
     if (!player4->loadFromFile("img/ferrari4.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player4_1 = new Textura();
+    if (!player4_1->loadFromFile("img/ferrari4_1.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player4_2 = new Textura();
+    if (!player4_2->loadFromFile("img/ferrari4_2.png", this->renderer)) {
+        printf("Failed to load sprite sheet texture!\n");
+        success = false;
+    }
+    player4_3 = new Textura();
+    if (!player4_3->loadFromFile("img/ferrari4_3.png", this->renderer)) {
         printf("Failed to load sprite sheet texture!\n");
         success = false;
     }
