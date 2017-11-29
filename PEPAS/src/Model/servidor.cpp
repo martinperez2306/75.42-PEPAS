@@ -338,7 +338,6 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
-                timerThread.start();
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
                     string mensajeFin= this->procesarMensajeFin();

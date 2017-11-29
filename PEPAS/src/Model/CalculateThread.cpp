@@ -26,10 +26,7 @@ void CalculateThread::run() {
         usleep (4000);
         cout<<stringProcesado<<endl;
         this->srv->enviarMensaje(stringProcesado,socket);
-<<<<<<< HEAD
     	}
-=======
->>>>>>> ad752e90955bb95b576e30ccce9493c3f460484d
     }
 }
 

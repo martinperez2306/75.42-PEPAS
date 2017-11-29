@@ -155,6 +155,18 @@ public:
 
     string getTime ();
 	bool estaListo();
+
+	void actualizarEstadoDeCarrera(int posicionDelAuto);
+
+	bool carreraHaTerminado();
+
+	void cambiarDePista();
+
+	void enviarMensajeCambioDePista();
+
+	void setPistaActual(int pistaActual);
+
+	int getPistaActual();
 };
 
 
