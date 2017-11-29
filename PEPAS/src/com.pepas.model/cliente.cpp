@@ -315,8 +315,8 @@ void Cliente::parsearMensaje(std::string datos){
             break;
         case CAMBIO_DE_PISTA:{
             cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
+            string pistaActual = obtenerParametros(datos,&i);
             for(int k = 0; k < cantidadJugadores; k++){
-                string pistaActual = obtenerParametros(datos,&i);
                 string usuario = obtenerParametros(datos,&i);
                 string scoreEtapa = obtenerParametros(datos,&i);
                 string scoreTotal = obtenerParametros(datos,&i);

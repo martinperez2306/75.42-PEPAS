@@ -670,6 +670,7 @@ void ClienteController::dibujar() {
                     cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
                     this->cargarMapa(&lines);
                     this->mapaCargado = true;
+                    cliente->enviarMensaje("0003/51");
                 }
                 if(this->cliente->recibioFinDeMapa() && mapaCargado) {
                     cout << "333333333333333333333333333333333333333333333333333333333333333333333333333" << endl;
@@ -1465,6 +1466,10 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
         	//AMARILLO
         	SDL_SetRenderDrawColor( renderer, 0xF3, 0xF3, 0x10, 0xFF );
         	break;
+        case 5:
+        	//GRIS
+        	SDL_SetRenderDrawColor( renderer, 0x1E, 0x1C, 0x1C, 0xFF );
+        	break;
         default:
         	break;
         }
@@ -1577,6 +1582,10 @@ Textura *ClienteController::getTextura(Rival* rival) {
                 texture = player4_3;
         }
             break;
+        case 5:{
+        	texture = player5;
+        	}
+        	break;
     }
     return texture;
 }
