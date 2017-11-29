@@ -21,6 +21,8 @@ void ServidorController::crearServidor(const char* archivo){
 	delete servidorBuilder;
 	loggear("salio del crearServidor",2);
 	loggear (" ",2);
+	this->carreraThread.setServidor(this->servidor);
+	this->carreraThread.start();
 }
 
 void ServidorController::mostrarUsuariosDisponibles(){
@@ -46,6 +48,7 @@ void ServidorController::mostrarUsuariosConectados(){
 }
 
 ServidorController::~ServidorController(){
+	this->carreraThread.terminar();
 	delete this->servidor;
 }
 

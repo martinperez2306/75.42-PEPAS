@@ -1,7 +1,3 @@
-//
-// Created by arturi on 27/11/17.
-//
-
 #include "../../headers/Model/TimerThread.h"
 
 TimerThread::TimerThread(bool CerrarServidor) {

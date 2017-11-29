@@ -48,6 +48,8 @@ public:
 	//Eliminar la memoria pedida por el minimapa
 	//Eliminar toda la memoria pedida para los segmentos y los objetos
 	~Minimapa();
+
+	void limpiarMinimapa();
 };
 
 

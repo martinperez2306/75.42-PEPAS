@@ -20,6 +20,7 @@
 #define CASE_LEFT_KU 25
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
+#define LISTO 51
 
 #define SEGL 50
 #define HORIZONTE 400
@@ -84,7 +85,10 @@ Servidor::Servidor(){
     this->time = "0:0";
     empezarJuego = false;
     player = 1;
-
+    this->carreraTerminada = false;
+    this->pistaActual = 0;
+    jugadoresListos=0;
+    listos = false;
 }
 
 
@@ -334,7 +338,6 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             if (this->baseDeDatos->obtenerMapUsuariosConectados()->size()==this->cantidadMaximaDeConexiones){
                 empezarJuego = true;
-                timerThread.start();
                 map<int,Socket*>::iterator iterador;
                 for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
                     string mensajeFin= this->procesarMensajeFin();
@@ -378,6 +381,35 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             }
             break;
 		}
+	case LISTO:{
+		this->jugadoresListos++;
+		cout<<"hola"<<endl;
+		map<int,Socket*>::iterator iterador;
+		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
+			int i =5;
+			while (i>=0){
+				cout<< i << endl;
+				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0005/50/" + to_string(i);
+				    cout<< mensaje << endl;
+				    this->enviarMensaje(mensaje,iterador->second);
+				}
+				i--;
+				sleep(1);
+			}
+		for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				    string mensaje= "0003/40";
+				    this->enviarMensaje(mensaje,iterador->second);
+		}
+		
+		timerThread.start();
+		}
+		
+		
+		
+			//listos = true;
+	}break;
+		
         case LOGOUT:{
             loggear("Codigo de logout",2);
             string msg = "El usuario se ha deslogueado correctamente";
@@ -516,7 +548,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 return mensajeAEnviar;
 }
 
-
+bool Servidor::estaListo(){
+	return this->listos;
+}
 void Servidor::desloguearse(string usuario,Socket* socketDelemisor){
 
     loggear("Saco al usuario de la base de datos",2);
@@ -639,19 +673,25 @@ void Servidor::setZoomEntreMapaYMinimapa(int zoom){
 void Servidor::generarMapa(){
     loggear("Creando pistas desde archivos de configuracion",1);
     (*this->mapas)[1] = this->pistaParser->parsearMapa("pista1.xml");
+    (this->mapas->find(1)->second->mostrarSegmentos());
+    (this->mapas->find(1)->second->mostrarObjetos());
     (*this->mapas)[2] = this->pistaParser->parsearMapa("pista2.xml");
+    (this->mapas->find(2)->second->mostrarSegmentos());
+    (this->mapas->find(2)->second->mostrarObjetos());
     (*this->mapas)[3] = this->pistaParser->parsearMapa("pista3.xml");
+    (this->mapas->find(3)->second->mostrarSegmentos());
+    (this->mapas->find(3)->second->mostrarObjetos());
     loggear("Pistas cargadas",1);
     delete this->pistaParser;
     loggear("Eliminando pista parser",1);
+    this->pistaActual = 1;
     this->setMapa(1);
     this->generarMinimapa();
     this->generarWorld();
 }
+
 void Servidor::generarMinimapa(){
     this->zoomer->zoomMapToMinimap(this->mapa,this->minimapa,this->recorredor);
-	this->minimapa->mostrarSegmentos();
-	this->minimapa->mostrarObjetos();
 }
 
 void Servidor::generarWorld(){
@@ -701,7 +741,7 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
 	   	this->enviarMensaje(mensajeAEnviar,socketCliente);
 	}
 
-    for (list<Objeto*>::iterator it = objetos->begin(); it != objetos->end(); ++it){
+	for (list<Objeto*>::iterator it = objetos->begin(); it != objetos->end(); ++it){
     	Objeto* obj = *it;
     	int tipoArbol = obj->getArbol();
     	int tipoCartel = obj->getCartel();
@@ -717,10 +757,7 @@ void Servidor::enviarMapaACliente(Socket* socketCliente){
 
 void Servidor::enviarFinMapas(Socket* socketCliente){
 	string mensajeFin= this->procesarMensajeFin();
-	    for (map<int,Socket*>::iterator it=mapaSocket->begin(); it!=mapaSocket->end(); ++it){
-	        usleep(5);
-	    	this->enviarMensaje(mensajeFin,it->second);
-	    }
+   	this->enviarMensaje(mensajeFin,socketCliente);
 }
 
 /*Este procesador, codifica el mensaje con el codigo 9.
@@ -829,6 +866,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
     int horizonte = HORIZONTE;
     stringMinimapa = to_string(mapAutitos->size());
     stringTime = timerThread.getTiempo();
+    bool salioDeColision;
     Auto * primero = NULL;
 //    obtengoElPrimero(primero);
 
@@ -861,26 +899,30 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
         float diferenciaX = abs(pAuto->getX() - it->second->getX());
-        if (diferenciaY <= horizonte && it->second != pAuto && diferenciaY >= 0) {
-            if ( diferenciaX <= 185 && diferenciaY <= 4){
-                //cout<<"Colision "<<diferenciaX<<"-"<<diferenciaY<<endl;
-                //cout<<pAuto->getLastMove()<<endl;
+        if (diferenciaY <= horizonte && it->second != pAuto && abs(diferenciaY) >= 0) {
+            if ( diferenciaX <= 185 && abs(diferenciaY) <= 4){
                 pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
+                if (salioDeColision){
+                    pAuto->agregarDestrozo();
+                    it->second->agregarDestrozo();
+                    salioDeColision= false;
+                }
             } else {
                // cout<<pAuto->getLastMove()<<endl;
                 pAuto->noEstaEnColision();
+                salioDeColision = true;
             }
             i++;
             if (i>=1) {
-                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador +to_string(it->second->obtenerDestrozo()) + separador+ to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
         }
         stringArmado = stringArmado + stringConcat;
     }
-    stringArmado = stringTime + separador + stringMinimapa + separador+ to_string(i) + separador + stringArmado;
+    stringArmado = stringTime + separador + to_string(pAuto->obtenerDestrozo())+ separador+ stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
-        stringArmado =  stringTime + separador + stringMinimapa + separador +  to_string(0);
+        stringArmado =  stringTime + separador +  to_string(pAuto->obtenerDestrozo()) + separador + stringMinimapa + separador +  to_string(0);
     return stringArmado;
 }
 
@@ -961,5 +1003,65 @@ void Servidor::setTime(string timeString) {
 
 }
 
+void Servidor::actualizarEstadoDeCarrera(int posicionDeAuto){
+	this->carreraTerminada = this->world->carreraHaTerminado(posicionDeAuto);
+}
 
+bool Servidor::carreraHaTerminado(){
+	return this->carreraTerminada;
+}
 
+void Servidor::cambiarDePista(){
+	//limpiar los viejos mapas
+	cout<<"Limpiando"<<endl;
+	this->minimapa->limpiarMinimapa();
+	this->world->limpiarWolrd();
+	this->recorredor->limpiarRecorredor();
+	//generar los nuevos mapas
+	cout<<"Generando otra vez"<<endl;
+	this->pistaActual = this->pistaActual + 1;
+	this->setMapa(this->pistaActual);
+	this->generarMinimapa();
+	this->generarWorld();
+	this->carreraTerminada = false;
+	//resetear los autos
+	cout<<"Reseteando autos"<<endl;
+	for(std::map<string,Auto*>::iterator it= this->mapAutitos->begin(); it!=this->mapAutitos->end();++it){
+		Auto* automovil = it->second;
+		automovil->setPosInicialDelAuto();
+	}
+	//enviar los nuevos mapas a los clientes
+	cout<<"Enviando nueva info"<<endl;
+	for (std::map<int,Socket*>::iterator it=this->mapaSocket->begin(); it!=this->mapaSocket->end(); ++it){
+		this->enviarMinimapaACliente(it->second);
+		this->enviarMapaACliente(it->second);
+		this->enviarFinMapas(it->second);
+	}
+}
+
+void Servidor::setPistaActual(int pistaActual){
+	this->pistaActual = pistaActual;
+}
+
+int Servidor::getPistaActual(){
+	return this->pistaActual;
+}
+
+string Servidor::procesarMensajeCambioDePista(){
+	string stringACrear, stringProcesado;
+	string separador = "/";
+	stringACrear = separador + "30" + separador;
+	unsigned long largoDelMensaje = stringACrear.length();
+	stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+
+	return stringProcesado;
+}
+
+void Servidor::enviarMensajeCambioDePista(){
+	string mensaje = this->procesarMensajeCambioDePista();
+	for (std::map<int,Socket*>::iterator it=this->mapaSocket->begin(); it!=this->mapaSocket->end(); ++it){
+		this->enviarMensaje(mensaje, it->second);
+		cout<<"Envio cambio de pista"<<endl;
+		cout<<mensaje<<endl;
+	}
+}

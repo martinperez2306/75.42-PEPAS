@@ -70,3 +70,8 @@ Minimapa::~Minimapa(){
 
 }
 
+void Minimapa::limpiarMinimapa(){
+	this->pista->clear();
+	this->objetos->clear();
+}
+

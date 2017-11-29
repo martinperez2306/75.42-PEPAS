@@ -18,7 +18,7 @@ private:
 	float PosX, PosY, ultPosY, posicion, RIGHT_BORDER, LEFT_BORDER;
 	float VelX, VelY;
 	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision;
-	int jugador;
+	int jugador, destrozo;
 	string lastMove;
 
 	int scoreEtapa1, scoreEtapa2, scoreEtapa3;
@@ -91,6 +91,12 @@ public:
     float getVelY();
 
     void noEstaEnColision();
+
+    void setPosInicialDelAuto();
+
+	void agregarDestrozo();
+
+	int obtenerDestrozo();
 
     void setScoreEtapa1(int score);
     void setScoreEtapa2(int score);

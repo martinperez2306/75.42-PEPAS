@@ -166,3 +166,10 @@ Posicion* Recorredor::getPosicionEnDistancia(int distancia){
 Recorredor::~Recorredor() {
     // TODO Auto-generated destructor stub
 }
+
+void Recorredor::limpiarRecorredor(){
+    this->direccionRecorrido = 0;
+    this->distanciaRecorrida = 0;
+    this->posicionActual = new Posicion();
+    this->posiciones->clear();
+}

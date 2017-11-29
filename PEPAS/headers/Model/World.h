@@ -9,11 +9,17 @@ class World {
 private:
 	//Mapa <distancia (eje Y), LineaDelEjeX>
 	map<int,LineaX*>* world;
-
+	//Fin de pista
+	int finDePista;
 public:
 	World();
 	void agregarLinea(int distanciaY,LineaX* lineaX);
 	int obtenerCurvaEnKilometraje(int distanciaY);
+	void setFinDePista(int finDePista);
+	int getFinDePista();
+	bool carreraHaTerminado(int posicionDeAuto);
+	void limpiarWolrd();
+	map<int,LineaX*>* getWorld();
 	~World();
 };
 

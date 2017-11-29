@@ -36,31 +36,14 @@ Auto::Auto(int player)
     PressRight_lock = false;
     PressUp_lock = false;
 	this->jugador = player;
+    destrozo = 0;
 	this->scoreEtapa1 = 0;
 	this->scoreEtapa2 = 0;
 	this->scoreEtapa3 = 0;
 
 
-	switch (jugador){
-		case 1:{
-			PosX = 230;
-			posicion = 400;
-		}break;
-		case 2:{
-			PosX =550;
-			posicion = 400;
-		}break;
-		case 3:{
-			PosX = 230;
+	this->setPosInicialDelAuto();
 
-		}
-            break;
-		case 4:{
-			PosX = 550;
-		}
-			break;
-
-	}
     RIGHT_BORDER = PosX + CAR_WIDTH;
     LEFT_BORDER = PosX;
 }
@@ -287,7 +270,7 @@ void Auto::estaEnColision(string lastMove, float velY) {
             frontColision = true;
             PressRight_lock = false;
             PressLeft_lock = false;
-            cout<<"11111111111"<<endl;
+           // cout<<"11111111111"<<endl;
         } /*else if (velY == VEL_MIN && lastMove == "left")
             PressLeft_lock = true;
         else if (velY == VEL_MIN && lastMove == "right")
@@ -296,12 +279,12 @@ void Auto::estaEnColision(string lastMove, float velY) {
         if (lastMove == "left" && !frontColision) {
             PosX -= VelX;
             PressLeft_lock = true;
-            cout<<"2222222222"<<endl;
+           // cout<<"2222222222"<<endl;
         }
         if (lastMove == "right" && !frontColision) {
             PosX -= VelX;
             PressRight_lock = true;
-            cout<<"33333333333"<<endl;
+           // cout<<"33333333333"<<endl;
     }
 }
 
@@ -318,6 +301,38 @@ void Auto::noEstaEnColision() {
     PressRight_lock = false;
     PressUp_lock = false;
     frontColision = false;
+}
+
+void Auto::setPosInicialDelAuto(){
+
+	switch (jugador){
+		case 1:{
+			PosX = 230;
+			posicion = 400;
+		}break;
+		case 2:{
+			PosX =550;
+			posicion = 400;
+		}break;
+		case 3:{
+			PosX = 230;
+
+		}
+            break;
+		case 4:{
+			PosX = 550;
+		}
+			break;
+
+	}
+}
+
+void Auto::agregarDestrozo() {
+    destrozo++;
+}
+
+int Auto::obtenerDestrozo(){
+    return destrozo;
 }
 
 int Auto::getScoreEtapa1() {

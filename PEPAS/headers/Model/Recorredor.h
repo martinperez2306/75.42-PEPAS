@@ -40,6 +40,7 @@ public:
     Posicion* getPosicionActual();
     Posicion* getPosicionEnDistancia(int distancia);
     void recorrer(Segmento* segmento);
+    void limpiarRecorredor();
     ~Recorredor();
 };
 

@@ -4,7 +4,7 @@
 #include"../Model/servidor.h"
 #include"../Model/servidorBuilder.h"
 #include "../Model/ClientesThread.h"
-
+#include "../Model/CarreraThread.h"
 
 #include <iostream>
 using namespace std;
@@ -14,7 +14,7 @@ class ServidorController{
 private:
 	Servidor* servidor;
 	ServidorBuilder* servidorBuilder;
-
+	CarreraThread carreraThread = CarreraThread(false);
 
 public:
 
