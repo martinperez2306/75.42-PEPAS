@@ -10,9 +10,10 @@ void CarreraThread::setServidor(Servidor* servidor){
 
 void CarreraThread::run(){
 	while(!this->estaCerrado){
-		if(this->servidor->carreraHaTerminado()){
+		if(this->servidor->carreraGlobalHaTerminado()){
 			this->servidor->enviarMensajeCambioDePista();
 			this->servidor->cambiarDePista();
+            cout<<"CAMBIO de pista"<<endl;
 		}
 	}
 }

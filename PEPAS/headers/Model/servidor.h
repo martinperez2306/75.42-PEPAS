@@ -28,7 +28,7 @@ private:
 	int socketFD;
 	int socketEscucha;
 	int player;
-	bool terminado;
+	bool terminado, contadorCarrera;
     bool empezarJuego;
 	bool colision;
 	BaseDeDatos* baseDeDatos;
@@ -52,7 +52,7 @@ private:
 	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
     TimerThread timerThread = TimerThread (false);
-    bool carreraTerminada;
+    bool carreraTerminada, carreraGlobalTerminada;
     int pistaActual;
     int jugadoresListos;
     bool listos;
@@ -156,7 +156,7 @@ public:
     string getTime ();
 	bool estaListo();
 
-	void actualizarEstadoDeCarrera(int posicionDelAuto);
+	bool actualizarEstadoDeCarrera(int posicionDelAuto, bool pinish);
 
 	bool carreraHaTerminado();
 
@@ -171,10 +171,11 @@ public:
 
 	void calcularPuntaje(Auto * autito, Auto * primero);
 
-
+    void actualizarEstadoDeCarreraGlobal(bool termino);
 
     void obtengoElPrimero(Auto * primero);
 
+    bool carreraGlobalHaTerminado();
 };
 
 

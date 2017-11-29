@@ -21,7 +21,7 @@
 #define CASE_RIGHT_KU 26
 #define CASE_DOWN_KU 27
 #define LISTO 51
-
+#define STOP 69
 #define SEGL 50
 #define HORIZONTE 400
 
@@ -89,6 +89,8 @@ Servidor::Servidor(){
     this->pistaActual = 0;
     jugadoresListos=0;
     listos = false;
+    this->contadorCarrera = 0;
+    this->carreraGlobalTerminada = false;
 }
 
 
@@ -389,11 +391,10 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 		map<int,Socket*>::iterator iterador;
 		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
 			int i =5;
+            this->jugadoresListos = 0;
 			while (i>=0){
-				cout<< i << endl;
 				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
 				    string mensaje= "0005/50/" + to_string(i);
-				    cout<< mensaje << endl;
 				    this->enviarMensaje(mensaje,iterador->second);
 				}
 				i--;
@@ -403,15 +404,12 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 				    string mensaje= "0003/40";
 				    this->enviarMensaje(mensaje,iterador->second);
 		}
-		
+            timerThread.reiniciar();
 		timerThread.start();
 		}
-		
-		
-		
-			//listos = true;
+
 	}break;
-		
+
         case LOGOUT:{
             loggear("Codigo de logout",2);
             string msg = "El usuario se ha deslogueado correctamente";
@@ -893,8 +891,6 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         }
     }
 
-
-
 	for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
 		posY = it->second->getPosition()/SEGL;
 		if(primeraVez) {
@@ -907,8 +903,6 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 			primero = it->second;
 		}
 	}
-
-
 
 
     for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
@@ -974,26 +968,26 @@ void Servidor::obtengoElPrimero(Auto * primero) {
 
 void Servidor::calcularPuntaje(Auto * autito, Auto * primero) {
 	// si es el primero
-	cout<<"ultposy: " << autito->getUltPosY() << endl;
-	cout<<"posy: " << autito->getPosition()/SEGL << endl;
+	/*cout<<"ultposy: " << autito->getUltPosY() << endl;
+	cout<<"posy: " << autito->getPosition()/SEGL << endl;*/
 	if(autito->getPosition()/SEGL >= autito->getUltPosY() + 1) {
 		if(autito->obtenerPlayer() == primero->obtenerPlayer()) {
 			if(autito->getEtapa() == 1)
-				autito->setScoreEtapa1( autito->getVelY() * 2 );
+				autito->setScoreEtapa1( autito->getVelY() * 2 * 3.6 );
 			else if(autito->getEtapa() == 2)
-				autito->setScoreEtapa2( autito->getVelY() * 2 );
+				autito->setScoreEtapa2( autito->getVelY() * 2 * 3.6 );
 			else
-				autito->setScoreEtapa3( autito->getVelY() * 2 );
+				autito->setScoreEtapa3( autito->getVelY() * 2 * 3.6 );
 		} else {
 			if(autito->getEtapa() == 1)
-				autito->setScoreEtapa1( autito->getVelY() );
+				autito->setScoreEtapa1( autito->getVelY() * 3.6 );
 			else if(autito->getEtapa() == 2)
-				autito->setScoreEtapa2( autito->getVelY() );
+				autito->setScoreEtapa2( autito->getVelY() * 3.6 );
 			else
-				autito->setScoreEtapa3( autito->getVelY() );
+				autito->setScoreEtapa3( autito->getVelY() * 3.6);
 		}
-		cout<<"la velocidad es: " << autito->getVelY() << endl;
-		cout<<"el puntaje es: " << autito->getScoreEtapa1() << endl;
+		/*cout<<"la velocidad es: " << autito->getVelY() << endl;
+		cout<<"el puntaje es: " << autito->getScoreEtapa1() << endl;*/
 		autito->setUltPosY(autito->getPosition()/SEGL);
 	}
 
@@ -1038,8 +1032,21 @@ void Servidor::setTime(string timeString) {
 
 }
 
-void Servidor::actualizarEstadoDeCarrera(int posicionDeAuto){
-	this->carreraTerminada = this->world->carreraHaTerminado(posicionDeAuto);
+
+
+bool Servidor::actualizarEstadoDeCarrera(int posicionDeAuto, bool finish){
+    this->carreraTerminada = this->world->carreraHaTerminado(posicionDeAuto);
+    if (carreraTerminada && !finish ){
+        this->contadorCarrera++;
+        finish = true;
+        cout<<"cont. carrera :"<<contadorCarrera<<endl;
+    }
+    if (contadorCarrera == this->cantidadMaximaDeConexiones) {
+        this->carreraGlobalTerminada = true;
+        finish = false;
+        cout<<"ARRE"<<endl;
+    }
+    return finish;
 }
 
 bool Servidor::carreraHaTerminado(){
@@ -1074,8 +1081,13 @@ void Servidor::cambiarDePista(){
 		this->enviarMinimapaACliente(it->second);
 		this->enviarMapaACliente(it->second);
 		this->enviarFinMapas(it->second, i);
+        string mensaje= "0003/69";
+        this->enviarMensaje(mensaje,it->second);
+        cout<<"ENVIO MENSAJE DE STOP"<<endl;
         i++;
 	}
+    timerThread.stop();
+    timerThread.join();
 }
 
 void Servidor::setPistaActual(int pistaActual){
@@ -1103,5 +1115,9 @@ void Servidor::enviarMensajeCambioDePista(){
 		cout<<"Envio cambio de pista"<<endl;
 		cout<<mensaje<<endl;
 	}
+}
+
+bool Servidor::carreraGlobalHaTerminado() {
+    return this->carreraGlobalTerminada;
 }
 

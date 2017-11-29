@@ -110,7 +110,9 @@ public:
 	int getScoreEtapa1();
 
 
+    void frenarAuto();
 
+    void lockearTeclas();
 };
 
 

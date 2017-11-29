@@ -339,6 +339,17 @@ int Auto::getScoreEtapa1() {
     return this->scoreEtapa1;
 }
 
+void Auto::frenarAuto() {
+    VelY = VEL_MIN;
+}
+
+void Auto::lockearTeclas() {
+    PressLeft_lock = true;
+    PressRight_lock = true;
+    PressUp_lock = true;
+    frontColision = true;
+}
+
 
 
 

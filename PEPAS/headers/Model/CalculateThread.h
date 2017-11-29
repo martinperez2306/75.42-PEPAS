@@ -13,7 +13,7 @@ class CalculateThread  : public Thread{
 private:
     Socket* socket;
     Servidor* srv;
-    bool estaCerrado, primeroE1, primeroE2, primeroE3;
+    bool estaCerrado, primeroE1, primeroE2, primeroE3, finish, payaslera;
     string user;
     Auto* Automovil;
 

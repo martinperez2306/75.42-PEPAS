@@ -35,3 +35,12 @@ string TimerThread::renderTiempo(clock_t sTime) {
 string TimerThread::getTiempo() {
     return time;
 }
+
+void TimerThread::stop() {
+    this->estaCerrado = true;
+}
+
+void TimerThread::reiniciar() {
+    this->estaCerrado = false;
+
+}

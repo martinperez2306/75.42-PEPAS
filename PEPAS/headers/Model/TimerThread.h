@@ -23,6 +23,9 @@ public:
     string getTiempo();
 
 
+    void stop();
+
+    void reiniciar();
 };
 
 
