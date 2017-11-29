@@ -1040,6 +1040,7 @@ void Servidor::cambiarDePista(){
 		Auto* automovil = it->second;
 		automovil->setPosInicialDelAuto();
 		automovil->incrementarEtapa();
+		automovil->setUltPosY(0);
 	}
 	//enviar los nuevos mapas a los clientes
 	cout<<"Enviando nueva info"<<endl;

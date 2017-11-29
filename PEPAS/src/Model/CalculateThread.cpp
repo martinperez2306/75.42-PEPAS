@@ -5,6 +5,9 @@ CalculateThread::CalculateThread(Servidor *sv, bool CerrarServidor, Socket* sock
     this->srv = sv;
     this->estaCerrado = false;
     this->socket = socket;
+    this->primeroE1 = true;
+    this->primeroE2 = true;
+    this->primeroE3 = true;
 }
 
 void CalculateThread::run() {
@@ -15,17 +18,40 @@ void CalculateThread::run() {
     while (!estaCerrado){
     	this->srv->actualizarEstadoDeCarrera((int)this->Automovil->getPosition() / 200);
     	if(!this->srv->carreraHaTerminado()){
-    	int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
-    	string msg = Automovil->calculateMove(curve);
-        string playersInformation = srv->actualizarJuego(Automovil);
-        if (srv->hayColision())
-            stringACrear = Automovil->procesarMovimiento() + playersInformation;
-        else stringACrear = msg + playersInformation;
-        unsigned long largoDelMensaje = stringACrear.length();
-        stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
-        usleep (4000);
-        cout<<stringProcesado<<endl;
-        this->srv->enviarMensaje(stringProcesado,socket);
+			int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
+			string msg = Automovil->calculateMove(curve);
+			string playersInformation = srv->actualizarJuego(Automovil);
+			if (srv->hayColision())
+				stringACrear = Automovil->procesarMovimiento() + playersInformation;
+			else stringACrear = msg + playersInformation;
+			unsigned long largoDelMensaje = stringACrear.length();
+			stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
+			usleep (4000);
+			cout<<stringProcesado<<endl;
+			this->srv->enviarMensaje(stringProcesado,socket);
+    	} else {
+			if(this->Automovil->getEtapa() == 1) {
+				if(this->primeroE1) {
+					cout<<"ganador etapa 1 es: " << this->Automovil->obtenerPlayer() << endl;
+    				this->Automovil->setScoreEtapa1(100000);
+    				this->primeroE1 = false;
+				}
+    		}
+			if(this->Automovil->getEtapa() == 2) {
+				if(this->primeroE2) {
+					cout<<"ganador etapa 2 es: " << this->Automovil->obtenerPlayer() << endl;
+					this->Automovil->setScoreEtapa2(100000);
+					this->primeroE2 = false;
+				}
+			}
+			if(this->Automovil->getEtapa() == 3) {
+				if(this->primeroE3) {
+					cout<<"ganador etapa 3 es: " << this->Automovil->obtenerPlayer() << endl;
+					this->Automovil->setScoreEtapa3(100000);
+					this->primeroE3 = false;
+				}
+
+			}
     	}
     }
 }
