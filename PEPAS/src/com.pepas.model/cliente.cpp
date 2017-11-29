@@ -248,6 +248,7 @@ void Cliente::parsearMensaje(std::string datos){
         }break;
         case FINMAPAS:{
             this->modelCar = stoi(obtenerParametros(datos,&i),nullptr,10);
+            cout<<"Model Car:"<<modelCar<<endl;
             this->cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
             this->crearRivales(cantidadJugadores, modelCar);
             this->minimapa->mostrarSegmentos();
@@ -475,7 +476,7 @@ void Cliente::parsearCalculos(string datos, int i) {
     if (tiempo_aux != "" && tiempo_aux != " " && tiempo_aux != "\0")
     	this->tiempo = tiempo_aux;
     this->destrozo = stoi(obtenerParametros(datos,&i),nullptr,10);
-    cout<<"Nivel de destrozo:"<<this->destrozo<<endl;
+    //cout<<"Nivel de destrozo:"<<this->destrozo<<endl;
     this->setPosY(posY);
     this->setPosX(posX);
     this->setVelocidad(velocidad);
@@ -581,4 +582,9 @@ bool Cliente::sePuedeMover(){
 
 int Cliente::getDestrozo() {
     return this->destrozo;
+}
+
+void Cliente::setRecibioFinDeMapa() {
+    this->finDeMapa = false;
+
 }

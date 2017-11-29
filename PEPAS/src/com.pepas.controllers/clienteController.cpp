@@ -137,9 +137,6 @@ void ClienteController::logIn(string usuario, string clave) {
 
     this->cliente->logIn(usuario, clave);
 
-    if (this->cliente->estalogueado()) {
-        this->empezarRecibir();
-    }
 
 }
 
@@ -373,8 +370,11 @@ void ClienteController::dibujar() {
 
             		if (!quit){
             			password = vistaLogin->get_last_input();
+
             			this->logIn(usuario, password);
+
 				sleep(1);
+
             			if (!this->cliente->estalogueado()){
             				vistaLogin->get_result("Usuario/Clave incorrectos");
             			}else{
@@ -545,8 +545,8 @@ void ClienteController::dibujar() {
 //                }
 //            };
 
-            std::vector<Line> lines;
 
+//
 //            //list<pair<int, double>> Track; /*distancia , curvatura*/
 //
 //            for (auto it = this->cliente->obtenerMapa()->obtenerObjetos()->begin();
@@ -571,18 +571,18 @@ void ClienteController::dibujar() {
 //
 //            }
 //            std::map<int, Textura *>::iterator it_obst;
-//
+////
 //            list<pair<int, float>> Track = this->cliente->obtenerTrack(); //TODO anda igual
+////
+////    /*         obstaculos->emplace(50,cartel);
+////             obstaculos->emplace(-50,cartel);
+////             obstaculos->emplace(50,cartel);
+////             obstaculos->emplace(-75,cartel2);
+////             obstaculos->emplace(75,cartel2);
+////             obstaculos->emplace(300,arbol);
+////             obstaculos->emplace(-100,arbol);
+////             obstaculos->emplace(100,arbol);
 //
-//    /*         obstaculos->emplace(50,cartel);
-//             obstaculos->emplace(-50,cartel);
-//             obstaculos->emplace(50,cartel);
-//             obstaculos->emplace(-75,cartel2);
-//             obstaculos->emplace(75,cartel2);
-//             obstaculos->emplace(300,arbol);
-//             obstaculos->emplace(-100,arbol);
-//             obstaculos->emplace(100,arbol);
-//*/
 //            // Track.emplace_back(5000,0);
 //            /*Armo la pista*/
 //            int iter_anterior = 0;
@@ -610,9 +610,11 @@ void ClienteController::dibujar() {
 //                iter_anterior += iteraciones;
 //            }
 
+            std::vector<Line> lines;
+            cout<<"Cargo mapa ?"<<endl;
             this->cargarMapa(&lines);
             this->mapaCargado = true;
-
+            cout<<"Si, cargo mapa"<<endl;
             int N = lines.size();
             pos = 1;
             int contador = 0;
@@ -631,6 +633,8 @@ void ClienteController::dibujar() {
             		this->obstaculos->clear();
             		this->cargarMapa(&lines);
             		this->mapaCargado  = true;
+                    this->cliente->setRecibioFinDeMapa();
+
             	}
 
             if(mapaCargado){
@@ -1064,7 +1068,7 @@ void ClienteController::renderTiempo(string tiempo) {
 
 */
     SDL_Color textColor = {0, 0, 0, 0xFF};
-	cout<<tiempo<<endl;
+	//cout<<tiempo<<endl;
 	opcion->loadFromRenderedText(tiempo.c_str(),textColor,this->tiempo,renderer);
 	opcion->render(((SCREEN_WIDTH - opcion->getWidth()) / 2 ), 30, renderer);
 }

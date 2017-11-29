@@ -151,6 +151,8 @@ string getTiempo();
 bool sePuedeMover();
 
     int getDestrozo();
+
+    void setRecibioFinDeMapa();
 };
 
 
