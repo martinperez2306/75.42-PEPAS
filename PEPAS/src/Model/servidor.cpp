@@ -91,6 +91,8 @@ Servidor::Servidor(){
     listos = false;
     this->contadorCarrera = 0;
     this->carreraGlobalTerminada = false;
+    this->mover = false;
+    this->timerThread.start();
 }
 
 
@@ -390,22 +392,22 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 		cout<<"hola"<<endl;
 		map<int,Socket*>::iterator iterador;
 		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
-			int i =5;
+			timerThread.temporizar();
             this->jugadoresListos = 0;
-			while (i>=0){
-				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
-				    string mensaje= "0005/50/" + to_string(i);
-				    this->enviarMensaje(mensaje,iterador->second);
-				}
-				i--;
-				sleep(1);
+			while (!timerThread.getIncremento()){
+//				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+//				    string mensaje= "0005/50/" + to_string(i);
+//				    this->enviarMensaje(mensaje,iterador->second);
+//				}
+				//Espera al incremento del timer
 			}
-		for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
-				    string mensaje= "0003/40";
-				    this->enviarMensaje(mensaje,iterador->second);
-		}
-            timerThread.reiniciar();
-		timerThread.start();
+			for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+				string mensaje= "0003/40";
+				this->enviarMensaje(mensaje,iterador->second);
+			}
+			this->timerThread.cronometrar();
+//			timerThread.reiniciar();
+			this->mover = true;
 		}
 
 	}break;
@@ -467,6 +469,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
         break;
         case CASE_UP_KD:{
             //Obtengo datos del mensaje
+        	if(!mover){
+        		break;
+        	}
             int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
@@ -478,6 +483,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
         }break;
         case CASE_LEFT_KD:{
+        	if(!mover){
+        	        		break;
+        	        	}
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
@@ -487,6 +495,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
         }break;
         case CASE_RIGHT_KD:{
+        	if(!mover){
+        	        		break;
+        	        	}
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
@@ -495,6 +506,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_DOWN_KD:{
+        	if(!mover){
+        	        		break;
+        	        	}
             //Obtengo datos del mensaje
             int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -505,6 +519,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_UP_KU:{
+        	if(!mover){
+        	        		break;
+        	        	}
             //Obtengo datos del mensaje
             int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -515,6 +532,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_LEFT_KU:{
+        	if(!mover){
+        	        		break;
+        	        	}
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
@@ -523,6 +543,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_RIGHT_KU:{
+        	if(!mover){
+        	        		break;
+        	        	}
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
             //Busco auto en map
             map<string,Auto*>::iterator it = this->mapAutitos->find(usuario);
@@ -531,6 +554,9 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
         case CASE_DOWN_KU:{
+        	if(!mover){
+        	        		break;
+        	        	}
             //Obtengo datos del mensaje
             int pos = stoi(obtenerParametros(datos,&i),nullptr,10);
             int curve = stoi(obtenerParametros(datos,&i),nullptr,10);
@@ -1091,8 +1117,9 @@ void Servidor::cambiarDePista(){
         cout<<"ENVIO MENSAJE DE STOP"<<endl;
         i++;
 	}
-    timerThread.stop();
-    timerThread.join();
+//    timerThread.stop();
+//    timerThread.join();
+
     this->carreraGlobalTerminada = false;
 }
 

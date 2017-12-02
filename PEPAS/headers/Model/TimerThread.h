@@ -12,6 +12,12 @@ private:
     clock_t startTime;
     string time;
 
+    int segundos;
+    int minutos;
+
+    bool empezarAContar;
+    bool incremento;
+
 public:
 
     TimerThread(bool CerrarServidor);
@@ -25,7 +31,21 @@ public:
 
     void stop();
 
+    void frenar();
+
     void reiniciar();
+
+    void setIncremento(bool incremento);
+
+    void incrementar();
+
+    void decrementar();
+
+    bool getIncremento();
+
+    void temporizar();
+
+    void cronometrar();
 };
 
 

@@ -61,8 +61,6 @@ void CalculateThread::run() {
                     }
                 }
             }
-
-
         }
 
         }

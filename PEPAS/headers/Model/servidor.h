@@ -57,6 +57,7 @@ private:
     int jugadoresListos;
     int contadorCarrera;
     bool listos;
+    bool mover;
 
 public:
 	int aliveCounter;
