@@ -7,7 +7,9 @@
 
 Rival::Rival() {
 
+
     dibujar = false;
+    noDraw = 0;
 
 }
 
@@ -43,4 +45,12 @@ void Rival::notDibujar() {
 
 int Rival::getDestroy() {
     return playerDestroy;
+}
+
+int Rival::getnoDraw() {
+    return noDraw;
+}
+
+void Rival::setnoDraw(double i) {
+    noDraw = i;
 }

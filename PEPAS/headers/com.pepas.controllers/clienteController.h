@@ -142,12 +142,14 @@ private:
                    double scale;
                    double camD = 0.5;
                    double roadW = 2000;
-                   double curve, spriteX, clip, spriteX2, spriteXR1, spriteXR2, spriteXR3;
+                   double curve, spriteX, clip, spriteX2, spriteXR1, spriteXR2, spriteXR3, spriteXR4,spriteXR5;
                    Textura *sprite;
                    Textura *sprite2;
                    Textura *spriteR1;
                    Textura *spriteR2;
                    Textura *spriteR3;
+                    Textura * spriteR4;
+                    Textura * spriteR5;
 
                    Line() {
                        spriteX = spriteX2 = x = y = z = 0;
@@ -156,9 +158,13 @@ private:
                        spriteR1 = NULL;
                        spriteR2 = NULL;
                        spriteR3 = NULL;
+                       spriteR4 = NULL;
+                       spriteR5 = NULL;
                        spriteXR1 = 0;
                        spriteXR2 = 0;
                        spriteXR3 = 0;
+                       spriteXR4 = 0;
+                       spriteXR5 = 0;
                    }
 
                    void project(int camX, int camY, int camZ) {
@@ -252,6 +258,40 @@ private:
 
                            SDL_RenderSetScale(renderer, destW / w, destH / h);
                            spriteR3->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                       if (spriteXR4 != 0) {
+                           int w = spriteR1->getWidth();
+                           int h = spriteR1->getHeight();
+
+                           double destX = X + scale * spriteXR4 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 700;
+                           double destH = h * W / 700;
+
+                           destX += destW * spriteXR4;
+                           destY += destH * (-1);
+
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           spriteR4->render(destX / destW * w, destY * h / destH, renderer);
+                           SDL_RenderSetScale(renderer, 1, 1);
+                       }
+                       if (spriteXR5 != 0) {
+                           int w = spriteR5->getWidth();
+                           int h = spriteR5->getHeight();
+
+                           double destX = X + scale * spriteXR5 * SCREEN_WIDTH / 2;
+                           double destY = Y + 4;
+                           double destW = w * W / 700;
+                           double destH = h * W / 700;
+
+                           destX += destW * spriteXR5;
+                           destY += destH * (-1);
+
+
+                           SDL_RenderSetScale(renderer, destW / w, destH / h);
+                           spriteR5->render(destX / destW * w, destY * h / destH, renderer);
                            SDL_RenderSetScale(renderer, 1, 1);
                        }
                    }

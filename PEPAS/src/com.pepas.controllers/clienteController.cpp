@@ -650,7 +650,7 @@ void ClienteController::dibujar() {
                     //cliente->noMover();
             	}*/
                 if(!this->cliente->recibioFinDeMapa()){
-                    cout<<"11111111111111111111111111111111111111111111111111111111111111111111"<<endl;
+                   // cout<<"11111111111111111111111111111111111111111111111111111111111111111111"<<endl;
                     mapaCargado = false;
                     lines.clear();
                     this->obstaculos->clear();
@@ -667,20 +667,20 @@ void ClienteController::dibujar() {
                     sleep(10);
                 }
                 if(this->cliente->recibioFinDeMapa() && !mapaCargado){
-                    cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
+                    //cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
                     this->cargarMapa(&lines);
                     this->mapaCargado = true;
                     cliente->enviarMensaje("0003/51");
                 }
                 if(this->cliente->recibioFinDeMapa() && mapaCargado) {
-                    cout << "333333333333333333333333333333333333333333333333333333333333333333333333333" << endl;
+                   // cout << "333333333333333333333333333333333333333333333333333333333333333333333333333" << endl;
 
                     while (SDL_PollEvent(&e) != 0) {
                         //User requests quit
                         if (e.type == SDL_QUIT) {
                             quit = true;
                         }
-                        if (cliente->sePuedeMover())
+                        //if (cliente->sePuedeMover())
                             this->keyEvent(e);
                     }
 
@@ -742,51 +742,61 @@ void ClienteController::dibujar() {
                     while (i < this->cliente->obtenerRivalList().size()) {
                         i++;
                         Rival *rival = *it;
-                        /*           if (rival->getDibujar()) {
-                                       dibujarRival(lines[startPos + rival->getHorizonte() + OFFSET].X,
-                                                    lines[startPos + rival->getHorizonte() + OFFSET].Y,
-                                                    lines[startPos + rival->getHorizonte() + OFFSET].W,
-                                                    lines[startPos + rival->getHorizonte() + OFFSET].scale,
-                                                    0.0056 * rival->getPosX() - 2.8,
-                                                    this->getTextura(rival->getPlayer()));
-                                   }
-                                   rival->notDibujar();*/
                         if (rival->getDibujar()) {
-                            if (i == 1) {
+                            if (rival->getPlayer() == 1) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[noDraw].spriteXR1 = 0;
+                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[rival->getnoDraw()].spriteXR1 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    noDraw = startPos + rival->getHorizonte() + OFFSET;
+                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
                                 }
-                            } else if (i == 2) {
+                            } else if (rival->getPlayer() == 2) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[noDraw2].spriteXR2 = 0;
+                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[rival->getnoDraw()].spriteXR2 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    noDraw2 = startPos + rival->getHorizonte() + OFFSET;
+                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
                                 }
-                            } else {
+                            } else if (rival->getPlayer() == 3) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[noDraw3].spriteXR3 = 0;
+                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[rival->getnoDraw()].spriteXR3 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    noDraw3 = startPos + rival->getHorizonte() + OFFSET;
+                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
                                 }
                                 //puts("entre3");
+                            }else if (rival->getPlayer() == 4){
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR4 = this->getTextura(rival);
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR4 =
+                                        0.0056 * rival->getPosX() - 2.8;
+                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[rival->getnoDraw()].spriteXR4 = 0;
+                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                }
+
+                            }else{
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR5 = this->getTextura(rival);
+                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR5 =
+                                        0.0056 * rival->getPosX() - 2.8;
+                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[rival->getnoDraw()].spriteXR5 = 0;
+                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
+                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                }
+
                             }
                             rival->notDibujar();
                         }
                         std::list<Rival *>::iterator it2 = std::next(it, 1);
                         // printf("ciclo\n");
                     }
-                    // printf("sali\n");
 
 
 

@@ -12,6 +12,7 @@ private:
     int PosX;
     float horizonte;
     bool dibujar;
+    double noDraw;
 public:
     Rival ();
 
@@ -28,6 +29,11 @@ public:
     int getDestroy();
 
     void notDibujar();
+
+
+    int getnoDraw();
+
+    void setnoDraw(double i);
 };
 
 
