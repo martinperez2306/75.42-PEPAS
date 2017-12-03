@@ -942,7 +942,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 	}
 
 
-    for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
+for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
         Posicion* posicionDelAuto = NULL;
@@ -952,20 +952,31 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         calcularPuntaje(it->second, primero);
 
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
-        float diferenciaX = abs(pAuto->getX() - it->second->getX());
-        if (diferenciaY <= horizonte && it->second != pAuto && abs(diferenciaY) >= 0) {
-            if ( diferenciaX <= 185 && abs(diferenciaY) <= 4){
-                pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
-                if (salioDeColision){
+        float diferenciaX = (pAuto->getX() - it->second->getX());
+        if (diferenciaY <= horizonte && it->second != pAuto) {
+            if (abs(diferenciaX)<= 185 && abs(diferenciaY) <= 4) {
+                if (diferenciaX < 0)
+                    pAuto->estaEnColision("right", pAuto->getVelY());
+                else if (diferenciaX > 0)
+                    pAuto->estaEnColision("left", pAuto->getVelY());
+                if (salioDeColision) {
                     pAuto->agregarDestrozo();
                     it->second->agregarDestrozo();
-                    salioDeColision= false;
+                    salioDeColision = false;
+                }
+            } else if (abs(diferenciaX)<= 185 && ((diferenciaY>4 && diferenciaY <= 5))){
+                pAuto->estaEnColision("up", pAuto->getVelY());
+                 if (salioDeColision) {
+                    pAuto->agregarDestrozo();
+                     it->second->agregarDestrozo();
+                    salioDeColision = false;
                 }
             } else {
                 // cout<<pAuto->getLastMove()<<endl;
                 pAuto->noEstaEnColision();
                 salioDeColision = true;
             }
+
             i++;
             if (i>=1) {
                 stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
