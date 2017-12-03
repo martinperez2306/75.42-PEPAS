@@ -241,8 +241,12 @@ void ClienteController::obtengoPuertoNuevoYHagoConectar() {
     cout << "El puerto recibido es: " << puerto << endl;
     this->obtenerCliente()->obtenerSocket()->CerrarConexion(this->obtenerCliente()->obtenerSocketFD());
 
+    while (  this->obtenerCliente()->conectarseAlServidor(this->ipAddress, stoi(puerto, nullptr, 10)) == -1){
+        cout <<"Reintentando conexion"<<endl;
+        sleep (1);
+    }
     /*Me conecto al nuevo servidor*/
-    this->obtenerCliente()->conectarseAlServidor(this->ipAddress, stoi(puerto, nullptr, 10));
+    //this->obtenerCliente()->conectarseAlServidor(this->ipAddress, stoi(puerto, nullptr, 10));
     cout << "Conectado satisfactorio con puerto: " << puerto << endl;
     this->cliente->conectarse();
     this->empezarRecibir();
