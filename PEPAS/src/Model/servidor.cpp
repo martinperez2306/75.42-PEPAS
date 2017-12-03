@@ -941,7 +941,7 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 		}
 	}
 
-
+bool choco = false;
 for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
@@ -955,6 +955,7 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
         float diferenciaX = (pAuto->getX() - it->second->getX());
         if (diferenciaY <= horizonte && it->second != pAuto) {
             if (abs(diferenciaX)<= 185 && abs(diferenciaY) <= 4) {
+                choco = true;
                 if (diferenciaX < 0)
                     pAuto->estaEnColision("right", pAuto->getVelY());
                 else if (diferenciaX > 0)
@@ -965,6 +966,7 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
                     salioDeColision = false;
                 }
             } else if (abs(diferenciaX)<= 185 && ((diferenciaY>4 && diferenciaY <= 5))){
+                choco = true;
                 pAuto->estaEnColision("up", pAuto->getVelY());
                  if (salioDeColision) {
                     pAuto->agregarDestrozo();
@@ -973,8 +975,7 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
                 }
             } else {
                 // cout<<pAuto->getLastMove()<<endl;
-                pAuto->noEstaEnColision();
-                salioDeColision = true;
+
             }
 
             i++;
@@ -984,6 +985,10 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
 
         }
         stringArmado = stringArmado + stringConcat;
+    }
+    if (!choco){
+        pAuto->noEstaEnColision();
+        salioDeColision = true;
     }
     stringArmado = stringTime + separador + to_string(pAuto->obtenerDestrozo())+ separador+ stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
