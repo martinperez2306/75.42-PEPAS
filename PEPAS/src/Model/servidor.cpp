@@ -79,9 +79,8 @@ Servidor::Servidor(){
     this->world = new World();
     //zoomer
     this->zoomer = new Zoomer();
+    //Recorredor para el radar
     this->recorredor = new Recorredor();
-
-    this->logicaJuego = new Logica(5000); //largo de la pista
     this->time = "0:0";
     empezarJuego = false;
     player = 1;
@@ -323,7 +322,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
 	switch(codigo){
 		case COMANDO: {
-				this->logicaJuego->setRuta(this->mapa->getRuta());
+//				this->logicaJuego->setRuta(this->mapa->getRuta());
 			}
 			break;
 		case LOGIN:{
@@ -643,11 +642,23 @@ BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
+//DEBE BORRAR TODOS SUS ATRIBUTOS DINAMICOS
+//DEBE LIMPIAR TODA LA MEMORIA QUE USEN SUS ATRIBUTOS DINAMICOS
 Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->minimapa;
 	delete this->mapa;
 	delete this->baseDeDatos;
+	this->mapaSocket->clear();
+	delete this->mapaSocket;
+	this->mapAutitos->clear();
+	delete this->mapAutitos;
+	this->mapUsuario->clear();
+	delete this->mapUsuario;
+	delete this->zoomer;
+	delete this->world;
+	delete this->recorredor;
+	delete this->serverSocket;
 }
 
 void Servidor::cerrarSockets() {
@@ -696,7 +707,7 @@ void Servidor::setZoomEntreMapaYMinimapa(int zoom){
 	this->zoomer->setTamanioZoom(zoom);
 }
 
-void Servidor::generarMapa(){
+void Servidor::generarMapas(){
     loggear("Creando pistas desde archivos de configuracion",1);
     (*this->mapas)[1] = this->pistaParser->parsearMapa("pista1.xml");
     (this->mapas->find(1)->second->mostrarSegmentos());
@@ -1037,8 +1048,6 @@ void Servidor::setMapa(int numeroMapa){
     this->mapa = this->mapas->find(numeroMapa)->second;
 }
 
-
-
 string Servidor::renderTiempo(clock_t sTime) {
     int secondsPassed;
     int minutesPassed;
@@ -1095,7 +1104,6 @@ void Servidor::cambiarDePista(){
 	this->generarMinimapa();
 	this->generarWorld();
 	this->carreraTerminada = false;
-
     this->contadorCarrera = 0;
 	//resetear los autos
 	cout<<"Reseteando autos"<<endl;

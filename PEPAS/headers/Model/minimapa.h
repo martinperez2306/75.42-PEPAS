@@ -9,7 +9,6 @@
 #include <list>
 
 #include "segmento.h"
-#include "objetos.h"
 #include "Objeto.h"
 
 using namespace std;
@@ -17,7 +16,6 @@ using namespace std;
 class Minimapa{
 
 private:
-	map<Segmento*,Objetos*>* minimapa;
 	list<Segmento*>* pista;
 	list<Objeto*>* objetos;
 
@@ -27,13 +25,9 @@ public:
 	//ES UN CONJUNTO DE SUBSEGMENTOS (LA CLASE SEGMENTOS REPRESENTA ESTOS SUBSEGMENTOS)
 	Minimapa();
 
-	void setObjetos(Segmento* seg,Objetos* objetos);
-
 	void agregarSegmento(Segmento* segmento);
 
 	void agregarObjeto(Objeto* objeto);
-
-	map<Segmento*,Objetos*>* getMinimapa();
 
 	list<Segmento*>* getSegmentos();
 

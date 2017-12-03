@@ -47,7 +47,7 @@ Servidor* ServidorBuilder::build(){
 	this->servidor->setPuerto(this->getPuerto());
 	this->servidor->setBaseDeDatos(this->baseDeDatos);
 	this->servidor->setZoomEntreMapaYMinimapa(10);
-	this->servidor->generarMapa();
+	this->servidor->generarMapas();
 	return this->getServidor();
 }
 

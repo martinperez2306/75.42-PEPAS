@@ -47,8 +47,10 @@ void ServidorController::mostrarUsuariosConectados(){
 	this->servidor->mostrarTodosLosUsuariosConectados();
 }
 
+//ELIMINAMOS EL THREAD DE CARRERA CUANDO TERMINA EL JUEGO Y BORRAMOS EL SERVIDOR
 ServidorController::~ServidorController(){
 	this->carreraThread.terminar();
+	this->carreraThread.join();
 	delete this->servidor;
 }
 
@@ -56,4 +58,3 @@ ServidorController::~ServidorController(){
 Servidor* ServidorController::obtenerServidor(){
     return this->servidor;
 }
-

@@ -1,15 +1,8 @@
 #include "../../headers/Model/minimapa.h"
 
-typedef pair<Segmento*,Objetos*> segObj;
-
 Minimapa::Minimapa(){
-	this->minimapa = new map<Segmento*,Objetos*>();
 	this->pista = new list<Segmento*>();
 	this->objetos = new list<Objeto*>();
-}
-
-void Minimapa::setObjetos(Segmento* seg,Objetos* objetos){
-	this->minimapa->insert(segObj(seg,objetos));
 }
 
 void Minimapa::agregarSegmento(Segmento* segmento){
@@ -18,16 +11,6 @@ void Minimapa::agregarSegmento(Segmento* segmento){
 
 void Minimapa::agregarObjeto(Objeto* objeto){
 	this->objetos->push_back(objeto);
-}
-
-void Minimapa::getAllPosiciones(){
-	for (map<Segmento*,Objetos*>::iterator it=this->minimapa->begin(); it!=this->minimapa->end(); ++it){
-	    cout<<"Posicion Incial: "<<" X "<< it->first->getPosicionInicial()->getX()<<" Y "<<it->first->getPosicionInicial()->getY()<<endl;
-	    cout<<"Posicion Final: "<<" X "<< it->first->getPosicionFinal()->getX()<<" Y "<<it->first->getPosicionFinal()->getY()<<endl;
-	    cout<<"Objetos Derecha:  "<<"arbol:"<<it->second->getObjetoDerecha()->getArbol()<<" cartel:"<<it->second->getObjetoDerecha()->getCartel()<<endl;
-	    cout<<"Objetos Izquierda: "<<"arbol:"<<it->second->getObjetoIzquierda()->getArbol()<<" cartel:"<<it->second->getObjetoIzquierda()->getCartel()<<endl;
-	}
-
 }
 
 void Minimapa::mostrarSegmentos(){
@@ -54,10 +37,6 @@ void Minimapa::mostrarObjetos(){
 	}
 }
 
-map<Segmento*,Objetos*>* Minimapa::getMinimapa(){
-	return this->minimapa;
-}
-
 list<Segmento*>* Minimapa::getSegmentos(){
 	return this->pista;
 }
@@ -67,7 +46,10 @@ list<Objeto*>* Minimapa::getObjetos(){
 }
 
 Minimapa::~Minimapa(){
-
+	this->objetos->clear();
+	this->pista->clear();
+	delete this->objetos;
+	delete this->pista;
 }
 
 void Minimapa::limpiarMinimapa(){

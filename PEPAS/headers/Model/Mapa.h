@@ -23,6 +23,7 @@ public:
 	void agregarSegmento(Segmento* segmento);
 	void mostrarSegmentos();
 	void mostrarObjetos();
+	void limpiarMapa();
 
 	list<Segmento*>* getRuta();
 	list<Objeto*>* getObjetos();

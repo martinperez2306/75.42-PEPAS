@@ -49,7 +49,7 @@ void Zoomer::zoomMapToWorld(Mapa* mapa, World* world){
 		}
 	}
 	//seteamos el final de pista
-	world->setFinDePista(400);
+	world->setFinDePista(4000);
 	//agregamos padding al final
 	this->agregarPaddingToWorld(world,metros);
 }
@@ -63,6 +63,7 @@ void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorre
 		minimapa->agregarSegmento(segmentoMinimapa);
 		recorredor->recorrer(segmentoMinimapa);
 	}
+	this->agregarPaddingToRecorredor(recorredor);
 	for(list<Objeto*>::iterator it = mapa->getObjetos()->begin(); it!=mapa->getObjetos()->end();++it){
 		Objeto* objeto = *it;
 		minimapa->agregarObjeto(this->zoomObjeto(objeto));
@@ -78,6 +79,10 @@ void Zoomer::agregarPaddingToWorld(World* world, int metrosFinales){
 		lineaX->setCurva(0);
 		world->agregarLinea(metrosFinales,lineaX);
 	}
+}
+
+void Zoomer::agregarPaddingToRecorredor(Recorredor* recorredor){
+	recorredor->agregarPadding(PADDING);
 }
 
 

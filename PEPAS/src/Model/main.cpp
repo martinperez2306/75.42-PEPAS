@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
     intefazMenu.join();
     escuchaThread.join();
 	cerrar_logger();
-
+	delete consola;
 	/////////////////////////////////////////////////////////////////////////////////////
 
 	return 0;

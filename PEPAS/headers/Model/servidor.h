@@ -11,7 +11,6 @@
 #include "pistaParser.h"
 #include "World.h"
 #include "Zoomer.h"
-#include "Logica.h"
 #include "Auto.h"
 #include "Recorredor.h"
 #include "TimerThread.h"
@@ -49,7 +48,6 @@ private:
 	Zoomer* zoomer;
     Recorredor* recorredor;
     string time;
-	Logica* logicaJuego;
 	map<string, Auto*>* mapAutitos;
     TimerThread timerThread = TimerThread (false);
     bool carreraTerminada, carreraGlobalTerminada;
@@ -122,7 +120,7 @@ public:
 	string procesarMensajeFin(int i);
 	string procesarMensajeCambioDePista();
 
-	void generarMapa();
+	void generarMapas();
 	void generarMinimapa();
 	void enviarMapaACliente(Socket* socketCliente);
 	void enviarMinimapaACliente(Socket* socketCliente);
