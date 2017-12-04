@@ -36,9 +36,6 @@ public:
 	//Crear el mundo a traves del mapa
 	void zoomMapToWorld(Mapa* mapa, World* world);
 	void zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorredor);
-	//Agregar paddings para evitar conflictos
-	void agregarPaddingToWorld(World* world, int metrosFinales);
-	void agregarPaddingToRecorredor(Recorredor* recorredor);
 	~Zoomer();
 };
 

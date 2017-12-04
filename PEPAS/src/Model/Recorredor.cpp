@@ -169,14 +169,6 @@ Recorredor::~Recorredor() {
     delete this->posiciones;
 }
 
-void Recorredor::agregarPadding(int padding){
-	for(int i = 1; i <= padding; i++){
-		this->siguientePosicion(1);
-		this->avanzar();
-		(*this->posiciones)[distanciaRecorrida] = this->generarPosicionRuta();
-	}
-}
-
 void Recorredor::limpiarRecorredor(){
     this->direccionRecorrido = 0;
     this->distanciaRecorrida = 0;
