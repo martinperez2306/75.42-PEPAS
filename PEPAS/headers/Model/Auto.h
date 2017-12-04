@@ -23,7 +23,7 @@ private:
 	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision,rightColision,leftColision,PressR,PressL;
 	int jugador, destrozo;
 	string lastMove;
-
+	bool grisado;
 	int scoreEtapa1, scoreEtapa2, scoreEtapa3, etapa;
 
 public:
@@ -116,6 +116,8 @@ public:
 
     int getScoreEtapa2();
     int getScoreEtapa3();
+
+	void setGrisadoTrue();
 };
 
 

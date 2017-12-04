@@ -22,7 +22,9 @@
 #define CASE_DOWN_KU 27
 #define LISTO 51
 #define STOP 69
+#define CASE_RETURN 70
 #define SEGL 50
+
 #define HORIZONTE 400
 
 
@@ -92,6 +94,7 @@ Servidor::Servidor(){
     this->carreraGlobalTerminada = false;
     this->mover = false;
     this->timerThread.start();
+    this->PressEnter = 0;
 }
 
 
@@ -565,6 +568,19 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             //string msg =it->second->calculateMove();
             //this->enviarMensaje(msg, socketDelemisor);
         }break;
+        case CASE_RETURN:{
+            PressEnter++;
+            cout<<"Recibi enter"<<endl;
+            if (PressEnter == this->cantidadMaximaDeConexiones){
+                map<int,Socket*>::iterator iterador;
+                for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
+                    string stringProcesado = "0003/70";
+                    this->enviarMensaje(stringProcesado,iterador->second);
+                    cout<<"Envio mensaje de enter a clientes"<<endl;
+                    PressEnter = 0;
+                }
+            }
+        }break;
 		default:
 			break;
 	}
@@ -973,16 +989,99 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
                      it->second->agregarDestrozo();
                     salioDeColision = false;
                 }
-            } else {
-                // cout<<pAuto->getLastMove()<<endl;
+            }
+            for (std::list<Objeto*>::iterator it=this->mapa->getObjetos()->begin(); it!=this->mapa->getObjetos()->end(); ++it){
 
+
+                Objeto* objeto = *it;
+                if (pAuto->getPosition()/200 + 150 < objeto->getDistancia()){
+                    break;
+                }
+
+                if(objeto->getDistancia() - pAuto->getPosition()/200 - 4 <= 0.2 && objeto->getDistancia() - pAuto->getPosition()/200 - 4 >= -0.2 ){
+
+                    if(objeto->getArbol() != 0){
+                        if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
+                            cout<<"distancia choque de frente"<<endl;
+                            cout<< objeto->getDistancia() - pAuto->getPosition()/200 - 4 << endl;
+                            choco = true;
+                            pAuto->estaEnColision("up", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }
+
+                    }else if(objeto->getCartel() != 0){
+                        if((pAuto->getX() + 180  >= 1000 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 25 && objeto->getLado().compare("I") == 0)){
+                            choco = true;
+                            pAuto->estaEnColision("up", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }
+                    }
+
+                }else if(objeto->getDistancia() - pAuto->getPosition()/200 -3 <= 0.7 && objeto->getDistancia() - pAuto->getPosition()/200 -3  >= -0.7){
+
+                    if(objeto->getArbol() != 0){
+                        if((pAuto->getX() + 180  >= 900 && objeto->getLado().compare("D") == 0) ){
+                            choco = true;
+                            pAuto->estaEnColision("right", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }else if((pAuto->getX()  <= 100 && objeto->getLado().compare("I") == 0)){
+                            choco = true;
+                            pAuto->estaEnColision("left", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }
+
+                    }else if(objeto->getCartel() != 0){
+                        if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) ){
+                            choco = true;
+                            pAuto->estaEnColision("right", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }else if((pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
+                            choco = true;
+                            pAuto->estaEnColision("left", pAuto->getVelY());
+                            if (salioDeColision) {
+                                pAuto->agregarDestrozo();
+                                salioDeColision = false;
+                            }
+                        }
+                    }
+
+                }
             }
 
             i++;
-            if (i>=1) {
-                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador +to_string(it->second->obtenerDestrozo()) + separador+ to_string(it->second->getX()) + separador + to_string(diferenciaY);
+            //if (cableado) {
+                if (i >= 1) {
+                    stringConcat = to_string(it->second->obtenerPlayer()) + separador +
+                                   to_string(it->second->obtenerDestrozo()) + separador +
+                                   to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+                } else stringConcat = to_string(it->second->obtenerPlayer()) + separador +
+                                      to_string(it->second->obtenerDestrozo()) + separador +
+                                      to_string(it->second->getX()) + separador + to_string(diferenciaY);
+             /*else {
+                if (i >= 1) {
+                    stringConcat == to_string(it->second->obtenerPlayer()) + "G" + separador +
+                                   to_string(it->second->obtenerDestrozo()) + separador +
+                                   to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+                } else stringConcat = to_string(it->second->obtenerPlayer()) + "G"  + separador + to_string(it->second->obtenerDestrozo()) + separador +
+                                      to_string(it->second->getX()) + separador + to_string(diferenciaY);
+            }*/
 
+            //cout <<"Cableado : "<<cableado<<endl;
         }
         stringArmado = stringArmado + stringConcat;
     }
@@ -1194,5 +1293,23 @@ void Servidor::enviarMensajeCambioDePista(){
 
 bool Servidor::carreraGlobalHaTerminado() {
     return this->carreraGlobalTerminada;
+}
+
+void Servidor::setDesconexionPorCable() {
+    this->cableado = false;
+}
+
+void Servidor::setConexionPorCable() {
+    this->cableado = true;
+}
+
+void Servidor::setAutosDesconectados() {
+    map<string,Auto*>::iterator iterador;
+    int i=0;
+    for (iterador = mapAutitos->begin(); iterador != mapAutitos->end(); ++iterador){
+        iterador->second->setGrisadoTrue();
+        i++;
+    }
+
 }
 

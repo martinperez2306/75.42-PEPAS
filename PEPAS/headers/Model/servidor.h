@@ -30,6 +30,7 @@ private:
 	bool terminado;
     bool empezarJuego;
 	bool colision;
+	bool cableado;
 	BaseDeDatos* baseDeDatos;
 	Socket* iniciarConexion(int puerto);
 	Socket* serverSocket;
@@ -52,7 +53,7 @@ private:
     TimerThread timerThread = TimerThread (false);
     bool carreraTerminada, carreraGlobalTerminada;
     int pistaActual;
-    int jugadoresListos;
+    int jugadoresListos, PressEnter;
     int contadorCarrera;
     bool listos;
     bool mover;
@@ -176,6 +177,12 @@ public:
     void obtengoElPrimero(Auto * primero);
 
     bool carreraGlobalHaTerminado();
+
+	void setDesconexionPorCable();
+
+	void setConexionPorCable();
+
+	void setAutosDesconectados();
 };
 
 

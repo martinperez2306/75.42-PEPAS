@@ -44,6 +44,7 @@ Auto::Auto(int player)
     this->scoreEtapa2 = 0;
     this->scoreEtapa3 = 0;
     this->etapa = 1;
+    this->grisado = false;
 
 
     this->setPosInicialDelAuto();
@@ -270,7 +271,7 @@ void Auto::setJugador(int i) {
 void Auto::estaEnColision(string lastMove, float velY) {
         //cout<<"recibi el lastmove: "<<lastMove<<endl;
     if (!Colision) {
-        if (lastMove == "up" || velY > VEL_MIN) { // && !leftColision && !rightColision
+        if (lastMove == "up") { // && !leftColision && !rightColision
             VelY = VEL_MIN;
             Colision = true;
             PressUp_lock = true;
@@ -400,4 +401,8 @@ int Auto::getScoreEtapa2(){
 
 int Auto::getScoreEtapa3(){
     return this->scoreEtapa3;
+}
+
+void Auto::setGrisadoTrue() {
+    grisado = true;
 }
