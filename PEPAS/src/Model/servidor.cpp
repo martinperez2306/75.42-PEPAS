@@ -453,6 +453,8 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
             puertosEnUso.erase(iter);
             loggear("Disminuyo las conexiones actuales",2);
             this->conexiones -= 1;
+            this->aliveCounter -= 1;
+            this->setEmpezoJuego(false);
             msg = "Conexiones actuales: " + to_string(this->conexiones);
             loggear(msg,3);
             mensajeAEnviar = "CerrarCliente";

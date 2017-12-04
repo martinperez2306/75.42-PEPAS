@@ -1,5 +1,6 @@
 #include <zconf.h>
 #include "../../headers/Model/CalculateThread.h"
+#include "../../headers/Model/logger.h"
 
 CalculateThread::CalculateThread(Servidor *sv, bool CerrarServidor, Socket* socket) {
     this->srv = sv;
@@ -23,6 +24,8 @@ void CalculateThread::run() {
             int curve = srv->curvaEnKilometraje((int)(Automovil->getPosition()/200));
             string msg = Automovil->calculateMove(curve);
             string playersInformation = srv->actualizarJuego(Automovil);
+
+            cout << "players information: " << playersInformation << endl;
             if (srv->hayColision())
                 stringACrear = Automovil->procesarMovimiento() + playersInformation;
             else stringACrear = msg + playersInformation;
@@ -76,7 +79,11 @@ void CalculateThread::terminar() {
 
 void CalculateThread::agregarGrisado() {
     string player = (this->srv->obtenerGrisados().front());
-    cout<<this->srv->obtenerGrisados().size()<<endl;
-    cout<<"jugador grisado "<<player<<endl;
-    this->srv->obtenerAutoConId(player)->setJugador(5);
+    // si devuelve vacio es porque el jugador todavia no se logueo entonces no lo grisa
+    if(player != "") {
+		loggear ("El jugador " + player + " se desconecto y se va a grisar.",2);
+		cout << this->srv->obtenerGrisados().size() << endl;
+		cout << "jugador grisado " << player << endl;
+		this->srv->obtenerAutoConId(player)->setJugador(5);
+    }
 }
