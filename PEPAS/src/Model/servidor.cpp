@@ -1068,12 +1068,8 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
             i++;
             //if (cableado) {
                 if (i >= 1) {
-                    stringConcat = to_string(it->second->obtenerPlayer()) + separador +
-                                   to_string(it->second->obtenerDestrozo()) + separador +
-                                   to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-                } else stringConcat = to_string(it->second->obtenerPlayer()) + separador +
-                                      to_string(it->second->obtenerDestrozo()) + separador +
-                                      to_string(it->second->getX()) + separador + to_string(diferenciaY);
+                    stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+                } else stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
              /*else {
                 if (i >= 1) {
                     stringConcat == to_string(it->second->obtenerPlayer()) + "G" + separador +
@@ -1305,13 +1301,5 @@ void Servidor::setConexionPorCable() {
     this->cableado = true;
 }
 
-void Servidor::setAutosDesconectados() {
-    map<string,Auto*>::iterator iterador;
-    int i=0;
-    for (iterador = mapAutitos->begin(); iterador != mapAutitos->end(); ++iterador){
-        iterador->second->setGrisadoTrue();
-        i++;
-    }
 
-}
 
