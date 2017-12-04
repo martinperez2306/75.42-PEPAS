@@ -163,6 +163,10 @@ Mapa* PistaParser::parsearMapa(const char* archivo){
 			this->generarObjeto(nodeObjectDist.text().as_int(),nodeObjectPos.text().as_string(),nodeObjectType,mapa);
 		}
 	}
+	//Agregamos padding al mapa para el minimapa
+	this->girarYAvanzar("derecho",PADDING_MINIMAPA,mapa);
+	//Agregamos padding al mapa para el World y el Mapa
+	this->girarYAvanzar("derecho",PADDING,mapa);
 	return mapa;
 }
 

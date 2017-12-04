@@ -49,42 +49,52 @@ void Zoomer::zoomMapToWorld(Mapa* mapa, World* world){
 		}
 	}
 	//seteamos el final de pista
-	world->setFinDePista(200);
+	world->setFinDePista(5000);
 	//agregamos padding al final
-	this->agregarPaddingToWorld(world,metros);
+//	this->agregarPaddingToWorld(world,metros);
 }
 
 //Modifica el metodo zoomPamToMinimap del zoomer.h y el codigo del .cpp reemplazalo por esto (el cout fue de debug)
 void Zoomer::zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorredor){
 	cout<<"entre al zoomer"<<endl;
+	int longitudTotal = 0;
 	for(list<Segmento*>::iterator it = mapa->getRuta()->begin(); it!= mapa->getRuta()->end(); ++it){
 		Segmento* segmento = *it;
 		Segmento* segmentoMinimapa = this->zoomRuta(segmento);
-		minimapa->agregarSegmento(segmentoMinimapa);
-		recorredor->recorrer(segmentoMinimapa);
+		if(longitudTotal <= LIMITE_MINIMAPA){
+			minimapa->agregarSegmento(segmentoMinimapa);
+			recorredor->recorrer(segmentoMinimapa);
+		}
+		longitudTotal += segmento->getLongitud();
 	}
-	this->agregarPaddingToRecorredor(recorredor);
+//	this->agregarPaddingToRecorredor(recorredor);
 	for(list<Objeto*>::iterator it = mapa->getObjetos()->begin(); it!=mapa->getObjetos()->end();++it){
 		Objeto* objeto = *it;
 		minimapa->agregarObjeto(this->zoomObjeto(objeto));
 	}
 }
 
-void Zoomer::agregarPaddingToWorld(World* world, int metrosFinales){
+//void Zoomer::agregarPaddingToWorld(World* world, int metrosFinales){
+//
+//	for(int i = 1; i <= PADDING ; i++){
+//		metrosFinales++;
+//		LineaX* lineaX = new LineaX();
+//		//RECTA
+//		lineaX->setCurva(0);
+//		world->agregarLinea(metrosFinales,lineaX);
+//	}
+//}
 
-	for(int i = 1; i <= PADDING ; i++){
-		metrosFinales++;
-		LineaX* lineaX = new LineaX();
-		//RECTA
-		lineaX->setCurva(0);
-		world->agregarLinea(metrosFinales,lineaX);
-	}
-}
+//void Zoomer::agregarPaddingToRecorredor(Recorredor* recorredor){
+//	recorredor->agregarPadding(PADDING);
+//}
 
-void Zoomer::agregarPaddingToRecorredor(Recorredor* recorredor){
-	recorredor->agregarPadding(PADDING);
-}
-
+//void Zoomer::recortarSegmentoParaMinimapa(Segmento* segmento){
+//	Posicion* posicion = segmento->getPosicionFinal();
+//	posicion->setX(posicion->getX() / RECORTE_MINIMAPA);
+//	posicion->setY(posicion->getY() / RECORTE_MINIMAPA);
+//	segmento->setPosicionFinal(posicion);
+//}
 
 Zoomer::~Zoomer() {
 }

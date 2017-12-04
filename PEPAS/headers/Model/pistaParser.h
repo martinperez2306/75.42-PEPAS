@@ -12,6 +12,8 @@
 #define CURVAI 1
 #define CURVAD -1
 #define ARBOL 1
+#define PADDING 450
+#define PADDING_MINIMAPA 50
 
 class PistaParser{
 

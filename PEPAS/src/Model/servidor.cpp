@@ -742,7 +742,9 @@ void Servidor::generarMapas(){
     this->pistaActual = 1;
     this->setMapa(1);
     this->generarMinimapa();
+    this->minimapa->mostrarSegmentos();
     this->generarWorld();
+    this->mapa->mostrarSegmentos();
 }
 
 void Servidor::generarMinimapa(){

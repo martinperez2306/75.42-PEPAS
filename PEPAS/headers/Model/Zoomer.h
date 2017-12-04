@@ -8,7 +8,9 @@
 #include "World.h"
 #include "Recorredor.h"
 
-#define PADDING 100
+//#define PADDING 100
+#define RECORTE_MINIMAPA 20
+#define LIMITE_MINIMAPA 5000
 
 class Zoomer {
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 
+#define ZOOM 10
 using namespace std;
 
 class ServidorBuilder{
