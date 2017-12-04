@@ -20,7 +20,7 @@ private:
 
 
 	float VelX, VelY;
-	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision;
+	bool PressUP, PressDown, PressLeft_lock, PressRight_lock, PressUp_lock, curveR, curveL, frontColision, Colision,rightColision,leftColision,PressR,PressL;
 	int jugador, destrozo;
 	string lastMove;
 

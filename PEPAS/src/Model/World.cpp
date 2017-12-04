@@ -14,6 +14,7 @@ int World::obtenerCurvaEnKilometraje(int distanciaY){
 }
 
 World::~World() {
+	this->world->clear();
 	delete this->world;
 }
 

@@ -46,7 +46,16 @@ void Mapa::mostrarObjetos(){
 	}
 }
 
+void Mapa::limpiarMapa(){
+	this->objetos->clear();
+	this->ruta->clear();
+	delete this->ruta;
+	delete this->objetos;
+}
+
 Mapa::~Mapa() {
+	this->objetos->clear();
+	this->ruta->clear();
 	delete this->objetos;
 	delete this->ruta;
 }

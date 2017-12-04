@@ -14,7 +14,6 @@ class Zoomer {
 
 private:
 	//Rellenar la matriz con los valores de los segmentos aumentados
-	void zoom(Mapa* mapa, Segmento* segmento, Objetos* objetos);
 	void aumentar(int x, int y,int pendiente,Mapa* mapa);
 	//Aplicar el multiplicador a un segmento
 	Segmento* zoomRuta(Segmento* segmento);
@@ -35,7 +34,9 @@ public:
 	//Crear el mundo a traves del mapa
 	void zoomMapToWorld(Mapa* mapa, World* world);
 	void zoomMapToMinimap(Mapa* mapa, Minimapa* minimapa,Recorredor* recorredor);
+	//Agregar paddings para evitar conflictos
 	void agregarPaddingToWorld(World* world, int metrosFinales);
+	void agregarPaddingToRecorredor(Recorredor* recorredor);
 	~Zoomer();
 };
 

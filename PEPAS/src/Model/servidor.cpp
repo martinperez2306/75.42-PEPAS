@@ -79,9 +79,8 @@ Servidor::Servidor(){
     this->world = new World();
     //zoomer
     this->zoomer = new Zoomer();
+    //Recorredor para el radar
     this->recorredor = new Recorredor();
-
-    this->logicaJuego = new Logica(5000); //largo de la pista
     this->time = "0:0";
     empezarJuego = false;
     player = 1;
@@ -323,7 +322,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 
 	switch(codigo){
 		case COMANDO: {
-				this->logicaJuego->setRuta(this->mapa->getRuta());
+//				this->logicaJuego->setRuta(this->mapa->getRuta());
 			}
 			break;
 		case LOGIN:{
@@ -645,11 +644,23 @@ BaseDeDatos *Servidor::obtenerBaseDeDatos() {
 
 
 //DEBE BORRAR LA MEMORIA QUE PIDIO EL BUILDER PARA LA BASE DE DATOS.
+//DEBE BORRAR TODOS SUS ATRIBUTOS DINAMICOS
+//DEBE LIMPIAR TODA LA MEMORIA QUE USEN SUS ATRIBUTOS DINAMICOS
 Servidor::~Servidor(){
 	//this->finalizarConexiones();
 	delete this->minimapa;
 	delete this->mapa;
 	delete this->baseDeDatos;
+	this->mapaSocket->clear();
+	delete this->mapaSocket;
+	this->mapAutitos->clear();
+	delete this->mapAutitos;
+	this->mapUsuario->clear();
+	delete this->mapUsuario;
+	delete this->zoomer;
+	delete this->world;
+	delete this->recorredor;
+	delete this->serverSocket;
 }
 
 void Servidor::cerrarSockets() {
@@ -698,7 +709,7 @@ void Servidor::setZoomEntreMapaYMinimapa(int zoom){
 	this->zoomer->setTamanioZoom(zoom);
 }
 
-void Servidor::generarMapa(){
+void Servidor::generarMapas(){
     loggear("Creando pistas desde archivos de configuracion",1);
     (*this->mapas)[1] = this->pistaParser->parsearMapa("pista1.xml");
     (this->mapas->find(1)->second->mostrarSegmentos());
@@ -932,8 +943,8 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 		}
 	}
 
-
-    for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
+bool choco = false;
+for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
         Posicion* posicionDelAuto = NULL;
@@ -943,20 +954,32 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         calcularPuntaje(it->second, primero);
 
         float diferenciaY = (it->second->getPosition()/SEGL) - (pAuto->getPosition()/SEGL);
-        float diferenciaX = abs(pAuto->getX() - it->second->getX());
-        if (diferenciaY <= horizonte && it->second != pAuto && abs(diferenciaY) >= 0) {
-            if ( diferenciaX <= 185 && abs(diferenciaY) <= 4){
-                pAuto->estaEnColision(pAuto->getLastMove(), pAuto->getVelY());
-                if (salioDeColision){
+        float diferenciaX = (pAuto->getX() - it->second->getX());
+        if (diferenciaY <= horizonte && it->second != pAuto) {
+            if (abs(diferenciaX)<= 185 && abs(diferenciaY) <= 4) {
+                choco = true;
+                if (diferenciaX < 0)
+                    pAuto->estaEnColision("right", pAuto->getVelY());
+                else if (diferenciaX > 0)
+                    pAuto->estaEnColision("left", pAuto->getVelY());
+                if (salioDeColision) {
                     pAuto->agregarDestrozo();
                     it->second->agregarDestrozo();
-                    salioDeColision= false;
+                    salioDeColision = false;
+                }
+            } else if (abs(diferenciaX)<= 185 && ((diferenciaY>4 && diferenciaY <= 5))){
+                choco = true;
+                pAuto->estaEnColision("up", pAuto->getVelY());
+                 if (salioDeColision) {
+                    pAuto->agregarDestrozo();
+                     it->second->agregarDestrozo();
+                    salioDeColision = false;
                 }
             } else {
                 // cout<<pAuto->getLastMove()<<endl;
-                pAuto->noEstaEnColision();
-                salioDeColision = true;
+
             }
+
             i++;
             if (i>=1) {
                 stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
@@ -964,6 +987,10 @@ string Servidor::actualizarJuego(Auto *pAuto) {
 
         }
         stringArmado = stringArmado + stringConcat;
+    }
+    if (!choco){
+        pAuto->noEstaEnColision();
+        salioDeColision = true;
     }
     stringArmado = stringTime + separador + to_string(pAuto->obtenerDestrozo())+ separador+ stringMinimapa + separador+ to_string(i) + separador + stringArmado;
     if (i==0)
@@ -1039,8 +1066,6 @@ void Servidor::setMapa(int numeroMapa){
     this->mapa = this->mapas->find(numeroMapa)->second;
 }
 
-
-
 string Servidor::renderTiempo(clock_t sTime) {
     int secondsPassed;
     int minutesPassed;
@@ -1097,7 +1122,6 @@ void Servidor::cambiarDePista(){
 	this->generarMinimapa();
 	this->generarWorld();
 	this->carreraTerminada = false;
-
     this->contadorCarrera = 0;
 	//resetear los autos
 	cout<<"Reseteando autos"<<endl;

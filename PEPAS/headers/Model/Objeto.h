@@ -3,6 +3,9 @@
 
 #include "posicion.h"
 #include <iostream>
+
+#define ARBOL 1
+
 using namespace std;
 
 class Objeto {
