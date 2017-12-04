@@ -17,11 +17,14 @@ void aliveSignalThread::run() {
         int signalActual = cliente->obtenerAliveCounter();
         string msg = "0009/7/signal";
         cliente->enviarMensaje(msg);
-        sleep (20);
+        sleep (5);
         if (cliente->obtenerAliveCounter() == signalActual){
             cout <<"**** Se detecto problemas en la conexion de red ****"<<endl;
+            this->cliente->grisarAuto();
             //cliente->parsearMensaje("0005");
             //break;
+        } else {
+            this->cliente->noGrisarAuto();
         }
 
     }

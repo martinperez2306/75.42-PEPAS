@@ -20,7 +20,7 @@
 #define CONTEO 50
 #define GO 40
 #define STOP 69
-
+#define PRESS_ENTER 70
 Cliente::Cliente() {
     this->socketCliente = new Socket();
     this->usuario = new Usuario();
@@ -34,12 +34,14 @@ Cliente::Cliente() {
     this->vista=new Vista();
     this->velocidad = 0;
     this->tiempo = "";
+    this->pressEnter = false;
     posX =  1024/2 -100;
     posY = 768 - 1;
     finDeMapa = false;
     this->mapaCompleto = false;
     mover =false;
     this->scoresUsuarios = new list<pair<string,scores>>();
+    grisado = false;
   
 }
 bool Cliente::minimapaEstaCompleto(){
@@ -338,6 +340,9 @@ void Cliente::parsearMensaje(std::string datos){
         	cout<<"limpie las pistas"<<endl;
         }
         	break;
+        case PRESS_ENTER:{
+            pressEnter = true;
+        }
 		default:
 			break;
 	}
@@ -499,8 +504,16 @@ void Cliente::parsearCalculos(string datos, int i) {
     this->setPosX(posX);
     this->setVelocidad(velocidad);
     cantidadJugadores = stoi(obtenerParametros(datos,&i),nullptr,10);
+    string numeroP;
+    int player;
     for(int k = 0; k < cantidadJugadores; k++){
-        int player = stoi(obtenerParametros(datos,&i),nullptr,10);
+        numeroP = obtenerParametros(datos,&i);
+        cout<<numeroP<<endl;
+        cout<<numeroP.length()<<endl;
+        if (numeroP.length() > 1)
+             player = 5;
+        else  player = stoi(numeroP, nullptr,10);
+        //int player = stoi(obtenerParametros(datos,&i),nullptr,10);
         int x = stoi(obtenerParametros(datos,&i),nullptr,10);
         int y = stoi(obtenerParametros(datos,&i),nullptr,10);
         Posicion* pos = new Posicion(x,y);
@@ -614,4 +627,25 @@ list<pair<string,scores>>* Cliente::getScores(){
 
 void Cliente::setFinDeMapa(bool finDeMapa){
     this->finDeMapa = finDeMapa;
+}
+
+bool Cliente::recibioPressEnter() {
+    return pressEnter;
+}
+
+void Cliente::setPressEnter() {
+    pressEnter = false;
+}
+
+void Cliente::grisarAuto() {
+    grisado = true;
+
+}
+
+bool Cliente::getGrisado() {
+    return grisado;
+}
+
+void Cliente::noGrisarAuto() {
+    grisado = false;
 }

@@ -362,6 +362,7 @@ public:
     void renderDistancia(int posMoving);
 
 
+    void enviarPressEnter();
 };
 
 #endif /* COM_PEPAS_CONTROLLERS_CLIENTECONTROLLER_H_ */

@@ -54,3 +54,7 @@ int Rival::getnoDraw() {
 void Rival::setnoDraw(double i) {
     noDraw = i;
 }
+
+void Rival::setDibujar() {
+    dibujar = true;
+}

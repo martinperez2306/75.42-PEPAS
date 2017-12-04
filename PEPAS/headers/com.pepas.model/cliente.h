@@ -51,7 +51,7 @@ private:
     Mapa* mapa;
     Vista* vista;
     string tiempo;
-    bool mover;
+    bool mover, pressEnter, grisado;
     int destrozo;
     list<pair<string,scores>>* scoresUsuarios;
 
@@ -166,6 +166,16 @@ bool sePuedeMover();
     list<pair<string,scores>>* getScores();
 
     void setFinDeMapa(bool finDeMapa);
+
+    bool recibioPressEnter();
+
+    void setPressEnter();
+
+    bool getGrisado();
+
+    void grisarAuto();
+
+    void noGrisarAuto();
 };
 
 

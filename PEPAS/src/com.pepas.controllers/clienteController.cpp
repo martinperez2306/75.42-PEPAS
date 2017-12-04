@@ -422,7 +422,7 @@ void ClienteController::dibujar() {
 
             int maxy = SCREEN_HEIGHT;
 
-            roadW = 2000;
+            roadW = 1600;
             segL = 50; //segment length
             camD = 0.84f; //camera depth
 
@@ -430,197 +430,10 @@ void ClienteController::dibujar() {
             y = 0;
             z = 0;
 
-//            struct Line {
-//                double x, y, z; //3d center of line
-//                double X, Y, W; //screen coord
-//                double scale;
-//                double camD = 0.5;
-//                double roadW = 2000;
-//                double curve, spriteX, clip, spriteX2, spriteXR1, spriteXR2, spriteXR3;
-//                Textura *sprite;
-//                Textura *sprite2;
-//                Textura *spriteR1;
-//                Textura *spriteR2;
-//                Textura *spriteR3;
-//
-//                Line() {
-//                    spriteX = spriteX2 = x = y = z = 0;
-//                    sprite = NULL;
-//                    sprite2 = NULL;
-//                    spriteR1 = NULL;
-//                    spriteR2 = NULL;
-//                    spriteR3 = NULL;
-//                    spriteXR1 = 0;
-//                    spriteXR2 = 0;
-//                    spriteXR3 = 0;
-//                }
-//
-//                void project(int camX, int camY, int camZ) {
-//                    scale = camD / (z - camZ);
-//                    X = (1 + scale * (x - camX)) * SCREEN_WIDTH / 2;
-//                    Y = ((1 - scale * (y - camY)) * SCREEN_HEIGHT / 2);
-//                    W = scale * (roadW) * SCREEN_WIDTH / 2;
-//
-//                }
-//
-//                void drawSprite(SDL_Renderer *renderer) {
-//                    if (spriteX != 0) {
-//                        int w = sprite->getWidth();
-//                        int h = sprite->getHeight();
-//
-//                        double destX = X + scale * spriteX * SCREEN_WIDTH / 2;//* SCREEN_WIDTH/2
-//                        double destY = Y + 4;
-//                        double destW = w * W / 266;
-//                        double destH = h * W / 266;
-//
-//                        destX += destW * spriteX; //offsetX
-//                        destY += destH * (-1);    //offsetY
-//
-//                        SDL_RenderSetScale(renderer, destW / w, destH / h);
-//                        sprite->render(destX / destW * w, destY * h / destH, renderer);
-//                        SDL_RenderSetScale(renderer, 1, 1);
-//                    }
-//
-//                    if (spriteX2 != 0) {
-//                        int w = sprite2->getWidth();
-//                        int h = sprite2->getHeight();
-//
-//                        double destX = X + scale * spriteX2 * SCREEN_WIDTH / 2;
-//                        double destY = Y + 4;
-//                        double destW = w * W / 266;
-//                        double destH = h * W / 266;
-//
-//                        destX += destW * spriteX2; //offsetX
-//                        destY += destH * (-1);    //offsetY
-//
-//
-//                        SDL_RenderSetScale(renderer, destW / w, destH / h);
-//                        sprite2->render(destX / destW * w, destY * h / destH, renderer);
-//                        SDL_RenderSetScale(renderer, 1, 1);
-//                    }
-//                    if (spriteXR1 != 0) {
-//                        int w = spriteR1->getWidth();
-//                        int h = spriteR1->getHeight();
-//
-//                        double destX = X + scale * spriteXR1 * SCREEN_WIDTH / 2;
-//                        double destY = Y + 4;
-//                        double destW = w * W / 700;
-//                        double destH = h * W / 700;
-//
-//                        destX += destW * spriteXR1;
-//                        destY += destH * (-1);
-//
-//
-//                        SDL_RenderSetScale(renderer, destW / w, destH / h);
-//                        spriteR1->render(destX / destW * w, destY * h / destH, renderer);
-//                        SDL_RenderSetScale(renderer, 1, 1);
-//                    }
-//                    if (spriteXR2 != 0) {
-//                        int w = spriteR2->getWidth();
-//                        int h = spriteR2->getHeight();
-//
-//                        double destX = X + scale * spriteXR2 * SCREEN_WIDTH / 2;
-//                        double destY = Y + 4;
-//                        double destW = w * W / 700;
-//                        double destH = h * W / 700;
-//
-//                        destX += destW * spriteXR2; //offsetX
-//                        destY += destH * (-1);    //offsetY
-//
-//
-//                        SDL_RenderSetScale(renderer, destW / w, destH / h);
-//                        spriteR2->render(destX / destW * w, destY * h / destH, renderer);
-//                        SDL_RenderSetScale(renderer, 1, 1);
-//                    }
-//                    if (spriteXR3 != 0) {
-//                        int w = spriteR3->getWidth();
-//                        int h = spriteR3->getHeight();
-//
-//                        double destX = X + scale * spriteXR3 * SCREEN_WIDTH / 2;
-//                        double destY = Y + 4;
-//                        double destW = w * W / 730;
-//                        double destH = h * W / 730;
-//
-//                        destX += destW * spriteXR3;
-//                        destY += destH * (-1);
-//
-//                        SDL_RenderSetScale(renderer, destW / w, destH / h);
-//                        spriteR3->render(destX / destW * w, destY * h / destH, renderer);
-//                        SDL_RenderSetScale(renderer, 1, 1);
-//                    }
-//                }
-//            };
 
-
-//
-//            //list<pair<int, double>> Track; /*distancia , curvatura*/
-//
-//            for (auto it = this->cliente->obtenerMapa()->obtenerObjetos()->begin();
-//                 it != this->cliente->obtenerMapa()->obtenerObjetos()->end(); ++it) {
-//                Objeto *obj = *it;
-//                int distancia = obj->getDistancia() * 4;
-//                int arbol = obj->getArbol();
-//                int cartel = obj->getCartel();
-//                string lado = obj->getLado();
-//                if (arbol != 0 && lado == "D")
-//                    obstaculos->emplace(distancia, this->arbol);
-//                if (arbol != 0 && lado == "I")
-//                    obstaculos->emplace(-distancia, this->arbol);
-//                if (cartel == 80 && lado == "D")
-//                    obstaculos->emplace(distancia, this->cartel);
-//                if (cartel == 80 && lado == "I")
-//                    obstaculos->emplace(-distancia, this->cartel);
-//                if (cartel == 120 && lado == "D")
-//                    obstaculos->emplace(distancia, this->cartel2);
-//                if (cartel == 120 && lado == "I")
-//                    obstaculos->emplace(-distancia, this->cartel2);
-//
-//            }
-//            std::map<int, Textura *>::iterator it_obst;
-////
-//            list<pair<int, float>> Track = this->cliente->obtenerTrack(); //TODO anda igual
-////
-////    /*         obstaculos->emplace(50,cartel);
-////             obstaculos->emplace(-50,cartel);
-////             obstaculos->emplace(50,cartel);
-////             obstaculos->emplace(-75,cartel2);
-////             obstaculos->emplace(75,cartel2);
-////             obstaculos->emplace(300,arbol);
-////             obstaculos->emplace(-100,arbol);
-////             obstaculos->emplace(100,arbol);
-//
-//            // Track.emplace_back(5000,0);
-//            /*Armo la pista*/
-//            int iter_anterior = 0;
-//            for (auto it = Track.begin(); it != Track.end(); it++) {
-//                int iteraciones = it->first;
-//                //cout<<"Tramo:"<<iteraciones<<endl;
-//                for (int i = iter_anterior; i < iteraciones + iter_anterior; i++) {
-//                    Line line;
-//                    line.z = i * segL;
-//                    line.curve = it->second / 4;
-//                    it_obst = obstaculos->find(i);
-//                    if (it_obst != obstaculos->end()) {
-//                        line.sprite = it_obst->second;
-//                        line.spriteX = -0.375 + (double) SCREEN_WIDTH / (5 * (double) line.sprite->getWidth());
-//
-//                    }
-//                    it_obst = obstaculos->find(-i);
-//                    if (it_obst != obstaculos->end()) {
-//                        line.sprite2 = it_obst->second;
-//                        line.spriteX2 = -0.5 - 17 * (double) SCREEN_WIDTH / (80 * (double) line.sprite2->getWidth());
-//                    }
-//                    lines.push_back(line);
-//                }
-//
-//                iter_anterior += iteraciones;
-//            }
 
             std::vector<Line> lines;
-           /* cout<<"Cargo mapa ?"<<endl;
-            //this->cargarMapa(&lines);
-            this->mapaCargado = true;
-            cout<<"Si, cargo mapa"<<endl;*/
+
             int N = lines.size();
 
             this->cargarMapa(&lines);
@@ -668,7 +481,28 @@ void ClienteController::dibujar() {
                         vistaTransicion->actualizar_scores(pistaActual,usuario,scoreEtapa,scoreTotal);
                     }
                     vistaTransicion->render_scores();
-                    sleep(10);
+                    //sleep(10);
+                    bool envio = false;
+                    do{
+                        while (SDL_PollEvent(&e) != 0) {
+                            //User requests quit
+                            if (e.type == SDL_QUIT) {
+                                quit = true;
+                            }
+                            //if (cliente->sePuedeMover())
+                            if (e.key.keysym.sym == SDLK_RETURN && !envio){
+                                this->enviarPressEnter();
+                                cout<<"ENTRO AL PRESS ENTER"<<endl;
+                                envio = true;
+                            }
+                        }
+
+                    } while (!this->cliente->recibioPressEnter());
+
+                    this->cliente->setPressEnter();
+
+
+
                 }
                 if(this->cliente->recibioFinDeMapa() && !mapaCargado){
                     //cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
@@ -729,23 +563,18 @@ void ClienteController::dibujar() {
                     }
 
 
-                    /*  if (!this->cliente->obtenerRivalList().empty()) {
-                          for (list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin(); it != this->cliente->obtenerRivalList().end(); ++it) {
-                              Rival *rival = *it;
-                              if (rival->getDibujar()) {
-                                  lines[startPos + rival->getHorizonte() +4].spriteP2 = this->getTextura(rival->getPlayer());
-                                  lines[startPos + rival->getHorizonte() +4].spriteXP2 = 0.0056 * rival->getPosX() - 2.8;
-                                  rival->notDibujar();
-                              }
-                              break;
-                          }
-                      }*/
+
 
                     int i = 0;
                     list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                     while (i < this->cliente->obtenerRivalList().size()) {
                         i++;
                         Rival *rival = *it;
+                        if (this->cliente->getGrisado()){
+                                rival->setDibujar();
+                        }
+
+
                         if (rival->getDibujar()) {
                             if (rival->getPlayer() == 1) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
@@ -803,47 +632,7 @@ void ClienteController::dibujar() {
                     }
 
 
-
-
-                    /*    switch (this->cliente->obtenerCantidadDePlayersADibujar()) {
-                            case 1: {
-                                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
-                                Rival *rival = *it;
-                                if (rival->getDibujar()) {
-                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(
-                                            rival->getPlayer());
-                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                                    if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
-                                        lines[noDraw].spriteXR1 = 0;
-                                        //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                        noDraw = startPos + rival->getHorizonte() + OFFSET;
-                                    }
-                                    rival->notDibujar();
-                                }
-                            }
-                                break;
-                            case 2: {
-                                list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
-                                Rival *rival = *it;
-                                if (rival->getDibujar()) {
-                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival->getPlayer());
-                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 = 0.0056 * rival->getPosX() - 2.8;
-                                    noDraw = startPos + rival->getHorizonte() + OFFSET;
-                                    rival->notDibujar();
-                                }
-                                std::list<Rival *>::iterator it2 = std::next(this->cliente->obtenerRivalList().begin(), 1);
-                                Rival *rival2 = *it2;
-                                if (rival2->getDibujar()) {
-                                    lines[startPos + rival2->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival2->getPlayer());
-                                    lines[startPos + rival2->getHorizonte() + OFFSET].spriteXR2 = 0.0056 * rival2->getPosX() - 2.8;
-                                    noDraw2 = startPos + rival->getHorizonte() + OFFSET;
-                                    rival2->notDibujar();
-                                }
-
-                            }
-                                break;
-                        }*/
-                    for (int n = startPos + LINEAS; n > startPos; n--) {
+                    for (int n = startPos + LINEAS; n > startPos+5; n--) {
                         lines[n].drawSprite(this->renderer);
                     }
                     //arregla el problema del noDraw
@@ -852,20 +641,14 @@ void ClienteController::dibujar() {
                         lines[j].spriteXR2 = 0;
                         lines[j].spriteXR3 = 0;
                     }
-
-                    /*  int posP2x = 230;
-                      lines[startPos+posP2y].spriteP2 = player3;
-                      lines[posP2y].spriteXP2 = 0.0059 * posP2x - 3;
-                      lines[startPos+posP2y].drawSprite(this->renderer);*/
-
                     curveSet = lines[(pos / segL)].curve;
 
                     this->carAsign();
 
                     checkCurveAndSetCentrifuga(curveSet);
-                    //autito->calculateMove(PressUP, curveR, curveL); //TODO lo hace el servidor
 
                     car->render(cliente->getX(), 618, this->renderer);
+
                     this->actualizarMinimapa(this->cliente->getMinimapa());
                     this->renderVelocidad();
                     this->renderTiempo(this->cliente->getTiempo());
@@ -1424,6 +1207,15 @@ void ClienteController::enviarNotMoveDown() {
     this->cliente->enviarMensaje(stringProcesado);
 }
 
+void ClienteController::enviarPressEnter() {
+    string stringACrear, stringProcesado;
+    string separador = "/";
+    stringACrear = separador + "70";
+    unsigned long largoDelMensaje = stringACrear.length();
+    stringProcesado = this->agregarPadding(largoDelMensaje) + stringACrear;
+    this->cliente->enviarMensaje(stringProcesado);
+}
+
 
 void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
     SDL_Rect rect;
@@ -1495,53 +1287,57 @@ void ClienteController::actualizarMinimapa(Minimapa *minimapa) {
 
 void ClienteController::carAsign() {
     int destrozo = cliente->getDestrozo();
-    switch (this->cliente->obtenerModel()) {
-        case 1: {
-            if (destrozo == 0)
-            car = player1;
-            else if (destrozo > 0 && destrozo< 3)
-                car = player1_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                car = player1_2;
-             if (destrozo > 6)
-               car = player1_3;
-        }
-            break;
-        case 2: {
-            if (destrozo == 0)
-                car = player2;
-            else if (destrozo > 0 && destrozo< 3)
-                car = player2_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                car = player2_2;
-            if (destrozo > 6)
-                car = player2_3;
-        }
-            break;
-        case 3: {
-            car = player3;
-            if (destrozo == 0)
+    if (this->cliente->getGrisado()){
+        car = player5;
+    } else {
+        switch (this->cliente->obtenerModel()) {
+            case 1: {
+                if (destrozo == 0)
+                    car = player1;
+                else if (destrozo > 0 && destrozo < 3)
+                    car = player1_1;
+                else if (destrozo >= 3 && destrozo <= 6)
+                    car = player1_2;
+                if (destrozo > 6)
+                    car = player1_3;
+            }
+                break;
+            case 2: {
+                if (destrozo == 0)
+                    car = player2;
+                else if (destrozo > 0 && destrozo < 3)
+                    car = player2_1;
+                else if (destrozo >= 3 && destrozo <= 6)
+                    car = player2_2;
+                if (destrozo > 6)
+                    car = player2_3;
+            }
+                break;
+            case 3: {
                 car = player3;
-            else if (destrozo > 0 && destrozo< 3)
-                car = player3_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                car = player3_2;
-            if (destrozo > 6)
-                car = player3_3;
-        }
+                if (destrozo == 0)
+                    car = player3;
+                else if (destrozo > 0 && destrozo < 3)
+                    car = player3_1;
+                else if (destrozo >= 3 && destrozo <= 6)
+                    car = player3_2;
+                if (destrozo > 6)
+                    car = player3_3;
+            }
 
-            break;
-        case 4: {
-            if (destrozo == 0)
-                car = player4;
-            else if (destrozo > 0 && destrozo< 3)
-                car = player4_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                car = player4_2;
-            if (destrozo > 6)
-                car = player4_3;
+                break;
+            case 4: {
+                if (destrozo == 0)
+                    car = player4;
+                else if (destrozo > 0 && destrozo < 3)
+                    car = player4_1;
+                else if (destrozo >= 3 && destrozo <= 6)
+                    car = player4_2;
+                if (destrozo > 6)
+                    car = player4_3;
+            }
+                break;
         }
-            break;
     }
 
 }
@@ -1549,58 +1345,64 @@ void ClienteController::carAsign() {
 Textura *ClienteController::getTextura(Rival* rival) {
     Textura * texture;
     int destrozo = rival->getDestroy();
-    switch (rival->getPlayer()) {
-        case 1: {
-            if (destrozo == 0)
-                texture = player1;
-            else if (destrozo > 0 && destrozo< 3)
-                texture = player1_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                texture = player1_2;
-            if (destrozo > 6)
-                texture = player1_3;
-        }
-            break;
-        case 2: {
-            if (destrozo == 0)
-                texture = player2;
-            else if (destrozo > 0 && destrozo< 3)
-                texture = player2_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                texture = player2_2;
-            if (destrozo > 6)
-                texture = player2_3;
-        }
-            break;
-        case 3: {
-            car = player3;
-            if (destrozo == 0)
-                texture = player3;
-            else if (destrozo > 0 && destrozo< 3)
-                texture = player3_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                texture = player3_2;
-            if (destrozo > 6)
-                texture = player3_3;
-        }
+    if (this->cliente->getGrisado()){
+        texture = player5;
+        //cout<<"Puse la textura en 5"<<endl;
+    } else {
+        switch (rival->getPlayer()) {
+            case 1: {
+                if (destrozo == 0)
+                    texture = player1;
+                else if (destrozo > 0 && destrozo< 3)
+                    texture = player1_1;
+                else if (destrozo >= 3 && destrozo <=6)
+                    texture = player1_2;
+                if (destrozo > 6)
+                    texture = player1_3;
+            }
+                break;
+            case 2: {
+                if (destrozo == 0)
+                    texture = player2;
+                else if (destrozo > 0 && destrozo< 3)
+                    texture = player2_1;
+                else if (destrozo >= 3 && destrozo <=6)
+                    texture = player2_2;
+                if (destrozo > 6)
+                    texture = player2_3;
+            }
+                break;
+            case 3: {
+                car = player3;
+                if (destrozo == 0)
+                    texture = player3;
+                else if (destrozo > 0 && destrozo< 3)
+                    texture = player3_1;
+                else if (destrozo >= 3 && destrozo <=6)
+                    texture = player3_2;
+                if (destrozo > 6)
+                    texture = player3_3;
+            }
 
-            break;
-        case 4: {
-            if (destrozo == 0)
-                texture = player4;
-            else if (destrozo > 0 && destrozo< 3)
-                texture = player4_1;
-            else if (destrozo >= 3 && destrozo <=6)
-                texture = player4_2;
-            if (destrozo > 6)
-                texture = player4_3;
+                break;
+            case 4: {
+                if (destrozo == 0)
+                    texture = player4;
+                else if (destrozo > 0 && destrozo< 3)
+                    texture = player4_1;
+                else if (destrozo >= 3 && destrozo <=6)
+                    texture = player4_2;
+                if (destrozo > 6)
+                    texture = player4_3;
+            }
+                break;
+            case 5:{
+                texture = player5;
+                }
+                break;
         }
-            break;
-        case 5:{
-        	texture = player5;
-        	}
-        	break;
     }
+
     return texture;
 }
 
@@ -1674,13 +1476,13 @@ void ClienteController::cargarMapa(std::vector<Line>* lines){
             it_obst = obstaculos->find(i);
             if (it_obst != obstaculos->end()) {
                 line.sprite = it_obst->second;
-                line.spriteX = -0.375 + (double) SCREEN_WIDTH / (5 * (double) line.sprite->getWidth());
+                line.spriteX = -0.45 + (double)SCREEN_WIDTH * 5 / (24 * (double) line.sprite->getWidth());
 
             }
             it_obst = obstaculos->find(-i);
             if (it_obst != obstaculos->end()) {
                 line.sprite2 = it_obst->second;
-                line.spriteX2 = -0.5 - 17 * (double) SCREEN_WIDTH / (80 * (double) line.sprite2->getWidth());
+                line.spriteX2 = -0.4 - 17 * (double) SCREEN_WIDTH / (80 * (double) line.sprite2->getWidth());
             }
             lines->push_back(line);
         }
@@ -1688,6 +1490,7 @@ void ClienteController::cargarMapa(std::vector<Line>* lines){
         iter_anterior += iteraciones;
     }
 }
+
 
 
 

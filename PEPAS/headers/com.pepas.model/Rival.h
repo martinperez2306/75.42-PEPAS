@@ -34,6 +34,8 @@ public:
     int getnoDraw();
 
     void setnoDraw(double i);
+
+    void setDibujar();
 };
 
 
