@@ -334,11 +334,13 @@ void Auto::setPosInicialDelAuto(){
         }break;
         case 3:{
             PosX = 230;
+            posicion = 0;
 
         }
             break;
         case 4:{
             PosX = 550;
+            posicion = 0;
         }
             break;
 

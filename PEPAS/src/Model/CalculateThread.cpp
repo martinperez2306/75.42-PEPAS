@@ -32,13 +32,10 @@ void CalculateThread::run() {
             unsigned long largoDelMensaje = stringACrear.length();
             stringProcesado = this->srv->agregarPadding(largoDelMensaje) + stringACrear;
             usleep (5000);
-            //cout<<stringProcesado<<endl;
             this->srv->enviarMensaje(stringProcesado,socket);
         } else  {
 
             this->Automovil->frenarAuto();
-            if (!this->srv->carreraGlobalHaTerminado())
-                finish = false;
             if (!payaslera) {
                 this->srv->enviarMensaje("0003/69", socket);
                 payaslera = true;

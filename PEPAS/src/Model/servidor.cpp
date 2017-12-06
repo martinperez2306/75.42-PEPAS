@@ -313,6 +313,7 @@ void Servidor::enviarMensaje(string  mensa, Socket* socket){
 
 
 string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
+    this->aliveCounter += 1;
 
 	int i = 0;
     int j=0;
@@ -391,12 +392,13 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 		}
 	case LISTO:{
 		this->jugadoresListos++;
-		cout<<"hola"<<endl;
+		cout<<"estamos listos"<<endl;
 		map<int,Socket*>::iterator iterador;
 		if(this->jugadoresListos == this->cantidadMaximaDeConexiones){
 			timerThread.temporizar();
             this->jugadoresListos = 0;
 			while (!timerThread.getIncremento()){
+                this->aliveCounter += 1;
 //				for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
 //				    string mensaje= "0005/50/" + to_string(i);
 //				    this->enviarMensaje(mensaje,iterador->second);
@@ -406,6 +408,7 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
 			for (iterador = mapaSocket->begin(); iterador != mapaSocket->end(); ++iterador){
 				string mensaje= "0003/40";
 				this->enviarMensaje(mensaje,iterador->second);
+                this->aliveCounter += 1;
 			}
 			this->timerThread.cronometrar();
 //			timerThread.reiniciar();
@@ -463,12 +466,12 @@ string Servidor::parsearMensaje(std::string datos, Socket* socketDelemisor){
         }
             break;
         case SIGNAL_CONNECT:{
-            this->aliveCounter += 1;
+            
             string msgLog = "El contador es: " + to_string(aliveCounter);
             loggear(msgLog,3);
             loggear ("Cliente se encuentra conectado por red", 2);
             string msg = "0009" + datos;
-            this->enviarMensaje(msg, socketDelemisor);
+            //this->enviarMensaje(msg, socketDelemisor);
         }
         break;
         case CASE_UP_KD:{
@@ -1181,17 +1184,12 @@ void Servidor::setTime(string timeString) {
 
 
 bool Servidor::actualizarEstadoDeCarrera(int posicionDeAuto, bool finish){
-    if (this->world->carreraHaTerminado(posicionDeAuto) && !finish ){
-        this->contadorCarrera = contadorCarrera + 1;
-        finish = true;
-    }
-    if (contadorCarrera == this->cantidadMaximaDeConexiones) {
+    if (this->world->carreraHaTerminado(posicionDeAuto)){
         this->carreraGlobalTerminada = true;
-        cout<<"ARRE"<<endl;
-        //this->contadorCarrera = 0;
+        this->mover  = false;
     }
 
-    return finish;
+    return this->carreraGlobalTerminada;
 }
 
 int Servidor::getContador(){
