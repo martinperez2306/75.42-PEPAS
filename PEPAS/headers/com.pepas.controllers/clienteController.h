@@ -261,8 +261,8 @@ private:
                            SDL_RenderSetScale(renderer, 1, 1);
                        }
                        if (spriteXR4 != 0) {
-                           int w = spriteR1->getWidth();
-                           int h = spriteR1->getHeight();
+                           int w = spriteR4->getWidth();
+                           int h = spriteR4->getHeight();
 
                            double destX = X + scale * spriteXR4 * SCREEN_WIDTH / 2;
                            double destY = Y + 4;

@@ -116,6 +116,7 @@ public:
     void vaciarColaChat();
     void vaciarColaBuzon();
     int obtenerAliveCounter();
+    void cambiarAliveCounter();
     void graficarMinimapa();
     void actualizarRutaMiniMapa(int x1, int y1, int x2,int y2);
     void actualizarObjetosMiniMapa(int arbol, int cartel, int distancia, string lado);

@@ -209,9 +209,12 @@ string Cliente::agregarPadding(int lenght) {
         else mensajeProcesado = largo;
     return mensajeProcesado;
 }
+void Cliente::cambiarAliveCounter(){
+    this->aliveCounter++;
+}
 
 void Cliente::parsearMensaje(std::string datos){
-
+    this->aliveCounter += 1;
 	int i = 0;
 	loggear("entro al parsear mensaje",1);
 	loggear (datos,1);
@@ -304,7 +307,7 @@ void Cliente::parsearMensaje(std::string datos){
 		this->tiempo = "0:" + obtenerParametros(datos,&i);
 	}break;
         case SIGNAL_CONNECT:{
-            this->aliveCounter += 1;
+            
             string msgLog = "El contador es: " + to_string(aliveCounter);
             loggear(msgLog,3);
             loggear ("Cliente se encuentra conectado por red", 2);
@@ -508,8 +511,6 @@ void Cliente::parsearCalculos(string datos, int i) {
     int player;
     for(int k = 0; k < cantidadJugadores; k++){
         numeroP = obtenerParametros(datos,&i);
-        cout<<numeroP<<endl;
-        cout<<numeroP.length()<<endl;
         if (numeroP.length() > 1)
              player = 5;
         else  player = stoi(numeroP, nullptr,10);

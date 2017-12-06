@@ -395,6 +395,8 @@ void ClienteController::dibujar() {
 
             while (!this->cliente->recibioFinDeMapa() && !quit) {
                 cout << "Esperando jugadores" << endl;
+                this->cliente->cambiarAliveCounter();
+                cliente->enviarMensaje("0002/7");
                 sleep(1);
             }
 
@@ -570,6 +572,7 @@ void ClienteController::dibujar() {
                     while (i < this->cliente->obtenerRivalList().size()) {
                         i++;
                         Rival *rival = *it;
+                        cout<< "rival "<< rival->getPlayer()<<endl;
                         if (this->cliente->getGrisado()){
                                 rival->setDibujar();
                         }
@@ -614,16 +617,6 @@ void ClienteController::dibujar() {
                                     rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
                                 }
 
-                            }else{
-                                lines[startPos + rival->getHorizonte() + OFFSET].spriteR5 = this->getTextura(rival);
-                                lines[startPos + rival->getHorizonte() + OFFSET].spriteXR5 =
-                                        0.0056 * rival->getPosX() - 2.8;
-                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[rival->getnoDraw()].spriteXR5 = 0;
-                                    //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
-                                }
-
                             }
                             rival->notDibujar();
                         }
@@ -632,13 +625,14 @@ void ClienteController::dibujar() {
                     }
 
 
-                    for (int n = startPos + LINEAS; n > startPos+5; n--) {
+                    for (int n = startPos + LINEAS; n > startPos+16; n--) {
                         lines[n].drawSprite(this->renderer);
                     }
                     //arregla el problema del noDraw
-                    for (int j = startPos + LINEAS - 1; j < startPos + LINEAS + 5; j++) {
+                    for (int j = startPos + LINEAS - 2; j < startPos + LINEAS + 10; j++) {
                         lines[j].spriteXR1 = 0;
                         lines[j].spriteXR2 = 0;
+                        lines[j].spriteXR3 = 0;
                         lines[j].spriteXR3 = 0;
                     }
                     curveSet = lines[(pos / segL)].curve;
@@ -648,6 +642,10 @@ void ClienteController::dibujar() {
                     checkCurveAndSetCentrifuga(curveSet);
 
                     car->render(cliente->getX(), 618, this->renderer);
+
+                    for (int n = startPos+16; n > startPos; n--) {
+                        lines[n].drawSprite(this->renderer);
+                    }
 
                     this->actualizarMinimapa(this->cliente->getMinimapa());
                     this->renderVelocidad();
