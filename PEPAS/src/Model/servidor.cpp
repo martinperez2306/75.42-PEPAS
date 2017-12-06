@@ -948,21 +948,95 @@ string Servidor::actualizarJuego(Auto *pAuto) {
         }
     }
 
-	for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
-		posY = it->second->getPosition()/SEGL;
-		if(primeraVez) {
-			posYAux = posY;
-			primero = it->second;
-			primeraVez = false;
-		}
-		if(posY > posYAux) {
-			posYAux = posY;
-			primero = it->second;
-		}
-	}
+    for (std::map<string,Auto*>::iterator it = this->mapAutitos->begin(); it != this->mapAutitos->end(); ++it) {
+        posY = it->second->getPosition()/SEGL;
+        if(primeraVez) {
+            posYAux = posY;
+            primero = it->second;
+            primeraVez = false;
+        }
+        if(posY > posYAux) {
+            posYAux = posY;
+            primero = it->second;
+        }
+    }
 
 bool choco = false;
-for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
+
+    for (std::list<Objeto*>::iterator it=this->mapa->getObjetos()->begin(); it!=this->mapa->getObjetos()->end(); ++it){
+        
+
+        Objeto* objeto = *it;
+         if (pAuto->getPosition()/200 + 150 < objeto->getDistancia()){
+             break;
+         }
+        
+        if(   objeto->getDistancia() - pAuto->getPosition()/200 - 4 <= 0.2 && objeto->getDistancia() - pAuto->getPosition()/200 - 4 >= -0.2 ){
+                
+                if(objeto->getArbol() != 0){
+                    if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
+                        cout<<"distancia choque de frente"<<endl;
+                        cout<< objeto->getDistancia() - pAuto->getPosition()/200 - 4 << endl;
+                        choco = true;
+                        pAuto->estaEnColision("up", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }
+
+                }else if(objeto->getCartel() != 0){
+                    if((pAuto->getX() + 180  >= 1000 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 25 && objeto->getLado().compare("I") == 0)){
+                        choco = true;
+                        pAuto->estaEnColision("up", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }
+                }
+                
+        }else if(objeto->getDistancia() - pAuto->getPosition()/200 -3 <= 0.7 && objeto->getDistancia() - pAuto->getPosition()/200 -3  >= -0.7){
+            
+            if(objeto->getArbol() != 0){
+                    if((pAuto->getX() + 180  >= 900 && objeto->getLado().compare("D") == 0) ){
+                        choco = true;
+                        pAuto->estaEnColision("right", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }else if((pAuto->getX()  <= 100 && objeto->getLado().compare("I") == 0)){
+                        choco = true;
+                        pAuto->estaEnColision("left", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }
+
+                }else if(objeto->getCartel() != 0){
+                    if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) ){
+                        choco = true;
+                        pAuto->estaEnColision("right", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }else if((pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
+                        choco = true;
+                        pAuto->estaEnColision("left", pAuto->getVelY());
+                         if (salioDeColision) {
+                            pAuto->agregarDestrozo();
+                            salioDeColision = false;
+                        }
+                    }
+                }
+
+        }
+    }
+
+    for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->end(); ++it){
         //cout<<"autitos size"<<mapAutitos->size()<<endl;
         stringConcat= "";
         Posicion* posicionDelAuto = NULL;
@@ -994,97 +1068,19 @@ for (std::map<string,Auto*>::iterator it=mapAutitos->begin(); it!=mapAutitos->en
                     salioDeColision = false;
                 }
             }
-            for (std::list<Objeto*>::iterator it=this->mapa->getObjetos()->begin(); it!=this->mapa->getObjetos()->end(); ++it){
-
-
-                Objeto* objeto = *it;
-                if (pAuto->getPosition()/200 + 150 < objeto->getDistancia()){
-                    break;
-                }
-
-                if(objeto->getDistancia() - pAuto->getPosition()/200 - 4 <= 0.2 && objeto->getDistancia() - pAuto->getPosition()/200 - 4 >= -0.2 ){
-
-                    if(objeto->getArbol() != 0){
-                        if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
-                            cout<<"distancia choque de frente"<<endl;
-                            cout<< objeto->getDistancia() - pAuto->getPosition()/200 - 4 << endl;
-                            choco = true;
-                            pAuto->estaEnColision("up", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }
-
-                    }else if(objeto->getCartel() != 0){
-                        if((pAuto->getX() + 180  >= 1000 && objeto->getLado().compare("D") == 0) || (pAuto->getX()  <= 25 && objeto->getLado().compare("I") == 0)){
-                            choco = true;
-                            pAuto->estaEnColision("up", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }
-                    }
-
-                }else if(objeto->getDistancia() - pAuto->getPosition()/200 -3 <= 0.7 && objeto->getDistancia() - pAuto->getPosition()/200 -3  >= -0.7){
-
-                    if(objeto->getArbol() != 0){
-                        if((pAuto->getX() + 180  >= 900 && objeto->getLado().compare("D") == 0) ){
-                            choco = true;
-                            pAuto->estaEnColision("right", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }else if((pAuto->getX()  <= 100 && objeto->getLado().compare("I") == 0)){
-                            choco = true;
-                            pAuto->estaEnColision("left", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }
-
-                    }else if(objeto->getCartel() != 0){
-                        if((pAuto->getX() + 180  >= 950 && objeto->getLado().compare("D") == 0) ){
-                            choco = true;
-                            pAuto->estaEnColision("right", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }else if((pAuto->getX()  <= 50 && objeto->getLado().compare("I") == 0)){
-                            choco = true;
-                            pAuto->estaEnColision("left", pAuto->getVelY());
-                            if (salioDeColision) {
-                                pAuto->agregarDestrozo();
-                                salioDeColision = false;
-                            }
-                        }
-                    }
-
-                }
-            }
 
             i++;
-            //if (cableado) {
-                if (i >= 1) {
-                    stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-                } else stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador + to_string(it->second->getX()) + separador + to_string(diferenciaY);
-             /*else {
-                if (i >= 1) {
-                    stringConcat == to_string(it->second->obtenerPlayer()) + "G" + separador +
-                                   to_string(it->second->obtenerDestrozo()) + separador +
-                                   to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
-                } else stringConcat = to_string(it->second->obtenerPlayer()) + "G"  + separador + to_string(it->second->obtenerDestrozo()) + separador +
-                                      to_string(it->second->getX()) + separador + to_string(diferenciaY);
-            }*/
+        
+            if (i>=1) {
+                stringConcat = to_string(it->second->obtenerPlayer()) + separador + to_string(it->second->obtenerDestrozo()) + separador +to_string(it->second->getX()) + separador + to_string(diferenciaY) + separador;
+            } else stringConcat = to_string(it->second->obtenerPlayer())+ separador +to_string(it->second->obtenerDestrozo()) + separador+ to_string(it->second->getX()) + separador + to_string(diferenciaY);
 
-            //cout <<"Cableado : "<<cableado<<endl;
         }
         stringArmado = stringArmado + stringConcat;
     }
+
+
+
     if (!choco){
         pAuto->noEstaEnColision();
         salioDeColision = true;

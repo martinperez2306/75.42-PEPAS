@@ -25,7 +25,7 @@ void CalculateThread::run() {
             string msg = Automovil->calculateMove(curve);
             string playersInformation = srv->actualizarJuego(Automovil);
 
-            cout << "players information: " << playersInformation << endl;
+           // cout << "players information: " << playersInformation << endl;
             if (srv->hayColision())
                 stringACrear = Automovil->procesarMovimiento() + playersInformation;
             else stringACrear = msg + playersInformation;
