@@ -402,8 +402,8 @@ void ClienteController::dibujar() {
 
             this->carAsign();
             Mix_PlayMusic( soundTrack, -1 );
-            Mix_VolumeMusic(10);
-            Mix_Volume(-1, 10);
+            Mix_VolumeMusic(100);
+            Mix_Volume(-1, 100);
 
             //Disable text input
             SDL_StopTextInput();
@@ -447,6 +447,8 @@ void ClienteController::dibujar() {
             double noDraw = 0;
             double noDraw2 = 0;
             double noDraw3 = 0;
+            double noDraw4 = 0;
+            double noDraw5 = 0;
             cliente->enviarMensaje("0003/51");
             this->mapaCargado = true;
             //Start timer
@@ -510,6 +512,11 @@ void ClienteController::dibujar() {
                     //cout<<"22222222222222222222222222222222222222222222222222222222222222222222222222"<<endl;
                     this->cargarMapa(&lines);
                     this->mapaCargado = true;
+                     noDraw = 0;
+                     noDraw2 = 0;
+                     noDraw3 = 0;
+                     noDraw4 = 0;
+                    noDraw5 = 0;
                     cliente->enviarMensaje("0003/51");
                 }
                 if(this->cliente->recibioFinDeMapa() && mapaCargado) {
@@ -564,15 +571,12 @@ void ClienteController::dibujar() {
 
                     }
 
-
-
-
                     int i = 0;
                     list<Rival *>::iterator it = this->cliente->obtenerRivalList().begin();
                     while (i < this->cliente->obtenerRivalList().size()) {
                         i++;
                         Rival *rival = *it;
-                        cout<< "rival "<< rival->getPlayer()<<endl;
+                        //cout<< "i:"<< i<<endl;
                         if (this->cliente->getGrisado()){
                                 rival->setDibujar();
                         }
@@ -583,46 +587,51 @@ void ClienteController::dibujar() {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR1 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR1 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[rival->getnoDraw()].spriteXR1 = 0;
+                                if (noDraw != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw].spriteXR1 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                    noDraw = (startPos + rival->getHorizonte() + OFFSET);
                                 }
                             } else if (rival->getPlayer() == 2) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR2 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR2 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[rival->getnoDraw()].spriteXR2 = 0;
+                                if (noDraw2 != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw2].spriteXR2 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                    noDraw2 = (startPos + rival->getHorizonte() + OFFSET);
                                 }
                             } else if (rival->getPlayer() == 3) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR3 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR3 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[rival->getnoDraw()].spriteXR3 = 0;
+                                if (noDraw3 != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw3].spriteXR3 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                    noDraw3 = (startPos + rival->getHorizonte() + OFFSET);
                                 }
                                 //puts("entre3");
-                            }else if (rival->getPlayer() == 4){
+                            }else if (rival->getPlayer() == 4) {
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteR4 = this->getTextura(rival);
                                 lines[startPos + rival->getHorizonte() + OFFSET].spriteXR4 =
                                         0.0056 * rival->getPosX() - 2.8;
-                                if (rival->getnoDraw() != startPos + rival->getHorizonte() + OFFSET) {
-                                    lines[rival->getnoDraw()].spriteXR4 = 0;
+                                if (noDraw4 != startPos + rival->getHorizonte() + OFFSET) {
+                                    lines[noDraw4].spriteXR4 = 0;
                                     //lines[startPos + rival->getHorizonte() + OFFSET].drawSprite(renderer);
-                                    rival->setnoDraw(startPos + rival->getHorizonte() + OFFSET);
+                                    noDraw4 = startPos + rival->getHorizonte() + OFFSET;
+                                    }
+                                } /*else if (rival->getPlayer() == 5) {
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteR5 = this->getTextura(rival);
+                                    lines[startPos + rival->getHorizonte() + OFFSET].spriteXR5 =
+                                            0.0056 * rival->getPosX() - 2.8;
                                 }
-
-                            }
-                            rival->notDibujar();
+*/                            rival->notDibujar();
                         }
                         std::list<Rival *>::iterator it2 = std::next(it, 1);
                         // printf("ciclo\n");
                     }
+                   // cout << "salio del while"<<endl;
+
 
 
                     for (int n = startPos + LINEAS; n > startPos+16; n--) {
@@ -633,7 +642,8 @@ void ClienteController::dibujar() {
                         lines[j].spriteXR1 = 0;
                         lines[j].spriteXR2 = 0;
                         lines[j].spriteXR3 = 0;
-                        lines[j].spriteXR3 = 0;
+                        lines[j].spriteXR4 = 0;
+                        lines[j].spriteXR5 = 0;
                     }
                     curveSet = lines[(pos / segL)].curve;
 
